@@ -1,0 +1,31 @@
+---
+import { copy, routeFor, alternateFor, type Locale, type PageKind } from '../data/site'
+interface Props { locale: Locale; page: PageKind }
+const { locale, page } = Astro.props
+const t = copy[locale]
+const nav: PageKind[] = ['home', 'about', 'projects', 'approach', 'contact']
+const otherLocale: Locale = locale === 'en' ? 'es' : 'en'
+---
+<header class="site-header">
+  <div class="container header__inner">
+    <a class="brand" href={routeFor(locale, 'home')}>
+      <img class="brand__logo" src="/images/logo.png" alt="" width="36" height="36" loading="eager" decoding="async" aria-hidden="true" />
+      <span>Juan Larrondo</span>
+    </a>
+    <details class="nav-menu">
+      <summary><span>{t.labels.menu}</span><span class="nav-menu__icon" aria-hidden="true"></span></summary>
+      <nav aria-label={t.labels.menu}>
+        <ul>
+          {nav.map((item) => <li><a aria-current={page === item ? 'page' : undefined} href={routeFor(locale, item)}>{t.nav[item]}</a></li>)}
+          <li class="nav-menu__language"><a href={alternateFor(locale, page)} lang={otherLocale} hreflang={otherLocale}>{otherLocale.toUpperCase()}</a></li>
+        </ul>
+      </nav>
+    </details>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <ul>
+        {nav.map((item) => <li><a aria-current={page === item ? 'page' : undefined} href={routeFor(locale, item)}>{t.nav[item]}</a></li>)}
+      </ul>
+    </nav>
+    <a class="language-link" href={alternateFor(locale, page)} lang={otherLocale} hreflang={otherLocale} aria-label={`${t.labels.language}: ${otherLocale.toUpperCase()}`}>{otherLocale.toUpperCase()}</a>
+  </div>
+</header>

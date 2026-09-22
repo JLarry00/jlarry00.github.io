@@ -1,0 +1,5 @@
+---
+interface Props { index: number; title: string; body: string; note?: string }
+const { index, title, body, note } = Astro.props
+---
+<article class="principle"><p class="principle__number">0{index}</p><h2>{title}</h2><p>{body}</p>{note && <p class="principle__note">{note}</p>}</article>

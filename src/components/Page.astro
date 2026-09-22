@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import CTA from './CTA.astro'
+import ProjectSummary from './ProjectSummary.astro'
+import Principle from './Principle.astro'
+import CaseSection from './CaseSection.astro'
+import ArchitectureDiagram from './ArchitectureDiagram.astro'
+import TerminalMockup from './TerminalMockup.astro'
+import RoadmapSection from './RoadmapSection.astro'
+import { copy, external, routeFor, type Locale, type PageKind } from '../data/site'
+interface Props { locale: Locale; page: PageKind }
+const { locale, page } = Astro.props
+const t = copy[locale]
+const pageTitle: Record<PageKind, string> = { home: 'Juan Larrondo — Agentic AI, Automation & Infrastructure', about: `${t.nav.about} — Juan Larrondo`, projects: `${t.nav.projects} — Juan Larrondo`, jarvis: `Jarvis — Juan Larrondo`, payroll: `${t.nav.payroll} — Juan Larrondo`, approach: `${t.nav.approach} — Juan Larrondo`, contact: `${t.nav.contact} — Juan Larrondo` }
+const description: Record<PageKind, string> = { home: t.home.lead, about: t.about.intro, projects: t.projects.intro, jarvis: t.cases.jarvis.lead, payroll: t.cases.payroll.lead, approach: t.approach.intro, contact: t.contactPage.intro }
+const otherCase: PageKind = page === 'jarvis' ? 'payroll' : 'jarvis'
+---
+<BaseLayout locale={locale} page={page} title={pageTitle[page]} description={description[page]}>
+  {page === 'home' && <>
+    <section class="hero"><div class="container hero__content"><p class="eyebrow">{t.home.eyebrow}</p><h1>{t.home.title}</h1><p class="hero__lead">{t.home.lead}</p><p class="hero__intro">{t.home.intro}</p><div class="button-row"><CTA href={routeFor(locale, 'contact')} label={t.home.primary} /><CTA href={routeFor(locale, 'projects')} label={t.home.secondary} variant="secondary" /></div></div></section>
+    <section class="section why"><div class="container"><p class="eyebrow eyebrow--dark">{t.home.whyTitle}</p><div class="why__grid">{t.home.why.map((reason, index) => <article><p class="why__number">0{index + 1}</p><h2>{reason.title}</h2><p>{reason.body}</p></article>)}</div></div></section>
+    <section class="closing-section"><div class="container closing-section__inner"><p>{t.home.closing}</p><CTA href={routeFor(locale, 'contact')} label={t.home.primary} variant="light" /></div></section>
+  </>}
+
+  {page === 'about' && <section class="page-intro"><div class="container"><div class="narrow"><p class="eyebrow eyebrow--dark">{t.about.eyebrow}</p><h1>{t.about.title}</h1><p class="page-lead">{t.about.intro}</p><div class="narrative">{t.about.sections.map((section) => <section><h2>{section.title}</h2><p>{section.body}</p></section>)}</div><div class="button-row"><CTA href={routeFor(locale, 'projects')} label={t.about.projectCta} /><CTA href={routeFor(locale, 'contact')} label={t.about.contactCta} variant="secondary" /></div></div></div></section>}
+
+  {page === 'projects' && <section class="page-intro"><div class="container"><div class="narrow"><p class="eyebrow eyebrow--dark">{t.projects.eyebrow}</p><h1>{t.projects.title}</h1><p class="page-lead">{t.projects.intro}</p></div><div class="projects-list">{t.projects.entries.map((entry, index) => <ProjectSummary {...entry} featured={index === 0} />)}</div></div></section>}
+
+  {(page === 'jarvis' || page === 'payroll') && (() => {
+    const project = t.cases[page]
+    const repository = page === 'jarvis' ? external.jarvis : external.payroll
+    return <>
+      <section class="case-hero"><div class="container"><p class="eyebrow">{project.eyebrow}</p><p class="case-status"><span>{t.labels.status}</span>{project.status}</p><h1>{project.title}</h1><p class="case-hero__lead">{project.lead}</p><a class="button button--light" href={repository} target="_blank" rel="noopener noreferrer">{project.repo}<span aria-hidden="true"> ↗</span></a></div></section>
+      <section class="case-content"><div class="container">
+        <dl class="case-facts">{project.facts.map((fact) => <div><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
+        {project.architecture && <ArchitectureDiagram title={project.architecture.title} blocks={project.architecture.blocks} />}
+        {project.terminal && <TerminalMockup title={project.terminal.title} command={project.terminal.command} output={project.terminal.output} />}
+        <div class="case-sections">{project.sections.map((section) => <CaseSection {...section} />)}</div>
+        {project.roadmap && <RoadmapSection title={project.roadmap.title} items={project.roadmap.items} />}
+        <div class="case-end"><p>{project.closing}</p><div class="button-row"><CTA href={routeFor(locale, otherCase)} label={project.nextLabel} /><CTA href={routeFor(locale, 'contact')} label={t.labels.contact} variant="secondary" /></div></div>
+      </div></section>
+    </>
+  })()}
+
+  {page === 'approach' && <section class="page-intro"><div class="container"><div class="narrow"><p class="eyebrow eyebrow--dark">{t.approach.eyebrow}</p><h1>{t.approach.title}</h1><p class="page-lead">{t.approach.intro}</p></div><div class="principles">{t.approach.principles.map((principle, index) => <Principle index={index + 1} {...principle} />)}</div><p class="approach-closing">{t.approach.closing}</p></div></section>}
+
+  {page === 'contact' && <section class="contact-page"><div class="container"><div class="narrow"><p class="eyebrow eyebrow--dark">{t.contactPage.eyebrow}</p><h1>{t.contactPage.title}</h1><p class="page-lead">{t.contactPage.intro}</p><div class="contact-block"><h2>{t.contactPage.emailTitle}</h2><p>{t.contactPage.emailBody}</p><a class="contact-email" href={`mailto:${external.email}`}>{external.email}</a></div><div class="contact-links"><h2>{t.contactPage.linksTitle}</h2><a href={external.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href={external.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div><p class="contact-closing">{t.contactPage.closing}</p></div></div></section>}
+</BaseLayout>

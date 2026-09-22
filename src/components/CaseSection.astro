@@ -1,0 +1,10 @@
+---
+interface Props { title: string; paragraphs?: string[]; flow?: string[]; items?: { title: string; body: string }[]; tone?: 'evidence' | 'limits' }
+const { title, paragraphs, flow, items, tone } = Astro.props
+---
+<section class:list={['case-section', tone && `case-section--${tone}`]}>
+  <h2>{title}</h2>
+  {paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+  {flow && <ol class="flow" aria-label={title}>{flow.map((step) => <li>{step}</li>)}</ol>}
+  {items && <div class="case-section__items">{items.map((item) => <article><h3>{item.title}</h3><p>{item.body}</p></article>)}</div>}
+</section>

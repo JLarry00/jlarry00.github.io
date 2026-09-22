@@ -1,0 +1,34 @@
+---
+import '../styles/global.css'
+import Header from '../components/Header.astro'
+import Footer from '../components/Footer.astro'
+import InteractiveGrid from '../components/InteractiveGrid.astro'
+import { copy, alternateFor, routeFor, type Locale, type PageKind } from '../data/site'
+interface Props { locale: Locale; page: PageKind; title: string; description: string }
+const { locale, page, title, description } = Astro.props
+const t = copy[locale]
+const canonical = new URL(routeFor(locale, page), Astro.site)
+const alternate = new URL(alternateFor(locale, page), Astro.site)
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === 'en' ? 'es' : 'en'} href={alternate} />
+    <link rel="alternate" hreflang={locale} href={canonical} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{t.labels.skip}</a>
+    <InteractiveGrid />
+    <Header locale={locale} page={page} />
+    <main id="main-content" style="position: relative; z-index: 1;"><slot /></main>
+    <Footer locale={locale} />
+  </body>
+</html>

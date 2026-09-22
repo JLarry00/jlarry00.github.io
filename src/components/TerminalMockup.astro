@@ -1,0 +1,117 @@
+---
+import type { TerminalLine } from '../data/site'
+
+interface Props {
+  title: string
+  command: string
+  output: TerminalLine[]
+}
+const { title, command, output } = Astro.props
+---
+<div class="terminal-mockup" aria-label={`Terminal console: ${title}`}>
+  <div class="terminal-mockup__bar">
+    <div class="terminal-mockup__dots" aria-hidden="true">
+      <span class="dot dot--red"></span>
+      <span class="dot dot--amber"></span>
+      <span class="dot dot--green"></span>
+    </div>
+    <span class="terminal-mockup__title">{title}</span>
+    <div class="terminal-mockup__badge">BASH // LOCAL</div>
+  </div>
+  <div class="terminal-mockup__body">
+    <div class="terminal-mockup__cmd">
+      <span class="prompt" aria-hidden="true">$</span>
+      <code>{command}</code>
+    </div>
+    <div class="terminal-mockup__output">
+      {output.map((line) => (
+        <div class:list={['term-line', line.tone && `term-line--${line.tone}`]}>
+          {line.text}
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .terminal-mockup {
+    margin: 2.5rem 0 3.5rem;
+    background: #06080e;
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 255, 213, 0.04);
+  }
+
+  .terminal-mockup__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.2rem;
+    background: rgba(18, 23, 34, 0.9);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .terminal-mockup__dots {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .dot--red { background: #ef4444; opacity: 0.8; }
+  .dot--amber { background: #f59e0b; opacity: 0.8; }
+  .dot--green { background: #10b981; opacity: 0.8; }
+
+  .terminal-mockup__title {
+    font: 600 0.8rem var(--font-mono);
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-mockup__badge {
+    font: 700 0.68rem var(--font-mono);
+    color: var(--accent-cyan);
+    letter-spacing: 0.08em;
+  }
+
+  .terminal-mockup__body {
+    padding: 1.4rem 1.6rem;
+    font: 400 0.88rem/1.65 var(--font-mono);
+    color: var(--text-primary);
+    overflow-x: auto;
+  }
+
+  .terminal-mockup__cmd {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  .prompt {
+    color: var(--accent-cyan);
+    font-weight: 700;
+  }
+
+  .term-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--text-secondary);
+  }
+
+  .term-line--cyan { color: var(--accent-cyan); }
+  .term-line--amber { color: var(--accent-amber); }
+  .term-line--success { color: #34d399; font-weight: 500; }
+  .term-line--muted { color: var(--text-muted); }
+</style>

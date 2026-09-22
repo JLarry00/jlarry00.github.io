@@ -1,0 +1,115 @@
+---
+import type { RoadmapItem } from '../data/site'
+
+interface Props {
+  title: string
+  items: RoadmapItem[]
+}
+const { title, items } = Astro.props
+---
+<section class="roadmap-section" aria-label={title}>
+  <div class="roadmap-section__header">
+    <p class="roadmap-section__eyebrow">PLANNED ITERATIONS // ROADMAP</p>
+    <h2>{title}</h2>
+  </div>
+  <div class="roadmap-grid">
+    {items.map((item, idx) => (
+      <article class="roadmap-card">
+        <div class="roadmap-card__top">
+          <span class="roadmap-card__index">ROADMAP // 0{idx + 1}</span>
+          <span class="roadmap-card__dot" aria-hidden="true"></span>
+        </div>
+        <h3>{item.title}</h3>
+        <p>{item.body}</p>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .roadmap-section {
+    margin: 4.5rem 0 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .roadmap-section__header {
+    margin-bottom: 2.2rem;
+  }
+
+  .roadmap-section__eyebrow {
+    margin-bottom: 0.5rem;
+    color: var(--accent-cyan);
+    font: 600 0.78rem/1.2 var(--font-mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .roadmap-section h2 {
+    font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+    color: var(--text-primary);
+  }
+
+  .roadmap-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .roadmap-card {
+    padding: 1.8rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .roadmap-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .roadmap-card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+
+  .roadmap-card__index {
+    font: 700 0.75rem var(--font-mono);
+    color: var(--accent-cyan);
+    letter-spacing: 0.08em;
+  }
+
+  .roadmap-card__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    opacity: 0.6;
+  }
+
+  .roadmap-card h3 {
+    margin: 0 0 0.6rem;
+    font-size: 1.15rem;
+    color: var(--text-primary);
+  }
+
+  .roadmap-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .roadmap-grid {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  }
+</style>

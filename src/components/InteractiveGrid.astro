@@ -1,0 +1,391 @@
+---
+// Stable Neural Mesh Canvas (2D Native, 0 external dependencies)
+// - Fixed graph topology with rich interconnections
+// - Zero scattering / repulsion: nodes stay anchored in place and illuminate harmoniously
+// - Calibrated smooth mouse tracking (speed: 0.24, responsive yet calm)
+// - Non-intrusive ambient background that protects reading comfort
+---
+<canvas id="interactive-grid" class="interactive-grid" aria-hidden="true"></canvas>
+
+<style>
+  .interactive-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.85;
+  }
+</style>
+
+<script>
+  (() => {
+    const canvas = document.getElementById('interactive-grid') as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    interface Node {
+      x: number;
+      y: number;
+      baseX: number;
+      baseY: number;
+      vx: number;
+      vy: number;
+      baseRadius: number;
+      currentRadius: number;
+      pulsePhase: number;
+      neighbors: Node[];
+    }
+
+    interface Edge {
+      a: Node;
+      b: Node;
+    }
+
+    interface Packet {
+      edge: Edge;
+      progress: number;
+      speed: number;
+      reverse: boolean;
+    }
+
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let nodes: Node[] = [];
+    let edges: Edge[] = [];
+    let packets: Packet[] = [];
+    let mouseX = -1000;
+    let mouseY = -1000;
+    let targetMouseX = -1000;
+    let targetMouseY = -1000;
+    let lastTime = 0;
+    let isMouseActive = false;
+
+    function initMesh() {
+      nodes = [];
+      edges = [];
+      packets = [];
+
+      // Cohesive cell spacing for an interconnected, harmonious mesh
+      const colSpacing = Math.max(85, Math.min(115, width / Math.round(width / 95)));
+      const rowSpacing = colSpacing * 0.88;
+
+      const cols = Math.ceil(width / colSpacing) + 2;
+      const rows = Math.ceil(height / rowSpacing) + 2;
+
+      // 1. Generate nodes on a gently jittered organic lattice (uniform & non-rigid)
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const offsetX = (r % 2 === 1) ? colSpacing * 0.5 : 0;
+          const jitterX = (Math.random() - 0.5) * colSpacing * 0.30;
+          const jitterY = (Math.random() - 0.5) * rowSpacing * 0.30;
+
+          const baseX = c * colSpacing + offsetX + jitterX - colSpacing * 0.5;
+          const baseY = r * rowSpacing + jitterY - rowSpacing * 0.5;
+
+          const baseRadius = 1.0 + Math.random() * 0.9;
+
+          nodes.push({
+            x: baseX,
+            y: baseY,
+            baseX,
+            baseY,
+            vx: 0,
+            vy: 0,
+            baseRadius,
+            currentRadius: baseRadius,
+            pulsePhase: Math.random() * Math.PI * 2,
+            neighbors: [],
+          });
+        }
+      }
+
+      // 2. Build dense, permanent graph topology (3 to 4 connections per node)
+      const maxEdgeDist = colSpacing * 1.65;
+      const edgeSet = new Set<string>();
+
+      function addEdge(a: Node, b: Node) {
+        if (a === b) return;
+        const idA = nodes.indexOf(a);
+        const idB = nodes.indexOf(b);
+        const key = idA < idB ? `${idA}-${idB}` : `${idB}-${idA}`;
+        if (!edgeSet.has(key)) {
+          edgeSet.add(key);
+          edges.push({ a, b });
+          a.neighbors.push(b);
+          b.neighbors.push(a);
+        }
+      }
+
+      for (let i = 0; i < nodes.length; i++) {
+        const na = nodes[i];
+        const candidates: { node: Node; dist: number }[] = [];
+        for (let j = 0; j < nodes.length; j++) {
+          if (i === j) continue;
+          const nb = nodes[j];
+          const dx = na.baseX - nb.baseX;
+          const dy = na.baseY - nb.baseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < maxEdgeDist) {
+            candidates.push({ node: nb, dist });
+          }
+        }
+
+        candidates.sort((c1, c2) => c1.dist - c2.dist);
+
+        const targetConnections = Math.min(candidates.length, 3 + (Math.random() < 0.4 ? 1 : 0));
+        for (let k = 0; k < targetConnections; k++) {
+          addEdge(na, candidates[k].node);
+        }
+      }
+
+      // Guarantee minimum degree 3
+      for (let i = 0; i < nodes.length; i++) {
+        const na = nodes[i];
+        if (na.neighbors.length < 3) {
+          let closestNode: Node | null = null;
+          let minDist = Infinity;
+          for (let j = 0; j < nodes.length; j++) {
+            if (i === j || na.neighbors.includes(nodes[j])) continue;
+            const nb = nodes[j];
+            const dx = na.baseX - nb.baseX;
+            const dy = na.baseY - nb.baseY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < minDist) {
+              minDist = dist;
+              closestNode = nb;
+            }
+          }
+          if (closestNode) {
+            addEdge(na, closestNode);
+          }
+        }
+      }
+    }
+
+    function resize() {
+      if (!canvas || !ctx) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.scale(dpr, dpr);
+      initMesh();
+      draw(0);
+    }
+
+    function onMouseMove(e: MouseEvent) {
+      targetMouseX = e.clientX;
+      targetMouseY = e.clientY;
+      if (!isMouseActive) {
+        isMouseActive = true;
+      }
+    }
+
+    function onMouseLeave() {
+      targetMouseX = -1000;
+      targetMouseY = -1000;
+    }
+
+    function spawnPacket() {
+      if (edges.length === 0 || packets.length >= 4) return;
+      const edge = edges[Math.floor(Math.random() * edges.length)];
+      packets.push({
+        edge,
+        progress: 0,
+        speed: 0.010 + Math.random() * 0.012,
+        reverse: Math.random() < 0.5,
+      });
+    }
+
+    function draw(timestamp: number) {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      // Delta-time normalized tracking for uniform velocity across all pages
+      if (!lastTime) lastTime = timestamp;
+      const dt = Math.min((timestamp - lastTime) / 1000, 0.05);
+      lastTime = timestamp;
+
+      // Direct responsive mouse tracking for instant reaction
+      if (!reducedMotion) {
+        mouseX = targetMouseX;
+        mouseY = targetMouseY;
+      }
+
+      const mouseRadius = 180;
+
+      // 1. Subtle, gentle ambient halo around cursor (wider & softer)
+      if (!reducedMotion && mouseX > -500) {
+        const mouseGlow = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 195);
+        mouseGlow.addColorStop(0, 'rgba(0, 255, 213, 0.024)');
+        mouseGlow.addColorStop(0.6, 'rgba(59, 130, 246, 0.008)');
+        mouseGlow.addColorStop(1, 'transparent');
+        ctx.fillStyle = mouseGlow;
+        ctx.fillRect(0, 0, width, height);
+      }
+
+      // 2. Nodes stay anchored horizontally, gently lift upward on hover, and scale up in 3D elevation
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+        n.pulsePhase += 0.012;
+
+        let targetY = n.baseY;
+        let targetRadius = n.baseRadius;
+
+        if (!reducedMotion && mouseX > -500) {
+          const dx = n.baseX - mouseX;
+          const dy = n.baseY - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < mouseRadius) {
+            const factor = Math.pow(1 - dist / mouseRadius, 1.3);
+            // Gentle upward lift (softened to max ~2.2px)
+            targetY = n.baseY - factor * 2.2;
+            // "Moverse hacia el usuario": softened size expansion (elevation in Z)
+            targetRadius = n.baseRadius * (1 + factor * 1.15);
+          }
+        }
+
+        // Smooth spring toward target Y and radius
+        n.y += (targetY - n.y) * 0.22;
+        n.currentRadius += (targetRadius - n.currentRadius) * 0.32;
+      }
+
+      // 3. Draw Synaptic Edges (connected to gently lifting nodes)
+      ctx.lineWidth = 1;
+      for (let i = 0; i < edges.length; i++) {
+        const { a, b } = edges[i];
+
+        let nearMouse = false;
+        let edgeExcitement = 0;
+
+        if (mouseX > -500) {
+          const dma = Math.sqrt((a.baseX - mouseX) ** 2 + (a.y - mouseY) ** 2);
+          const dmb = Math.sqrt((b.baseX - mouseX) ** 2 + (b.y - mouseY) ** 2);
+          const midX = (a.baseX + b.baseX) * 0.5;
+          const midY = (a.y + b.y) * 0.5;
+          const dmid = Math.sqrt((midX - mouseX) ** 2 + (midY - mouseY) ** 2);
+
+          const minD = Math.min(dma, dmb, dmid);
+          if (minD < mouseRadius) {
+            nearMouse = true;
+            edgeExcitement = Math.pow(1 - minD / mouseRadius, 1.4);
+          }
+        }
+
+        ctx.beginPath();
+        ctx.moveTo(a.baseX, a.y);
+        ctx.lineTo(b.baseX, b.y);
+
+        if (nearMouse) {
+          // Highlight edge under cursor smoothly
+          ctx.strokeStyle = `rgba(0, 255, 213, ${0.07 + edgeExcitement * 0.16})`;
+        } else {
+          // Resting synapse: calm and unobtrusive for reading
+          ctx.strokeStyle = 'rgba(148, 163, 184, 0.07)';
+        }
+        ctx.stroke();
+      }
+
+      // 4. Draw Discrete Data Packet Pulses
+      if (!reducedMotion) {
+        if (Math.random() < 0.014) {
+          spawnPacket();
+        }
+
+        for (let p = packets.length - 1; p >= 0; p--) {
+          const pkt = packets[p];
+          pkt.progress += pkt.speed * (dt * 60);
+          if (pkt.progress >= 1) {
+            packets.splice(p, 1);
+            continue;
+          }
+
+          const startNode = pkt.reverse ? pkt.edge.b : pkt.edge.a;
+          const endNode = pkt.reverse ? pkt.edge.a : pkt.edge.b;
+
+          const px = startNode.baseX + (endNode.baseX - startNode.baseX) * pkt.progress;
+          const py = startNode.y + (endNode.y - startNode.y) * pkt.progress;
+
+          // Packet halo + core
+          ctx.beginPath();
+          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(0, 255, 213, 0.22)';
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(px, py, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = '#00ffd5';
+          ctx.fill();
+        }
+      }
+
+      // 5. Draw Synaptic Nodes: Pure elevation towards user with clean dual-layer glow
+      for (let i = 0; i < nodes.length; i++) {
+        const n = nodes[i];
+
+        let isExcited = false;
+        let factor = 0;
+
+        if (mouseX > -500) {
+          const dx = n.baseX - mouseX;
+          const dy = n.y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < mouseRadius) {
+            isExcited = true;
+            factor = Math.pow(1 - dist / mouseRadius, 1.3);
+          }
+        }
+
+        if (isExcited) {
+          // Node popping towards user: softer outer corona + elevated core
+          const r = n.currentRadius;
+
+          // Soft outer corona
+          ctx.beginPath();
+          ctx.arc(n.baseX, n.y, r * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 255, 213, ${0.10 + factor * 0.18})`;
+          ctx.fill();
+
+          // Luminous elevated body
+          ctx.beginPath();
+          ctx.arc(n.baseX, n.y, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 255, 213, ${0.36 + factor * 0.32})`;
+          ctx.fill();
+
+          // Focused white specular highlight
+          ctx.beginPath();
+          ctx.arc(n.baseX, n.y, r * 0.45, 0, Math.PI * 2);
+          ctx.fillStyle = '#ffffff';
+          ctx.fill();
+        } else {
+          // Resting node: peaceful breathing rhythm
+          const pulse = reducedMotion ? 1 : (0.9 + Math.sin(n.pulsePhase) * 0.1);
+          ctx.beginPath();
+          ctx.arc(n.baseX, n.y, n.currentRadius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(148, 163, 184, ${0.18 * pulse})`;
+          ctx.fill();
+        }
+      }
+
+      if (!reducedMotion) {
+        requestAnimationFrame(draw);
+      }
+    }
+
+    window.addEventListener('resize', resize, { passive: true });
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    window.addEventListener('mouseleave', onMouseLeave, { passive: true });
+
+    resize();
+  })();
+</script>
