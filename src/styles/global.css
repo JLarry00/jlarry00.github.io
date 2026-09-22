@@ -98,11 +98,16 @@ summary:focus-visible {
 }
 
 /* Headings */
-h1, h2, h3, p {
+h1,
+h2,
+h3,
+p {
   margin-top: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-family: var(--font-sans);
   line-height: 1.1;
   letter-spacing: -0.035em;
@@ -299,8 +304,8 @@ h3 {
 }
 
 .brand__logo {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   display: inline-block;
   flex-shrink: 0;
   border-radius: 8px;
@@ -324,8 +329,18 @@ h3 {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.6; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 12px var(--accent-cyan); }
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 12px var(--accent-cyan);
+  }
 }
 
 .desktop-nav {
@@ -439,7 +454,7 @@ h3 {
   list-style: none;
 }
 
-.nav-menu li + li {
+.nav-menu li+li {
   margin-top: 0.8rem;
 }
 
@@ -818,7 +833,7 @@ h3 {
   padding: 1.4rem 1.6rem;
 }
 
-.case-facts div + div {
+.case-facts div+div {
   border-left: 1px solid var(--border-subtle);
 }
 
@@ -924,7 +939,7 @@ h3 {
   border-top: 1px solid var(--border-subtle);
 }
 
-.case-end > p,
+.case-end>p,
 .approach-closing {
   font: 500 1.35rem/1.38 var(--font-sans);
   color: var(--text-secondary);
@@ -1166,6 +1181,7 @@ h3 {
 
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
