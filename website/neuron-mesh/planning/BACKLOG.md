@@ -56,5 +56,5 @@ Estados: `Backlog`, `Seleccionado S03`, `Bloqueado`, `Terminado`.
 |---|---|---|---|---|---|
 | `ENV-005` | Entorno | Organizar la web existente en `website/neuron-mesh/` | P0 | Terminado | Instalación y compilación limpias; las 14 rutas históricas se mantienen. |
 | `ENV-006` | Publicación | Añadir selector estricto en raíz y comandos para cada app | P0 | Terminado | Ambos builds y checks; destinos válidos y configuración inválida comprobados. |
-| `ENV-007` | Publicación | Construir y subir a Pages únicamente el destino seleccionado | P0 | En revisión | Falta confirmar la primera ejecución remota tras sincronizar. |
+| `ENV-007` | Publicación | Construir y subir a Pages únicamente el destino seleccionado | P0 | Terminado | Workflow #3 completado con éxito para `91703e8`; rutas públicas principales responden HTTP 200. |
 | `ENV-008` | Publicación | Mantener Neuron Mesh como destino inicial | P0 | Terminado | `site.config.json` selecciona `neuron-mesh`; dist conserva 14 rutas. |
