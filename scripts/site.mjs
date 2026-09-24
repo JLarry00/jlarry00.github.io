@@ -5,7 +5,7 @@ import path from 'node:path'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 const sites = {
-  'neuron-mesh': 'website/neuron-mesh',
+  'neuron-mesh': 'websites/neuron-mesh',
   agent: 'websites/agent',
 }
 

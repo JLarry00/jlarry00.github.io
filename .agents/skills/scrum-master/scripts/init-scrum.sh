@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../../../../" && pwd)"
 
 case "$PRODUCT" in
-  neuron-mesh) PRODUCT_DIR="website/neuron-mesh" ;;
+  neuron-mesh) PRODUCT_DIR="websites/neuron-mesh" ;;
   agent) PRODUCT_DIR="websites/agent" ;;
   *)
     echo "Usage: $0 neuron-mesh|agent" >&2

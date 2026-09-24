@@ -1,6 +1,6 @@
 # Scrum de Neuron Mesh
 
-Esta carpeta es la única fuente de Scrum para la web Neuron Mesh. Contiene el backlog, el incremento actual, el historial de versiones y los cierres de iteración. El Scrum de Agent vive en `../../.. /websites/agent/planning/` desde la raíz del repositorio; no se mezclan sus objetivos ni sus estados.
+Esta carpeta es la única fuente de Scrum para la web Neuron Mesh. Contiene el backlog, el incremento actual, el historial de versiones y los cierres de iteración. El Scrum de Agent vive en [`../../agent/planning/`](../../agent/planning/), dentro de `websites/`; no se mezclan sus objetivos ni sus estados.
 
 ## Alcance
 

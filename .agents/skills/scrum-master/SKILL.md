@@ -13,7 +13,7 @@ description: >
 
 This repository contains two independent websites and two independent Scrums:
 
-- Neuron Mesh: website/neuron-mesh/planning/
+- Neuron Mesh: websites/neuron-mesh/planning/
 - Agent: websites/agent/planning/
 
 Choose the product from the requested work and read its planning records before editing. The product areas are separate sources of truth. Never create or use a shared backlog, sprint, status file, or retrospective at the repository root. Never update the other website's Scrum as a side effect.

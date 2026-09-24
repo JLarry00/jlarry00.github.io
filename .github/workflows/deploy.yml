@@ -31,7 +31,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: |
-            website/neuron-mesh/package-lock.json
+            websites/neuron-mesh/package-lock.json
             websites/agent/package-lock.json
 
       - name: Install dependencies

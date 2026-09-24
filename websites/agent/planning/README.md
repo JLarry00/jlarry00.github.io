@@ -11,9 +11,9 @@ La aplicación vive en `websites/agent/`; su único Scrum está en `websites/age
 - Interfaz inspirada en VS Code, simplificada para leer un portfolio y sin controles que no tengan una función real.
 - Explorer como vista principal, con una carpeta abierta que representa el repo de un agente.
 - Search busca solo nombres y rutas de archivos.
-- Source Control simula ramas de presentación. `main` muestra información real; las ramas de broma se identifican con claridad como ficción. Una puede presentar la identidad secreta de Batman, expuesta con poca discreción. No son ramas Git ni identidades alternativas reales.
-- Run and Debug abre una animación ligera de alguien corriendo detrás de bichos para depurarlos. Debe poder pausarse y respetar `prefers-reduced-motion`.
-- No mostrar Extensions hasta que exista una función útil.
+- Source Control simula ramas de presentación. `main` muestra el perfil y la web reales; las ramas de broma se identifican con claridad como ficción. Una presenta la identidad secreta de Batman de forma tan pública que la ironía sea evidente. No son ramas Git ni identidades alternativas reales.
+- Run and Debug abre una animación ligera, tipo stickman, de alguien corriendo detrás de bichos para eliminarlos como bugs de software. Debe poder pausarse y respetar `prefers-reduced-motion`.
+- No mostrar Extensions hasta que exista una función útil y decidida.
 - Temas con al menos un claro clásico y un oscuro clásico; se valorarán paletas conocidas adicionales mediante tokens de diseño.
 - En móvil, mantener Explorer accesible y el contenido legible sin forzar la distribución de escritorio.
 
@@ -31,17 +31,17 @@ skills/
 projects/
   README.md
   [project].md
-hobbies/
+Hobbies/  (mayúscula propuesta por Juan; confirmar antes de fijar la ruta pública)
   [hobby].md
 ```
 
-Los documentos reales del portfolio se versionarán como Markdown y se presentarán también en la interfaz. Una entrada específica para lectura automática apuntará a un índice Markdown y a URLs estables para cada archivo. Las instrucciones reales del agente que desarrolla este workspace no se publicarán como perfil; el `AGENTS.md` del portfolio será contenido deliberado y distinto.
+El árbol es la propuesta explícita de Juan y se concretará con él antes de crear contenido. Los documentos reales del portfolio se versionarán como Markdown y se presentarán también en la interfaz. Una entrada específica y visible desde la web apuntará a un índice Markdown y a URLs estables para cada archivo, legibles sin ejecutar la interfaz. Las instrucciones reales del agente que desarrolla este workspace no se publicarán como perfil; el `AGENTS.md` del portfolio será contenido deliberado y distinto.
 
 ## Contenido y voz
 
 La web clásica es una fuente inicial, no una autorización para copiar cada frase. Las reviews editoriales de Juan y la evidencia actual de los proyectos deben guiar el tono y cada afirmación. Se distinguirán hechos confirmados, experiencia, aprendizaje, planes y ficción. La paridad inglés/español forma parte de aceptación.
 
-La vista para lectores automáticos tendrá una entrada estable en `/for-agents/`, con un índice navegable y enlaces a los archivos Markdown servidos como texto plano. No se presupone que un agente necesite recorrer la interfaz visual.
+La vista para lectores automáticos tendrá una entrada estable en `/for-agents/`, con un índice navegable y enlaces a los archivos Markdown servidos como texto plano. Un enlace o botón visible desde la web (por ejemplo, en Welcome o en una esquina del editor) dará acceso a esta colección separada. No se presupone que un agente necesite recorrer la interfaz visual.
 
 ## Scrum propio
 

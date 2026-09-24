@@ -5,7 +5,7 @@ Esta carpeta contiene referencias breves y aptas para versionar que ayudan a tra
 ## Fuentes
 
 - `public-profile-snapshot.md`: resumen del copy que ya era público en Neuron Mesh y de lo que debe volver a verificarse antes de reutilizarlo.
-- El contenido público canónico actual de Neuron Mesh está en `website/neuron-mesh/src/data/site.ts` y en sus páginas Astro.
+- El contenido público canónico actual de Neuron Mesh está en `websites/neuron-mesh/src/data/site.ts` y en sus páginas Astro.
 - Las decisiones y los requisitos futuros de la interfaz Agent pertenecen a `websites/agent/planning/`, no a esta carpeta.
 
 ## Privacidad y uso

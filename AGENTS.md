@@ -4,7 +4,7 @@ Este repositorio es el workspace completo para desarrollar dos webs. Lee `START_
 
 ## Estructura y propiedad
 
-- `website/neuron-mesh/`: aplicación Astro clásica y su único Scrum en `planning/`.
+- `websites/neuron-mesh/`: aplicación Astro clásica y su único Scrum en `planning/`.
 - `websites/agent/`: aplicación Astro de la futura experiencia tipo editor y su único Scrum en `planning/`.
 - `site.config.json`: selecciona exactamente `neuron-mesh` o `agent` para GitHub Pages. El valor inicial es `neuron-mesh`.
 - `.agents/skills/`: skills portables del workspace.
@@ -27,7 +27,7 @@ Cada producto mantiene su propio backlog, sprint y versiones. Antes de cambiar c
 - Distingue hechos, experiencia, aprendizaje, planes y ficción. No inventes cifras, funciones, resultados ni credenciales.
 - Reconfirma hechos que pueden cambiar, en especial fechas, estados laborales, estudios y estado de proyectos. Usa fuentes actuales y señala las limitaciones.
 - Mantén coherencia entre español e inglés. Prefiere frases concretas y naturales; elimina vaguedad, relleno y fórmulas de marketing genéricas.
-- `website/neuron-mesh/` conserva contenido existente como fuente fechada, no como autorización automática para copiarlo. El estado de perfil en `context/public-profile-snapshot.md` también requiere reconfirmación antes de reutilizarse.
+- `websites/neuron-mesh/` conserva contenido existente como fuente fechada, no como autorización automática para copiarlo. El estado de perfil en `context/public-profile-snapshot.md` también requiere reconfirmación antes de reutilizarse.
 - No versionar secretos, dependencias, salidas de compilación, cachés ni importaciones privadas. Revisa lo que entra en el commit y el contenido de `dist/` antes de publicar.
 - No publiques una web, compres servicios, contactes terceros o crees un remoto sin una instrucción que lo incluya. La sincronización del workspace en esta tarea está autorizada por el plan aprobado.
 

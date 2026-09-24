@@ -17,7 +17,7 @@ npm run dev:active
 
 | Aplicación | Código | Scrum |
 |---|---|---|
-| Neuron Mesh, web existente | [`website/neuron-mesh/`](./website/neuron-mesh/) | [`planning/`](./website/neuron-mesh/planning/) |
+| Neuron Mesh, web existente | [`websites/neuron-mesh/`](./websites/neuron-mesh/) | [`planning/`](./websites/neuron-mesh/planning/) |
 | Agent, futura web tipo editor | [`websites/agent/`](./websites/agent/) | [`planning/`](./websites/agent/planning/) |
 
 Cada web tiene dependencias, lockfile, backlog, sprint y versiones propias. El brief de Agent conserva Explorer, Search, ramas simuladas, temas, Run and Debug y el acceso a Markdown para lectores automáticos; aún no se ha implementado la interfaz.

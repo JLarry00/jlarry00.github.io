@@ -4,7 +4,7 @@ Estado: cerrado el 24/09/2026. Implementación, checks, builds y primera ejecuci
 
 ## Objetivo
 
-Mantener Neuron Mesh en `website/neuron-mesh/`, aislar Agent y permitir que GitHub Pages publique exactamente la app seleccionada en `site.config.json`, con Neuron Mesh como valor inicial.
+Mantener Neuron Mesh en `websites/neuron-mesh/`, aislar Agent y permitir que GitHub Pages publique exactamente la app seleccionada en `site.config.json`, con Neuron Mesh como valor inicial.
 
 ## Resultado y aceptación local
 
@@ -18,3 +18,7 @@ Mantener Neuron Mesh en `website/neuron-mesh/`, aislar Agent y permitir que GitH
 ## Límites del cierre
 
 Los comandos `dev` de ambas apps respondieron HTTP 200 con la misma copia limpia en filesystem Linux temporal. El checkout bajo `/mnt/c` es lento al iniciar Astro por el disco WSL/NTFS y excedió el límite de arranque del terminal interactivo; no se cambió el producto para sortear esa lentitud.
+
+## Seguimiento estructural (24/09/2026)
+
+A petición de Juan, Neuron Mesh se trasladó de la ubicación inicial `website/neuron-mesh/` a `websites/neuron-mesh/`, como hermana de `websites/agent/`. Se actualizaron los comandos raíz, las referencias documentales y Scrum, la ruta de caché del workflow y la skill de Scrum. El build desde la ubicación final generó las 14 páginas esperadas. `astro check` quedó atascado en lecturas del checkout WSL/NTFS y se interrumpió; no fue un rechazo de permisos. La aplicación no tuvo cambios de código fuente.

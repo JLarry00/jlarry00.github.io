@@ -2,7 +2,7 @@
 
 Estado: cerrado el 24/09/2026 tras validar instalación, builds, publicación y rutas públicas.
 
-Objetivo: mantener Neuron Mesh funcional en `website/neuron-mesh/`, aislar la aplicación Agent y hacer que la publicación de GitHub Pages siga una selección estricta cuyo valor inicial sea Neuron Mesh.
+Objetivo: mantener Neuron Mesh funcional en `websites/neuron-mesh/`, aislar la aplicación Agent y hacer que la publicación de GitHub Pages siga una selección estricta cuyo valor inicial sea Neuron Mesh.
 
 | ID | Tarea | Estado | Evidencia o pendiente |
 |---|---|---|---|
