@@ -12,5 +12,6 @@
 | Alpha S08 (publicada en `/agent/`) | GitHub Pages #35989129116 completado; aceptación editorial y visual pendiente | Primera publicación simultánea con Neuron Mesh. Incluye S02–S07 y Markdown directo para IA; mantiene etiqueta de desarrollo y `noindex` HTML. |
 | Alpha S09 (publicada en `/`) | GitHub Pages #35997797464 completado; aceptación editorial y visual pendiente | Agent pasa a ser la entrada predeterminada; Markdown directo en `/for-agents/`. Neuron Mesh continúa en `/neon-mesh/`. |
 | Alpha S10 (publicada en `/`) | GitHub Pages #36017979551 completado; lectura nueva pendiente de aceptación | Los 22 documentos ES/EN tienen vista HTML con formato y botones desde el índice, además de los `.md` directos para IA. Juan aceptó la primera versión visual, funcional y de contenido. |
+| Alpha S11 (publicada en `/`) | GitHub Pages #36024962878 completado; aceptación de lectura pendiente | Sustituye la doble presentación de S10: índice y 22 documentos se sirven solo como HTML sencillo y enlazado; Markdown real permanece como fuente en el repositorio. |
 
 Las versiones Agent tienen su propia secuencia. El selector local apunta ahora a Agent.

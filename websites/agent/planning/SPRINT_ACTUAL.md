@@ -1,8 +1,8 @@
-# Sprint actual — S11
+# Sprint actual — sin sprint activo
 
-Objetivo: corregir la lectura de documentos tras el feedback de Juan. Seleccionado: `AG-026`.
+Estado: S11 cerrado el 24/09/2026 tras publicación y comprobación remota. `/for-agents/` es una única colección HTML estática generada desde Markdown en el repo; personas e IA pueden recorrer los mismos enlaces.
 
-S10 publicó dos presentaciones y Juan rechazó esa separación. S11 dejará una única colección HTML generada desde Markdown, con enlaces fáciles de seguir por personas e IA. La aceptación de las otras 17 tareas de primera versión se conserva. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
+`AG-026` sigue en el PB pendiente hasta que Juan revise esta corrección. La aceptación de las otras 17 tareas de primera versión se conserva. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
 
 - [S11 — Una lectura compartida](./sprints/S11-lectura-compartida.md)
 - [S10 — Aceptación y lectura Markdown](./sprints/S10-lectura-markdown.md)
