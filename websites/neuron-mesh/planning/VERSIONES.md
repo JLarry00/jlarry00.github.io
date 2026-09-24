@@ -15,3 +15,7 @@
 - Cambio mayor (`2.0.0`): cambio material de identidad visual, arquitectura de información o posicionamiento.
 
 No se asigna una versión nueva al comenzar un sprint. Se asigna al cerrarlo, cuando el incremento existe y ha sido validado.
+
+## Publicación del workspace
+
+ENV-03 (24/09/2026) mantiene la web Neuron Mesh 2.2.0 en la raíz pública y añade Agent en `/agent/` sin cambiar el número de versión de Neuron Mesh. GitHub Actions #35989129116 terminó correctamente; rutas de ambas webs respondieron 200.

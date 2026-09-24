@@ -9,5 +9,6 @@
 | Alpha S05 (sin versión publicada) | Incremento local compilado y visible en Codex; aceptación visual pendiente | Selector de temas del sistema, VS Code oscuro/claro y variantes Monokai/Solarized Dark; elección manual persistente. Presentación Alpha implementada; perfil y funciones completas pendientes. |
 | Alpha S06 (sin versión publicada) | Incremento local compilado; revisión editorial pendiente | Primeras fichas ES/EN desde datos públicos curados, Markdown directo para IA y varias pestañas de documentos. El vídeo y el árbol final siguen pendientes. |
 | Alpha S07 (sin versión publicada) | Incremento local compilado; revisión de interacción pendiente | Search por archivos, rama ficticia batman, animación Run and Debug y enlaces directos ES/EN. |
+| Alpha S08 (publicada en `/agent/`) | GitHub Pages #35989129116 completado; aceptación editorial y visual pendiente | Primera publicación simultánea con Neuron Mesh. Incluye S02–S07 y Markdown directo para IA; mantiene etiqueta de desarrollo y `noindex` HTML. |
 
 Las versiones Agent tienen su propia secuencia. El selector raíz continúa apuntando a Neuron Mesh.

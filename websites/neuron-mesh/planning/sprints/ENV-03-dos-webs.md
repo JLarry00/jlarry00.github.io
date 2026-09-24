@@ -1,6 +1,6 @@
 # Sprint ENV-03 — Dos webs en GitHub Pages
 
-Estado: iniciado el 24/09/2026 por decisión explícita de Juan.
+Estado: cerrado el 24/09/2026 tras publicación y comprobación remota.
 
 Objetivo: conservar Neuron Mesh en la raíz pública y añadir Agent bajo `/agent/` sin crear otro repositorio.
 
@@ -14,4 +14,8 @@ Seleccionado: `ENV-009`. La entrada pública de Agent está registrada como `AG-
 
 ## Comprobación local
 
-Neuron Mesh compiló 14 rutas con el código conservado. Agent compiló dos rutas HTML y 23 Markdown (22 documentos ES/EN más el índice) con base `/agent/`. La composición contiene 16 HTML y los Markdown esperados; no aparecen rutas de `planning/`, `context/`, `contexto/`, dependencias, CV ni vídeo en el artefacto. El CSS de Agent se enlaza con prefijo `/agent/` y los iconos se integran en el bundle. La revisión remota sigue pendiente.
+Neuron Mesh compiló 14 rutas con el código conservado. Agent compiló dos rutas HTML y 23 Markdown (22 documentos ES/EN más el índice) con base `/agent/`. La composición contiene 16 HTML y los Markdown esperados; no aparecen rutas de `planning/`, `context/`, `contexto/`, dependencias, CV ni vídeo en el artefacto. El CSS de Agent se enlaza con prefijo `/agent/` y los iconos se integran en el bundle.
+
+## Publicación remota
+
+El commit `886d5d0` activó [GitHub Actions #35989129116](https://github.com/JLarry00/jlarry00.github.io/actions/runs/35989129116), concluido en `success`. `/`, `/es/` y `/projects/` de Neuron Mesh respondieron 200. `/agent/`, `/agent/for-agents/` y sus Markdown ES/EN respondieron 200; el CSS bajo `/agent/_astro/` también. `site.config.json` conserva `activeSite: neuron-mesh` para comandos locales, y Pages sirve ambas webs.

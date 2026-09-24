@@ -1,10 +1,10 @@
-# Sprint activo: ENV-03 — Dos webs en GitHub Pages
+# Sprint actual — sin sprint activo
 
-Estado: iniciado el 24/09/2026 por decisión explícita de Juan. [ENV-02](./sprints/ENV-02-selector.md) está cerrado.
+Estado: ENV-03 cerrado el 24/09/2026 tras publicación y comprobación remota. [ENV-02](./sprints/ENV-02-selector.md) también está cerrado.
 
-Objetivo: conservar Neuron Mesh en `/` y publicar Agent en `/agent/` dentro del mismo artefacto de GitHub Pages. Trabajo seleccionado: `ENV-009`.
+Neuron Mesh se conserva en [la raíz pública](https://jlarry00.github.io/) y Agent se publica en [/agent/](https://jlarry00.github.io/agent/) dentro del mismo artefacto. `ENV-009` está terminado.
 
-- [Sprint ENV-03 — Dos webs](./sprints/ENV-03-dos-webs.md)
+- [Resultado ENV-03 — Dos webs](./sprints/ENV-03-dos-webs.md)
 - [Product Backlog Neuron Mesh](./BACKLOG.md)
 
-La publicación doble está pendiente de compilación, revisión del artefacto y ejecución remota. El scaffold y las funciones de Agent se registran en su propio Scrum.
+El workflow remoto [#35989129116](https://github.com/JLarry00/jlarry00.github.io/actions/runs/35989129116) terminó en `success`; rutas de ambas webs respondieron 200. El scaffold y las funciones de Agent se registran en su propio Scrum.
