@@ -2,6 +2,8 @@
 
 Recoge lo acordado y lo pendiente de discutir con Juan, sin inventar hechos biográficos. Hay tres contextos distintos: el `AGENTS.md` visible en la interfaz humana, el documento `AGENTS.md` de la colección agéntica y el `AGENTS.md` situado en la raíz de este workspace, que instruye al agente que desarrolla la web.
 
+S13 fijó la estructura pública con `Welcome.md`, `README.md`, `AGENTS.md`, `SOUL.md`, `Experience.md`, `Contact.md`, `skills/` y `projects/`. S14 agrupa skills en infraestructura, CI/CD, IA aplicada y programación. `MEMORY.md` permanece aplazado. La redacción personal y los hobbies de `SOUL.md` se revisarán en un sprint editorial posterior.
+
 ## Función de cada archivo
 
 | Archivo | Propuesta | Lo que falta decidir |

@@ -19,4 +19,11 @@ I took part in production, testing and documentation in ophthalmic technology. I
 
 I am studying Computer Engineering at Universidad Autónoma de Madrid. This page does not state a projected graduation date as a settled fact.
 
+## Related files
+
+- [SOUL.md](./SOUL.md)
+- [skills/README.md](./skills/README.md)
+- [projects/README.md](./projects/README.md)
+- [Contact.md](./Contact.md)
+
 [Agent index](../index.md)

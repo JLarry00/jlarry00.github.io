@@ -9,6 +9,13 @@ Pasa y curiosea. Estoy preparando este portfolio como un repositorio que puedas 
 
 ## Empieza por aquí
 
-Abre Explorer, busca un archivo o entra en README.md. Si prefieres páginas sencillas con enlaces, usa el índice de documentos.
+Abre README.md para una visión general o sigue los enlaces entre archivos para explorar el perfil.
+
+## Archivos relacionados
+
+- [README.md](./README.md)
+- [SOUL.md](./SOUL.md)
+- [Experience.md](./Experience.md)
+- [projects/README.md](./projects/README.md)
 
 [Índice de agentes](../index.md)

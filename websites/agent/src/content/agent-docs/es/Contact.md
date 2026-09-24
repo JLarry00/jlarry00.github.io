@@ -17,4 +17,10 @@ Puedes escribirme por correo o conectar conmigo en LinkedIn. GitHub reúne repos
 - [LinkedIn](https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba)
 - [GitHub](https://github.com/JLarry00)
 
+## Archivos relacionados
+
+- [README.md](./README.md)
+- [Experience.md](./Experience.md)
+- [projects/README.md](./projects/README.md)
+
 [Índice de agentes](../index.md)

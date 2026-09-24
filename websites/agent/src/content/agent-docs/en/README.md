@@ -5,15 +5,15 @@
 Status: public portfolio in development.
 Source review: 2026-09-24.
 
-I study Computer Engineering at Universidad Autónoma de Madrid. I am interested in automation, infrastructure and applied AI for concrete problems.
+I study Computer Engineering at Universidad Autónoma de Madrid. My public experience includes technical production and a DevOps internship; my interests include automation, infrastructure and applied AI.
 
-## What you will find
+## Profile contents
 
-An initial selection of experience, tools and projects. This version is still in development; unfinished work is labelled as such.
+Experience.md covers roles and education. skills/README.md distinguishes professional practice from studies. projects/README.md links two public personal repositories. SOUL.md adds personal context still under review.
 
-## How to explore
+## Scope
 
-Open files from Explorer or search by filename. You can also follow the links in the document collection without using this interface.
+This portfolio is in development. Each page states the limits of its claims; it does not assign unverified metrics, job availability or project status.
 
 ## Links
 
@@ -23,14 +23,27 @@ Open files from Explorer or search by filename. You can also follow the links in
 ## Files
 
 - [AGENTS.md](./AGENTS.md)
+- [SOUL.md](./SOUL.md)
 - [Welcome.md](./Welcome.md)
 - [Experience.md](./Experience.md)
 - [Contact.md](./Contact.md)
 - [skills/README.md](./skills/README.md)
-- [skills/terraform.md](./skills/terraform.md)
+- [skills/infrastructure.md](./skills/infrastructure.md)
+- [skills/ci-cd.md](./skills/ci-cd.md)
 - [skills/applied-ai.md](./skills/applied-ai.md)
+- [skills/programming.md](./skills/programming.md)
 - [projects/README.md](./projects/README.md)
 - [projects/jarvis.md](./projects/jarvis.md)
 - [projects/payroll-extractor.md](./projects/payroll-extractor.md)
+
+## Related files
+
+- [Welcome.md](./Welcome.md)
+- [AGENTS.md](./AGENTS.md)
+- [SOUL.md](./SOUL.md)
+- [Experience.md](./Experience.md)
+- [skills/README.md](./skills/README.md)
+- [projects/README.md](./projects/README.md)
+- [Contact.md](./Contact.md)
 
 [Agent index](../index.md)

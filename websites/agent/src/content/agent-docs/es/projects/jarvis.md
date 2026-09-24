@@ -15,4 +15,10 @@ El repositorio público documenta el diseño y el código compartidos. Algunas i
 
 - [Repositorio](https://github.com/JLarry00/jarvis)
 
+## Archivos relacionados
+
+- [projects/README.md](./README.md)
+- [skills/applied-ai.md](../skills/applied-ai.md)
+- [Contact.md](../Contact.md)
+
 [Índice de agentes](../../index.md)

@@ -20,4 +20,11 @@ Explora la extracción de datos de documentos y la comprobación de importes. El
 - [Jarvis en GitHub](https://github.com/JLarry00/jarvis)
 - [Extractor en GitHub](https://github.com/JLarry00/ExtractorNominas)
 
+## Archivos relacionados
+
+- [projects/jarvis.md](./jarvis.md)
+- [projects/payroll-extractor.md](./payroll-extractor.md)
+- [skills/README.md](../skills/README.md)
+- [Experience.md](../Experience.md)
+
 [Índice de agentes](../../index.md)

@@ -20,4 +20,11 @@ Explores document data extraction and numerical checks. The repository is the re
 - [Jarvis on GitHub](https://github.com/JLarry00/jarvis)
 - [Extractor on GitHub](https://github.com/JLarry00/ExtractorNominas)
 
+## Related files
+
+- [projects/jarvis.md](./jarvis.md)
+- [projects/payroll-extractor.md](./payroll-extractor.md)
+- [skills/README.md](../skills/README.md)
+- [Experience.md](../Experience.md)
+
 [Agent index](../../index.md)

@@ -15,4 +15,10 @@ The public repository documents the shared design and code. Some integrations an
 
 - [Repository](https://github.com/JLarry00/jarvis)
 
+## Related files
+
+- [projects/README.md](./README.md)
+- [skills/applied-ai.md](../skills/applied-ai.md)
+- [Contact.md](../Contact.md)
+
 [Agent index](../../index.md)

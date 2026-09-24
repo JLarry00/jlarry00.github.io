@@ -19,4 +19,11 @@ Participé en producción, pruebas y documentación en un entorno de tecnología
 
 Curso el Grado en Ingeniería Informática en la Universidad Autónoma de Madrid. Esta página no presenta una fecha de graduación prevista como hecho cerrado.
 
+## Archivos relacionados
+
+- [SOUL.md](./SOUL.md)
+- [skills/README.md](./skills/README.md)
+- [projects/README.md](./projects/README.md)
+- [Contact.md](./Contact.md)
+
 [Índice de agentes](../index.md)

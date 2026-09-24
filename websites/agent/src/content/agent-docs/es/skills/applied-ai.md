@@ -11,4 +11,10 @@ Me interesa usar IA para construir herramientas concretas y hacer visibles sus l
 
 He trabajado con agentes y generación de presentaciones durante mis prácticas. En proyectos personales exploro la extracción de información y la organización de tareas. El estado de cada repositorio debe consultarse por separado.
 
+## Archivos relacionados
+
+- [skills/README.md](./README.md)
+- [projects/jarvis.md](../projects/jarvis.md)
+- [projects/payroll-extractor.md](../projects/payroll-extractor.md)
+
 [Índice de agentes](../../index.md)

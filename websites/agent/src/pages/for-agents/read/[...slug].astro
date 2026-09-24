@@ -23,13 +23,20 @@ const title = profile.documents.find((item) => item.path === documentPath)?.[loc
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>{title} · Markdown con formato · Juan Larrondo</title>
+    <title>{title} · {locale === 'es' ? 'Markdown con formato' : 'Formatted Markdown'} · Juan Larrondo</title>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('agent-theme')
+        const choice = ['dark', 'light', 'monokai', 'solarized', 'system'].includes(stored) ? stored : 'dark'
+        document.documentElement.dataset.theme = choice === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : choice
+      } catch { document.documentElement.dataset.theme = 'dark' }
+    </script>
   </head>
   <body>
     <main class="reader-shell">
       <nav class="reader-top" aria-label={locale === 'es' ? 'Navegación' : 'Navigation'}>
-        <a href="/for-agents/">← {locale === 'es' ? 'Todos los archivos' : 'All files'}</a>
-        <a href="/">{locale === 'es' ? 'Portfolio visual' : 'Visual portfolio'} ↗</a>
+        <a class="reader-index" href="/for-agents/">← {locale === 'es' ? 'Todos los archivos' : 'All files'}</a>
+        <a class="reader-return" href={`/#/${locale}/AGENTS.md`}>{locale === 'es' ? 'AGENTS.md visual' : 'Visual AGENTS.md'} ↗</a>
       </nav>
       <p class="reader-path">{locale.toUpperCase()} / {documentPath}</p>
       <article class="reader-markdown"><Content /></article>

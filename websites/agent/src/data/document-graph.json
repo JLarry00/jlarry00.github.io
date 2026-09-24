@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    { "path": "README.md", "group": "root", "x": 600, "y": 310, "related": ["Welcome.md", "AGENTS.md", "SOUL.md", "Experience.md", "skills/README.md", "projects/README.md", "Contact.md"] },
+    { "path": "AGENTS.md", "group": "root", "x": 330, "y": 135, "related": ["README.md", "SOUL.md", "Experience.md", "skills/README.md", "projects/README.md", "Contact.md"] },
+    { "path": "SOUL.md", "group": "root", "x": 870, "y": 135, "related": ["README.md", "Experience.md", "projects/README.md", "Contact.md"] },
+    { "path": "Welcome.md", "group": "root", "x": 600, "y": 75, "related": ["README.md", "SOUL.md", "Experience.md", "projects/README.md"] },
+    { "path": "Experience.md", "group": "root", "x": 285, "y": 345, "related": ["SOUL.md", "skills/README.md", "projects/README.md", "Contact.md"] },
+    { "path": "Contact.md", "group": "root", "x": 915, "y": 345, "related": ["README.md", "Experience.md", "projects/README.md"] },
+    { "path": "skills/README.md", "group": "skills", "x": 375, "y": 525, "related": ["skills/infrastructure.md", "skills/ci-cd.md", "skills/applied-ai.md", "skills/programming.md", "Experience.md", "projects/README.md"] },
+    { "path": "skills/infrastructure.md", "group": "skills", "x": 120, "y": 625, "related": ["skills/README.md", "skills/ci-cd.md", "Experience.md"] },
+    { "path": "skills/ci-cd.md", "group": "skills", "x": 300, "y": 675, "related": ["skills/README.md", "skills/infrastructure.md", "Experience.md"] },
+    { "path": "skills/applied-ai.md", "group": "skills", "x": 485, "y": 675, "related": ["skills/README.md", "projects/jarvis.md", "projects/payroll-extractor.md"] },
+    { "path": "skills/programming.md", "group": "skills", "x": 670, "y": 675, "related": ["skills/README.md", "projects/README.md", "Experience.md"] },
+    { "path": "projects/README.md", "group": "projects", "x": 825, "y": 525, "related": ["projects/jarvis.md", "projects/payroll-extractor.md", "skills/README.md", "Experience.md"] },
+    { "path": "projects/jarvis.md", "group": "projects", "x": 865, "y": 675, "related": ["projects/README.md", "skills/applied-ai.md", "Contact.md"] },
+    { "path": "projects/payroll-extractor.md", "group": "projects", "x": 1070, "y": 625, "related": ["projects/README.md", "skills/applied-ai.md", "skills/programming.md", "Contact.md"] }
+  ]
+}

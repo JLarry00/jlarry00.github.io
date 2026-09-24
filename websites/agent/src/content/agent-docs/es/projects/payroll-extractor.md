@@ -15,4 +15,11 @@ El código público permite revisar la estructura y las comprobaciones implement
 
 - [Repositorio](https://github.com/JLarry00/ExtractorNominas)
 
+## Archivos relacionados
+
+- [projects/README.md](./README.md)
+- [skills/applied-ai.md](../skills/applied-ai.md)
+- [skills/programming.md](../skills/programming.md)
+- [Contact.md](../Contact.md)
+
 [Índice de agentes](../../index.md)

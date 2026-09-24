@@ -1,9 +1,10 @@
 ---
-import { welcome } from '../data/welcome'
+import { welcome, welcomeEs } from '../data/welcome'
 import profile from '../data/profile.json'
+import documentGraph from '../data/document-graph.json'
 import '../styles/workbench.css'
 
-const pageTitle = 'Juan · Portfolio Agent (Alpha)'
+const pageTitle = 'Juan · Agent Portfolio (Alpha)'
 const documents = profile.documents
 const rootDocuments = documents.filter((document) => !document.path.includes('/'))
 const skillDocuments = documents.filter((document) => document.path.startsWith('skills/'))
@@ -12,13 +13,13 @@ const baseUrl = import.meta.env.BASE_URL
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Portfolio en desarrollo de Juan Larrondo: experiencia, skills y proyectos en una interfaz inspirada en VS Code."
+      content="Juan Larrondo's portfolio in development: experience, skills and projects in a VS Code inspired interface."
     />
     <meta name="robots" content="noindex" />
     <meta name="theme-color" content="#181818" />
@@ -26,40 +27,40 @@ const baseUrl = import.meta.env.BASE_URL
     <script is:inline>
       try {
         const stored = localStorage.getItem('agent-theme')
-        const choice = ['dark', 'light', 'monokai', 'solarized'].includes(stored) ? stored : 'system'
+        const choice = ['dark', 'light', 'monokai', 'solarized', 'system'].includes(stored) ? stored : 'dark'
         document.documentElement.dataset.themeChoice = choice
         document.documentElement.dataset.theme = choice === 'system'
           ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
           : choice
       } catch {
-        document.documentElement.dataset.themeChoice = 'system'
-        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        document.documentElement.dataset.themeChoice = 'dark'
+        document.documentElement.dataset.theme = 'dark'
       }
     </script>
   </head>
   <body>
     <div class="app-shell">
-      <header class="titlebar" aria-label="Barra de título">
+      <header class="titlebar" aria-label="Title bar">
         <div class="titlebar-brand">
           <span class="brand-mark" aria-hidden="true">JL</span>
           <span class="titlebar-name">juan / portfolio-agent</span>
         </div>
         <div class="titlebar-location" id="titlebar-location">Welcome.md — portfolio-agent</div>
         <div class="titlebar-actions">
-          <label class="visually-hidden" for="language-select">Idioma</label>
-          <select id="language-select" class="theme-select language-select" aria-label="Idioma">
-            <option value="es">ES</option>
+          <label class="visually-hidden" for="language-select">Language</label>
+          <select id="language-select" class="theme-select language-select" aria-label="Language">
             <option value="en">EN</option>
+            <option value="es">ES</option>
           </select>
-          <label class="visually-hidden" for="theme-select">Tema visual</label>
-          <select id="theme-select" class="theme-select" aria-label="Tema visual">
-            <option value="system">Tema: sistema</option>
+          <label class="visually-hidden" for="theme-select">Visual theme</label>
+          <select id="theme-select" class="theme-select" aria-label="Visual theme">
             <option value="dark">VS Code oscuro</option>
             <option value="light">VS Code claro</option>
             <option value="monokai">Monokai</option>
             <option value="solarized">Solarized Dark</option>
+            <option value="system">Tema: sistema</option>
           </select>
-          <span class="alpha-label">Vista previa · Alpha</span>
+          <span class="alpha-label">Preview · Alpha</span>
         </div>
       </header>
 
@@ -170,7 +171,6 @@ const baseUrl = import.meta.env.BASE_URL
                   </ul>
                 </li>
               </ul>
-              <p class="tree-provisional">Estructura provisional · en revisión</p>
             </section>
 
             <section class="view-content" data-view-content="search" aria-label="Search" hidden>
@@ -215,7 +215,6 @@ const baseUrl = import.meta.env.BASE_URL
             <span class="breadcrumb-folder">Juan</span><span id="breadcrumb-path"></span>
             <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="file-glyph ui-icon" aria-hidden="true"></span>
             <span class="breadcrumb-file" id="breadcrumb-file">Welcome.md</span>
-            <a class="file-permalink" id="file-permalink" href="#/es/Welcome.md">Enlace al archivo ↗</a>
           </div>
           <div class="editor-scroll">
             <article class="welcome-preview" id="welcome-preview" aria-label="Vista previa de Welcome.md">
@@ -251,8 +250,8 @@ const baseUrl = import.meta.env.BASE_URL
                 </div>
               </div>
               <div class="welcome-bottom">
-                <span class="welcome-bottom-label">Nota de la Alpha</span>
-                <p>Esta versión sigue en desarrollo. <a href={`${baseUrl}for-agents/`}>Todos los documentos ↗</a> · <a href={`${baseUrl}for-agents/read/es/Welcome/`}>Leer Welcome ↗</a> · <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Créditos de iconos</a></p>
+                <span class="welcome-bottom-label">Development note</span>
+                <p>This version is still in development. <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Icon credits</a></p>
               </div>
             </article>
             <article class="profile-preview" id="profile-preview" aria-live="polite" hidden></article>
@@ -281,18 +280,19 @@ const baseUrl = import.meta.env.BASE_URL
 
       <footer class="statusbar" aria-label="Estado del workspace">
         <div class="status-group">
-          <span class="status-item">Agent · desarrollo</span>
+          <span class="status-item">Agent · development</span>
           <span class="status-item is-secondary" id="status-branch">main</span>
         </div>
         <div class="status-group">
           <span class="status-item is-secondary" id="status-file">Welcome.md</span>
-          <span class="status-item is-secondary" id="status-locale">ES</span>
+          <span class="status-item is-secondary" id="status-locale">EN</span>
         </div>
       </footer>
     </div>
 
-    <script define:vars={{ profileDocuments: documents, baseUrl, welcomeContent: welcome }}>
+    <script define:vars={{ profileDocuments: documents, graphNodes: documentGraph.nodes, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
       const byPath = Object.fromEntries(profileDocuments.map((item) => [item.path, item]))
+      const graphByPath = Object.fromEntries(graphNodes.map((item) => [item.path, item]))
       const paths = profileDocuments.map((item) => item.path)
       const workbench = document.querySelector('.workbench')
       const sidebarTitle = document.querySelector('#sidebar-title')
@@ -306,7 +306,6 @@ const baseUrl = import.meta.env.BASE_URL
       const breadcrumbFile = document.querySelector('#breadcrumb-file')
       const breadcrumbPath = document.querySelector('#breadcrumb-path')
       const breadcrumbs = document.querySelector('#breadcrumbs')
-      const filePermalink = document.querySelector('#file-permalink')
       const statusFile = document.querySelector('#status-file')
       const statusLocale = document.querySelector('#status-locale')
       const statusBranch = document.querySelector('#status-branch')
@@ -325,7 +324,7 @@ const baseUrl = import.meta.env.BASE_URL
       const labels = { explorer: 'Explorer', search: 'Search', 'source-control': 'Source Control', run: 'Run and Debug' }
       const openTabs = ['Welcome.md']
       let activePath = 'Welcome.md'
-      let locale = 'es'
+      let locale = (() => { try { return localStorage.getItem('agent-language') === 'es' ? 'es' : 'en' } catch { return 'en' } })()
       let branch = 'main'
       let view = 'explorer'
       let running = !reducedMotion.matches
@@ -338,6 +337,7 @@ const baseUrl = import.meta.env.BASE_URL
         const target = path ? linkFor(path, language) : `#/${language}/_empty`
         if (location.hash !== target) history.pushState(null, '', target)
         locale = language
+        try { localStorage.setItem('agent-language', language) } catch { /* The current visit still uses the chosen language. */ }
         activePath = path
         if (path && !openTabs.includes(path)) openTabs.push(path)
         render()
@@ -413,14 +413,10 @@ const baseUrl = import.meta.env.BASE_URL
         }
         breadcrumbFile.textContent = parts.at(-1) || '—'
         breadcrumbs.dataset.file = activePath || ''
-        filePermalink.hidden = !activePath
-        if (activePath) filePermalink.href = linkFor(activePath)
       }
 
       function renderWelcome() {
-        const intro = locale === 'es'
-          ? welcomeContent
-          : { greeting: 'Hi, I’m Juan.', invitation: 'Come in and look around.', lead: 'I am building this portfolio as a repository you can browse. Open a file in Explorer and begin wherever you like.', guide: 'Start with the column on the left. Every file has a story of its own.' }
+        const intro = locale === 'es' ? welcomeSpanish : welcomeContent
         const heading = welcomePreview.querySelector('.welcome-copy h1')
         heading.firstChild.textContent = intro.greeting
         heading.querySelector('em').textContent = intro.invitation
@@ -428,13 +424,9 @@ const baseUrl = import.meta.env.BASE_URL
         welcomePreview.querySelector('.welcome-guide p').textContent = intro.guide
         welcomePreview.querySelector('.welcome-bottom-label').textContent = locale === 'es' ? 'Nota de desarrollo' : 'Development note'
         const note = welcomePreview.querySelector('.welcome-bottom p')
-        const agentLink = make('a', '', locale === 'es' ? 'Todos los documentos ↗' : 'All documents ↗')
-        agentLink.href = `${baseUrl}for-agents/`
-        const welcomeLink = make('a', '', locale === 'es' ? 'Leer Welcome ↗' : 'Read Welcome ↗')
-        welcomeLink.href = `${baseUrl}for-agents/read/${locale}/Welcome/`
         const creditLink = make('a', '', locale === 'es' ? 'Créditos de iconos' : 'Icon credits')
         creditLink.href = `${baseUrl}icons/codicons/ATTRIBUTION.txt`
-        note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), agentLink, document.createTextNode(' · '), welcomeLink, document.createTextNode(' · '), creditLink)
+        note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), creditLink)
       }
 
       function renderProfile() {
@@ -449,6 +441,8 @@ const baseUrl = import.meta.env.BASE_URL
           grid.append(card)
         })
         profilePreview.append(grid)
+        if (activePath === 'README.md') renderBrain()
+        else renderRelatedFiles(activePath)
         if (entry.links.length) {
           const links = make('div', 'profile-links')
           entry.links.forEach((link) => {
@@ -459,9 +453,95 @@ const baseUrl = import.meta.env.BASE_URL
           })
           profilePreview.append(links)
         }
-        const markdownLink = make('a', 'markdown-link', locale === 'es' ? 'Leer este documento ↗' : 'Read this document ↗')
-        markdownLink.href = `${baseUrl}for-agents/read/${locale}/${activePath.replace(/\.md$/, '')}/`
-        profilePreview.append(markdownLink)
+        if (activePath === 'AGENTS.md') {
+          const agentLink = make('a', 'markdown-link', locale === 'es' ? 'Abrir los documentos enlazados ↗' : 'Open the linked documents ↗')
+          agentLink.href = `${baseUrl}for-agents/read/${locale}/AGENTS/`
+          profilePreview.append(agentLink)
+        }
+      }
+
+      function renderRelatedFiles(path) {
+        const related = graphByPath[path]?.related || []
+        if (!related.length) return
+        const nav = make('nav', 'related-files')
+        nav.setAttribute('aria-label', locale === 'es' ? 'Archivos relacionados' : 'Related files')
+        nav.append(make('h2', '', locale === 'es' ? 'Sigue por aquí' : 'Explore next'))
+        const list = make('div', 'related-file-list')
+        related.forEach((target) => {
+          const button = make('button', 'related-file', target)
+          button.type = 'button'
+          button.addEventListener('click', () => routeTo(target))
+          list.append(button)
+        })
+        nav.append(list)
+        profilePreview.append(nav)
+      }
+
+      function renderBrain() {
+        const section = make('section', 'brain-section')
+        section.append(
+          make('p', 'brain-kicker', locale === 'es' ? 'Markdown brain' : 'Markdown brain'),
+          make('h2', '', locale === 'es' ? 'Un perfil, varios caminos' : 'One profile, many paths'),
+          make('p', 'brain-intro', locale === 'es'
+            ? 'Cada nodo abre un archivo. Las líneas muestran relaciones entre documentos; también puedes seguirlas dentro de cada archivo.'
+            : 'Each node opens a file. Lines show relationships between documents; you can also follow them inside each file.'),
+        )
+        const viewport = make('div', 'brain-viewport')
+        const ns = 'http://www.w3.org/2000/svg'
+        const svg = document.createElementNS(ns, 'svg')
+        svg.setAttribute('viewBox', '0 0 1200 740')
+        svg.setAttribute('aria-label', locale === 'es' ? 'Mapa navegable de archivos' : 'Navigable file map')
+        const drawnEdges = new Set()
+        for (const source of graphNodes) {
+          for (const targetPath of source.related) {
+            const edgeKey = [source.path, targetPath].sort().join('|')
+            if (drawnEdges.has(edgeKey)) continue
+            drawnEdges.add(edgeKey)
+            const target = graphByPath[targetPath]
+            const line = document.createElementNS(ns, 'line')
+            line.setAttribute('class', 'brain-edge')
+            line.setAttribute('x1', source.x)
+            line.setAttribute('y1', source.y)
+            line.setAttribute('x2', target.x)
+            line.setAttribute('y2', target.y)
+            svg.append(line)
+          }
+        }
+        for (const node of graphNodes) {
+          const link = document.createElementNS(ns, 'a')
+          link.setAttribute('class', `brain-node brain-node-${node.group}`)
+          link.setAttribute('href', linkFor(node.path))
+          link.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${node.path}`)
+          const rect = document.createElementNS(ns, 'rect')
+          rect.setAttribute('x', node.x - 82)
+          rect.setAttribute('y', node.y - 23)
+          rect.setAttribute('width', '164')
+          rect.setAttribute('height', '46')
+          rect.setAttribute('rx', '12')
+          const label = document.createElementNS(ns, 'text')
+          label.setAttribute('x', node.x)
+          label.setAttribute('y', node.y + 5)
+          label.setAttribute('text-anchor', 'middle')
+          label.textContent = node.path.endsWith('/README.md') ? node.path.replace('README.md', '') : node.path.split('/').at(-1)
+          link.append(rect, label)
+          svg.append(link)
+        }
+        viewport.append(svg)
+        section.append(viewport)
+        const list = make('div', 'brain-mobile-list')
+        for (const [group, titleEs, titleEn] of [['root', 'Archivos principales', 'Main files'], ['skills', 'Skills', 'Skills'], ['projects', 'Proyectos', 'Projects']]) {
+          const cluster = make('section', 'brain-mobile-cluster')
+          cluster.append(make('h3', '', locale === 'es' ? titleEs : titleEn))
+          for (const node of graphNodes.filter((item) => item.group === group)) {
+            const button = make('button', 'related-file', node.path)
+            button.type = 'button'
+            button.addEventListener('click', () => routeTo(node.path))
+            cluster.append(button)
+          }
+          list.append(cluster)
+        }
+        section.append(list)
+        profilePreview.append(section)
       }
 
       function renderContent() {
@@ -495,12 +575,50 @@ const baseUrl = import.meta.env.BASE_URL
         })
       }
 
+      function renderChromeLocale() {
+        const es = locale === 'es'
+        const set = (selector, spanish, english) => { document.querySelector(selector).textContent = es ? spanish : english }
+        set('.alpha-label', 'Vista previa · Alpha', 'Preview · Alpha')
+        set('[data-view-content="search"] .panel-kicker', 'Archivos', 'Files')
+        set('[data-view-content="search"] .panel-help', 'Busca archivos, no su contenido.', 'Search filenames and paths, not their contents.')
+        set('[data-view-content="source-control"] .panel-kicker', 'Simulación · no Git', 'Simulation · not Git')
+        set('[data-view-content="source-control"] .panel-help', 'Dos versiones de la historia. Solo main cuenta hechos.', 'Two versions of the story. Only main describes real facts.')
+        set('[data-branch="main"] small', 'Perfil real', 'Real profile')
+        set('[data-branch="batman"] small', 'Broma pública', 'Public joke')
+        set('[data-view-content="run"] .panel-kicker', 'Escena interactiva', 'Interactive scene')
+        set('[data-view-content="run"] .functional-panel > p:last-child', 'Un personaje corre detrás de los bugs. La animación se puede pausar y respeta la reducción de movimiento.', 'A character chases bugs. You can pause the animation, and reduced-motion preferences are respected.')
+        set('.fiction-preview .profile-eyebrow', 'Rama ficticia · broma', 'Fictional branch · joke')
+        set('.fiction-preview > p:not(.profile-eyebrow)', 'He creado una rama pública para ocultar mi identidad secreta. Como plan, tiene alguna laguna.', 'I made a public branch to hide my secret identity. There may be a flaw in the plan.')
+        set('.fiction-card p', 'La rama batman es ficción. Vuelve a main para leer mi perfil real.', 'The batman branch is fiction. Return to main for my real profile.')
+        set('.run-preview .profile-eyebrow', 'Run and Debug', 'Run and Debug')
+        set('.run-preview h1', 'Persiguiendo bugs', 'Chasing bugs')
+        set('.run-preview > p:not(.profile-eyebrow)', 'Un pequeño recordatorio de que depurar también es correr detrás de cosas que se escapan.', 'A small reminder that debugging can feel like chasing things that keep escaping.')
+        set('.empty-editor h1', 'Todo cerrado por ahora.', 'Everything is closed for now.')
+        set('.empty-editor p', 'Abre un archivo desde Explorer o búscalo por nombre.', 'Open a file in Explorer or search by name.')
+        set('.statusbar .status-item:first-child', 'Agent · desarrollo', 'Agent · development')
+        fileSearch.placeholder = es ? 'Nombre o ruta…' : 'Filename or path…'
+        document.querySelector('.activity-bar').setAttribute('aria-label', es ? 'Vistas del portfolio' : 'Portfolio views')
+        document.querySelector('.sidebar').setAttribute('aria-label', es ? 'Panel de actividad' : 'Activity panel')
+        document.querySelector('.editor').setAttribute('aria-label', es ? 'Portfolio de Juan' : 'Juan’s portfolio')
+        document.querySelector('.breadcrumbs').setAttribute('aria-label', es ? 'Ruta del archivo' : 'File path')
+        document.querySelector('.titlebar').setAttribute('aria-label', es ? 'Barra de título' : 'Title bar')
+        document.querySelector('.statusbar').setAttribute('aria-label', es ? 'Estado del workspace' : 'Workspace status')
+        languageSelect.setAttribute('aria-label', es ? 'Idioma' : 'Language')
+        themeSelect.setAttribute('aria-label', es ? 'Tema visual' : 'Visual theme')
+        fileSearch.setAttribute('aria-label', es ? 'Buscar archivos por nombre o ruta' : 'Search files by name or path')
+        themeSelect.options[0].textContent = es ? 'VS Code oscuro' : 'VS Code Dark'
+        themeSelect.options[1].textContent = es ? 'VS Code claro' : 'VS Code Light'
+        themeSelect.options[4].textContent = es ? 'Tema: sistema' : 'Theme: system'
+        document.title = es ? 'Juan · Portfolio Agent (Alpha)' : 'Juan · Agent Portfolio (Alpha)'
+      }
+
       function render() {
+        renderChromeLocale()
         languageSelect.value = locale
         document.documentElement.lang = locale
         statusLocale.textContent = locale.toUpperCase()
         statusBranch.textContent = branch
-        statusFile.textContent = view === 'run' ? 'Run and Debug' : branch === 'batman' ? 'Ficción' : activePath || 'Sin archivo'
+        statusFile.textContent = view === 'run' ? 'Run and Debug' : branch === 'batman' ? (locale === 'es' ? 'Ficción' : 'Fiction') : activePath || (locale === 'es' ? 'Sin archivo' : 'No file')
         titlebarLocation.textContent = `${activePath || 'Portfolio'} — Juan`
         document.querySelectorAll('.tree-file').forEach((button) => {
           if (button.dataset.file === activePath && branch === 'main') button.setAttribute('aria-current', 'page')
@@ -511,6 +629,7 @@ const baseUrl = import.meta.env.BASE_URL
         renderBreadcrumb()
         renderContent()
         renderSearch()
+        updateRun()
       }
 
       themeSelect.value = document.documentElement.dataset.themeChoice || 'system'
@@ -519,8 +638,7 @@ const baseUrl = import.meta.env.BASE_URL
         document.documentElement.dataset.themeChoice = choice
         document.documentElement.dataset.theme = choice === 'system' ? (systemTheme.matches ? 'light' : 'dark') : choice
         try {
-          if (choice === 'system') localStorage.removeItem('agent-theme')
-          else localStorage.setItem('agent-theme', choice)
+          localStorage.setItem('agent-theme', choice)
         } catch { /* The current visit still uses the selected theme. */ }
       })
       systemTheme.addEventListener('change', (event) => {

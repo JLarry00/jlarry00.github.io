@@ -7,16 +7,23 @@ if (!index) throw new Error('Falta el índice Markdown de Agent')
 const { Content } = await render(index)
 ---
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Archivos del portfolio Agent · Juan Larrondo</title>
+    <title>Agent portfolio files · Juan Larrondo</title>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('agent-theme')
+        const choice = ['dark', 'light', 'monokai', 'solarized', 'system'].includes(stored) ? stored : 'dark'
+        document.documentElement.dataset.theme = choice === 'system' ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : choice
+      } catch { document.documentElement.dataset.theme = 'dark' }
+    </script>
   </head>
   <body>
     <main class="reader-shell">
-      <nav class="reader-top" aria-label="Navegación"><a href="/">← Portfolio</a></nav>
+      <nav class="reader-top" aria-label="Navigation"><a class="reader-return" href="/#/en/AGENTS.md">← Visual AGENTS.md</a></nav>
       <article class="reader-markdown"><Content /></article>
     </main>
   </body>

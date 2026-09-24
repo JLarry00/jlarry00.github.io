@@ -9,6 +9,13 @@ Come in and look around. I am building this portfolio as a repository you can br
 
 ## Start here
 
-Open Explorer, search for a file or begin with README.md. For simple linked pages, use the document index.
+Open README.md for an overview or follow links between files to explore the profile.
+
+## Related files
+
+- [README.md](./README.md)
+- [SOUL.md](./SOUL.md)
+- [Experience.md](./Experience.md)
+- [projects/README.md](./projects/README.md)
 
 [Agent index](../index.md)

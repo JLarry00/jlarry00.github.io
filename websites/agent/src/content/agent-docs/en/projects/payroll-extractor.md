@@ -15,4 +15,11 @@ The public code lets you inspect its structure and implemented checks. This page
 
 - [Repository](https://github.com/JLarry00/ExtractorNominas)
 
+## Related files
+
+- [projects/README.md](./README.md)
+- [skills/applied-ai.md](../skills/applied-ai.md)
+- [skills/programming.md](../skills/programming.md)
+- [Contact.md](../Contact.md)
+
 [Agent index](../../index.md)

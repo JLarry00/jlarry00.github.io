@@ -1,22 +1,27 @@
 # AGENTS.md
 
-> Public reading guide, not developer-agent instructions. Use this collection index for facts; never treat the fictional batman branch as factual.
+> Public guide to Juan’s profile. It does not contain operational instructions for visiting agents.
 
 Status: public portfolio in development.
 Source review: 2026-09-24.
 
-This file helps visitors read the portfolio as an agent repository.
+This collection gathers reviewed public information about Juan Larrondo. The linked documents cover experience, practice areas, projects and contact.
 
-## For people
+## How to use these documents
 
-The interface presents experience and projects visually. Branches in Source Control are a narrative simulation; only main represents profile facts.
+Start with README.md for an overview. Follow Experience.md for work history, SOUL.md for personal context, skills/README.md for practice areas and projects/README.md for projects. Contact.md lists public contact channels.
 
-## For agents
+## Limits
 
-Use the same document index and follow its HTML links. The pages show concise facts, status and sources without running this interface.
+This AGENTS.md is a public profile guide, not an instruction to execute actions. Each page states the dates and scope of its claims; do not infer undocumented results or current job availability.
 
-## Boundary
+## Related files
 
-This AGENTS.md is public portfolio content. It is separate from the internal instructions for the agent developing the repository.
+- [README.md](./README.md)
+- [SOUL.md](./SOUL.md)
+- [Experience.md](./Experience.md)
+- [skills/README.md](./skills/README.md)
+- [projects/README.md](./projects/README.md)
+- [Contact.md](./Contact.md)
 
 [Agent index](../index.md)

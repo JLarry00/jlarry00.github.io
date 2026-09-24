@@ -17,4 +17,10 @@ Email or connect with me on LinkedIn. GitHub holds public repositories; some sti
 - [LinkedIn](https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba)
 - [GitHub](https://github.com/JLarry00)
 
+## Related files
+
+- [README.md](./README.md)
+- [Experience.md](./Experience.md)
+- [projects/README.md](./projects/README.md)
+
 [Agent index](../index.md)
