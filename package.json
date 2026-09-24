@@ -13,6 +13,7 @@
     "build:active": "node scripts/site.mjs build",
     "build:neuron-mesh": "node scripts/site.mjs build neuron-mesh",
     "build:agent": "node scripts/site.mjs build agent",
+    "build:pages": "node scripts/site.mjs compose",
     "check:active": "node scripts/site.mjs check",
     "check:neuron-mesh": "node scripts/site.mjs check neuron-mesh",
     "check:agent": "node scripts/site.mjs check agent",

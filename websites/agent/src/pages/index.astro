@@ -1,47 +1,572 @@
 ---
-const title = 'Agent — work in progress'
+import { welcome } from '../data/welcome'
+import profile from '../data/profile.json'
+import '../styles/workbench.css'
+
+const pageTitle = 'Juan · Portfolio Agent (Alpha)'
+const documents = profile.documents
+const rootDocuments = documents.filter((document) => !document.path.includes('/'))
+const skillDocuments = documents.filter((document) => document.path.startsWith('skills/'))
+const projectDocuments = documents.filter((document) => document.path.startsWith('projects/'))
+const baseUrl = import.meta.env.BASE_URL
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="A separate workspace for the agent-repository portfolio concept." />
+    <meta
+      name="description"
+      content="Portfolio en desarrollo de Juan Larrondo: experiencia, skills y proyectos en una interfaz inspirada en VS Code."
+    />
     <meta name="robots" content="noindex" />
-    <title>{title}</title>
-    <style>
-      :root {
-        color-scheme: light;
-        font-family: system-ui, sans-serif;
-        background: #f5f5f4;
-        color: #292524;
+    <meta name="theme-color" content="#181818" />
+    <title>{pageTitle}</title>
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('agent-theme')
+        const choice = ['dark', 'light', 'monokai', 'solarized'].includes(stored) ? stored : 'system'
+        document.documentElement.dataset.themeChoice = choice
+        document.documentElement.dataset.theme = choice === 'system'
+          ? (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+          : choice
+      } catch {
+        document.documentElement.dataset.themeChoice = 'system'
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
       }
-
-      body {
-        display: grid;
-        min-height: 100vh;
-        margin: 0;
-        place-items: center;
-      }
-
-      main {
-        width: min(42rem, calc(100% - 3rem));
-        padding: 2rem 0;
-      }
-
-      p {
-        color: #57534e;
-        line-height: 1.7;
-      }
-    </style>
+    </script>
   </head>
   <body>
-    <main>
-      <p>Separate Astro application · scaffold 0.1.0</p>
-      <h1>Agent portfolio</h1>
-      <p>This site has its own source, release history and Scrum. The editor interface and profile content have not been implemented yet.</p>
-      <p>The public deployment still uses Neuron Mesh until the root selector is changed deliberately.</p>
-    </main>
+    <div class="app-shell">
+      <header class="titlebar" aria-label="Barra de título">
+        <div class="titlebar-brand">
+          <span class="brand-mark" aria-hidden="true">JL</span>
+          <span class="titlebar-name">juan / portfolio-agent</span>
+        </div>
+        <div class="titlebar-location" id="titlebar-location">Welcome.md — portfolio-agent</div>
+        <div class="titlebar-actions">
+          <label class="visually-hidden" for="language-select">Idioma</label>
+          <select id="language-select" class="theme-select language-select" aria-label="Idioma">
+            <option value="es">ES</option>
+            <option value="en">EN</option>
+          </select>
+          <label class="visually-hidden" for="theme-select">Tema visual</label>
+          <select id="theme-select" class="theme-select" aria-label="Tema visual">
+            <option value="system">Tema: sistema</option>
+            <option value="dark">VS Code oscuro</option>
+            <option value="light">VS Code claro</option>
+            <option value="monokai">Monokai</option>
+            <option value="solarized">Solarized Dark</option>
+          </select>
+          <span class="alpha-label">Vista previa · Alpha</span>
+        </div>
+      </header>
+
+      <div class="workbench" data-active-view="explorer" data-mobile-sidebar-open="false">
+        <nav class="activity-bar" aria-label="Vistas del portfolio">
+          <div class="activity-list">
+            <button
+              class="activity-button"
+              type="button"
+              data-view="explorer"
+              aria-label="Explorer"
+              aria-controls="activity-panel"
+              aria-pressed="true"
+              aria-expanded="true"
+              title="Explorer"
+            >
+              <span class="activity-icon ui-icon icon-files" aria-hidden="true"></span>
+            </button>
+            <button
+              class="activity-button"
+              type="button"
+              data-view="search"
+              aria-label="Search"
+              aria-controls="activity-panel"
+              aria-pressed="false"
+              title="Search"
+            >
+              <span class="activity-icon ui-icon icon-search" aria-hidden="true"></span>
+            </button>
+            <button
+              class="activity-button"
+              type="button"
+              data-view="source-control"
+              aria-label="Source Control"
+              aria-controls="activity-panel"
+              aria-pressed="false"
+              title="Source Control"
+            >
+              <span class="activity-icon ui-icon icon-source-control" aria-hidden="true"></span>
+            </button>
+            <button
+              class="activity-button"
+              type="button"
+              data-view="run"
+              aria-label="Run and Debug"
+              aria-controls="activity-panel"
+              aria-pressed="false"
+              title="Run and Debug"
+            >
+              <span class="activity-icon ui-icon icon-debug-alt" aria-hidden="true"></span>
+            </button>
+          </div>
+          <div class="activity-spacer" aria-hidden="true"></div>
+        </nav>
+
+        <aside class="sidebar" id="activity-panel" aria-label="Panel de actividad">
+          <div class="sidebar-heading">
+            <span id="sidebar-title">Explorer</span>
+            <small>Portfolio</small>
+          </div>
+          <div class="sidebar-scroll">
+            <section class="view-content" data-view-content="explorer" aria-label="Árbol de archivos">
+              <button
+                class="root-folder"
+                type="button"
+                data-folder="root"
+                data-target="workspace-files"
+                aria-expanded="true"
+                aria-controls="workspace-files"
+              >
+                <svg class="tree-chevron" viewBox="0 0 16 16" aria-hidden="true">
+                  <path d="m5.5 3.5 5 4.5-5 4.5" />
+                </svg>
+                <span class="folder-glyph ui-icon" aria-hidden="true"></span>
+                <span>PORTFOLIO-AGENT</span>
+              </button>
+
+              <ul class="tree-group" id="workspace-files">
+                {rootDocuments.map((document) => (
+                  <li><button class="tree-file" type="button" data-file={document.path} aria-current={document.path === 'Welcome.md' ? 'page' : undefined}>
+                    <span class="file-glyph ui-icon" aria-hidden="true"></span><span class="tree-file-label">{document.path}</span>
+                  </button></li>
+                ))}
+                <li>
+                  <button class="tree-folder" type="button" data-folder="skills" data-target="skills-files" aria-expanded="true" aria-controls="skills-files">
+                    <svg class="tree-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m5.5 3.5 5 4.5-5 4.5" /></svg>
+                    <span class="folder-glyph ui-icon" aria-hidden="true"></span><span>skills</span>
+                  </button>
+                  <ul class="tree-children" id="skills-files">
+                    {skillDocuments.map((document) => (
+                      <li><button class="tree-file" type="button" data-file={document.path}>
+                        <span class="file-glyph ui-icon" aria-hidden="true"></span><span class="tree-file-label">{document.path.split('/').at(-1)}</span>
+                      </button></li>
+                    ))}
+                  </ul>
+                </li>
+                <li>
+                  <button class="tree-folder" type="button" data-folder="projects" data-target="project-files" aria-expanded="true" aria-controls="project-files">
+                    <svg class="tree-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m5.5 3.5 5 4.5-5 4.5" /></svg>
+                    <span class="folder-glyph ui-icon" aria-hidden="true"></span><span>projects</span>
+                  </button>
+                  <ul class="tree-children" id="project-files">
+                    {projectDocuments.map((document) => (
+                      <li><button class="tree-file" type="button" data-file={document.path}>
+                        <span class="file-glyph ui-icon" aria-hidden="true"></span><span class="tree-file-label">{document.path.split('/').at(-1)}</span>
+                      </button></li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+              <p class="tree-provisional">Estructura provisional · en revisión</p>
+            </section>
+
+            <section class="view-content" data-view-content="search" aria-label="Search" hidden>
+              <div class="empty-panel functional-panel">
+                <p class="panel-kicker">Archivos</p>
+                <h2>Search</h2>
+                <label class="visually-hidden" for="file-search">Buscar archivos por nombre o ruta</label>
+                <input id="file-search" class="file-search" type="search" placeholder="Nombre o ruta…" autocomplete="off" />
+                <p class="panel-help">Busca archivos, no su contenido.</p>
+                <ul id="search-results" class="search-results" aria-live="polite"></ul>
+              </div>
+            </section>
+
+            <section class="view-content" data-view-content="source-control" aria-label="Source Control" hidden>
+              <div class="empty-panel functional-panel">
+                <p class="panel-kicker">Simulación · no Git</p>
+                <h2>Source Control</h2>
+                <p class="panel-help">Dos versiones de la historia. Solo main cuenta hechos.</p>
+                <div class="branch-list" role="group" aria-label="Ramas ficticias de presentación">
+                  <button type="button" class="branch-button" data-branch="main" aria-pressed="true"><span class="ui-icon icon-source-control" aria-hidden="true"></span><span>main<small>Perfil real</small></span></button>
+                  <button type="button" class="branch-button" data-branch="batman" aria-pressed="false"><span class="ui-icon icon-source-control" aria-hidden="true"></span><span>batman<small>Broma pública</small></span></button>
+                </div>
+              </div>
+            </section>
+
+            <section class="view-content" data-view-content="run" aria-label="Run and Debug" hidden>
+              <div class="empty-panel functional-panel">
+                <p class="panel-kicker">Escena interactiva</p>
+                <h2>Run and Debug</h2>
+                <p>Un personaje corre detrás de los bugs. La animación se puede pausar y respeta la reducción de movimiento.</p>
+              </div>
+            </section>
+          </div>
+        </aside>
+
+        <main class="editor" aria-label="Portfolio de Juan">
+          <div class="tabs-bar" aria-label="Archivos abiertos">
+            <div class="tabs-list" id="tabs-list"></div>
+          </div>
+          <div class="breadcrumbs" id="breadcrumbs" data-file="Welcome.md" aria-label="Ruta del archivo">
+            <span class="breadcrumb-root-icon ui-icon" aria-hidden="true"></span>
+            <span class="breadcrumb-folder">Juan</span><span id="breadcrumb-path"></span>
+            <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="file-glyph ui-icon" aria-hidden="true"></span>
+            <span class="breadcrumb-file" id="breadcrumb-file">Welcome.md</span>
+            <a class="file-permalink" id="file-permalink" href="#/es/Welcome.md">Enlace al archivo ↗</a>
+          </div>
+          <div class="editor-scroll">
+            <article class="welcome-preview" id="welcome-preview" aria-label="Vista previa de Welcome.md">
+              <div class="welcome-eyebrow">
+                <span class="welcome-eyebrow-line" aria-hidden="true"></span>
+                <span>Welcome.md</span>
+                <span class="welcome-eyebrow-index">01 / portfolio</span>
+              </div>
+              <div class="welcome-layout">
+                <div class="welcome-copy">
+                  <h1>{welcome.greeting}<br /><em>{welcome.invitation}</em></h1>
+                  <p class="welcome-lead">{welcome.lead}</p>
+                  <div class="welcome-guide">
+                    <span class="guide-arrow" aria-hidden="true">↖</span>
+                    <p>{welcome.guide}</p>
+                  </div>
+                </div>
+                <div class="welcome-art" aria-hidden="true">
+                  <div class="art-file art-file-back">
+                    <span>skills/</span>
+                    <i></i><i></i><i></i>
+                  </div>
+                  <div class="art-file art-file-front">
+                    <span>README.md</span>
+                    <i></i><i></i><i></i><i></i>
+                  </div>
+                  <div class="art-folder">
+                    <span class="art-folder-mark">JL<span class="art-folder-spark">✳</span></span>
+                    <span class="art-folder-caption">portfolio / agent</span>
+                  </div>
+                  <span class="art-coordinate art-coordinate-top">01 — OPEN</span>
+                  <span class="art-coordinate art-coordinate-bottom">// CURIOUS BY DESIGN</span>
+                </div>
+              </div>
+              <div class="welcome-bottom">
+                <span class="welcome-bottom-label">Nota de la Alpha</span>
+                <p>Esta versión sigue en desarrollo. <a href={`${baseUrl}for-agents/`}>Markdown para IA ↗</a> · <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Créditos de iconos</a></p>
+              </div>
+            </article>
+            <article class="profile-preview" id="profile-preview" aria-live="polite" hidden></article>
+            <article class="fiction-preview" id="fiction-preview" hidden>
+              <p class="profile-eyebrow">Rama ficticia · broma</p>
+              <h1>IDENTIDAD SECRETA: BATMAN</h1>
+              <p>He creado una rama pública para ocultar mi identidad secreta. Como plan, tiene alguna laguna.</p>
+              <div class="fiction-card"><span aria-hidden="true">🦇</span><p>La rama <strong>batman</strong> es una ficción. Para leer mi perfil real, vuelve a <strong>main</strong>.</p></div>
+            </article>
+            <article class="run-preview" id="run-preview" data-running="false" hidden>
+              <p class="profile-eyebrow">Run and Debug</p>
+              <h1>Persiguiendo bugs</h1>
+              <p>Un pequeño recordatorio de que depurar también es correr detrás de cosas que se escapan.</p>
+              <div class="run-stage" aria-hidden="true">
+                <svg class="runner" viewBox="0 0 70 90"><circle cx="35" cy="12" r="8" /><path d="M35 22 30 48m4-18-19 15m18-14 21 10M30 48 13 73m17-25 24 24" /></svg>
+                <span class="bug bug-one"></span><span class="bug bug-two"></span><span class="bug bug-three"></span>
+              </div>
+              <button class="run-toggle" id="run-toggle" type="button" aria-pressed="false">Iniciar animación</button>
+            </article>
+            <article class="empty-editor" id="empty-editor" hidden><h1>Todo cerrado por ahora.</h1><p>Abre un archivo desde Explorer o búscalo por nombre.</p></article>
+          </div>
+        </main>
+
+        <button class="mobile-scrim" type="button" aria-label="Cerrar panel lateral" hidden></button>
+      </div>
+
+      <footer class="statusbar" aria-label="Estado del workspace">
+        <div class="status-group">
+          <span class="status-item">Agent · desarrollo</span>
+          <span class="status-item is-secondary" id="status-branch">main</span>
+        </div>
+        <div class="status-group">
+          <span class="status-item is-secondary" id="status-file">Welcome.md</span>
+          <span class="status-item is-secondary" id="status-locale">ES</span>
+        </div>
+      </footer>
+    </div>
+
+    <script define:vars={{ profileDocuments: documents, baseUrl, welcomeContent: welcome }}>
+      const byPath = Object.fromEntries(profileDocuments.map((item) => [item.path, item]))
+      const paths = profileDocuments.map((item) => item.path)
+      const workbench = document.querySelector('.workbench')
+      const sidebarTitle = document.querySelector('#sidebar-title')
+      const welcomePreview = document.querySelector('#welcome-preview')
+      const profilePreview = document.querySelector('#profile-preview')
+      const fictionPreview = document.querySelector('#fiction-preview')
+      const runPreview = document.querySelector('#run-preview')
+      const emptyEditor = document.querySelector('#empty-editor')
+      const tabsList = document.querySelector('#tabs-list')
+      const titlebarLocation = document.querySelector('#titlebar-location')
+      const breadcrumbFile = document.querySelector('#breadcrumb-file')
+      const breadcrumbPath = document.querySelector('#breadcrumb-path')
+      const breadcrumbs = document.querySelector('#breadcrumbs')
+      const filePermalink = document.querySelector('#file-permalink')
+      const statusFile = document.querySelector('#status-file')
+      const statusLocale = document.querySelector('#status-locale')
+      const statusBranch = document.querySelector('#status-branch')
+      const languageSelect = document.querySelector('#language-select')
+      const themeSelect = document.querySelector('#theme-select')
+      const fileSearch = document.querySelector('#file-search')
+      const searchResults = document.querySelector('#search-results')
+      const runToggle = document.querySelector('#run-toggle')
+      const scrim = document.querySelector('.mobile-scrim')
+      const activityButtons = [...document.querySelectorAll('[data-view]')]
+      const viewPanels = [...document.querySelectorAll('[data-view-content]')]
+      const branchButtons = [...document.querySelectorAll('[data-branch]')]
+      const mobileViewport = window.matchMedia('(max-width: 760px)')
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+      const systemTheme = window.matchMedia('(prefers-color-scheme: light)')
+      const labels = { explorer: 'Explorer', search: 'Search', 'source-control': 'Source Control', run: 'Run and Debug' }
+      const openTabs = ['Welcome.md']
+      let activePath = 'Welcome.md'
+      let locale = 'es'
+      let branch = 'main'
+      let view = 'explorer'
+      let running = !reducedMotion.matches
+
+      function linkFor(path, language = locale) {
+        return `#/${language}/${encodeURIComponent(path)}`
+      }
+
+      function routeTo(path, language = locale) {
+        const target = path ? linkFor(path, language) : `#/${language}/_empty`
+        if (location.hash !== target) history.pushState(null, '', target)
+        locale = language
+        activePath = path
+        if (path && !openTabs.includes(path)) openTabs.push(path)
+        render()
+      }
+
+      function readRoute() {
+        const match = location.hash.match(/^#\/(es|en)\/(.+)$/)
+        if (!match) return
+        const path = decodeURIComponent(match[2])
+        if (path !== '_empty' && !byPath[path]) return
+        locale = match[1]
+        activePath = path === '_empty' ? null : path
+        if (activePath && !openTabs.includes(activePath)) openTabs.push(activePath)
+        render()
+      }
+
+      function setMobileSidebarOpen(isOpen) {
+        workbench.dataset.mobileSidebarOpen = String(isOpen)
+        scrim.hidden = !isOpen
+        activityButtons.forEach((button) => {
+          button.setAttribute('aria-expanded', String(isOpen && button.dataset.view === view))
+        })
+      }
+
+      function selectView(next) {
+        view = next
+        workbench.dataset.activeView = next
+        sidebarTitle.textContent = labels[next]
+        activityButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.view === next)))
+        viewPanels.forEach((panel) => { panel.hidden = panel.dataset.viewContent !== next })
+        setMobileSidebarOpen(true)
+        if (next === 'search') fileSearch.focus()
+        renderContent()
+      }
+
+      function make(tag, className, text) {
+        const node = document.createElement(tag)
+        if (className) node.className = className
+        if (text != null) node.textContent = text
+        return node
+      }
+
+      function renderTabs() {
+        tabsList.replaceChildren()
+        openTabs.forEach((path) => {
+          const tab = make('div', 'editor-tab')
+          tab.dataset.file = path
+          if (path === activePath) tab.dataset.active = 'true'
+          const open = make('button', 'tab-open')
+          open.type = 'button'
+          open.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${path}`)
+          open.append(make('span', 'file-glyph ui-icon'), make('span', 'editor-tab-name', path.split('/').at(-1)))
+          open.addEventListener('click', () => routeTo(path))
+          const close = make('button', 'tab-close', '×')
+          close.type = 'button'
+          close.setAttribute('aria-label', `${locale === 'es' ? 'Cerrar' : 'Close'} ${path}`)
+          close.addEventListener('click', () => {
+            const index = openTabs.indexOf(path)
+            openTabs.splice(index, 1)
+            if (path === activePath) routeTo(openTabs[Math.min(index, openTabs.length - 1)] || null)
+            else renderTabs()
+          })
+          tab.append(open, close)
+          tabsList.append(tab)
+        })
+      }
+
+      function renderBreadcrumb() {
+        breadcrumbPath.replaceChildren()
+        const parts = activePath?.split('/') || []
+        for (const folder of parts.slice(0, -1)) {
+          breadcrumbPath.append(make('span', 'breadcrumb-separator', '›'), make('span', 'breadcrumb-folder', folder))
+        }
+        breadcrumbFile.textContent = parts.at(-1) || '—'
+        breadcrumbs.dataset.file = activePath || ''
+        filePermalink.hidden = !activePath
+        if (activePath) filePermalink.href = linkFor(activePath)
+      }
+
+      function renderWelcome() {
+        const intro = locale === 'es'
+          ? welcomeContent
+          : { greeting: 'Hi, I’m Juan.', invitation: 'Come in and look around.', lead: 'I am building this portfolio as a repository you can browse. Open a file in Explorer and begin wherever you like.', guide: 'Start with the column on the left. Every file has a story of its own.' }
+        const heading = welcomePreview.querySelector('.welcome-copy h1')
+        heading.firstChild.textContent = intro.greeting
+        heading.querySelector('em').textContent = intro.invitation
+        welcomePreview.querySelector('.welcome-lead').textContent = intro.lead
+        welcomePreview.querySelector('.welcome-guide p').textContent = intro.guide
+        welcomePreview.querySelector('.welcome-bottom-label').textContent = locale === 'es' ? 'Nota de desarrollo' : 'Development note'
+        const note = welcomePreview.querySelector('.welcome-bottom p')
+        const agentLink = make('a', '', locale === 'es' ? 'Markdown para IA ↗' : 'Markdown for AI ↗')
+        agentLink.href = `${baseUrl}for-agents/`
+        const creditLink = make('a', '', locale === 'es' ? 'Créditos de iconos' : 'Icon credits')
+        creditLink.href = `${baseUrl}icons/codicons/ATTRIBUTION.txt`
+        note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), agentLink, document.createTextNode(' · '), creditLink)
+      }
+
+      function renderProfile() {
+        profilePreview.replaceChildren()
+        if (!activePath) return
+        const entry = byPath[activePath][locale]
+        profilePreview.append(make('p', 'profile-eyebrow', entry.eyebrow), make('h1', '', entry.title), make('p', 'profile-lead', entry.lead))
+        const grid = make('div', 'profile-grid')
+        entry.sections.forEach((section, index) => {
+          const card = make('section', 'profile-card')
+          card.append(make('span', 'profile-card-index', String(index + 1).padStart(2, '0')), make('h2', '', section.title), make('p', '', section.body))
+          grid.append(card)
+        })
+        profilePreview.append(grid)
+        if (entry.links.length) {
+          const links = make('div', 'profile-links')
+          entry.links.forEach((link) => {
+            const anchor = make('a', 'profile-link', `${link.label} ↗`)
+            anchor.href = link.url
+            if (link.url.startsWith('https://')) { anchor.target = '_blank'; anchor.rel = 'noopener noreferrer' }
+            links.append(anchor)
+          })
+          profilePreview.append(links)
+        }
+        const raw = make('a', 'raw-link', locale === 'es' ? 'Leer Markdown directo ↗' : 'Read direct Markdown ↗')
+        raw.href = `${baseUrl}for-agents/${locale}/${activePath}`
+        profilePreview.append(raw)
+      }
+
+      function renderContent() {
+        welcomePreview.hidden = true
+        profilePreview.hidden = true
+        fictionPreview.hidden = true
+        runPreview.hidden = true
+        emptyEditor.hidden = true
+        if (view === 'run') runPreview.hidden = false
+        else if (branch === 'batman') fictionPreview.hidden = false
+        else if (!activePath) emptyEditor.hidden = false
+        else if (activePath === 'Welcome.md') { welcomePreview.hidden = false; renderWelcome() }
+        else { profilePreview.hidden = false; renderProfile() }
+      }
+
+      function renderSearch() {
+        searchResults.replaceChildren()
+        const query = fileSearch.value.trim().toLocaleLowerCase()
+        if (!query) { searchResults.append(make('li', 'search-message', locale === 'es' ? 'Escribe un nombre o ruta.' : 'Type a filename or path.')); return }
+        const found = paths.filter((path) => path.toLocaleLowerCase().includes(query))
+        if (!found.length) { searchResults.append(make('li', 'search-message', locale === 'es' ? 'No hay archivos con ese nombre.' : 'No matching filenames.')); return }
+        found.forEach((path) => {
+          const item = make('li')
+          const button = make('button', 'search-result')
+          button.type = 'button'
+          button.dataset.file = path
+          button.append(make('span', 'file-glyph ui-icon'), make('span', '', path))
+          button.addEventListener('click', () => { routeTo(path); if (mobileViewport.matches) setMobileSidebarOpen(false) })
+          item.append(button)
+          searchResults.append(item)
+        })
+      }
+
+      function render() {
+        languageSelect.value = locale
+        document.documentElement.lang = locale
+        statusLocale.textContent = locale.toUpperCase()
+        statusBranch.textContent = branch
+        statusFile.textContent = view === 'run' ? 'Run and Debug' : branch === 'batman' ? 'Ficción' : activePath || 'Sin archivo'
+        titlebarLocation.textContent = `${activePath || 'Portfolio'} — Juan`
+        document.querySelectorAll('.tree-file').forEach((button) => {
+          if (button.dataset.file === activePath && branch === 'main') button.setAttribute('aria-current', 'page')
+          else button.removeAttribute('aria-current')
+        })
+        branchButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.branch === branch)))
+        renderTabs()
+        renderBreadcrumb()
+        renderContent()
+        renderSearch()
+      }
+
+      themeSelect.value = document.documentElement.dataset.themeChoice || 'system'
+      themeSelect.addEventListener('change', () => {
+        const choice = themeSelect.value
+        document.documentElement.dataset.themeChoice = choice
+        document.documentElement.dataset.theme = choice === 'system' ? (systemTheme.matches ? 'light' : 'dark') : choice
+        try {
+          if (choice === 'system') localStorage.removeItem('agent-theme')
+          else localStorage.setItem('agent-theme', choice)
+        } catch { /* The current visit still uses the selected theme. */ }
+      })
+      systemTheme.addEventListener('change', (event) => {
+        if (document.documentElement.dataset.themeChoice === 'system') document.documentElement.dataset.theme = event.matches ? 'light' : 'dark'
+      })
+      languageSelect.addEventListener('change', () => routeTo(activePath, languageSelect.value))
+      fileSearch.addEventListener('input', renderSearch)
+      activityButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = button.dataset.view
+          if (mobileViewport.matches && next === 'explorer' && view === 'explorer') { setMobileSidebarOpen(workbench.dataset.mobileSidebarOpen !== 'true'); return }
+          selectView(next)
+        })
+      })
+      document.querySelectorAll('[data-folder]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const list = document.getElementById(button.dataset.target)
+          const isExpanded = button.getAttribute('aria-expanded') === 'true'
+          button.setAttribute('aria-expanded', String(!isExpanded))
+          list.hidden = isExpanded
+        })
+      })
+      document.querySelectorAll('.tree-file').forEach((button) => {
+        button.addEventListener('click', () => { routeTo(button.dataset.file); if (mobileViewport.matches) setMobileSidebarOpen(false) })
+      })
+      branchButtons.forEach((button) => button.addEventListener('click', () => { branch = button.dataset.branch; render() }))
+      function updateRun() {
+        if (reducedMotion.matches) running = false
+        runPreview.dataset.running = String(running)
+        runToggle.setAttribute('aria-pressed', String(running))
+        runToggle.disabled = reducedMotion.matches
+        runToggle.textContent = reducedMotion.matches
+          ? (locale === 'es' ? 'Animación detenida por preferencia de movimiento' : 'Animation stopped by motion preference')
+          : running ? (locale === 'es' ? 'Pausar animación' : 'Pause animation') : (locale === 'es' ? 'Iniciar animación' : 'Play animation')
+      }
+      runToggle.addEventListener('click', () => { running = !running; updateRun() })
+      reducedMotion.addEventListener('change', () => updateRun())
+      scrim.addEventListener('click', () => { setMobileSidebarOpen(false); document.querySelector(`[data-view="${view}"]`).focus() })
+      mobileViewport.addEventListener('change', (event) => setMobileSidebarOpen(!event.matches))
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && workbench.dataset.mobileSidebarOpen === 'true' && mobileViewport.matches) { setMobileSidebarOpen(false); document.querySelector(`[data-view="${view}"]`).focus() }
+      })
+      window.addEventListener('popstate', readRoute)
+      window.addEventListener('hashchange', readRoute)
+      setMobileSidebarOpen(!mobileViewport.matches)
+      readRoute()
+      render()
+      updateRun()
+    </script>
   </body>
 </html>

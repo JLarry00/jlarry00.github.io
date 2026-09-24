@@ -18,9 +18,9 @@ npm run dev:active
 | Aplicación | Código | Scrum |
 |---|---|---|
 | Neuron Mesh, web existente | [`websites/neuron-mesh/`](./websites/neuron-mesh/) | [`planning/`](./websites/neuron-mesh/planning/) |
-| Agent, futura web tipo editor | [`websites/agent/`](./websites/agent/) | [`planning/`](./websites/agent/planning/) |
+| Agent, Alpha visual del portfolio tipo editor | [`websites/agent/`](./websites/agent/) | [`planning/`](./websites/agent/planning/) |
 
-Cada web tiene dependencias, lockfile, backlog, sprint y versiones propias. El brief de Agent conserva Explorer, Search, ramas simuladas, temas, Run and Debug y el acceso a Markdown para lectores automáticos; aún no se ha implementado la interfaz.
+Cada web tiene dependencias, lockfile, Scrum y versiones propias. Agent usa fichas visuales para personas, Markdown directo para lectores automáticos y un workbench con temas, búsqueda de archivos, una rama ficticia y Run and Debug. Su perfil y organización siguen en revisión.
 
 ## Comandos desde la raíz
 
@@ -36,13 +36,17 @@ npm run check:agent
 npm run dev:active
 npm run build:active
 npm run check:active
+
+# Compila primero las dos webs; después compone el artefacto Pages:
+npm run build:pages
 ```
 
-`site.config.json` contiene el selector de publicación. Su valor inicial es `neuron-mesh`; editar `activeSite` a `agent` hace que el workflow de GitHub Pages construya esa aplicación. Un valor inválido falla antes de desplegar. Las ramas de broma que aparezcan en Agent serán solo una simulación de interfaz.
+`site.config.json` selecciona qué web usan los comandos locales `*:active`. Su valor inicial es `neuron-mesh` y uno inválido falla. GitHub Pages publica ambas: Neuron Mesh en `/` y Agent en `/agent/`. El workflow construye los dos `dist/` y compone `.pages-dist/`, que se ignora en Git. La rama `batman` de Agent es una simulación de interfaz.
 
 ## Contexto y configuración del agente
 
 - `.agents/skills/` y `.codex/agents/` se versionan para que viajen con el clon. Revisa `START_HERE.md` para la activación y las limitaciones de configuración propia de cada ordenador.
+- Añade propuestas a [`SUGERENCIAS.md`](./SUGERENCIAS.md); Codex las revisa y, tras aclarar contigo lo que haga falta, las integra en el Scrum del producto correspondiente.
 - [`context/`](./context/) contiene una síntesis pública y fechada; no se copia al sitio publicado.
 - `contexto/`, CVs, credenciales, instalaciones, cachés y artefactos generados no forman parte del repositorio ni del artefacto de Pages.
 - El [índice de Scrum](./PLANNING_INDEX.md) solo enlaza a los dos planes independientes.

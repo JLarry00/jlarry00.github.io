@@ -1,0 +1,12 @@
+Iconos de producto: VS Code Codicons, Microsoft Corporation.
+Origen: https://github.com/microsoft/vscode-codicons/tree/main/src/icons
+Licencia de los iconos: Creative Commons Attribution 4.0 International.
+Texto de la licencia: ./LICENSE.txt
+Enlace a la licencia: https://creativecommons.org/licenses/by/4.0/
+
+Archivos incluidos: book, briefcase, code, debug-alt, file-text, files,
+folder, folder-opened, heart, home, mail, project, robot, search,
+source-control y tools.
+
+Los SVG se incluyen sin alterar sus trazados. La web adapta el tamaño y el
+color mediante CSS para integrarlos en su tema.

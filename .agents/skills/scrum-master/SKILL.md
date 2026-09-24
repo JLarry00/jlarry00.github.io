@@ -4,7 +4,8 @@ description: >
   Maintain honest, product-specific Scrum records for this workspace.
   Use when planning or reviewing an iteration, checking sprint status,
   handling a blocker, closing a delivery cycle, or improving the work
-  process. Select the affected website and read only its planning area.
+  process, or routing a suggestion into a product backlog. Select the affected
+  website and read only its planning area.
 ---
 
 # Scrum Master
@@ -19,6 +20,12 @@ This repository contains two independent websites and two independent Scrums:
 Choose the product from the requested work and read its planning records before editing. The product areas are separate sources of truth. Never create or use a shared backlog, sprint, status file, or retrospective at the repository root. Never update the other website's Scrum as a side effect.
 
 The root AGENTS.md assigns deployment-selector and GitHub Pages protection work to Neuron Mesh. The Agent Scrum owns its app scaffold, future editor interface, profile content, and reader-facing features. If one request genuinely spans both products, record each product's own deliverable in its own backlog or sprint; do not copy a shared task table between them.
+
+## Suggestion intake
+
+`SUGERENCIAS.md` at the repository root is a temporary input inbox, not a third Scrum, shared backlog, or status history. At the start of workspace work, inspect its entries and determine whether each suggestion belongs to Neuron Mesh, Agent, or both. Before routing a suggestion, read the affected product's planning README, current sprint, and relevant backlog entries. For work spanning both, write distinct product-specific outcomes in each backlog. If it fits an existing item, refine that item instead of duplicating it. Otherwise, add one or more reviewable items to the affected `BACKLOG.md` using that product's conventions.
+
+Ask Juan only when a material ambiguity affects product routing, scope, acceptance, evidence, or priority. Do not infer a priority or select the work into a sprint on his behalf. Leave an entry in `SUGERENCIAS.md` while it awaits clarification; after recording it in the product backlog, or after Juan decides not to pursue it, remove it from the inbox so the product backlog remains the source of truth. If an entry is about workspace-level work that belongs to neither website, clarify its destination with Juan rather than creating a shared Scrum.
 
 ## Working agreement
 
@@ -42,10 +49,12 @@ Do not add a second status register, shared planning directory, or tracker witho
 
 At the beginning of Scrum work:
 
-1. Identify the one affected website.
-2. Read its planning README, current sprint, relevant backlog entries, and latest closed sprint or version record.
-3. Reflect the goal and any unresolved decision, blocker, or external verification in that product's terms.
-4. Keep every edit inside that product's planning directory unless the user asks to change shared workspace guidance.
+1. Inspect `SUGERENCIAS.md`; identify the product or products each entry may affect and note any material ambiguity that needs Juan.
+2. Identify the affected website or websites for the requested work.
+3. Read the planning README, current sprint, and relevant backlog entries for each product involved in a suggestion or the requested work. Read the latest closed sprint or version record when relevant.
+4. Review and route ready suggestions using the suggestion-intake rules above. Leave entries awaiting Juan's clarification in the inbox; continue independent requested work when possible.
+5. Reflect the goal and any unresolved decision, blocker, or external verification in each affected product's terms.
+6. Keep every Scrum edit inside its product's planning directory unless the user asks to change shared workspace guidance.
 
 The script at scripts/init-scrum.sh can create missing skeleton files for exactly one known product. It is write-if-absent. It does not migrate records or create a shared workspace. The current repository already has both Scrum areas initialized; do not run it unless a product planning area is genuinely missing.
 

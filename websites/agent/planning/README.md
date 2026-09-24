@@ -4,7 +4,7 @@ Esta carpeta describe la segunda versión del portfolio personal: una experienci
 
 ## Alcance de esta línea
 
-La aplicación vive en `websites/agent/`; su único Scrum está en `websites/agent/planning/`. No comparte backlog, sprint ni registro de versiones con Neuron Mesh. La aplicación empieza como scaffold independiente. El sprint `S01` prepara la estructura; la interfaz y el contenido final permanecen en el backlog.
+La aplicación vive en `websites/agent/`; su único Scrum está en `websites/agent/planning/`. No comparte backlog, sprint ni registro de versiones con Neuron Mesh. `S01` preparó la estructura independiente, `S02` construyó la Alpha visual, `S03` revisó su primera impresión, `S04` afinó iconos y selección, y `S05` añadió temas. `S06`–`S08` cubren contenido inicial, funciones y publicación doble. El árbol definitivo, las reviews en vídeo y el QA final siguen pendientes.
 
 ## Experiencia prevista
 
@@ -35,18 +35,18 @@ Hobbies/  (mayúscula propuesta por Juan; confirmar antes de fijar la ruta públ
   [hobby].md
 ```
 
-El árbol es la propuesta explícita de Juan y se concretará con él antes de crear contenido. Los documentos reales del portfolio se versionarán como Markdown y se presentarán también en la interfaz. Una entrada específica y visible desde la web apuntará a un índice Markdown y a URLs estables para cada archivo, legibles sin ejecutar la interfaz. Las instrucciones reales del agente que desarrolla este workspace no se publicarán como perfil; el `AGENTS.md` del portfolio será contenido deliberado y distinto.
+El árbol anterior es una propuesta explícita de Juan, todavía no acordada. S06 publicó una selección provisional de archivos para ensayar contenido y navegación sin cerrar `AG-005`; sus rutas pueden cambiar tras ver opciones con Juan. Los documentos públicos se generan como Markdown real desde `src/data/profile.json`, y la interfaz humana presenta fichas visuales. Las instrucciones reales del agente que desarrolla este workspace no se publican como perfil; el `AGENTS.md` del portfolio es contenido deliberado y distinto.
 
 ## Contenido y voz
 
-La web clásica es una fuente inicial, no una autorización para copiar cada frase. Las reviews editoriales de Juan y la evidencia actual de los proyectos deben guiar el tono y cada afirmación. Se distinguirán hechos confirmados, experiencia, aprendizaje, planes y ficción. La paridad inglés/español forma parte de aceptación.
+La web clásica es una fuente inicial, no una autorización para copiar cada frase. S06 usa hechos claros del workspace `PerfilProfesional` y declara los límites de los proyectos; el vídeo de reviews no se ha procesado y el copy sigue siendo provisional hasta `AG-004`. Se distinguen hechos, experiencia, aprendizaje, planes y ficción. La paridad inglés/español forma parte de aceptación.
 
-La vista para lectores automáticos tendrá una entrada estable en `/for-agents/`, con un índice navegable y enlaces a los archivos Markdown servidos como texto plano. Un enlace o botón visible desde la web (por ejemplo, en Welcome o en una esquina del editor) dará acceso a esta colección separada. No se presupone que un agente necesite recorrer la interfaz visual.
+La vista para lectores automáticos tiene una entrada en `/for-agents/` dentro de la aplicación, desplegada como `/agent/for-agents/` en Pages, con índice y archivos Markdown directos. Welcome y cada ficha enlazan a esa colección. No se presupone que un agente necesite recorrer la interfaz visual.
 
 ## Scrum propio
 
 - Juan decide prioridad y aceptación.
 - El sprint se define por una entrega revisable, sin duración artificial ni métricas de equipo inventadas.
-- `BACKLOG.md` contiene lo no seleccionado; `SPRINT_ACTUAL.md` contiene solo el incremento activo; `VERSIONES.md` no reutiliza las versiones de Neuron Mesh.
+- `BACKLOG.md` contiene toda tarea pendiente, incluso si ya está seleccionada o espera aceptación; `COMPLETADAS.md` contiene las terminadas con las mismas columnas. El producto solo se considera terminado cuando el primero se vacíe. `SPRINT_ACTUAL.md` contiene el incremento activo; `VERSIONES.md` no reutiliza las versiones de Neuron Mesh.
 - Los cierres quedan en `sprints/`. No hay un Scrum compartido en la raíz.
 - El scaffold actual no convierte las funciones futuras en trabajo terminado.

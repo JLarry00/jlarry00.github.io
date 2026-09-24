@@ -8,6 +8,7 @@
 # Dependencias, compilaciones, cachés y secretos.
 **/node_modules/
 **/dist/
+/.pages-dist/
 **/.astro/
 **/.env
 **/.env.*

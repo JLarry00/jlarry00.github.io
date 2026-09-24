@@ -1,4 +1,4 @@
-import { appendFileSync, readFileSync } from 'node:fs'
+import { readFileSync, cpSync, mkdirSync, rmSync, existsSync, writeFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -54,15 +54,20 @@ function runNpm(site, args) {
   if (result.status !== 0) process.exit(result.status ?? 1)
 }
 
-function printActiveOutput() {
-  const site = resolveSite()
-  const output = `${sites[site.name]}/dist`
-
-  if (process.env.GITHUB_OUTPUT) {
-    appendFileSync(process.env.GITHUB_OUTPUT, `dist=${output}\n`)
-  } else {
-    process.stdout.write(`${output}\n`)
+function composePages() {
+  activeSite() // A malformed selector is still an error, even though Pages now contains both sites.
+  const neuron = path.join(root, sites['neuron-mesh'], 'dist')
+  const agent = path.join(root, sites.agent, 'dist')
+  if (!existsSync(path.join(neuron, 'index.html')) || !existsSync(path.join(agent, 'index.html'))) {
+    throw new Error('Faltan los builds de Neuron Mesh o Agent para componer Pages.')
   }
+  const output = path.join(root, '.pages-dist')
+  rmSync(output, { recursive: true, force: true })
+  mkdirSync(output, { recursive: true })
+  cpSync(neuron, output, { recursive: true })
+  cpSync(agent, path.join(output, 'agent'), { recursive: true })
+  writeFileSync(path.join(output, '.nojekyll'), '')
+  process.stdout.write(`${output}\n`)
 }
 
 const [action, requestedSite] = process.argv.slice(2)
@@ -70,15 +75,15 @@ const [action, requestedSite] = process.argv.slice(2)
 try {
   if (action === 'setup') {
     for (const name of Object.keys(sites)) runNpm(resolveSite(name), ['ci'])
-  } else if (action === 'output') {
-    printActiveOutput()
+  } else if (action === 'compose') {
+    composePages()
   } else if (['install', 'dev', 'build', 'check', 'preview'].includes(action)) {
     const site = resolveSite(requestedSite)
 
     if (action === 'install') runNpm(site, ['ci'])
     else runNpm(site, ['run', action])
   } else {
-    throw new Error('Uso: site.mjs setup | output | install|dev|build|check|preview [neuron-mesh|agent]')
+    throw new Error('Uso: site.mjs setup | compose | install|dev|build|check|preview [neuron-mesh|agent]')
   }
 } catch (error) {
   process.stderr.write(`${error.message}\n`)

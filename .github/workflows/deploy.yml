@@ -21,10 +21,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Validate selected site
-        id: target
-        run: node scripts/site.mjs output
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -35,15 +31,23 @@ jobs:
             websites/agent/package-lock.json
 
       - name: Install dependencies
-        run: npm run install:active
+        run: npm run setup
 
-      - name: Build site
-        run: npm run build:active
+      - name: Build Neuron Mesh
+        run: npm run build:neuron-mesh
+
+      - name: Build Agent at /agent/
+        env:
+          AGENT_BASE: /agent/
+        run: npm run build:agent
+
+      - name: Compose public artifact
+        run: npm run build:pages
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./${{ steps.target.outputs.dist }}
+          path: ./.pages-dist
 
   deploy:
     environment:

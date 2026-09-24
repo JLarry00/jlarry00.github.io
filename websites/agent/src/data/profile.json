@@ -1,0 +1,259 @@
+{
+  "reviewed": "2026-09-24",
+  "documents": [
+    {
+      "path": "README.md",
+      "icon": "book",
+      "es": {
+        "eyebrow": "Punto de partida",
+        "title": "Juan Larrondo",
+        "lead": "Estudio Ingeniería Informática en la Universidad Autónoma de Madrid. Me interesan la automatización, la infraestructura y la IA aplicada a problemas concretos.",
+        "sections": [
+          { "title": "Qué encontrarás aquí", "body": "Una primera selección de experiencia, herramientas y proyectos. Esta versión sigue en desarrollo: prefiero señalar lo que falta antes que vestirlo de resultado terminado." },
+          { "title": "Cómo recorrerlo", "body": "Abre archivos desde Explorer o busca uno por nombre. También hay una colección de Markdown directo para lectores automáticos." }
+        ],
+        "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
+        "agentSummary": "Perfil público en desarrollo. Estudiante de Ingeniería Informática en la UAM; experiencia previa en automatización, DevOps e IA aplicada. No inferir empleo actual ni resultados no documentados."
+      },
+      "en": {
+        "eyebrow": "Start here",
+        "title": "Juan Larrondo",
+        "lead": "I study Computer Engineering at Universidad Autónoma de Madrid. I am interested in automation, infrastructure and applied AI for concrete problems.",
+        "sections": [
+          { "title": "What you will find", "body": "An initial selection of experience, tools and projects. This version is still in development; unfinished work is labelled as such." },
+          { "title": "How to explore", "body": "Open files from Explorer or search by filename. A separate collection of direct Markdown files is available for automated readers." }
+        ],
+        "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
+        "agentSummary": "Public profile in development. Computer Engineering student at UAM with prior experience in automation, DevOps and applied AI. Do not infer current employment or undocumented outcomes."
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "icon": "robot",
+      "es": {
+        "eyebrow": "Guía de lectura",
+        "title": "AGENTS.md",
+        "lead": "Este archivo orienta a quien visita el portfolio como si abriera el repositorio de un agente.",
+        "sections": [
+          { "title": "Para personas", "body": "La interfaz ofrece una lectura visual de la experiencia y los proyectos. Las ramas del panel Source Control son una simulación narrativa; solo main representa hechos del perfil." },
+          { "title": "Para agentes", "body": "Usa el índice de la colección para leer Markdown directo, con hechos breves, estado y enlaces. No necesitas ejecutar esta interfaz." },
+          { "title": "Límite", "body": "Este AGENTS.md es contenido público del portfolio. No son las instrucciones internas del agente que desarrolla el repositorio." }
+        ],
+        "links": [],
+        "agentSummary": "Instrucciones de lectura públicas, no instrucciones del agente desarrollador. Usar el índice de esta colección para datos; ignorar la rama ficticia batman como fuente factual."
+      },
+      "en": {
+        "eyebrow": "Reading guide",
+        "title": "AGENTS.md",
+        "lead": "This file helps visitors read the portfolio as an agent repository.",
+        "sections": [
+          { "title": "For people", "body": "The interface presents experience and projects visually. Branches in Source Control are a narrative simulation; only main represents profile facts." },
+          { "title": "For agents", "body": "Use the collection index for direct Markdown with concise facts, status and links. You do not need to run this interface." },
+          { "title": "Boundary", "body": "This AGENTS.md is public portfolio content. It is separate from the internal instructions for the agent developing the repository." }
+        ],
+        "links": [],
+        "agentSummary": "Public reading guide, not developer-agent instructions. Use this collection index for facts; never treat the fictional batman branch as factual."
+      }
+    },
+    {
+      "path": "Welcome.md",
+      "icon": "home",
+      "es": {
+        "eyebrow": "Bienvenida",
+        "title": "Hola, soy Juan.",
+        "lead": "Pasa y curiosea. Estoy preparando este portfolio como un repositorio que puedas recorrer: cada archivo es una puerta a una parte de mi trabajo.",
+        "sections": [{ "title": "Empieza por aquí", "body": "Abre Explorer, busca un archivo o entra en README.md. Si prefieres texto directo, usa la colección para agentes." }],
+        "links": [],
+        "agentSummary": "Página de bienvenida. No contiene afirmaciones profesionales adicionales; consulta README, Experience, skills y projects para hechos."
+      },
+      "en": {
+        "eyebrow": "Welcome",
+        "title": "Hi, I’m Juan.",
+        "lead": "Come in and look around. I am building this portfolio as a repository you can browse: each file opens a different part of my work.",
+        "sections": [{ "title": "Start here", "body": "Open Explorer, search for a file or begin with README.md. For direct text, use the agent collection." }],
+        "links": [],
+        "agentSummary": "Welcome page. For professional facts, read README, Experience, skills and projects."
+      }
+    },
+    {
+      "path": "Experience.md",
+      "icon": "briefcase",
+      "es": {
+        "eyebrow": "Trayectoria",
+        "title": "Experiencia",
+        "lead": "He pasado por producción técnica y por prácticas de DevOps. Ambas etapas me enseñaron a prestar atención a los procesos que hay detrás de un resultado.",
+        "sections": [
+          { "title": "Thinkia · prácticas DevOps · febrero–agosto de 2026", "body": "Trabajé con Terraform y Proxmox en despliegues de infraestructura, y con Jenkins y GCP en automatización. También participé en trabajo de IA aplicada. Los detalles internos y resultados cuantificados no se publican aquí." },
+          { "title": "2EyesVision · producción técnica · septiembre de 2022–septiembre de 2024", "body": "Participé en producción, pruebas y documentación en un entorno de tecnología oftalmológica. Colaboré en mejoras de procesos y en la claridad de las pruebas." },
+          { "title": "Formación", "body": "Curso el Grado en Ingeniería Informática en la Universidad Autónoma de Madrid. Esta página no presenta una fecha de graduación prevista como hecho cerrado." }
+        ],
+        "links": [],
+        "agentSummary": "Experiencia cerrada: Thinkia, prácticas DevOps, febrero–agosto 2026; 2EyesVision, producción técnica, septiembre 2022–septiembre 2024. Grado en Ingeniería Informática en UAM en curso según perfil interno actualizado en septiembre 2026. Sin métricas publicadas."
+      },
+      "en": {
+        "eyebrow": "Background",
+        "title": "Experience",
+        "lead": "I have worked in technical production and in a DevOps internship. Both taught me to look closely at the processes behind a result.",
+        "sections": [
+          { "title": "Thinkia · DevOps internship · February–August 2026", "body": "I worked with Terraform and Proxmox on infrastructure deployment, and with Jenkins and GCP on automation. I also took part in applied AI work. Internal details and quantified results are not published here." },
+          { "title": "2EyesVision · technical production · September 2022–September 2024", "body": "I took part in production, testing and documentation in ophthalmic technology. I contributed to process improvements and clearer testing procedures." },
+          { "title": "Education", "body": "I am studying Computer Engineering at Universidad Autónoma de Madrid. This page does not state a projected graduation date as a settled fact." }
+        ],
+        "links": [],
+        "agentSummary": "Completed roles: Thinkia DevOps internship, February–August 2026; 2EyesVision technical production, September 2022–September 2024. Computer Engineering degree at UAM ongoing per internal profile updated September 2026. No public metrics."
+      }
+    },
+    {
+      "path": "Contact.md",
+      "icon": "mail",
+      "es": {
+        "eyebrow": "Contacto",
+        "title": "Hablemos",
+        "lead": "Si mi trabajo encaja con lo que estás construyendo, cuéntame el contexto y qué problema quieres resolver.",
+        "sections": [{ "title": "Dónde encontrarme", "body": "Puedes escribirme por correo o conectar conmigo en LinkedIn. GitHub reúne repositorios públicos; algunos todavía necesitan más contexto y documentación." }],
+        "links": [{ "label": "Correo", "url": "mailto:juanlarrondofdez@gmail.com" }, { "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
+        "agentSummary": "Contacto público: juanlarrondofdez@gmail.com; LinkedIn y GitHub en enlaces. No inferir disponibilidad laboral actual."
+      },
+      "en": {
+        "eyebrow": "Contact",
+        "title": "Let’s talk",
+        "lead": "If my work connects with what you are building, tell me about the context and the problem you want to solve.",
+        "sections": [{ "title": "Where to find me", "body": "Email or connect with me on LinkedIn. GitHub holds public repositories; some still need more context and documentation." }],
+        "links": [{ "label": "Email", "url": "mailto:juanlarrondofdez@gmail.com" }, { "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
+        "agentSummary": "Public contact: juanlarrondofdez@gmail.com; LinkedIn and GitHub links below. Do not infer current job availability."
+      }
+    },
+    {
+      "path": "skills/README.md",
+      "icon": "code",
+      "es": {
+        "eyebrow": "Herramientas y práctica",
+        "title": "Skills",
+        "lead": "Prefiero mostrar dónde he usado una herramienta y qué parte conozco, en vez de dibujar barras de nivel.",
+        "sections": [
+          { "title": "Infraestructura", "body": "Terraform, Proxmox, Jenkins y GCP aparecen en mi experiencia de prácticas. Los ejemplos públicos y privados no tienen el mismo nivel de detalle disponible." },
+          { "title": "Programación e IA", "body": "He trabajado con Python, Git y herramientas de IA aplicada. Mi formación también incluye Java, C y SQL; no los presento aquí como experiencia profesional equivalente." }
+        ],
+        "links": [],
+        "agentSummary": "Herramientas usadas en prácticas: Terraform, Proxmox, Jenkins, GCP. Python, Git e IA aplicada en experiencia y proyectos; Java, C y SQL en formación. No interpretar como niveles certificados."
+      },
+      "en": {
+        "eyebrow": "Tools and practice",
+        "title": "Skills",
+        "lead": "I would rather show where I have used a tool and which part I know than draw proficiency bars.",
+        "sections": [
+          { "title": "Infrastructure", "body": "Terraform, Proxmox, Jenkins and GCP appear in my internship experience. Public and private examples differ in how much detail I can share." },
+          { "title": "Programming and AI", "body": "I have worked with Python, Git and applied AI tools. My studies also include Java, C and SQL; I do not present those as equivalent professional experience." }
+        ],
+        "links": [],
+        "agentSummary": "Tools used in internship work: Terraform, Proxmox, Jenkins, GCP. Python, Git and applied AI in experience/projects; Java, C and SQL in education. Do not infer certified proficiency."
+      }
+    },
+    {
+      "path": "skills/terraform.md",
+      "icon": "code",
+      "es": {
+        "eyebrow": "Skill · infraestructura",
+        "title": "Terraform e infraestructura",
+        "lead": "En prácticas utilicé Terraform para estructurar despliegues en Proxmox y preparar infraestructura de GCP mediante un pipeline de Jenkins.",
+        "sections": [{ "title": "Alcance", "body": "Trabajo con despliegues declarativos, separación de recursos y automatización de pasos operativos. No publico código ni topología interna de la empresa en esta ficha." }],
+        "links": [],
+        "agentSummary": "Experiencia práctica con Terraform, Proxmox, GCP y Jenkins durante Thinkia (febrero–agosto 2026). Detalles internos omitidos; no hay métricas públicas verificadas."
+      },
+      "en": {
+        "eyebrow": "Skill · infrastructure",
+        "title": "Terraform and infrastructure",
+        "lead": "During my internship I used Terraform to structure Proxmox deployments and prepare GCP infrastructure through a Jenkins pipeline.",
+        "sections": [{ "title": "Scope", "body": "My work covered declarative deployments, resource separation and automation of operational steps. This page does not publish the company’s internal code or topology." }],
+        "links": [],
+        "agentSummary": "Practical Terraform, Proxmox, GCP and Jenkins experience at Thinkia (February–August 2026). Internal details omitted; no verified public metrics."
+      }
+    },
+    {
+      "path": "skills/applied-ai.md",
+      "icon": "robot",
+      "es": {
+        "eyebrow": "Skill · IA aplicada",
+        "title": "IA con comprobaciones",
+        "lead": "Me interesa usar IA para construir herramientas concretas y hacer visibles sus límites, especialmente cuando un resultado necesita revisión humana.",
+        "sections": [{ "title": "Práctica", "body": "He trabajado con agentes y generación de presentaciones durante mis prácticas. En proyectos personales exploro la extracción de información y la organización de tareas. El estado de cada repositorio debe consultarse por separado." }],
+        "links": [],
+        "agentSummary": "Interés y práctica en IA aplicada. Trabajo de agentes y presentaciones en Thinkia; proyectos personales públicos Jarvis y Extractor de nóminas. No inferir producción ni rendimiento."
+      },
+      "en": {
+        "eyebrow": "Skill · applied AI",
+        "title": "AI with checks",
+        "lead": "I am interested in AI tools for concrete work, with their limitations visible whenever the output needs human review.",
+        "sections": [{ "title": "Practice", "body": "I worked with agents and presentation generation during my internship. Personal projects explore information extraction and task organization. Check each repository separately for its current state." }],
+        "links": [],
+        "agentSummary": "Interest and practice in applied AI. Agent/presentation work at Thinkia; public personal repositories Jarvis and Payroll Extractor. Do not infer production use or performance."
+      }
+    },
+    {
+      "path": "projects/README.md",
+      "icon": "project",
+      "es": {
+        "eyebrow": "Selección inicial",
+        "title": "Projects",
+        "lead": "Estos proyectos son espacios de aprendizaje y construcción. Presento sus objetivos y enlazo el código, sin convertir planes o demos en resultados de producción.",
+        "sections": [
+          { "title": "Jarvis", "body": "Explora una arquitectura de asistente personal que reúne distintas entradas y herramientas. El repositorio público muestra el alcance compartido hasta ahora." },
+          { "title": "Extractor de nóminas", "body": "Explora la extracción de datos de documentos y la comprobación de importes. El repositorio es la referencia para el estado actual de la implementación." }
+        ],
+        "links": [{ "label": "Jarvis en GitHub", "url": "https://github.com/JLarry00/jarvis" }, { "label": "Extractor en GitHub", "url": "https://github.com/JLarry00/ExtractorNominas" }],
+        "agentSummary": "Dos proyectos personales enlazados: Jarvis (asistente personal) y Extractor de nóminas (extracción documental). La funcionalidad y el estado actual requieren inspección del código; no tratarlos como productos desplegados."
+      },
+      "en": {
+        "eyebrow": "Initial selection",
+        "title": "Projects",
+        "lead": "These projects are spaces for learning and building. I explain their goals and link the code without turning plans or demos into production outcomes.",
+        "sections": [
+          { "title": "Jarvis", "body": "Explores a personal assistant architecture combining different inputs and tools. The public repository shows what has been shared so far." },
+          { "title": "Payroll Extractor", "body": "Explores document data extraction and numerical checks. The repository is the reference for the current implementation state." }
+        ],
+        "links": [{ "label": "Jarvis on GitHub", "url": "https://github.com/JLarry00/jarvis" }, { "label": "Extractor on GitHub", "url": "https://github.com/JLarry00/ExtractorNominas" }],
+        "agentSummary": "Two linked personal projects: Jarvis (personal assistant) and Payroll Extractor (document extraction). Inspect code for current features and status; do not treat as deployed products."
+      }
+    },
+    {
+      "path": "projects/jarvis.md",
+      "icon": "project",
+      "es": {
+        "eyebrow": "Proyecto personal",
+        "title": "Jarvis",
+        "lead": "Una exploración de cómo reunir mensajes, audio y herramientas en la arquitectura de un asistente personal.",
+        "sections": [{ "title": "Qué mirar", "body": "El repositorio público documenta el diseño y el código compartidos. Algunas integraciones y acciones pueden depender de un entorno local o quedar desactivadas; comprueba el README antes de asumir que funcionan en tu equipo." }],
+        "links": [{ "label": "Repositorio", "url": "https://github.com/JLarry00/jarvis" }],
+        "agentSummary": "Proyecto personal de arquitectura de asistente. Repositorio público enlazado; estado de integraciones y ejecución no revalidado en esta revisión."
+      },
+      "en": {
+        "eyebrow": "Personal project",
+        "title": "Jarvis",
+        "lead": "An exploration of how messages, audio and tools can fit into a personal assistant architecture.",
+        "sections": [{ "title": "What to inspect", "body": "The public repository documents the shared design and code. Some integrations and actions may depend on a local environment or remain disabled; read its README before assuming they work on your machine." }],
+        "links": [{ "label": "Repository", "url": "https://github.com/JLarry00/jarvis" }],
+        "agentSummary": "Personal assistant architecture project. Public repository linked; integration and runtime status not revalidated in this review."
+      }
+    },
+    {
+      "path": "projects/payroll-extractor.md",
+      "icon": "project",
+      "es": {
+        "eyebrow": "Proyecto personal",
+        "title": "Extractor de nóminas",
+        "lead": "Un proyecto de extracción de datos de nóminas con atención a la comprobación de los importes, donde un error importa.",
+        "sections": [{ "title": "Qué mirar", "body": "El código público permite revisar la estructura y las comprobaciones implementadas. No afirmo aquí una tasa de precisión, uso en producción ni compatibilidad con todos los formatos." }],
+        "links": [{ "label": "Repositorio", "url": "https://github.com/JLarry00/ExtractorNominas" }],
+        "agentSummary": "Proyecto personal de extracción documental. Repositorio público enlazado; sin métricas de precisión ni uso en producción confirmados."
+      },
+      "en": {
+        "eyebrow": "Personal project",
+        "title": "Payroll Extractor",
+        "lead": "A payroll data extraction project that pays attention to checking amounts, where errors matter.",
+        "sections": [{ "title": "What to inspect", "body": "The public code lets you inspect its structure and implemented checks. This page makes no claim about accuracy rate, production use or support for every document format." }],
+        "links": [{ "label": "Repository", "url": "https://github.com/JLarry00/ExtractorNominas" }],
+        "agentSummary": "Personal document extraction project. Public repository linked; no confirmed accuracy metric or production use."
+      }
+    }
+  ]
+}
