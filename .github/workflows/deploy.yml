@@ -21,22 +21,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Validate selected site
+        id: target
+        run: node scripts/site.mjs output
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            website/neuron-mesh/package-lock.json
+            websites/agent/package-lock.json
 
       - name: Install dependencies
-        run: npm ci
+        run: npm run install:active
 
       - name: Build site
-        run: npm run build
+        run: npm run build:active
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: ./${{ steps.target.outputs.dist }}
 
   deploy:
     environment:

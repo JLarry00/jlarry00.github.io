@@ -1,6 +1,22 @@
-node_modules/
-dist/
-.astro/
-.env
-.env.*
+# Material privado importado: solo local.
+/contexto/
 
+# Archivos de importación y material multimedia local.
+/*.zip
+/*.mp4
+
+# Dependencias, compilaciones, cachés y secretos.
+**/node_modules/
+**/dist/
+**/.astro/
+**/.env
+**/.env.*
+**/.npmrc
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/.DS_Store
+**/Thumbs.db
+**/*.log
+**/*.local

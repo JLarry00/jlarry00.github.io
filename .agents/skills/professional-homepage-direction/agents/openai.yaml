@@ -1,0 +1,4 @@
+interface:
+  display_name: "Professional homepage direction"
+  short_description: "Direct a distinctive technical homepage"
+  default_prompt: "Use $professional-homepage-direction to define the content, structure, and design brief for a technical personal homepage."

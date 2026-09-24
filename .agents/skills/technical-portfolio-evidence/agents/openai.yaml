@@ -1,0 +1,4 @@
+interface:
+  display_name: "Technical portfolio evidence"
+  short_description: "Turn market needs into portfolio proof"
+  default_prompt: "Use $technical-portfolio-evidence to select and structure evidence for a technical portfolio."

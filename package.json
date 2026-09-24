@@ -1,17 +1,21 @@
 {
-  "name": "juan-larrondo-website",
-  "version": "2.2.0",
+  "name": "juan-larrondo-workspace",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.10",
-    "astro": "^7.0.0",
-    "typescript": "^5.8.3"
+    "setup": "node scripts/site.mjs setup",
+    "install:active": "node scripts/site.mjs install",
+    "install:neuron-mesh": "node scripts/site.mjs install neuron-mesh",
+    "install:agent": "node scripts/site.mjs install agent",
+    "dev:active": "node scripts/site.mjs dev",
+    "dev:neuron-mesh": "node scripts/site.mjs dev neuron-mesh",
+    "dev:agent": "node scripts/site.mjs dev agent",
+    "build:active": "node scripts/site.mjs build",
+    "build:neuron-mesh": "node scripts/site.mjs build neuron-mesh",
+    "build:agent": "node scripts/site.mjs build agent",
+    "check:active": "node scripts/site.mjs check",
+    "check:neuron-mesh": "node scripts/site.mjs check neuron-mesh",
+    "check:agent": "node scripts/site.mjs check agent",
+    "preview:active": "node scripts/site.mjs preview"
   }
 }

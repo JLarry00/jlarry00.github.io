@@ -1,0 +1,4 @@
+interface:
+  display_name: "IT professional marketing"
+  short_description: "Market a modern technical professional"
+  default_prompt: "Use $it-professional-marketing to define a credible marketing strategy for an IT or AI professional."
