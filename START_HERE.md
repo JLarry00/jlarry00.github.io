@@ -28,7 +28,7 @@ El índice [`PLANNING_INDEX.md`](./PLANNING_INDEX.md) enlaza a ambos Scrums. No 
 
 ## Estado de producto
 
-Agent es la web predeterminada de Pages: vive en `/` como versión en desarrollo y no indexable, con workbench de VS Code, fichas de perfil iniciales, Markdown para IA, temas, búsqueda de archivos, una rama ficticia y una animación ligera. Neuron Mesh vive en `/neon-mesh/`. La organización definitiva, la revisión del vídeo y el QA final de Agent siguen pendientes. Su Scrum registra el alcance y los incrementos.
+Agent es la web predeterminada de Pages: vive en `/` como versión en desarrollo y no indexable, con workbench de VS Code, fichas de perfil iniciales, Markdown para IA, temas, búsqueda de archivos, una rama ficticia y una animación ligera. Neuron Mesh vive en `/neon-mesh/`. La organización definitiva y el QA final de Agent siguen pendientes. El vídeo de reviews ya tiene un análisis curado en su Scrum, pendiente de aceptación de Juan; no se versionan el vídeo ni su transcripción íntegra.
 
 Antes de usar copy de la web clásica en Agent, revisa `context/public-profile-snapshot.md`, contrasta fechas y estado actual con Juan y verifica las afirmaciones técnicas contra los repositorios. Las reviews editoriales de Juan deben informar el tono antes de escribir el perfil final.
 

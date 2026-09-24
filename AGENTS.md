@@ -33,7 +33,7 @@ Al comenzar trabajo en este workspace, revisa [`SUGERENCIAS.md`](./SUGERENCIAS.m
 - `websites/neuron-mesh/` conserva contenido existente como fuente fechada, no como autorización automática para copiarlo. El estado de perfil en `context/public-profile-snapshot.md` también requiere reconfirmación antes de reutilizarse.
 - No versionar secretos, dependencias, salidas de compilación, cachés ni importaciones privadas. Revisa lo que entra en el commit y el contenido de `dist/` antes de publicar.
 - No publiques una web, compres servicios, contactes terceros o crees un remoto sin una instrucción que lo incluya. La sincronización del workspace en esta tarea está autorizada por el plan aprobado.
-- En Agent, `AG-004` (vídeo de reviews) requiere una petición posterior de Juan y no debe abrirse aún; `AG-005` espera que Juan revise opciones de árbol; `AG-014` será la última tarea del producto.
+- En Agent, Juan ya pidió revisar el vídeo de reviews: S12 dejó un análisis curado en `websites/agent/planning/reviews/S12-video-2026-09-23.md`, pendiente de su aceptación. El vídeo y su transcripción íntegra son locales y no deben versionarse. `AG-005` está parcialmente acordado: entrada desde el `AGENTS.md` humano al documental, `SOUL.md` como About personal completo y `MEMORY.md` aplazado; el resto del árbol sigue abierto. `AG-014` será la última tarea del producto.
 
 ## Rutas Windows en WSL
 
