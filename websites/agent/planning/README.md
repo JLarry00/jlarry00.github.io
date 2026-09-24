@@ -41,7 +41,7 @@ El árbol anterior es una propuesta explícita de Juan, todavía no acordada. S0
 
 La web clásica es una fuente inicial, no una autorización para copiar cada frase. S06 usa hechos claros del workspace `PerfilProfesional` y declara los límites de los proyectos; el vídeo de reviews no se ha procesado y el copy sigue siendo provisional hasta `AG-004`. Se distinguen hechos, experiencia, aprendizaje, planes y ficción. La paridad inglés/español forma parte de aceptación.
 
-La vista para lectores automáticos tiene una entrada en `/for-agents/` dentro de la aplicación, desplegada como `/agent/for-agents/` en Pages, con índice y archivos Markdown directos. Welcome y cada ficha enlazan a esa colección. No se presupone que un agente necesite recorrer la interfaz visual.
+La vista para lectores automáticos tiene una entrada en `/for-agents/` dentro de la aplicación y de Pages, con índice y archivos Markdown directos. Welcome y cada ficha enlazan a esa colección. No se presupone que un agente necesite recorrer la interfaz visual.
 
 ## Scrum propio
 

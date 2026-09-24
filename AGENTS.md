@@ -6,7 +6,7 @@ Este repositorio es el workspace completo para desarrollar dos webs. Lee `START_
 
 - `websites/neuron-mesh/`: aplicación Astro clásica y su único Scrum en `planning/`.
 - `websites/agent/`: aplicación Astro de la futura experiencia tipo editor y su único Scrum en `planning/`.
-- `site.config.json`: selecciona exactamente `neuron-mesh` o `agent` para los comandos locales `*:active`. El valor inicial es `neuron-mesh`.
+- `site.config.json`: selecciona exactamente `neuron-mesh` o `agent` para los comandos locales `*:active`. El valor actual es `agent`.
 - `.agents/skills/`: skills portables del workspace.
 - `.codex/agents/`: perfiles opcionales de agentes del proyecto; Codex puede requerir que el clon se marque como confiable.
 - `SUGERENCIAS.md`: bandeja de entrada para propuestas de Juan; no es un backlog compartido.
@@ -21,7 +21,7 @@ Al comenzar trabajo en este workspace, revisa [`SUGERENCIAS.md`](./SUGERENCIAS.m
 
 - Instala desde la raíz con `npm run setup`; cada aplicación conserva `package.json` y `package-lock.json` propios.
 - Usa los comandos raíz documentados en `README.md` para desarrollar, comprobar y compilar una variante concreta o la seleccionada.
-- GitHub Pages compone Neuron Mesh en `/` y Agent en `/agent/` tras la decisión explícita de Juan del 24/09/2026. Cambiar `site.config.json` selecciona solo la variante de los comandos locales `*:active`; la configuración inválida sigue fallando.
+- GitHub Pages compone Agent en `/` y Neuron Mesh en `/neon-mesh/` tras la decisión explícita de Juan. Cambiar `site.config.json` selecciona solo la variante de los comandos locales `*:active`; la configuración inválida sigue fallando.
 - Las ramas de broma dentro de Agent son ficción, no ramas Git reales.
 - El workflow publica exclusivamente ambos `dist/` en un artefacto. Nunca copies el workspace, contexto o planning al artefacto.
 

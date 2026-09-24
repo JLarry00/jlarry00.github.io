@@ -18,17 +18,17 @@ No ejecutes npm install en la raíz. La raíz no tiene dependencias de aplicaci�
 - [`SUGERENCIAS.md`](./SUGERENCIAS.md): bandeja de entrada que Codex revisa y deriva al backlog de producto adecuado.
 - `websites/neuron-mesh/`: web existente. Su Scrum está en `websites/neuron-mesh/planning/`.
 - `websites/agent/`: Alpha visual Astro de la nueva variante. Su Scrum está en `websites/agent/planning/`.
-- `site.config.json`: selección estricta de la web usada por los comandos locales `*:active`; inicialmente `neuron-mesh`.
+- `site.config.json`: selección estricta de la web usada por los comandos locales `*:active`; actualmente `agent`.
 - `scripts/site.mjs`: resuelve selección, instalación, desarrollo, comprobaciones, compilación y composición de las dos webs.
 - `context/`: síntesis curada de información ya publicada y decisiones editoriales seguras para versionar.
 - `contexto/`: posibles fuentes privadas locales. Está excluido de Git y nunca se copia a `context/` sin revisión.
-- `.github/workflows/deploy.yml`: construye ambas aplicaciones y publica un artefacto con Neuron Mesh en `/` y Agent en `/agent/`.
+- `.github/workflows/deploy.yml`: construye ambas aplicaciones y publica un artefacto con Agent en `/` y Neuron Mesh en `/neon-mesh/`.
 
 El índice [`PLANNING_INDEX.md`](./PLANNING_INDEX.md) enlaza a ambos Scrums. No existe un backlog compartido.
 
 ## Estado de producto
 
-Neuron Mesh se mantiene en la raíz de Pages. Agent vive en `/agent/` como versión en desarrollo y no indexable, con workbench de VS Code, fichas de perfil iniciales, Markdown para IA, temas, búsqueda de archivos, una rama ficticia y una animación ligera. La organización definitiva, la revisión del vídeo y el QA final siguen pendientes. Su Scrum registra el alcance y los incrementos.
+Agent es la web predeterminada de Pages: vive en `/` como versión en desarrollo y no indexable, con workbench de VS Code, fichas de perfil iniciales, Markdown para IA, temas, búsqueda de archivos, una rama ficticia y una animación ligera. Neuron Mesh vive en `/neon-mesh/`. La organización definitiva, la revisión del vídeo y el QA final de Agent siguen pendientes. Su Scrum registra el alcance y los incrementos.
 
 Antes de usar copy de la web clásica en Agent, revisa `context/public-profile-snapshot.md`, contrasta fechas y estado actual con Juan y verifica las afirmaciones técnicas contra los repositorios. Las reviews editoriales de Juan deben informar el tono antes de escribir el perfil final.
 

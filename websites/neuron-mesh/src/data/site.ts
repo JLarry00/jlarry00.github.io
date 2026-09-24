@@ -14,8 +14,9 @@ const paths: Record<Locale, Record<PageKind, string>> = {
   es: { home: '/es/', about: '/es/sobre-mi/', projects: '/es/proyectos/', jarvis: '/es/proyectos/jarvis/', payroll: '/es/proyectos/extractor-nominas/', approach: '/es/forma-de-trabajar/', contact: '/es/contacto/' },
 }
 
-export const routeFor = (locale: Locale, page: PageKind) => paths[locale][page]
-export const alternateFor = (locale: Locale, page: PageKind) => paths[locale === 'en' ? 'es' : 'en'][page]
+const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+export const routeFor = (locale: Locale, page: PageKind) => `${base}${paths[locale][page]}`
+export const alternateFor = (locale: Locale, page: PageKind) => routeFor(locale === 'en' ? 'es' : 'en', page)
 
 export type ArchitectureBlock = { step: string; title: string; desc: string; tech: string }
 export type TerminalLine = { text: string; tone?: 'cyan' | 'amber' | 'success' | 'muted' }

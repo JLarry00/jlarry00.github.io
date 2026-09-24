@@ -1,11 +1,8 @@
 import { defineConfig } from 'astro/config'
 
-const base = process.env.AGENT_BASE ?? '/'
-if (!['/', '/agent/'].includes(base)) throw new Error(`AGENT_BASE no válido: ${base}`)
-
 export default defineConfig({
   site: 'https://jlarry00.github.io',
-  base,
+  base: '/',
   output: 'static',
   trailingSlash: 'always',
 })

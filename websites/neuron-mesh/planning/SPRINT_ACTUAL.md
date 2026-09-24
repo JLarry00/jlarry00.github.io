@@ -1,10 +1,10 @@
-# Sprint actual — sin sprint activo
+# Sprint actual — ENV-04
 
-Estado: ENV-03 cerrado el 24/09/2026 tras publicación y comprobación remota. [ENV-02](./sprints/ENV-02-selector.md) también está cerrado.
+Objetivo: trasladar Neuron Mesh a `/neon-mesh/` y conservar sus rutas internas y enlaces públicos anteriores. Seleccionado: `ENV-010`.
 
-Neuron Mesh se conserva en [la raíz pública](https://jlarry00.github.io/) y Agent se publica en [/agent/](https://jlarry00.github.io/agent/) dentro del mismo artefacto. `ENV-009` está terminado.
+Agent pasará a la raíz en S09 de su Scrum. El selector local pasará a `agent`.
 
-- [Resultado ENV-03 — Dos webs](./sprints/ENV-03-dos-webs.md)
+- [ENV-04 — Cambio de rutas públicas](./sprints/ENV-04-cambio-de-raiz.md)
 - [Product Backlog Neuron Mesh](./BACKLOG.md)
 
-El workflow remoto [#35989129116](https://github.com/JLarry00/jlarry00.github.io/actions/runs/35989129116) terminó en `success`; rutas de ambas webs respondieron 200. El scaffold y las funciones de Agent se registran en su propio Scrum.
+La publicación anterior de ENV-03 sigue documentada como historia; ENV-04 no se cerrará hasta que termine Actions y respondan las URL nuevas.

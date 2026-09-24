@@ -34,11 +34,11 @@ jobs:
         run: npm run setup
 
       - name: Build Neuron Mesh
+        env:
+          NEURON_MESH_BASE: /neon-mesh/
         run: npm run build:neuron-mesh
 
-      - name: Build Agent at /agent/
-        env:
-          AGENT_BASE: /agent/
+      - name: Build Agent at root
         run: npm run build:agent
 
       - name: Compose public artifact

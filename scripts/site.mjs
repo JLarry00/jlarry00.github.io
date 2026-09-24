@@ -1,4 +1,4 @@
-import { readFileSync, cpSync, mkdirSync, rmSync, existsSync, writeFileSync } from 'node:fs'
+import { readFileSync, cpSync, mkdirSync, rmSync, existsSync, writeFileSync, readdirSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -55,7 +55,7 @@ function runNpm(site, args) {
 }
 
 function composePages() {
-  activeSite() // A malformed selector is still an error, even though Pages now contains both sites.
+  activeSite() // La selección local debe seguir siendo válida aunque Pages publique ambas webs.
   const neuron = path.join(root, sites['neuron-mesh'], 'dist')
   const agent = path.join(root, sites.agent, 'dist')
   if (!existsSync(path.join(neuron, 'index.html')) || !existsSync(path.join(agent, 'index.html'))) {
@@ -64,8 +64,31 @@ function composePages() {
   const output = path.join(root, '.pages-dist')
   rmSync(output, { recursive: true, force: true })
   mkdirSync(output, { recursive: true })
-  cpSync(neuron, output, { recursive: true })
-  cpSync(agent, path.join(output, 'agent'), { recursive: true })
+  cpSync(agent, output, { recursive: true })
+  cpSync(neuron, path.join(output, 'neon-mesh'), { recursive: true })
+
+  function redirect(relative, destination) {
+    const file = path.join(output, relative)
+    if (existsSync(file)) throw new Error(`La redirección antigua colisiona con Agent: ${relative}`)
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, `<!doctype html><html lang="es"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=${destination}"><link rel="canonical" href="https://jlarry00.github.io${destination}"><title>Página trasladada</title><p>Esta página está ahora en <a href="${destination}">${destination}</a>.</p></html>`)
+  }
+
+  function redirectOldNeuronPages(directory, prefix = '') {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const relative = path.posix.join(prefix, entry.name)
+      if (entry.isDirectory()) redirectOldNeuronPages(path.join(directory, entry.name), relative)
+      else if (entry.name === 'index.html' && relative !== 'index.html') {
+        redirect(relative, `/neon-mesh/${prefix}/`)
+      }
+    }
+  }
+
+  redirectOldNeuronPages(neuron)
+  redirect('agent/index.html', '/')
+  cpSync(path.join(agent, 'for-agents'), path.join(output, 'agent/for-agents'), { recursive: true })
+  rmSync(path.join(output, 'agent/for-agents/index.html'))
+  redirect('agent/for-agents/index.html', '/for-agents/')
   writeFileSync(path.join(output, '.nojekyll'), '')
   process.stdout.write(`${output}\n`)
 }

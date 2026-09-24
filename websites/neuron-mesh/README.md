@@ -10,4 +10,4 @@ npm run dev:neuron-mesh
 npm run build:neuron-mesh
 ```
 
-La configuración de publicación vive en `../../site.config.json`. El Scrum y las decisiones de esta web están en `planning/`.
+El workflow compila esta web con `NEURON_MESH_BASE=/neon-mesh/` y la publica bajo esa subruta. Sin esa variable, los comandos locales sirven la web en `/`. `../../site.config.json` solo selecciona la variante activa para comandos locales; el Scrum y las decisiones de esta web están en `planning/`.

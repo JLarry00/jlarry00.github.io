@@ -41,7 +41,7 @@ npm run check:active
 npm run build:pages
 ```
 
-`site.config.json` selecciona qué web usan los comandos locales `*:active`. Su valor inicial es `neuron-mesh` y uno inválido falla. GitHub Pages publica ambas: Neuron Mesh en `/` y Agent en `/agent/`. El workflow construye los dos `dist/` y compone `.pages-dist/`, que se ignora en Git. La rama `batman` de Agent es una simulación de interfaz.
+`site.config.json` selecciona qué web usan los comandos locales `*:active`. Su valor actual es `agent` y uno inválido falla. GitHub Pages publica ambas: Agent en `/` y Neuron Mesh en `/neon-mesh/` (la subruta pedida por Juan). El workflow construye los dos `dist/` y compone `.pages-dist/`, que se ignora en Git. Las antiguas URL de páginas tienen redirecciones HTML cuando no colisionan con Agent. La rama `batman` de Agent es una simulación de interfaz.
 
 ## Contexto y configuración del agente
 
