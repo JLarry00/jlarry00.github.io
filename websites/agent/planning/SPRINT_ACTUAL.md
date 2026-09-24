@@ -1,8 +1,8 @@
-# Sprint actual — S10
+# Sprint actual — sin sprint activo
 
-Objetivo: cerrar la aceptación de la primera versión Agent y ofrecer una lectura humana interpretada de todos los Markdown. Seleccionado: `AG-026` y cierre de las tareas ya implementadas que Juan ha aceptado.
+Estado: S10 cerrado el 24/09/2026 tras publicación y comprobación remota. Juan aceptó las 17 tareas implementadas de contenido, presentación e interacción revisadas en esta sesión; pasaron a `COMPLETADAS.md` con sus límites de primera versión.
 
-Juan aceptó la presentación, interacciones y contenido inicial con una salvedad: los `.md` directos aparecen como texto plano y quiere páginas interpretadas y enlaces visibles mediante botones. `AG-006` queda abierta hasta resolver esta presentación; las tareas restantes aceptadas se cerrarán con el límite del árbol provisional. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
+`AG-026` está implementada y publicada, pero sigue en el PB pendiente hasta que Juan revise la nueva vista [Markdown con formato](https://jlarry00.github.io/for-agents/). `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
 
 - [S10 — Aceptación y lectura Markdown](./sprints/S10-lectura-markdown.md)
 - [S09 — Agent en la raíz](./sprints/S09-agent-en-raiz.md)

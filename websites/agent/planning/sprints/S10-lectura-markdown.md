@@ -1,6 +1,6 @@
 # Sprint S10 — Aceptación y lectura Markdown
 
-Estado: en curso desde el 24/09/2026.
+Estado: cerrado el 24/09/2026 tras publicación remota; `AG-026` vuelve al PB a la espera de la aceptación de Juan.
 
 Objetivo: registrar la aceptación de Juan de la primera versión visual y funcional, y resolver la lectura humana de los Markdown.
 
@@ -14,4 +14,8 @@ Seleccionado: `AG-026`. La revisión también cierra los ítems ya implementados
 
 ## Resultado
 
-Pendiente de implementación y publicación.
+Juan aceptó explícitamente las 17 tareas de primera versión que seguían en el PB por revisión. Se movieron a `COMPLETADAS.md` sin dar por decidido el árbol `AG-005`, la revisión del vídeo `AG-004` ni el QA final `AG-014`.
+
+La web Agent compiló 24 páginas HTML: raíz, índice de colección y 22 documentos renderizados. Conserva los 23 `.md` originales (22 documentos e índice). La composición local confirmó 22 botones a páginas con formato y 22 enlaces a `.md`, todos con archivo de destino; los enlaces internos desde README renderizado apuntan a otras vistas renderizadas. No se copió material privado al artefacto.
+
+El commit `583d254` activó [GitHub Actions #36017979551](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36017979551), concluido en `success`. `/for-agents/`, `/for-agents/read/es/README/` y `/for-agents/read/en/projects/jarvis/` respondieron 200 con `text/html`; `/for-agents/es/README.md` respondió 200 con `text/markdown`. Juan aún no ha revisado las páginas nuevas, de modo que `AG-026` queda implementada y publicada, pendiente de aceptación.
