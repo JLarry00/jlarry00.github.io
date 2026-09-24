@@ -1,6 +1,6 @@
-# Portfolio Agent — direct Markdown index
+# Archivos del portfolio Agent
 
-This is the direct text entry point. The visual site is for human browsing; these documents are short, factual and available without JavaScript.
+These documents are written as Markdown in the project and published as linked, formatted HTML pages. People and automated readers use the same pages without JavaScript.
 
 Source review: 2026-09-24. The website is in development. The final folder tree is still under discussion.
 

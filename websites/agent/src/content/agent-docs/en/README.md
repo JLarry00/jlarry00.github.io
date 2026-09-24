@@ -13,7 +13,7 @@ An initial selection of experience, tools and projects. This version is still in
 
 ## How to explore
 
-Open files from Explorer or search by filename. A separate collection of direct Markdown files is available for automated readers.
+Open files from Explorer or search by filename. You can also follow the links in the document collection without using this interface.
 
 ## Links
 

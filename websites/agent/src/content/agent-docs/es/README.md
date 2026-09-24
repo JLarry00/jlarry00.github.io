@@ -13,7 +13,7 @@ Una primera selección de experiencia, herramientas y proyectos. Esta versión s
 
 ## Cómo recorrerlo
 
-Abre archivos desde Explorer o busca uno por nombre. También hay una colección de Markdown directo para lectores automáticos.
+Abre archivos desde Explorer o busca uno por nombre. También puedes seguir los enlaces de la colección de documentos, sin usar esta interfaz.
 
 ## Enlaces
 

@@ -1,9 +1,9 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const markdownRoot = fileURLToPath(new URL('../public/for-agents/', import.meta.url))
+const markdownRoot = fileURLToPath(new URL('../src/content/agent-docs/', import.meta.url))
 
-// Only the HTML view changes links. Public .md files retain relative .md links.
+// Source Markdown keeps relative links; published HTML points to published HTML.
 export const renderedMarkdownLinks = {
   name: 'rendered-markdown-links',
   link(node, ctx) {

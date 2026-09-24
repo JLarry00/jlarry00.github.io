@@ -13,7 +13,7 @@ La interfaz ofrece una lectura visual de la experiencia y los proyectos. Las ram
 
 ## Para agentes
 
-Usa el índice de la colección para leer Markdown directo, con hechos breves, estado y enlaces. No necesitas ejecutar esta interfaz.
+Usa el mismo índice de documentos y sigue sus enlaces HTML. Las páginas muestran hechos breves, estado y fuentes sin ejecutar esta interfaz.
 
 ## Límite
 

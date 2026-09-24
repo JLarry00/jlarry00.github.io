@@ -16,7 +16,6 @@ const { Content } = await render(document)
 const [locale, ...segments] = document.id.split('/')
 const documentPath = `${segments.join('/')}.md`
 const title = profile.documents.find((item) => item.path === documentPath)?.[locale]?.title ?? documentPath
-const readUrl = (file: string) => `/for-agents/read/${locale}/${file.replace(/\.md$/, '')}/`
 ---
 <!doctype html>
 <html lang={locale}>
@@ -32,19 +31,8 @@ const readUrl = (file: string) => `/for-agents/read/${locale}/${file.replace(/\.
         <a href="/for-agents/">← {locale === 'es' ? 'Todos los archivos' : 'All files'}</a>
         <a href="/">{locale === 'es' ? 'Portfolio visual' : 'Visual portfolio'} ↗</a>
       </nav>
-      <header class="reader-document-header">
-        <p class="reader-kicker">{locale.toUpperCase()} / {documentPath}</p>
-        <div class="reader-actions"><a class="reader-button" href={`/for-agents/${locale}/${documentPath}`}>{locale === 'es' ? 'Ver .md original' : 'View original .md'} ↗</a></div>
-      </header>
-      <div class="reader-layout">
-        <article class="reader-markdown"><Content /></article>
-        <aside class="reader-sidebar">
-          <h2>{locale === 'es' ? 'Archivos' : 'Files'}</h2>
-          <nav aria-label={locale === 'es' ? 'Otros documentos' : 'Other documents'}>
-            {profile.documents.map((item) => <a href={readUrl(item.path)} aria-current={item.path === documentPath ? 'page' : undefined}>{item.path}</a>)}
-          </nav>
-        </aside>
-      </div>
+      <p class="reader-path">{locale.toUpperCase()} / {documentPath}</p>
+      <article class="reader-markdown"><Content /></article>
     </main>
   </body>
 </html>

@@ -20,7 +20,7 @@ npm run dev:active
 | Neuron Mesh, web existente | [`websites/neuron-mesh/`](./websites/neuron-mesh/) | [`planning/`](./websites/neuron-mesh/planning/) |
 | Agent, Alpha visual del portfolio tipo editor | [`websites/agent/`](./websites/agent/) | [`planning/`](./websites/agent/planning/) |
 
-Cada web tiene dependencias, lockfile, Scrum y versiones propias. Agent usa fichas visuales para personas, Markdown directo para lectores automáticos y un workbench con temas, búsqueda de archivos, una rama ficticia y Run and Debug. Su perfil y organización siguen en revisión.
+Cada web tiene dependencias, lockfile, Scrum y versiones propias. Agent usa un workbench visual con temas, búsqueda de archivos, una rama ficticia y Run and Debug. Su colección `/for-agents/` publica Markdown interpretado como HTML estático enlazado para personas y lectores automáticos. Su perfil y organización siguen en revisión.
 
 ## Comandos desde la raíz
 

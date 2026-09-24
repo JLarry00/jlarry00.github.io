@@ -9,6 +9,6 @@ Come in and look around. I am building this portfolio as a repository you can br
 
 ## Start here
 
-Open Explorer, search for a file or begin with README.md. For direct text, use the agent collection.
+Open Explorer, search for a file or begin with README.md. For simple linked pages, use the document index.
 
 [Agent index](../index.md)

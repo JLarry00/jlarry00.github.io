@@ -13,7 +13,7 @@ The interface presents experience and projects visually. Branches in Source Cont
 
 ## For agents
 
-Use the collection index for direct Markdown with concise facts, status and links. You do not need to run this interface.
+Use the same document index and follow its HTML links. The pages show concise facts, status and sources without running this interface.
 
 ## Boundary
 

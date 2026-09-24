@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders'
 const agentMarkdown = defineCollection({
   loader: glob({
     pattern: '**/*.md',
-    base: './public/for-agents',
+    base: './src/content/agent-docs',
     generateId: ({ entry }) => entry.replace(/\.md$/, ''),
   }),
 })

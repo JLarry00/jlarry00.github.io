@@ -1,9 +1,10 @@
-# Sprint actual — sin sprint activo
+# Sprint actual — S11
 
-Estado: S10 cerrado el 24/09/2026 tras publicación y comprobación remota. Juan aceptó las 17 tareas implementadas de contenido, presentación e interacción revisadas en esta sesión; pasaron a `COMPLETADAS.md` con sus límites de primera versión.
+Objetivo: corregir la lectura de documentos tras el feedback de Juan. Seleccionado: `AG-026`.
 
-`AG-026` está implementada y publicada, pero sigue en el PB pendiente hasta que Juan revise la nueva vista [Markdown con formato](https://jlarry00.github.io/for-agents/). `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
+S10 publicó dos presentaciones y Juan rechazó esa separación. S11 dejará una única colección HTML generada desde Markdown, con enlaces fáciles de seguir por personas e IA. La aceptación de las otras 17 tareas de primera versión se conserva. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
 
+- [S11 — Una lectura compartida](./sprints/S11-lectura-compartida.md)
 - [S10 — Aceptación y lectura Markdown](./sprints/S10-lectura-markdown.md)
 - [S09 — Agent en la raíz](./sprints/S09-agent-en-raiz.md)
 - [Resultado S08 — Publicación simultánea](./sprints/S08-publicacion-doble.md)

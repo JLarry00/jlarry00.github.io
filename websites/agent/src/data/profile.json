@@ -10,7 +10,7 @@
         "lead": "Estudio Ingeniería Informática en la Universidad Autónoma de Madrid. Me interesan la automatización, la infraestructura y la IA aplicada a problemas concretos.",
         "sections": [
           { "title": "Qué encontrarás aquí", "body": "Una primera selección de experiencia, herramientas y proyectos. Esta versión sigue en desarrollo: prefiero señalar lo que falta antes que vestirlo de resultado terminado." },
-          { "title": "Cómo recorrerlo", "body": "Abre archivos desde Explorer o busca uno por nombre. También hay una colección de Markdown directo para lectores automáticos." }
+          { "title": "Cómo recorrerlo", "body": "Abre archivos desde Explorer o busca uno por nombre. También puedes seguir los enlaces de la colección de documentos, sin usar esta interfaz." }
         ],
         "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
         "agentSummary": "Perfil público en desarrollo. Estudiante de Ingeniería Informática en la UAM; experiencia previa en automatización, DevOps e IA aplicada. No inferir empleo actual ni resultados no documentados."
@@ -21,7 +21,7 @@
         "lead": "I study Computer Engineering at Universidad Autónoma de Madrid. I am interested in automation, infrastructure and applied AI for concrete problems.",
         "sections": [
           { "title": "What you will find", "body": "An initial selection of experience, tools and projects. This version is still in development; unfinished work is labelled as such." },
-          { "title": "How to explore", "body": "Open files from Explorer or search by filename. A separate collection of direct Markdown files is available for automated readers." }
+          { "title": "How to explore", "body": "Open files from Explorer or search by filename. You can also follow the links in the document collection without using this interface." }
         ],
         "links": [{ "label": "LinkedIn", "url": "https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba" }, { "label": "GitHub", "url": "https://github.com/JLarry00" }],
         "agentSummary": "Public profile in development. Computer Engineering student at UAM with prior experience in automation, DevOps and applied AI. Do not infer current employment or undocumented outcomes."
@@ -36,7 +36,7 @@
         "lead": "Este archivo orienta a quien visita el portfolio como si abriera el repositorio de un agente.",
         "sections": [
           { "title": "Para personas", "body": "La interfaz ofrece una lectura visual de la experiencia y los proyectos. Las ramas del panel Source Control son una simulación narrativa; solo main representa hechos del perfil." },
-          { "title": "Para agentes", "body": "Usa el índice de la colección para leer Markdown directo, con hechos breves, estado y enlaces. No necesitas ejecutar esta interfaz." },
+          { "title": "Para agentes", "body": "Usa el mismo índice de documentos y sigue sus enlaces HTML. Las páginas muestran hechos breves, estado y fuentes sin ejecutar esta interfaz." },
           { "title": "Límite", "body": "Este AGENTS.md es contenido público del portfolio. No son las instrucciones internas del agente que desarrolla el repositorio." }
         ],
         "links": [],
@@ -48,7 +48,7 @@
         "lead": "This file helps visitors read the portfolio as an agent repository.",
         "sections": [
           { "title": "For people", "body": "The interface presents experience and projects visually. Branches in Source Control are a narrative simulation; only main represents profile facts." },
-          { "title": "For agents", "body": "Use the collection index for direct Markdown with concise facts, status and links. You do not need to run this interface." },
+          { "title": "For agents", "body": "Use the same document index and follow its HTML links. The pages show concise facts, status and sources without running this interface." },
           { "title": "Boundary", "body": "This AGENTS.md is public portfolio content. It is separate from the internal instructions for the agent developing the repository." }
         ],
         "links": [],
@@ -62,7 +62,7 @@
         "eyebrow": "Bienvenida",
         "title": "Hola, soy Juan.",
         "lead": "Pasa y curiosea. Estoy preparando este portfolio como un repositorio que puedas recorrer: cada archivo es una puerta a una parte de mi trabajo.",
-        "sections": [{ "title": "Empieza por aquí", "body": "Abre Explorer, busca un archivo o entra en README.md. Si prefieres texto directo, usa la colección para agentes." }],
+        "sections": [{ "title": "Empieza por aquí", "body": "Abre Explorer, busca un archivo o entra en README.md. Si prefieres páginas sencillas con enlaces, usa el índice de documentos." }],
         "links": [],
         "agentSummary": "Página de bienvenida. No contiene afirmaciones profesionales adicionales; consulta README, Experience, skills y projects para hechos."
       },
@@ -70,7 +70,7 @@
         "eyebrow": "Welcome",
         "title": "Hi, I’m Juan.",
         "lead": "Come in and look around. I am building this portfolio as a repository you can browse: each file opens a different part of my work.",
-        "sections": [{ "title": "Start here", "body": "Open Explorer, search for a file or begin with README.md. For direct text, use the agent collection." }],
+        "sections": [{ "title": "Start here", "body": "Open Explorer, search for a file or begin with README.md. For simple linked pages, use the document index." }],
         "links": [],
         "agentSummary": "Welcome page. For professional facts, read README, Experience, skills and projects."
       }

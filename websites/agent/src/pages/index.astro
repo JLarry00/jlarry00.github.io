@@ -252,7 +252,7 @@ const baseUrl = import.meta.env.BASE_URL
               </div>
               <div class="welcome-bottom">
                 <span class="welcome-bottom-label">Nota de la Alpha</span>
-                <p>Esta versión sigue en desarrollo. <a href={`${baseUrl}for-agents/`}>Todos los Markdown ↗</a> · <a href={`${baseUrl}for-agents/read/es/Welcome/`}>Leer Welcome con formato ↗</a> · <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Créditos de iconos</a></p>
+                <p>Esta versión sigue en desarrollo. <a href={`${baseUrl}for-agents/`}>Todos los documentos ↗</a> · <a href={`${baseUrl}for-agents/read/es/Welcome/`}>Leer Welcome ↗</a> · <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Créditos de iconos</a></p>
               </div>
             </article>
             <article class="profile-preview" id="profile-preview" aria-live="polite" hidden></article>
@@ -428,9 +428,9 @@ const baseUrl = import.meta.env.BASE_URL
         welcomePreview.querySelector('.welcome-guide p').textContent = intro.guide
         welcomePreview.querySelector('.welcome-bottom-label').textContent = locale === 'es' ? 'Nota de desarrollo' : 'Development note'
         const note = welcomePreview.querySelector('.welcome-bottom p')
-        const agentLink = make('a', '', locale === 'es' ? 'Todos los Markdown ↗' : 'All Markdown files ↗')
+        const agentLink = make('a', '', locale === 'es' ? 'Todos los documentos ↗' : 'All documents ↗')
         agentLink.href = `${baseUrl}for-agents/`
-        const welcomeLink = make('a', '', locale === 'es' ? 'Leer Welcome con formato ↗' : 'Read formatted Welcome ↗')
+        const welcomeLink = make('a', '', locale === 'es' ? 'Leer Welcome ↗' : 'Read Welcome ↗')
         welcomeLink.href = `${baseUrl}for-agents/read/${locale}/Welcome/`
         const creditLink = make('a', '', locale === 'es' ? 'Créditos de iconos' : 'Icon credits')
         creditLink.href = `${baseUrl}icons/codicons/ATTRIBUTION.txt`
@@ -459,13 +459,9 @@ const baseUrl = import.meta.env.BASE_URL
           })
           profilePreview.append(links)
         }
-        const actions = make('div', 'profile-links')
-        const formatted = make('a', 'raw-link', locale === 'es' ? 'Leer Markdown con formato ↗' : 'Read formatted Markdown ↗')
-        formatted.href = `${baseUrl}for-agents/read/${locale}/${activePath.replace(/\.md$/, '')}/`
-        const raw = make('a', 'raw-link', locale === 'es' ? 'Ver .md original ↗' : 'View original .md ↗')
-        raw.href = `${baseUrl}for-agents/${locale}/${activePath}`
-        actions.append(formatted, raw)
-        profilePreview.append(actions)
+        const markdownLink = make('a', 'markdown-link', locale === 'es' ? 'Leer este documento ↗' : 'Read this document ↗')
+        markdownLink.href = `${baseUrl}for-agents/read/${locale}/${activePath.replace(/\.md$/, '')}/`
+        profilePreview.append(markdownLink)
       }
 
       function renderContent() {

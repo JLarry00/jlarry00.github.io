@@ -9,6 +9,6 @@ Pasa y curiosea. Estoy preparando este portfolio como un repositorio que puedas 
 
 ## Empieza por aquí
 
-Abre Explorer, busca un archivo o entra en README.md. Si prefieres texto directo, usa la colección para agentes.
+Abre Explorer, busca un archivo o entra en README.md. Si prefieres páginas sencillas con enlaces, usa el índice de documentos.
 
 [Índice de agentes](../index.md)

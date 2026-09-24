@@ -803,12 +803,12 @@ a:focus-visible {
 .profile-card p { margin: 0; color: #cbd5df; font-size: 13px; line-height: 1.7; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 24px; }
 .profile-link,
-.raw-link,
+.markdown-link,
 .run-toggle { display: inline-flex; min-height: 36px; align-items: center; padding: 8px 13px; border: 1px solid #44759c; border-radius: 8px; background: rgb(55 148 255 / 10%); color: #aad7ff; font-size: 12px; font-weight: 600; text-decoration: none; cursor: pointer; }
 .profile-link:hover,
-.raw-link:hover,
+.markdown-link:hover,
 .run-toggle:hover { background: rgb(55 148 255 / 20%); }
-.profile-preview > .profile-links:last-child { margin-top: 26px; }
+.markdown-link { margin-top: 26px; }
 .fiction-card { display: flex; align-items: center; gap: 20px; max-width: 600px; margin-top: 35px; padding: 24px; border: 1px solid #8672a4; border-radius: 12px; background: rgb(144 109 185 / 11%); }
 .fiction-card > span { font-size: 48px; }
 .fiction-card p { margin: 0; color: #e1d8ee; font-size: 14px; line-height: 1.6; }
@@ -1404,10 +1404,10 @@ a:focus-visible {
 :root[data-theme='light'] .profile-eyebrow,
 :root[data-theme='light'] .profile-card-index,
 :root[data-theme='light'] .profile-link,
-:root[data-theme='light'] .raw-link,
+:root[data-theme='light'] .markdown-link,
 :root[data-theme='light'] .run-toggle { color: #0550ae; }
 :root[data-theme='light'] .profile-link,
-:root[data-theme='light'] .raw-link,
+:root[data-theme='light'] .markdown-link,
 :root[data-theme='light'] .run-toggle { border-color: #a4c5e9; background: #e7f2fe; }
 
 :root[data-theme='monokai'] .profile-preview,

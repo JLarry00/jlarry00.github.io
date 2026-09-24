@@ -1,9 +1,10 @@
 ---
-import profile from '../../data/profile.json'
+import { getEntry, render } from 'astro:content'
 import '../../styles/reader.css'
 
-const documents = profile.documents
-const readUrl = (locale: string, file: string) => `/for-agents/read/${locale}/${file.replace(/\.md$/, '')}/`
+const index = await getEntry('agentMarkdown', 'index')
+if (!index) throw new Error('Falta el índice Markdown de Agent')
+const { Content } = await render(index)
 ---
 <!doctype html>
 <html lang="es">
@@ -11,35 +12,12 @@ const readUrl = (locale: string, file: string) => `/for-agents/read/${locale}/${
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Archivos para agentes · Juan Larrondo</title>
+    <title>Archivos del portfolio Agent · Juan Larrondo</title>
   </head>
   <body>
     <main class="reader-shell">
-      <nav class="reader-top" aria-label="Navegación"><a href="/">← Portfolio</a><a href="/for-agents/index.md">Índice .md original ↗</a></nav>
-      <header class="reader-intro">
-        <p class="reader-kicker">Colección de documentos</p>
-        <h1>Markdown, con formato.</h1>
-        <p>Elige un archivo para leerlo como página. Cada documento también conserva su enlace <code>.md</code> directo para lectores automáticos.</p>
-      </header>
-      <div class="reader-languages">
-        {(['es', 'en'] as const).map((locale) => (
-          <section class="reader-language" lang={locale}>
-            <h2>{locale === 'es' ? 'Español' : 'English'}</h2>
-            <div class="reader-list">
-              {documents.map((document) => (
-                <div class="reader-item">
-                  <div><span class="reader-path">{document.path}</span><strong>{document[locale].title}</strong></div>
-                  <div class="reader-actions">
-                    <a class="reader-button" href={readUrl(locale, document.path)}>{locale === 'es' ? 'Leer con formato' : 'Read formatted'}</a>
-                    <a class="reader-raw" href={`/for-agents/${locale}/${document.path}`} aria-label={`${locale === 'es' ? 'Archivo Markdown original' : 'Original Markdown file'}: ${document.path}`}>.md ↗</a>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-      <p class="reader-note">Versión en desarrollo. La rama «batman» de la interfaz es ficción; estos documentos describen el perfil real. El árbol final sigue en revisión.</p>
+      <nav class="reader-top" aria-label="Navegación"><a href="/">← Portfolio</a></nav>
+      <article class="reader-markdown"><Content /></article>
     </main>
   </body>
 </html>
