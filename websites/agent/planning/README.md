@@ -23,7 +23,7 @@ La aplicación vive en `websites/agent/`; su único Scrum está en `websites/age
 README.md
 AGENTS.md
 SOUL.md
-MEMORY.md  (función por decidir)
+MEMORY.md  (aplazado; no crear todavía)
 Welcome.md
 Experience.md
 Contact.md
@@ -35,13 +35,13 @@ projects/
   [project].md
 ```
 
-El árbol anterior sigue siendo una propuesta. Juan prefiere agrupar las skills por campo y considera incluir los hobbies dentro de `SOUL.md`, en vez de crear `Hobbies/`. [AG-005-opciones.md](./AG-005-opciones.md) compara las funciones de `AGENTS.md`, `SOUL.md` y `MEMORY.md`. S06 publicó archivos provisionales para ensayar contenido y navegación; sus rutas pueden cambiar tras la decisión, cuidando los enlaces ya publicados. Los documentos públicos se generan como Markdown real desde `src/data/profile.json`, y la interfaz humana presenta fichas visuales. Las instrucciones reales del agente que desarrolla este workspace no se publican como perfil.
+El árbol anterior sigue siendo una propuesta. Juan prefiere agrupar las skills por campo y acordó usar `SOUL.md` como About personal, donde podrían entrar hobbies confirmados; `MEMORY.md` queda aplazado sin función definida. [AG-005-opciones.md](./AG-005-opciones.md) distingue el `AGENTS.md` visible en la interfaz humana del documental agéntico. S06 publicó archivos provisionales para ensayar contenido y navegación; sus rutas pueden cambiar tras la decisión, cuidando los enlaces ya publicados. Los documentos públicos se generan como Markdown real desde `src/data/profile.json`, y la interfaz humana presenta fichas visuales. Las instrucciones reales del agente que desarrolla este workspace no se publican como perfil.
 
 ## Contenido y voz
 
 La web clásica es una fuente inicial, no una autorización para copiar cada frase. S06 usa hechos claros del workspace `PerfilProfesional` y declara los límites de los proyectos; el vídeo de reviews no se ha procesado y el copy sigue siendo provisional hasta `AG-004`. Juan quiere una redacción más suya, concreta y natural (`AG-034`). Se distinguen hechos, experiencia, aprendizaje, planes y ficción. El inglés será el idioma inicial y el oscuro el tema inicial; la paridad inglés/español y los selectores siguen formando parte del producto.
 
-La colección está en `/for-agents/`. Su índice y los 22 documentos ES/EN se escriben en Markdown en `src/content/agent-docs/` y se publican como HTML estático, sencillo y enlazado. Personas y agentes recorren los mismos enlaces. Los `.md` fuente no se publican como una segunda vista. Juan quiere que la única conexión visible entre esta colección y la interfaz humana sea una entrada de cabecera en cada lado, pendiente de concretar con `AG-027`; los enlaces actuales desde Welcome y las fichas se retirarán al implementarla. Dentro de la colección, cada archivo tendrá conexiones contextuales con otros (`AG-029`). La colección agéntica incluirá información práctica del perfil, sin referencias a Batman ni al juego de bugs (`AG-031`).
+La colección está en `/for-agents/`. Su índice y los 22 documentos ES/EN se escriben en Markdown en `src/content/agent-docs/` y se publican como HTML estático, sencillo y enlazado. Personas y agentes recorren los mismos enlaces. Los `.md` fuente no se publican como una segunda vista. Juan quiere una sola conexión visible por dirección entre esta colección y la interfaz humana. Se estudia ubicar la entrada en el `AGENTS.md` humano y el retorno en la cabecera agéntica (`AG-027`); los cruces actuales desde Welcome y las fichas se retirarán al implementarla. Dentro de la colección, cada archivo tendrá conexiones contextuales con otros (`AG-029`). La colección agéntica incluirá información práctica del perfil, sin referencias a Batman ni al juego de bugs (`AG-031`).
 
 ## Scrum propio
 

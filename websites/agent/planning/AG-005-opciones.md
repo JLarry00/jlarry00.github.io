@@ -1,24 +1,23 @@
 # AG-005 — Opciones para los archivos personales del repo-perfil
 
-Estas son propuestas para discutir con Juan, no decisiones ni hechos biográficos. El `AGENTS.md` público del portfolio es distinto del `AGENTS.md` situado en la raíz de este workspace, que instruye al agente que desarrolla la web.
+Recoge lo acordado y lo pendiente de discutir con Juan, sin inventar hechos biográficos. Hay tres contextos distintos: el `AGENTS.md` visible en la interfaz humana, el documento `AGENTS.md` de la colección agéntica y el `AGENTS.md` situado en la raíz de este workspace, que instruye al agente que desarrolla la web.
 
 ## Función de cada archivo
 
 | Archivo | Propuesta | Lo que falta decidir |
 |---|---|---|
-| `AGENTS.md` | Puerta de entrada **dentro de la colección documental**: mapa breve del perfil, dónde encontrar experiencia, proyectos, skills y contacto; fecha de revisión y distinción entre hechos, planes y ficción. | Si también debe ser el enlace de entrada desde la web visual en lugar del botón de cabecera. Hacer las dos cosas como puntos de cruce separados contradiría `AG-027`. |
-| `SOUL.md` | El About personal: intereses, motivaciones, forma de trabajar y hobbies que Juan quiera publicar. Usar su voz y ejemplos concretos. | Qué facetas personales e intereses son reales, actuales y públicos. No derivarlos de una plantilla de personalidad de IA. |
-| `MEMORY.md` | Opción A: una selección de episodios profesionales y qué aprendió en cada uno; complementa la cronología factual de Experience. | Elegir esta opción solo si Juan tiene historias concretas y quiere contarlas. |
-| `MEMORY.md` | Opción B: hitos y cambios de rumbo del portfolio y de la carrera, con fechas y fuentes. | Evitar duplicar Experience y mantenerlo actualizado. |
-| `MEMORY.md` | Opción C: no crearlo todavía; usar un nombre más literal cuando aparezca contenido que lo justifique. | Priorizar claridad sobre completar la metáfora de un agente. |
+| `AGENTS.md` en la UI humana | Propuesta: explicar, dentro de la metáfora del repo, cómo está organizado el perfil y qué encontrará un lector en la colección agéntica. Un botón dentro de este archivo abriría directamente el `AGENTS.md` agéntico. | Acordar si ese será el único acceso humano→agéntico. Si se prefiere un botón global, este archivo necesitará otra función sustantiva. |
+| `AGENTS.md` agéntico | Portada documental: mapa breve del perfil, enlaces a experiencia, proyectos, skills y contacto; fecha de revisión y límites de las afirmaciones. | El retorno a la interfaz humana puede estar en su cabecera y apuntar al `AGENTS.md` humano. |
+| `SOUL.md` | **Acordado:** About personal, con intereses, motivaciones, forma de trabajar y hobbies que Juan quiera publicar. Usar su voz y ejemplos concretos. | Confirmar qué facetas e intereses son reales, actuales y públicos. No derivarlos de una plantilla de personalidad de IA. |
+| `MEMORY.md` | **Aplazado:** todavía no tiene función ni contenido. No crear un archivo vacío o genérico solo para completar la metáfora. | Retomar cuando Juan tenga una idea que lo justifique. |
 
 ## Recomendación provisional
 
-Usar **un solo botón visible en la esquina superior derecha** de cada interfaz. Llevaría a `AGENTS.md` como primer documento de la colección agéntica; así `AGENTS.md` sería la portada documental sin añadir un segundo cruce. Para `MEMORY.md`, preferir la opción A si Juan puede aportar dos o tres episodios reales con aprendizaje; si no, esperar antes de publicar un archivo vacío o genérico. `SOUL.md` puede reunir About y hobbies, sin una carpeta Hobbies separada salvo que su contenido crezca lo bastante para justificarla.
+Poner el **único botón de salida de la UI humana dentro de su `AGENTS.md`**, donde tiene contexto y lleva al `AGENTS.md` agéntico. En la colección agéntica, mantener arriba a la derecha el único enlace de retorno a ese archivo humano. Esto deja una función en cada lado: presentación visual del acceso para una persona, e índice práctico para una IA. Es una propuesta pendiente de decisión, no un cambio de interfaz ya aprobado. `SOUL.md` reúne About y hobbies, sin una carpeta Hobbies separada salvo que su contenido crezca lo bastante para justificarla. `MEMORY.md` queda pendiente sin propuesta preferida.
 
 ## Orden de decisiones
 
-1. Acordar puerta única entre interfaces (`AG-027`) y función de `AGENTS.md`.
-2. Definir con Juan qué material personal entra en `SOUL.md` y si `MEMORY.md` tiene historias propias.
+1. Acordar puerta única entre interfaces (`AG-027`) y función del `AGENTS.md` visible para humanos.
+2. Definir con Juan qué material personal entra en `SOUL.md`; dejar `MEMORY.md` aparcado.
 3. Fijar árbol, nombres y agrupación de skills (`AG-035`), conservando enlaces directos o redirecciones razonables para rutas ya publicadas.
 4. Redactar y diseñar los archivos con las conclusiones de `AG-004` y los hechos confirmados.
