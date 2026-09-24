@@ -1,0 +1,45 @@
+:root { color-scheme: dark; font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif; background: #181b20; color: #d9e2ec; }
+* { box-sizing: border-box; }
+body { margin: 0; line-height: 1.65; }
+a { color: #9bcfff; }
+a:focus-visible { outline: 2px solid #c8e6ff; outline-offset: 3px; }
+.reader-shell { max-width: 1150px; margin: 0 auto; padding: clamp(24px, 5vw, 64px); }
+.reader-top { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid #334454; font-size: 14px; }
+.reader-top a { text-decoration: none; }
+.reader-kicker { margin: 0 0 12px; color: #8bcaff; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.reader-intro { max-width: 690px; padding: 50px 0 32px; }
+.reader-intro h1 { margin: 0; color: #f3f7fc; font-size: clamp(38px, 6vw, 62px); line-height: 1.1; }
+.reader-intro p:last-child { margin: 20px 0 0; color: #c6d2de; font-size: 17px; }
+.reader-languages { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.reader-language { padding: 20px; border: 1px solid #34495e; border-radius: 16px; background: #20262f; }
+.reader-language h2, .reader-sidebar h2 { margin: 0 0 16px; color: #f0f5fa; font-size: 19px; }
+.reader-list { display: grid; gap: 8px; }
+.reader-item { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 13px; border: 1px solid #354657; border-radius: 11px; background: #1b2129; }
+.reader-item > div:first-child { min-width: 0; }
+.reader-path { display: block; overflow-wrap: anywhere; color: #8db1d3; font: 12px 'Cascadia Code', Consolas, monospace; }
+.reader-item strong { display: block; margin-top: 3px; color: #e9f1fa; font-size: 14px; }
+.reader-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.reader-button, .reader-raw { display: inline-flex; align-items: center; justify-content: center; min-height: 37px; padding: 7px 11px; border: 1px solid #4982b1; border-radius: 8px; background: #23415b; color: #e3f3ff; font-size: 12px; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.reader-raw { background: transparent; color: #b2d8fa; }
+.reader-button:hover, .reader-raw:hover { background: #315775; }
+.reader-note { max-width: 760px; margin-top: 28px; color: #acbac9; font-size: 13px; }
+.reader-document-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 30px 0 22px; }
+.reader-document-header .reader-kicker { margin: 0; overflow-wrap: anywhere; }
+.reader-layout { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 24px; align-items: start; }
+.reader-markdown { min-width: 0; padding: clamp(22px, 4vw, 42px); border: 1px solid #35495d; border-radius: 16px; background: #20262f; }
+.reader-markdown > :first-child { margin-top: 0; }
+.reader-markdown h1, .reader-markdown h2, .reader-markdown h3 { color: #f2f6fb; line-height: 1.25; }
+.reader-markdown h1 { font-size: clamp(30px, 4vw, 46px); }
+.reader-markdown h2 { margin-top: 32px; padding-top: 12px; border-top: 1px solid #3a4a59; font-size: 21px; }
+.reader-markdown p, .reader-markdown li { color: #d0dae4; }
+.reader-markdown blockquote { margin: 22px 0; padding: 3px 18px; border-left: 3px solid #6bb4ed; background: #1b3144; border-radius: 0 8px 8px 0; }
+.reader-markdown ul { padding-left: 24px; }
+.reader-markdown li { margin: 7px 0; }
+.reader-markdown a { text-underline-offset: 3px; }
+.reader-markdown code, .reader-intro code { padding: 2px 5px; border-radius: 4px; background: #304150; font: .92em 'Cascadia Code', Consolas, monospace; }
+.reader-sidebar { padding: 20px; border: 1px solid #34495e; border-radius: 14px; background: #20262f; }
+.reader-sidebar nav { display: grid; gap: 4px; }
+.reader-sidebar a { overflow-wrap: anywhere; padding: 7px 9px; border-radius: 7px; color: #adcce7; font: 12px 'Cascadia Code', Consolas, monospace; text-decoration: none; }
+.reader-sidebar a:hover, .reader-sidebar a[aria-current='page'] { background: #2c4e6a; color: #f0f8ff; }
+@media (max-width: 820px) { .reader-languages, .reader-layout { grid-template-columns: 1fr; } .reader-sidebar { order: -1; } .reader-sidebar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .reader-item { align-items: flex-start; flex-direction: column; } .reader-sidebar nav { grid-template-columns: 1fr; } }

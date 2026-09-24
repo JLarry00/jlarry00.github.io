@@ -1,0 +1,50 @@
+---
+import { getCollection, render } from 'astro:content'
+import profile from '../../../data/profile.json'
+import '../../../styles/reader.css'
+
+export async function getStaticPaths() {
+  const documents = await getCollection('agentMarkdown')
+  return documents.filter((document) => document.id !== 'index').map((document) => ({
+    params: { slug: document.id },
+    props: { document },
+  }))
+}
+
+const { document } = Astro.props
+const { Content } = await render(document)
+const [locale, ...segments] = document.id.split('/')
+const documentPath = `${segments.join('/')}.md`
+const title = profile.documents.find((item) => item.path === documentPath)?.[locale]?.title ?? documentPath
+const readUrl = (file: string) => `/for-agents/read/${locale}/${file.replace(/\.md$/, '')}/`
+---
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title} · Markdown con formato · Juan Larrondo</title>
+  </head>
+  <body>
+    <main class="reader-shell">
+      <nav class="reader-top" aria-label={locale === 'es' ? 'Navegación' : 'Navigation'}>
+        <a href="/for-agents/">← {locale === 'es' ? 'Todos los archivos' : 'All files'}</a>
+        <a href="/">{locale === 'es' ? 'Portfolio visual' : 'Visual portfolio'} ↗</a>
+      </nav>
+      <header class="reader-document-header">
+        <p class="reader-kicker">{locale.toUpperCase()} / {documentPath}</p>
+        <div class="reader-actions"><a class="reader-button" href={`/for-agents/${locale}/${documentPath}`}>{locale === 'es' ? 'Ver .md original' : 'View original .md'} ↗</a></div>
+      </header>
+      <div class="reader-layout">
+        <article class="reader-markdown"><Content /></article>
+        <aside class="reader-sidebar">
+          <h2>{locale === 'es' ? 'Archivos' : 'Files'}</h2>
+          <nav aria-label={locale === 'es' ? 'Otros documentos' : 'Other documents'}>
+            {profile.documents.map((item) => <a href={readUrl(item.path)} aria-current={item.path === documentPath ? 'page' : undefined}>{item.path}</a>)}
+          </nav>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

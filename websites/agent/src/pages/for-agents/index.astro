@@ -1,5 +1,9 @@
 ---
-const baseUrl = import.meta.env.BASE_URL
+import profile from '../../data/profile.json'
+import '../../styles/reader.css'
+
+const documents = profile.documents
+const readUrl = (locale: string, file: string) => `/for-agents/read/${locale}/${file.replace(/\.md$/, '')}/`
 ---
 <!doctype html>
 <html lang="es">
@@ -7,30 +11,35 @@ const baseUrl = import.meta.env.BASE_URL
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <title>Markdown para IA · Juan Larrondo</title>
-    <style>
-      :root { color-scheme: dark; font-family: 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif; background: #1f1f1f; color: #d4d4d4; }
-      body { max-width: 740px; margin: 0 auto; padding: clamp(25px, 6vw, 70px); line-height: 1.65; }
-      .kicker { color: #8bcaff; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-      h1 { margin: 12px 0 22px; color: #f3f6fa; font-size: clamp(34px, 5vw, 54px); line-height: 1.1; }
-      p { max-width: 64ch; color: #c2cfda; }
-      .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-      a { color: #aad7ff; }
-      .links a { padding: 10px 14px; border: 1px solid #44759c; border-radius: 8px; background: #202d3a; font-weight: 600; text-decoration: none; }
-      .note { margin-top: 44px; padding-top: 16px; border-top: 1px solid #42505e; font-size: 13px; }
-      a:focus-visible { outline: 2px solid #d7ebff; outline-offset: 3px; }
-    </style>
+    <title>Archivos para agentes · Juan Larrondo</title>
   </head>
   <body>
-    <p class="kicker">Entrada de lectura directa</p>
-    <h1>Markdown para agentes</h1>
-    <p>La interfaz visual es para personas. Aquí los mismos hechos esenciales se presentan en archivos Markdown breves y enlazables, sin ejecutar JavaScript ni navegar un editor.</p>
-    <div class="links">
-      <a href={`${baseUrl}for-agents/index.md`}>Índice Markdown ↗</a>
-      <a href={`${baseUrl}for-agents/es/README.md`}>Español ↗</a>
-      <a href={`${baseUrl}for-agents/en/README.md`}>English ↗</a>
-    </div>
-    <p class="note">Versión en desarrollo. La rama «batman» de la web es una broma explícita; los Markdown describen únicamente el perfil real. La estructura final de carpetas sigue en revisión.</p>
-    <p><a href={baseUrl}>← Volver al portfolio</a></p>
+    <main class="reader-shell">
+      <nav class="reader-top" aria-label="Navegación"><a href="/">← Portfolio</a><a href="/for-agents/index.md">Índice .md original ↗</a></nav>
+      <header class="reader-intro">
+        <p class="reader-kicker">Colección de documentos</p>
+        <h1>Markdown, con formato.</h1>
+        <p>Elige un archivo para leerlo como página. Cada documento también conserva su enlace <code>.md</code> directo para lectores automáticos.</p>
+      </header>
+      <div class="reader-languages">
+        {(['es', 'en'] as const).map((locale) => (
+          <section class="reader-language" lang={locale}>
+            <h2>{locale === 'es' ? 'Español' : 'English'}</h2>
+            <div class="reader-list">
+              {documents.map((document) => (
+                <div class="reader-item">
+                  <div><span class="reader-path">{document.path}</span><strong>{document[locale].title}</strong></div>
+                  <div class="reader-actions">
+                    <a class="reader-button" href={readUrl(locale, document.path)}>{locale === 'es' ? 'Leer con formato' : 'Read formatted'}</a>
+                    <a class="reader-raw" href={`/for-agents/${locale}/${document.path}`} aria-label={`${locale === 'es' ? 'Archivo Markdown original' : 'Original Markdown file'}: ${document.path}`}>.md ↗</a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <p class="reader-note">Versión en desarrollo. La rama «batman» de la interfaz es ficción; estos documentos describen el perfil real. El árbol final sigue en revisión.</p>
+    </main>
   </body>
 </html>
