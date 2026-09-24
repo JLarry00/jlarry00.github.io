@@ -10,5 +10,6 @@
 | Alpha S06 (sin versión publicada) | Incremento local compilado; revisión editorial pendiente | Primeras fichas ES/EN desde datos públicos curados, Markdown directo para IA y varias pestañas de documentos. El vídeo y el árbol final siguen pendientes. |
 | Alpha S07 (sin versión publicada) | Incremento local compilado; revisión de interacción pendiente | Search por archivos, rama ficticia batman, animación Run and Debug y enlaces directos ES/EN. |
 | Alpha S08 (publicada en `/agent/`) | GitHub Pages #35989129116 completado; aceptación editorial y visual pendiente | Primera publicación simultánea con Neuron Mesh. Incluye S02–S07 y Markdown directo para IA; mantiene etiqueta de desarrollo y `noindex` HTML. |
+| Alpha S09 (publicada en `/`) | GitHub Pages #35997797464 completado; aceptación editorial y visual pendiente | Agent pasa a ser la entrada predeterminada; Markdown directo en `/for-agents/`. Neuron Mesh continúa en `/neon-mesh/`. |
 
-Las versiones Agent tienen su propia secuencia. El selector raíz continúa apuntando a Neuron Mesh.
+Las versiones Agent tienen su propia secuencia. El selector local apunta ahora a Agent.

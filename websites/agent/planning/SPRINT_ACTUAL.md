@@ -1,6 +1,6 @@
-# Sprint actual — S09
+# Sprint actual — sin sprint activo
 
-Objetivo: hacer que Agent sea la entrada pública predeterminada en `/`, conservando la versión en desarrollo, sus Markdown y la otra web publicada. Seleccionado: `AG-025`.
+Estado: S09 cerrado el 24/09/2026 tras publicación y comprobación remota. Agent es la [entrada pública predeterminada](https://jlarry00.github.io/); sus Markdown están en [/for-agents/](https://jlarry00.github.io/for-agents/). Neuron Mesh se sirve bajo [/neon-mesh/](https://jlarry00.github.io/neon-mesh/).
 
 El cambio correspondiente de base, enlaces y redirecciones de Neuron Mesh se registra en ENV-04 de su Scrum. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea. El PB pendiente no está vacío.
 

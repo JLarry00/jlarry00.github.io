@@ -1,10 +1,10 @@
-# Sprint actual — ENV-04
+# Sprint actual — sin sprint activo
 
-Objetivo: trasladar Neuron Mesh a `/neon-mesh/` y conservar sus rutas internas y enlaces públicos anteriores. Seleccionado: `ENV-010`.
+Estado: ENV-04 cerrado el 24/09/2026 tras publicación y comprobación remota. Neuron Mesh se sirve bajo [/neon-mesh/](https://jlarry00.github.io/neon-mesh/); Agent ocupa [la raíz](https://jlarry00.github.io/).
 
-Agent pasará a la raíz en S09 de su Scrum. El selector local pasará a `agent`.
+`ENV-010` está terminado. El selector local es `agent` y el workflow sigue publicando ambas webs.
 
 - [ENV-04 — Cambio de rutas públicas](./sprints/ENV-04-cambio-de-raiz.md)
 - [Product Backlog Neuron Mesh](./BACKLOG.md)
 
-La publicación anterior de ENV-03 sigue documentada como historia; ENV-04 no se cerrará hasta que termine Actions y respondan las URL nuevas.
+La publicación anterior de ENV-03 sigue documentada como historia. [Actions #35997797464](https://github.com/JLarry00/jlarry00.github.io/actions/runs/35997797464) terminó en `success` y respondieron las URL nuevas y las antiguas páginas de entrada.

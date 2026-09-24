@@ -19,3 +19,5 @@ No se asigna una versión nueva al comenzar un sprint. Se asigna al cerrarlo, cu
 ## Publicación del workspace
 
 ENV-03 (24/09/2026) mantiene la web Neuron Mesh 2.2.0 en la raíz pública y añade Agent en `/agent/` sin cambiar el número de versión de Neuron Mesh. GitHub Actions #35989129116 terminó correctamente; rutas de ambas webs respondieron 200.
+
+ENV-04 (24/09/2026) traslada la misma web Neuron Mesh 2.2.0 a `/neon-mesh/` y sitúa Agent en `/`. GitHub Actions #35997797464 terminó correctamente; las dos entradas y la versión española de Neuron Mesh respondieron 200. Las antiguas páginas clásicas tienen saltos HTML para conservar enlaces compartidos.
