@@ -1,6 +1,6 @@
 # Product Backlog — Agent: terminadas
 
-Mismas columnas y criterios que `BACKLOG.md`. Juan aceptó el 24/09/2026 los 17 ítems de primera versión que estaban pendientes de su revisión; se suman a las tareas ya terminadas. Sus límites y el trabajo futuro `AG-004`, `AG-005` y `AG-014` permanecen explícitos.
+Mismas columnas y criterios que `BACKLOG.md`. Juan aceptó el 24/09/2026 los 17 ítems de primera versión que estaban pendientes de su revisión y después la lectura Markdown `AG-026`. Los nuevos requisitos y los límites de aceptación anteriores permanecen en el backlog pendiente.
 
 | ID | Área | Resultado | Prioridad | Estado | Condición / aceptación |
 |---|---|---|---|---|---|
@@ -26,3 +26,4 @@ Mismas columnas y criterios que `BACKLOG.md`. Juan aceptó el 24/09/2026 los 17 
 | `AG-023` | Refinamiento visual | Dar más personalidad y legibilidad a iconos, tipografía y selección | Por decidir | Terminado | Colores distintos y coherentes por tipo de archivo/carpeta; iconos de Activity Bar 24→26 px y de árbol/pestaña 16→18 px; letra de interfaz más amable; pestaña activa con fondo y esquinas redondeadas, como en la captura aportada por Juan. Welcome y formato VS Code conservados. |
 | `AG-024` | Pestañas | Mantener cada documento abierto en su propia pestaña del editor | Por decidir | Terminado | Abrir otro archivo añade pestaña sin cerrar las anteriores; seleccionar una existente vuelve a su documento sin duplicarla. Cada «×» cierra solo esa pestaña. Se conservan durante la visita, no entre recargas. |
 | `AG-025` | Publicación | Mostrar Agent como web predeterminada en `/` | P0 | Terminado | Juan pidió Agent en la raíz y Neuron Mesh en `/neon-mesh/`. Agent, `/for-agents/index.md` y Neuron Mesh respondieron 200 tras Actions #35997797464 (success). Se mantienen `noindex` y la etiqueta de desarrollo. |
+| `AG-026` | Lectura Markdown | Publicar una única colección enlazada de Markdown interpretado para personas e IA | Por decidir | Terminado; aceptado por Juan el 24/09/2026 | Juan confirmó «Los markdown me gustan más así, ese req está terminado». El índice y los 22 documentos ES/EN se publican como HTML estático sencillo desde Markdown real en el repo, con enlaces internos. Nuevas mejoras de navegación y contenido tienen tareas propias en el PB. |

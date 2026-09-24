@@ -2,7 +2,7 @@
 
 Estado: S11 cerrado el 24/09/2026 tras publicación y comprobación remota. `/for-agents/` es una única colección HTML estática generada desde Markdown en el repo; personas e IA pueden recorrer los mismos enlaces.
 
-`AG-026` sigue en el PB pendiente hasta que Juan revise esta corrección. La aceptación de las otras 17 tareas de primera versión se conserva. `AG-004` (vídeo) espera una petición posterior, `AG-005` espera opciones con Juan y `AG-014` será la última tarea.
+Juan aceptó `AG-026` el 24/09/2026; se movió al PB terminado. Esta actualización registra los requisitos `AG-027`–`AG-038` y redefine `AG-005` sin iniciar un sprint ni modificar la web. `AG-004` (vídeo) es el siguiente trabajo editorial tras este registro, con modelo recomendado para su siguiente encargo. `AG-014` será la última tarea.
 
 - [S11 — Una lectura compartida](./sprints/S11-lectura-compartida.md)
 - [S10 — Aceptación y lectura Markdown](./sprints/S10-lectura-markdown.md)
