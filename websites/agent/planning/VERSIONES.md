@@ -14,7 +14,7 @@
 | Alpha S10 (publicada en `/`) | GitHub Pages #36017979551 completado; lectura nueva pendiente de aceptación | Los 22 documentos ES/EN tienen vista HTML con formato y botones desde el índice, además de los `.md` directos para IA. Juan aceptó la primera versión visual, funcional y de contenido. |
 | Alpha S11 (publicada en `/`) | GitHub Pages #36024962878 completado; lectura aceptada por Juan el 24/09/2026 | Sustituye la doble presentación de S10: índice y 22 documentos se sirven solo como HTML sencillo y enlazado; Markdown real permanece como fuente en el repositorio. |
 | S12 editorial (sin versión nueva) | Análisis aceptado por Juan el 24/09/2026 | Revisión local de 54:05 de vídeo, con hallazgos curados y referencias temporales. No cambió la web ni se desplegó un artefacto. |
-| Alpha S13 (preview local) | Compilada, aceptada y solicitada para publicación; remoto pendiente de verificar | Árbol con `SOUL.md`, puerta única en `AGENTS.md`, controles depurados, inglés/oscuro iniciales y colección documental sin ficción. |
-| Alpha S14 (preview local) | Compilada, aceptada y solicitada para publicación; remoto pendiente de verificar | Skills por áreas, enlaces contextuales y mapa navegable del `README.md` humano con lista móvil. Ruta antigua de Terraform conservada como puente. |
+| Alpha S13 (publicada en `/`) | Aceptada y publicada por Juan; [GitHub Pages #36057025710](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36057025710) completado para `35cfbd0` | Árbol con `SOUL.md`, puerta única en `AGENTS.md`, controles depurados, inglés/oscuro iniciales y colección documental sin ficción. |
+| Alpha S14 (publicada en `/`) | Aceptada y publicada por Juan; mismo despliegue que S13 | Skills por áreas, enlaces contextuales y mapa navegable del `README.md` humano con lista móvil. Ruta antigua de Terraform conservada como puente. |
 
 Las versiones Agent tienen su propia secuencia. El selector local apunta ahora a Agent.

@@ -1,6 +1,6 @@
 # Sprint actual — sin sprint activo
 
-Estado: [S13 — Base y navegación](./sprints/S13-base-y-navegacion.md) y [S14 — Markdown brain](./sprints/S14-markdown-brain.md) aceptados por Juan el 24/09/2026. Juan pidió publicarlos; el despliegue remoto aún debe verificarse. Sus nueve tareas pasaron a `COMPLETADAS.md`. No hay sprint nuevo seleccionado.
+Estado: [S13 — Base y navegación](./sprints/S13-base-y-navegacion.md) y [S14 — Markdown brain](./sprints/S14-markdown-brain.md) aceptados por Juan el 24/09/2026 y publicados por él en GitHub Pages mediante el [workflow #36057025710](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36057025710), completado correctamente para el commit `35cfbd0`. Las rutas `/` y `/for-agents/read/en/SOUL/` respondieron HTTP 200 al verificarlas el 26/09/2026. Sus nueve tareas pasaron a `COMPLETADAS.md`. No hay sprint nuevo seleccionado.
 
 S11 cerró y Juan aceptó `AG-026`. S12 no modificó la web ni publicó una variante nueva. Juan confirmó la función del `AGENTS.md` humano y que `SOUL.md` es su About personal completo, incluidos los hobbies; `MEMORY.md` queda aplazado. Las tareas de interfaz siguen en el PB y `AG-014` será la última.
 

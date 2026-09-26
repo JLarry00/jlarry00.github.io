@@ -1,6 +1,6 @@
 # Sprint S14 — Markdown brain
 
-Estado: aceptado por Juan el 24/09/2026; publicación remota solicitada y pendiente de verificación. Producto: Agent. Seleccionado: `AG-035`, `AG-029`, `AG-040`.
+Estado: aceptado por Juan el 24/09/2026; publicado después por Juan mediante [GitHub Pages #36057025710](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36057025710), verificado el 26/09/2026. Producto: Agent. Seleccionado: `AG-035`, `AG-029`, `AG-040`.
 
 ## Objetivo
 
@@ -17,6 +17,10 @@ El mapa se presenta en la interfaz humana y la estructura de enlaces en la docum
 
 ## Resultado local
 
-Las skills visibles se agruparon en cuatro áreas con alcances prudentes. La ruta antigua de Terraform muestra un enlace al área de infraestructura. `document-graph.json` gobierna los enlaces relacionados en cada Markdown y ficha humana, además del mapa SVG en `README.md`; en móvil se presenta una lista navegable. La compilación Astro generó 32 páginas estáticas. El servidor local continúa sirviendo `dist/` en `http://127.0.0.1:8765/`; no se publicó en GitHub Pages.
+Las skills visibles se agruparon en cuatro áreas con alcances prudentes. La ruta antigua de Terraform muestra un enlace al área de infraestructura. `document-graph.json` gobierna los enlaces relacionados en cada Markdown y ficha humana, además del mapa SVG en `README.md`; en móvil se presenta una lista navegable. La compilación Astro generó 32 páginas estáticas. El servidor local sirvió `dist/` en `http://127.0.0.1:8765/`; en el cierre local aún no se había publicado en GitHub Pages.
 
 Juan aceptó S13 y S14 juntos y pidió publicarlos. Los tres ítems de S14 pasaron a `COMPLETADAS.md`.
+
+## Publicación posterior
+
+Juan subió el commit `35cfbd0`. El workflow #36057025710 terminó correctamente el 24/09/2026; la página principal y `/for-agents/read/en/SOUL/` respondieron HTTP 200 al verificarlas el 26/09/2026.

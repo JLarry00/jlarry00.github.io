@@ -1,6 +1,6 @@
 # Sprint S12 — Criterios desde las reviews de Juan
 
-Estado: cerrado el 24/09/2026 con análisis entregado; aceptación de Juan pendiente. Producto: Agent. Seleccionado: `AG-004`.
+Estado: cerrado el 24/09/2026 con análisis entregado; Juan lo aceptó después junto con S13 y S14. Producto: Agent. Seleccionado: `AG-004`.
 
 ## Objetivo
 
@@ -22,7 +22,7 @@ El archivo `VID_20260923_212854.mp4` permanece local e ignorado por Git. No subi
 
 El vídeo dura 54:05. Se extrajo audio localmente, se transcribió con un modelo local y se generaron 162 fotogramas espaciados aproximadamente 20 segundos; los tramos importantes se contrastaron con la imagen. La transcripción completa se guardó en `contexto/`, excluida de Git. El documento público [AG-004 — Qué aporta el vídeo](../reviews/S12-video-2026-09-23.md) selecciona los momentos con opinión sustantiva, separa criterios firmes de ideas tentativas y los relaciona con tareas existentes.
 
-La transcripción automática puede confundir nombres y algunas palabras. Los fotogramas proceden de una grabación de pantalla hecha con teléfono, por lo que no permiten valorar detalles finos de tipografía o color. Las conclusiones se limitan a lo que Juan dice y a rasgos visuales claros. No se aplicaron cambios a la web, no hubo compilación ni despliegue y no se usó una API de pago. `AG-004` sigue en el PB hasta que Juan confirme que la interpretación le representa.
+La transcripción automática puede confundir nombres y algunas palabras. Los fotogramas proceden de una grabación de pantalla hecha con teléfono, por lo que no permiten valorar detalles finos de tipografía o color. Las conclusiones se limitan a lo que Juan dice y a rasgos visuales claros. No se aplicaron cambios a la web, no hubo compilación ni despliegue y no se usó una API de pago. En el cierre de S12, `AG-004` seguía en el PB; Juan lo aceptó después, al revisar S13 y S14, y pasó a `COMPLETADAS.md`.
 
 ## Aprendizaje de proceso
 
