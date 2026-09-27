@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+  <title id="title">Boceto de la portada de Juan</title>
+  <desc id="desc">Una propuesta visual de portfolio con presentación personal, enlaces directos y navegación por archivos, sin marco de VS Code.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="17" stdDeviation="24" flood-color="#16343e" flood-opacity="0.18"/></filter>
+    <clipPath id="appclip"><rect x="64" y="94" width="1472" height="810" rx="16"/></clipPath>
+    <style>
+      .sans { font-family: 'Ubuntu Sans', 'DejaVu Sans', sans-serif; }
+      .mono { font-family: 'Ubuntu Sans Mono', 'DejaVu Sans Mono', monospace; }
+      .ink { fill: #173843; }
+      .muted { fill: #60777a; }
+      .line { stroke: #d8e4e1; stroke-width: 1; }
+    </style>
+  </defs>
+  <rect width="1600" height="980" fill="#dce8e6"/>
+  <text x="66" y="54" class="sans ink" font-size="21" font-weight="700">Boceto de la portada</text>
+  <text x="1340" y="54" class="sans muted" font-size="16" text-anchor="end">Dirección visual · Agent</text>
+  <rect x="64" y="94" width="1472" height="810" rx="16" fill="#f7faf7" filter="url(#shadow)"/>
+  <g clip-path="url(#appclip)">
+    <!-- Un encabezado de portfolio, no una barra de ventana. -->
+    <rect x="64" y="94" width="1472" height="90" fill="#173843"/>
+    <rect x="94" y="116" width="45" height="45" rx="10" fill="#7cc2bf"/>
+    <text x="116" y="145" class="sans ink" font-size="19" font-weight="800" text-anchor="middle">JL</text>
+    <text x="156" y="135" class="sans" fill="#f4f8f5" font-size="25" font-weight="700">Juan Larrondo</text>
+    <text x="157" y="158" class="sans" fill="#a8c4c4" font-size="14">Portfolio en desarrollo</text>
+    <rect x="1208" y="119" width="41" height="41" rx="8" fill="#31555c"/>
+    <text x="1228" y="146" class="sans" fill="#ffffff" text-anchor="middle" font-size="16" font-weight="700">ES</text>
+    <text x="1276" y="146" class="sans" fill="#c4d7d4" font-size="16">EN</text>
+    <circle cx="1335" cy="139" r="10" fill="none" stroke="#c4d7d4" stroke-width="2"/>
+    <path d="M1335 121v-5m0 46v-5m18-18h5m-46 0h5m5-13-4-4m34 34-4-4m0-26 4-4m-34 34 4-4" stroke="#c4d7d4" stroke-width="2" stroke-linecap="round"/>
+    <rect x="1382" y="116" width="124" height="47" rx="8" fill="#d6eee8"/>
+    <text x="1444" y="146" class="sans ink" font-size="16" font-weight="700" text-anchor="middle">Contacto</text>
+
+    <!-- Árbol lateral propio, con la ruta correcta y sin Activity Bar. -->
+    <rect x="64" y="184" width="312" height="720" fill="#e7efed"/>
+    <path d="M376 184v720" stroke="#ccdcda" stroke-width="1"/>
+    <text x="96" y="228" class="sans ink" font-size="17" font-weight="700">Explorar archivos</text>
+    <path d="M96 246h248" class="line"/>
+    <path d="m96 276 5 5 5-5" fill="none" stroke="#4e7476" stroke-width="2" stroke-linecap="round"/>
+    <path d="M117 269h12l5 5h18v15h-35z" fill="none" stroke="#4e7476" stroke-width="1.8" stroke-linejoin="round"/>
+    <text x="164" y="283" class="sans ink" font-size="17" font-weight="700">Juan/</text>
+    <rect x="82" y="313" width="278" height="42" rx="7" fill="#cde2df"/>
+    <rect x="82" y="313" width="4" height="42" rx="2" fill="#247780"/>
+    <path d="M122 324h14v20h-14z" fill="none" stroke="#247780" stroke-width="1.8"/>
+    <path d="M126 331h7m-7 5h7" stroke="#247780" stroke-width="1.5"/>
+    <text x="151" y="340" class="mono ink" font-size="15" font-weight="700">Welcome.md</text>
+    <path d="M122 371h14v19h-14z M122 416h14v19h-14z M122 461h14v19h-14z" fill="none" stroke="#79989a" stroke-width="1.5"/>
+    <text x="151" y="386" class="mono ink" font-size="15">README.md</text>
+    <text x="151" y="431" class="mono ink" font-size="15">Experience.md</text>
+    <text x="151" y="476" class="mono ink" font-size="15">SOUL.md</text>
+    <path d="m122 510 5 5 5-5 M140 505h12l4 5h14v16h-30z" fill="none" stroke="#6b9190" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="181" y="521" class="mono ink" font-size="15">skills/</text>
+    <path d="m122 555 5 5 5-5 M140 550h12l4 5h14v16h-30z" fill="none" stroke="#6b9190" stroke-width="1.5" stroke-linejoin="round"/>
+    <text x="181" y="566" class="mono ink" font-size="15">projects/</text>
+    <path d="M122 596h14v19h-14z M122 641h14v19h-14z" fill="none" stroke="#79989a" stroke-width="1.5"/>
+    <text x="151" y="611" class="mono ink" font-size="15">Contact.md</text>
+    <text x="151" y="656" class="mono ink" font-size="15">AGENTS.md</text>
+    <text x="98" y="860" class="sans muted" font-size="14">También puedes ir directo al contenido.</text>
+
+    <!-- Pestañas útiles y breadcrumb legible. -->
+    <rect x="376" y="184" width="1160" height="64" fill="#edf3f0"/>
+    <rect x="376" y="184" width="230" height="64" fill="#f7faf7"/>
+    <rect x="376" y="245" width="230" height="3" fill="#247780"/>
+    <text x="407" y="224" class="mono ink" font-size="15" font-weight="700">Welcome.md</text>
+    <text x="572" y="224" class="sans muted" font-size="21">×</text>
+    <text x="639" y="224" class="mono muted" font-size="15">Experience.md</text>
+    <text x="802" y="224" class="sans muted" font-size="21">×</text>
+    <text x="867" y="224" class="mono muted" font-size="15">projects/README.md</text>
+    <text x="1078" y="224" class="sans muted" font-size="21">×</text>
+    <path d="M376 248h1160" class="line"/>
+    <text x="446" y="287" class="mono muted" font-size="14">Juan</text>
+    <text x="497" y="287" class="sans muted" font-size="21">›</text>
+    <text x="520" y="287" class="mono ink" font-size="14" font-weight="700">Welcome.md</text>
+
+    <!-- La persona y sus rutas pesan más que la interfaz. -->
+    <text x="446" y="383" class="sans ink" font-size="68" font-weight="800" letter-spacing="-2">Hola, soy Juan.</text>
+    <text x="446" y="446" class="sans" fill="#247780" font-size="53" font-weight="500" letter-spacing="-1.5">Pasa y curiosea.</text>
+    <text x="450" y="502" class="sans ink" font-size="20">Estoy preparando este portfolio como un repositorio que puedas recorrer.</text>
+    <text x="450" y="535" class="sans muted" font-size="20">Elige una puerta de entrada o explora los archivos a tu ritmo.</text>
+
+    <!-- Motivo de dos documentos que da contexto al repositorio. -->
+    <rect x="1268" y="336" width="142" height="162" rx="10" fill="#dce9e6" transform="rotate(11 1268 336)"/>
+    <rect x="1236" y="320" width="155" height="174" rx="10" fill="#ffffff" stroke="#c2dad6" stroke-width="2" transform="rotate(-6 1236 320)"/>
+    <text x="1259" y="363" class="mono" fill="#247780" font-size="16" transform="rotate(-6 1259 363)">juan/</text>
+    <path d="M1260 387h92m-92 19h76m-76 19h85m-85 19h51" stroke="#c8dad6" stroke-width="7" stroke-linecap="round" transform="rotate(-6 1260 387)"/>
+    <circle cx="1426" cy="331" r="9" fill="#7cc2bf"/>
+
+    <text x="450" y="609" class="sans ink" font-size="19" font-weight="700">Elige por dónde empezar</text>
+    <path d="M450 628h1000" stroke="#cbdcd9" stroke-width="1.5"/>
+    <text x="451" y="670" class="sans ink" font-size="25" font-weight="700">Experiencia</text>
+    <text x="451" y="696" class="mono muted" font-size="14">Experience.md</text>
+    <text x="910" y="672" class="sans" fill="#247780" font-size="26">↗</text>
+    <path d="M450 718h480" class="line"/>
+    <text x="451" y="756" class="sans ink" font-size="25" font-weight="700">Sobre mí</text>
+    <text x="451" y="782" class="mono muted" font-size="14">SOUL.md</text>
+    <text x="910" y="758" class="sans" fill="#247780" font-size="26">↗</text>
+
+    <text x="968" y="670" class="sans ink" font-size="25" font-weight="700">Proyectos</text>
+    <text x="968" y="696" class="mono muted" font-size="14">projects/</text>
+    <text x="1432" y="672" class="sans" fill="#247780" font-size="26">↗</text>
+    <path d="M968 718h482" class="line"/>
+    <text x="968" y="756" class="sans ink" font-size="25" font-weight="700">Contacto</text>
+    <text x="968" y="782" class="mono muted" font-size="14">Contact.md</text>
+    <text x="1432" y="758" class="sans" fill="#247780" font-size="26">↗</text>
+
+    <path d="M450 816h1000" class="line"/>
+    <text x="450" y="853" class="sans muted" font-size="15">Versión en desarrollo</text>
+    <text x="1450" y="853" class="sans" fill="#247780" font-size="15" font-weight="700" text-anchor="end">Para agentes: documentos enlazados ↗</text>
+  </g>
+  <text x="66" y="947" class="sans muted" font-size="16">Concepto para comentar: conserva archivos, pestañas y rutas; la portada habla primero de Juan.</text>
+</svg>

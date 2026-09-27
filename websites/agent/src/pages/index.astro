@@ -4,9 +4,13 @@ import profile from '../data/profile.json'
 import documentGraph from '../data/document-graph.json'
 import '../styles/workbench.css'
 
-const pageTitle = 'Juan · Agent Portfolio (Alpha)'
+const pageTitle = 'Juan Larrondo · Portfolio (Alpha)'
 const documents = profile.documents
-const rootDocuments = documents.filter((document) => !document.path.includes('/'))
+const rootFileOrder = ['Welcome.md', 'README.md', 'AGENTS.md', 'SOUL.md', 'Experience.md', 'Contact.md']
+const rootFileRank = new Map(rootFileOrder.map((path, index) => [path, index]))
+const rootDocuments = documents
+  .filter((document) => !document.path.includes('/'))
+  .sort((first, second) => (rootFileRank.get(first.path) ?? 999) - (rootFileRank.get(second.path) ?? 999))
 const skillDocuments = documents.filter((document) => document.path.startsWith('skills/'))
 const projectDocuments = documents.filter((document) => document.path.startsWith('projects/'))
 const baseUrl = import.meta.env.BASE_URL
@@ -41,17 +45,16 @@ const baseUrl = import.meta.env.BASE_URL
   <body>
     <div class="app-shell">
       <header class="titlebar" aria-label="Title bar">
-        <div class="titlebar-brand">
+        <button class="titlebar-brand" type="button" aria-label="Open Welcome.md">
           <span class="brand-mark" aria-hidden="true">JL</span>
-          <span class="titlebar-name">juan / portfolio-agent</span>
-        </div>
-        <div class="titlebar-location" id="titlebar-location">Welcome.md — portfolio-agent</div>
+          <span class="titlebar-name">Juan / portfolio</span>
+        </button>
+        <div class="titlebar-location" id="titlebar-location">Welcome.md — Juan</div>
         <div class="titlebar-actions">
-          <label class="visually-hidden" for="language-select">Language</label>
-          <select id="language-select" class="theme-select language-select" aria-label="Language">
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-          </select>
+          <button class="language-switch" type="button" data-current-language="en" aria-label="Switch language to Spanish">
+            <span data-language-option="es" lang="es">ES</span>
+            <span data-language-option="en" lang="en">EN</span>
+          </button>
           <label class="visually-hidden" for="theme-select">Visual theme</label>
           <select id="theme-select" class="theme-select" aria-label="Visual theme">
             <option value="dark">VS Code oscuro</option>
@@ -64,65 +67,14 @@ const baseUrl = import.meta.env.BASE_URL
         </div>
       </header>
 
-      <div class="workbench" data-active-view="explorer" data-mobile-sidebar-open="false">
-        <nav class="activity-bar" aria-label="Vistas del portfolio">
-          <div class="activity-list">
-            <button
-              class="activity-button"
-              type="button"
-              data-view="explorer"
-              aria-label="Explorer"
-              aria-controls="activity-panel"
-              aria-pressed="true"
-              aria-expanded="true"
-              title="Explorer"
-            >
-              <span class="activity-icon ui-icon icon-files" aria-hidden="true"></span>
-            </button>
-            <button
-              class="activity-button"
-              type="button"
-              data-view="search"
-              aria-label="Search"
-              aria-controls="activity-panel"
-              aria-pressed="false"
-              title="Search"
-            >
-              <span class="activity-icon ui-icon icon-search" aria-hidden="true"></span>
-            </button>
-            <button
-              class="activity-button"
-              type="button"
-              data-view="source-control"
-              aria-label="Source Control"
-              aria-controls="activity-panel"
-              aria-pressed="false"
-              title="Source Control"
-            >
-              <span class="activity-icon ui-icon icon-source-control" aria-hidden="true"></span>
-            </button>
-            <button
-              class="activity-button"
-              type="button"
-              data-view="run"
-              aria-label="Run and Debug"
-              aria-controls="activity-panel"
-              aria-pressed="false"
-              title="Run and Debug"
-            >
-              <span class="activity-icon ui-icon icon-debug-alt" aria-hidden="true"></span>
-            </button>
-          </div>
-          <div class="activity-spacer" aria-hidden="true"></div>
-        </nav>
-
-        <aside class="sidebar" id="activity-panel" aria-label="Panel de actividad">
+      <div class="workbench" data-mobile-sidebar-open="false">
+        <aside class="sidebar" id="file-sidebar" aria-label="File explorer">
           <div class="sidebar-heading">
             <span id="sidebar-title">Explorer</span>
-            <small>Portfolio</small>
+            <button class="sidebar-close" type="button" aria-label="Close file explorer">×</button>
           </div>
           <div class="sidebar-scroll">
-            <section class="view-content" data-view-content="explorer" aria-label="Árbol de archivos">
+            <section class="view-content" aria-label="File tree">
               <button
                 class="root-folder"
                 type="button"
@@ -135,7 +87,7 @@ const baseUrl = import.meta.env.BASE_URL
                   <path d="m5.5 3.5 5 4.5-5 4.5" />
                 </svg>
                 <span class="folder-glyph ui-icon" aria-hidden="true"></span>
-                <span>PORTFOLIO-AGENT</span>
+                <span>Juan/</span>
               </button>
 
               <ul class="tree-group" id="workspace-files">
@@ -172,49 +124,22 @@ const baseUrl = import.meta.env.BASE_URL
                 </li>
               </ul>
             </section>
-
-            <section class="view-content" data-view-content="search" aria-label="Search" hidden>
-              <div class="empty-panel functional-panel">
-                <p class="panel-kicker">Archivos</p>
-                <h2>Search</h2>
-                <label class="visually-hidden" for="file-search">Buscar archivos por nombre o ruta</label>
-                <input id="file-search" class="file-search" type="search" placeholder="Nombre o ruta…" autocomplete="off" />
-                <p class="panel-help">Busca archivos, no su contenido.</p>
-                <ul id="search-results" class="search-results" aria-live="polite"></ul>
-              </div>
-            </section>
-
-            <section class="view-content" data-view-content="source-control" aria-label="Source Control" hidden>
-              <div class="empty-panel functional-panel">
-                <p class="panel-kicker">Simulación · no Git</p>
-                <h2>Source Control</h2>
-                <p class="panel-help">Dos versiones de la historia. Solo main cuenta hechos.</p>
-                <div class="branch-list" role="group" aria-label="Ramas ficticias de presentación">
-                  <button type="button" class="branch-button" data-branch="main" aria-pressed="true"><span class="ui-icon icon-source-control" aria-hidden="true"></span><span>main<small>Perfil real</small></span></button>
-                  <button type="button" class="branch-button" data-branch="batman" aria-pressed="false"><span class="ui-icon icon-source-control" aria-hidden="true"></span><span>batman<small>Broma pública</small></span></button>
-                </div>
-              </div>
-            </section>
-
-            <section class="view-content" data-view-content="run" aria-label="Run and Debug" hidden>
-              <div class="empty-panel functional-panel">
-                <p class="panel-kicker">Escena interactiva</p>
-                <h2>Run and Debug</h2>
-                <p>Un personaje corre detrás de los bugs. La animación se puede pausar y respeta la reducción de movimiento.</p>
-              </div>
-            </section>
           </div>
         </aside>
 
         <main class="editor" aria-label="Portfolio de Juan">
           <div class="tabs-bar" aria-label="Archivos abiertos">
+            <button class="mobile-files-toggle" type="button" aria-controls="file-sidebar" aria-expanded="false"><span class="ui-icon icon-files" aria-hidden="true"></span><span>Files</span></button>
             <div class="tabs-list" id="tabs-list"></div>
           </div>
-          <div class="breadcrumbs" id="breadcrumbs" data-file="Welcome.md" aria-label="Ruta del archivo">
-            <span class="breadcrumb-root-icon ui-icon" aria-hidden="true"></span>
-            <span class="breadcrumb-folder">Juan</span><span id="breadcrumb-path"></span>
-            <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="file-glyph ui-icon" aria-hidden="true"></span>
+          <div class="breadcrumbs" id="breadcrumbs" aria-label="Ruta del archivo">
+            <button class="breadcrumb-folder" id="breadcrumb-root" type="button" aria-controls="breadcrumb-menu" aria-expanded="false"><span class="breadcrumb-root-icon ui-icon" aria-hidden="true"></span><span>Juan</span></button><span id="breadcrumb-path"></span>
+            <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="breadcrumb-current-icon" id="breadcrumb-current-icon" data-file="Welcome.md"><span class="file-glyph ui-icon" aria-hidden="true"></span></span>
             <span class="breadcrumb-file" id="breadcrumb-file">Welcome.md</span>
+            <div class="breadcrumb-menu" id="breadcrumb-menu" role="region" aria-label="Files in Juan" hidden>
+              <div class="breadcrumb-menu-heading"><span id="breadcrumb-menu-title">Juan/</span><small id="breadcrumb-menu-hint">Choose a file</small></div>
+              <div class="breadcrumb-menu-list" id="breadcrumb-menu-list"></div>
+            </div>
           </div>
           <div class="editor-scroll">
             <article class="welcome-preview" id="welcome-preview" aria-label="Vista previa de Welcome.md">
@@ -231,6 +156,12 @@ const baseUrl = import.meta.env.BASE_URL
                     <span class="guide-arrow" aria-hidden="true">↖</span>
                     <p>{welcome.guide}</p>
                   </div>
+                  <nav class="welcome-routes" aria-label="Start exploring">
+                    <a data-welcome-file="Experience.md" href="#/en/Experience.md">Experience</a>
+                    <a data-welcome-file="projects/README.md" href="#/en/projects%2FREADME.md">Projects</a>
+                    <a data-welcome-file="SOUL.md" href="#/en/SOUL.md">About me</a>
+                    <a data-welcome-file="Contact.md" href="#/en/Contact.md">Contact</a>
+                  </nav>
                 </div>
                 <div class="welcome-art" aria-hidden="true">
                   <div class="art-file art-file-back">
@@ -243,7 +174,7 @@ const baseUrl = import.meta.env.BASE_URL
                   </div>
                   <div class="art-folder">
                     <span class="art-folder-mark">JL<span class="art-folder-spark">✳</span></span>
-                    <span class="art-folder-caption">portfolio / agent</span>
+                    <span class="art-folder-caption">Juan / portfolio</span>
                   </div>
                   <span class="art-coordinate art-coordinate-top">01 — OPEN</span>
                   <span class="art-coordinate art-coordinate-bottom">// CURIOUS BY DESIGN</span>
@@ -252,26 +183,11 @@ const baseUrl = import.meta.env.BASE_URL
               <div class="welcome-bottom">
                 <span class="welcome-bottom-label">Development note</span>
                 <p>This version is still in development. <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Icon credits</a></p>
+                <a class="welcome-agent-link" href={`${baseUrl}for-agents/`}>For agents ↗</a>
               </div>
             </article>
             <article class="profile-preview" id="profile-preview" aria-live="polite" hidden></article>
-            <article class="fiction-preview" id="fiction-preview" hidden>
-              <p class="profile-eyebrow">Rama ficticia · broma</p>
-              <h1>IDENTIDAD SECRETA: BATMAN</h1>
-              <p>He creado una rama pública para ocultar mi identidad secreta. Como plan, tiene alguna laguna.</p>
-              <div class="fiction-card"><span aria-hidden="true">🦇</span><p>La rama <strong>batman</strong> es una ficción. Para leer mi perfil real, vuelve a <strong>main</strong>.</p></div>
-            </article>
-            <article class="run-preview" id="run-preview" data-running="false" hidden>
-              <p class="profile-eyebrow">Run and Debug</p>
-              <h1>Persiguiendo bugs</h1>
-              <p>Un pequeño recordatorio de que depurar también es correr detrás de cosas que se escapan.</p>
-              <div class="run-stage" aria-hidden="true">
-                <svg class="runner" viewBox="0 0 70 90"><circle cx="35" cy="12" r="8" /><path d="M35 22 30 48m4-18-19 15m18-14 21 10M30 48 13 73m17-25 24 24" /></svg>
-                <span class="bug bug-one"></span><span class="bug bug-two"></span><span class="bug bug-three"></span>
-              </div>
-              <button class="run-toggle" id="run-toggle" type="button" aria-pressed="false">Iniciar animación</button>
-            </article>
-            <article class="empty-editor" id="empty-editor" hidden><h1>Todo cerrado por ahora.</h1><p>Abre un archivo desde Explorer o búscalo por nombre.</p></article>
+            <article class="empty-editor" id="empty-editor" hidden><h1>Everything is closed for now.</h1><p>Open a file from the tree, or return to Welcome.</p><button class="empty-welcome" type="button">Open Welcome.md</button></article>
           </div>
         </main>
 
@@ -280,8 +196,7 @@ const baseUrl = import.meta.env.BASE_URL
 
       <footer class="statusbar" aria-label="Estado del workspace">
         <div class="status-group">
-          <span class="status-item">Agent · development</span>
-          <span class="status-item is-secondary" id="status-branch">main</span>
+          <span class="status-item">Juan · in development</span>
         </div>
         <div class="status-group">
           <span class="status-item is-secondary" id="status-file">Welcome.md</span>
@@ -290,44 +205,37 @@ const baseUrl = import.meta.env.BASE_URL
       </footer>
     </div>
 
-    <script define:vars={{ profileDocuments: documents, graphNodes: documentGraph.nodes, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
+    <script define:vars={{ profileDocuments: documents, rootFileOrder, graphNodes: documentGraph.nodes, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
       const byPath = Object.fromEntries(profileDocuments.map((item) => [item.path, item]))
       const graphByPath = Object.fromEntries(graphNodes.map((item) => [item.path, item]))
-      const paths = profileDocuments.map((item) => item.path)
       const workbench = document.querySelector('.workbench')
-      const sidebarTitle = document.querySelector('#sidebar-title')
+      const sidebar = document.querySelector('.sidebar')
+      const filesToggle = document.querySelector('.mobile-files-toggle')
+      const sidebarClose = document.querySelector('.sidebar-close')
+      const brandButton = document.querySelector('.titlebar-brand')
+      const languageSwitch = document.querySelector('.language-switch')
       const welcomePreview = document.querySelector('#welcome-preview')
       const profilePreview = document.querySelector('#profile-preview')
-      const fictionPreview = document.querySelector('#fiction-preview')
-      const runPreview = document.querySelector('#run-preview')
       const emptyEditor = document.querySelector('#empty-editor')
       const tabsList = document.querySelector('#tabs-list')
       const titlebarLocation = document.querySelector('#titlebar-location')
       const breadcrumbFile = document.querySelector('#breadcrumb-file')
+      const breadcrumbCurrentIcon = document.querySelector('#breadcrumb-current-icon')
       const breadcrumbPath = document.querySelector('#breadcrumb-path')
+      const breadcrumbRoot = document.querySelector('#breadcrumb-root')
       const breadcrumbs = document.querySelector('#breadcrumbs')
+      const breadcrumbMenu = document.querySelector('#breadcrumb-menu')
+      const breadcrumbMenuList = document.querySelector('#breadcrumb-menu-list')
       const statusFile = document.querySelector('#status-file')
       const statusLocale = document.querySelector('#status-locale')
-      const statusBranch = document.querySelector('#status-branch')
-      const languageSelect = document.querySelector('#language-select')
       const themeSelect = document.querySelector('#theme-select')
-      const fileSearch = document.querySelector('#file-search')
-      const searchResults = document.querySelector('#search-results')
-      const runToggle = document.querySelector('#run-toggle')
       const scrim = document.querySelector('.mobile-scrim')
-      const activityButtons = [...document.querySelectorAll('[data-view]')]
-      const viewPanels = [...document.querySelectorAll('[data-view-content]')]
-      const branchButtons = [...document.querySelectorAll('[data-branch]')]
       const mobileViewport = window.matchMedia('(max-width: 760px)')
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
       const systemTheme = window.matchMedia('(prefers-color-scheme: light)')
-      const labels = { explorer: 'Explorer', search: 'Search', 'source-control': 'Source Control', run: 'Run and Debug' }
       const openTabs = ['Welcome.md']
       let activePath = 'Welcome.md'
+      let openBreadcrumbTrigger = null
       let locale = (() => { try { return localStorage.getItem('agent-language') === 'es' ? 'es' : 'en' } catch { return 'en' } })()
-      let branch = 'main'
-      let view = 'explorer'
-      let running = !reducedMotion.matches
 
       function linkFor(path, language = locale) {
         return `#/${language}/${encodeURIComponent(path)}`
@@ -355,22 +263,11 @@ const baseUrl = import.meta.env.BASE_URL
       }
 
       function setMobileSidebarOpen(isOpen) {
-        workbench.dataset.mobileSidebarOpen = String(isOpen)
-        scrim.hidden = !isOpen
-        activityButtons.forEach((button) => {
-          button.setAttribute('aria-expanded', String(isOpen && button.dataset.view === view))
-        })
-      }
-
-      function selectView(next) {
-        view = next
-        workbench.dataset.activeView = next
-        sidebarTitle.textContent = labels[next]
-        activityButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.view === next)))
-        viewPanels.forEach((panel) => { panel.hidden = panel.dataset.viewContent !== next })
-        setMobileSidebarOpen(true)
-        if (next === 'search') fileSearch.focus()
-        renderContent()
+        const open = mobileViewport.matches && isOpen
+        workbench.dataset.mobileSidebarOpen = String(open)
+        scrim.hidden = !open
+        filesToggle.setAttribute('aria-expanded', String(open))
+        sidebar.inert = mobileViewport.matches && !open
       }
 
       function make(tag, className, text) {
@@ -378,6 +275,86 @@ const baseUrl = import.meta.env.BASE_URL
         if (className) node.className = className
         if (text != null) node.textContent = text
         return node
+      }
+
+      function closeBreadcrumbMenu(restoreFocus = false) {
+        if (breadcrumbMenu.hidden) return
+        breadcrumbMenu.hidden = true
+        openBreadcrumbTrigger?.setAttribute('aria-expanded', 'false')
+        if (restoreFocus && openBreadcrumbTrigger?.isConnected) openBreadcrumbTrigger.focus()
+        openBreadcrumbTrigger = null
+      }
+
+      function folderContents(folderPath) {
+        const prefix = folderPath ? `${folderPath}/` : ''
+        const files = []
+        const folders = new Set()
+        for (const document of profileDocuments) {
+          if (!document.path.startsWith(prefix)) continue
+          const rest = document.path.slice(prefix.length)
+          if (!rest.includes('/')) files.push(document.path)
+          else folders.add(`${prefix}${rest.split('/')[0]}`)
+        }
+        if (!folderPath) {
+          const rank = (path) => { const index = rootFileOrder.indexOf(path); return index < 0 ? rootFileOrder.length : index }
+          files.sort((first, second) => rank(first) - rank(second))
+        }
+        return { files, folders: [...folders] }
+      }
+
+      function fillBreadcrumbMenu(container, folderPath) {
+        const { files, folders } = folderContents(folderPath)
+        for (const path of files) {
+          const fileButton = make('button', 'breadcrumb-menu-row breadcrumb-menu-file')
+          fileButton.type = 'button'
+          fileButton.dataset.file = path
+          if (path === activePath) fileButton.setAttribute('aria-current', 'page')
+          fileButton.append(make('span', 'breadcrumb-menu-indent'), make('span', 'file-glyph ui-icon'), make('span', 'breadcrumb-menu-name', path.split('/').at(-1)))
+          fileButton.addEventListener('click', () => {
+            routeTo(path)
+            const heading = document.querySelector('.welcome-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
+            if (heading) { heading.tabIndex = -1; heading.focus() }
+          })
+          container.append(fileButton)
+        }
+        for (const path of folders) {
+          const wrapper = make('div', 'breadcrumb-menu-group')
+          const folderButton = make('button', 'breadcrumb-menu-row breadcrumb-menu-subfolder')
+          folderButton.type = 'button'
+          folderButton.dataset.folder = path.split('/').at(-1)
+          folderButton.setAttribute('aria-expanded', 'false')
+          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar carpeta' : 'Show folder'} ${path}`)
+          folderButton.append(make('span', 'breadcrumb-menu-chevron', '›'), make('span', 'folder-glyph ui-icon'), make('span', 'breadcrumb-menu-name', path.split('/').at(-1)))
+          const children = make('div', 'breadcrumb-menu-children')
+          children.hidden = true
+          folderButton.addEventListener('click', () => {
+            const opening = children.hidden
+            if (opening && !children.childElementCount) fillBreadcrumbMenu(children, path)
+            children.hidden = !opening
+            folderButton.setAttribute('aria-expanded', String(opening))
+          })
+          wrapper.append(folderButton, children)
+          container.append(wrapper)
+        }
+      }
+
+      function toggleBreadcrumbMenu(trigger, folderPath) {
+        if (openBreadcrumbTrigger === trigger && !breadcrumbMenu.hidden) { closeBreadcrumbMenu(); return }
+        closeBreadcrumbMenu()
+        breadcrumbMenuList.replaceChildren()
+        fillBreadcrumbMenu(breadcrumbMenuList, folderPath)
+        const folderName = folderPath ? folderPath.split('/').at(-1) : 'Juan'
+        document.querySelector('#breadcrumb-menu-title').textContent = `${folderName}/`
+        document.querySelector('#breadcrumb-menu-hint').textContent = locale === 'es' ? 'Elige un archivo' : 'Choose a file'
+        breadcrumbMenu.setAttribute('aria-label', `${locale === 'es' ? 'Archivos en' : 'Files in'} ${folderName}`)
+        breadcrumbMenu.hidden = false
+        const bounds = breadcrumbs.getBoundingClientRect()
+        const triggerBounds = trigger.getBoundingClientRect()
+        const menuWidth = breadcrumbMenu.getBoundingClientRect().width
+        breadcrumbMenu.style.left = `${Math.max(10, Math.min(triggerBounds.left - bounds.left, bounds.width - menuWidth - 10))}px`
+        trigger.setAttribute('aria-expanded', 'true')
+        openBreadcrumbTrigger = trigger
+        breadcrumbMenuList.querySelector('button')?.focus()
       }
 
       function renderTabs() {
@@ -406,13 +383,23 @@ const baseUrl = import.meta.env.BASE_URL
       }
 
       function renderBreadcrumb() {
+        closeBreadcrumbMenu()
         breadcrumbPath.replaceChildren()
         const parts = activePath?.split('/') || []
-        for (const folder of parts.slice(0, -1)) {
-          breadcrumbPath.append(make('span', 'breadcrumb-separator', '›'), make('span', 'breadcrumb-folder', folder))
+        breadcrumbRoot.setAttribute('aria-label', locale === 'es' ? 'Mostrar archivos de Juan' : 'Show files in Juan')
+        for (let index = 0; index < parts.length - 1; index++) {
+          const folder = parts[index]
+          const folderPath = parts.slice(0, index + 1).join('/')
+          const folderButton = make('button', 'breadcrumb-folder', folder)
+          folderButton.type = 'button'
+          folderButton.setAttribute('aria-controls', 'breadcrumb-menu')
+          folderButton.setAttribute('aria-expanded', 'false')
+          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar archivos de' : 'Show files in'} ${folderPath}`)
+          folderButton.addEventListener('click', () => toggleBreadcrumbMenu(folderButton, folderPath))
+          breadcrumbPath.append(make('span', 'breadcrumb-separator', '›'), folderButton)
         }
         breadcrumbFile.textContent = parts.at(-1) || '—'
-        breadcrumbs.dataset.file = activePath || ''
+        breadcrumbCurrentIcon.dataset.file = activePath || ''
       }
 
       function renderWelcome() {
@@ -427,6 +414,13 @@ const baseUrl = import.meta.env.BASE_URL
         const creditLink = make('a', '', locale === 'es' ? 'Créditos de iconos' : 'Icon credits')
         creditLink.href = `${baseUrl}icons/codicons/ATTRIBUTION.txt`
         note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), creditLink)
+        welcomePreview.querySelector('.welcome-agent-link').textContent = locale === 'es' ? 'Para agentes ↗' : 'For agents ↗'
+        welcomePreview.querySelector('.welcome-routes').setAttribute('aria-label', locale === 'es' ? 'Empieza a explorar' : 'Start exploring')
+        const routeNames = locale === 'es' ? ['Experiencia', 'Proyectos', 'Sobre mí', 'Contacto'] : ['Experience', 'Projects', 'About me', 'Contact']
+        welcomePreview.querySelectorAll('[data-welcome-file]').forEach((link, index) => {
+          link.textContent = routeNames[index]
+          link.href = linkFor(link.dataset.welcomeFile)
+        })
       }
 
       function renderProfile() {
@@ -547,89 +541,51 @@ const baseUrl = import.meta.env.BASE_URL
       function renderContent() {
         welcomePreview.hidden = true
         profilePreview.hidden = true
-        fictionPreview.hidden = true
-        runPreview.hidden = true
         emptyEditor.hidden = true
-        if (view === 'run') runPreview.hidden = false
-        else if (branch === 'batman') fictionPreview.hidden = false
-        else if (!activePath) emptyEditor.hidden = false
+        if (!activePath) emptyEditor.hidden = false
         else if (activePath === 'Welcome.md') { welcomePreview.hidden = false; renderWelcome() }
         else { profilePreview.hidden = false; renderProfile() }
-      }
-
-      function renderSearch() {
-        searchResults.replaceChildren()
-        const query = fileSearch.value.trim().toLocaleLowerCase()
-        if (!query) { searchResults.append(make('li', 'search-message', locale === 'es' ? 'Escribe un nombre o ruta.' : 'Type a filename or path.')); return }
-        const found = paths.filter((path) => path.toLocaleLowerCase().includes(query))
-        if (!found.length) { searchResults.append(make('li', 'search-message', locale === 'es' ? 'No hay archivos con ese nombre.' : 'No matching filenames.')); return }
-        found.forEach((path) => {
-          const item = make('li')
-          const button = make('button', 'search-result')
-          button.type = 'button'
-          button.dataset.file = path
-          button.append(make('span', 'file-glyph ui-icon'), make('span', '', path))
-          button.addEventListener('click', () => { routeTo(path); if (mobileViewport.matches) setMobileSidebarOpen(false) })
-          item.append(button)
-          searchResults.append(item)
-        })
       }
 
       function renderChromeLocale() {
         const es = locale === 'es'
         const set = (selector, spanish, english) => { document.querySelector(selector).textContent = es ? spanish : english }
         set('.alpha-label', 'Vista previa · Alpha', 'Preview · Alpha')
-        set('[data-view-content="search"] .panel-kicker', 'Archivos', 'Files')
-        set('[data-view-content="search"] .panel-help', 'Busca archivos, no su contenido.', 'Search filenames and paths, not their contents.')
-        set('[data-view-content="source-control"] .panel-kicker', 'Simulación · no Git', 'Simulation · not Git')
-        set('[data-view-content="source-control"] .panel-help', 'Dos versiones de la historia. Solo main cuenta hechos.', 'Two versions of the story. Only main describes real facts.')
-        set('[data-branch="main"] small', 'Perfil real', 'Real profile')
-        set('[data-branch="batman"] small', 'Broma pública', 'Public joke')
-        set('[data-view-content="run"] .panel-kicker', 'Escena interactiva', 'Interactive scene')
-        set('[data-view-content="run"] .functional-panel > p:last-child', 'Un personaje corre detrás de los bugs. La animación se puede pausar y respeta la reducción de movimiento.', 'A character chases bugs. You can pause the animation, and reduced-motion preferences are respected.')
-        set('.fiction-preview .profile-eyebrow', 'Rama ficticia · broma', 'Fictional branch · joke')
-        set('.fiction-preview > p:not(.profile-eyebrow)', 'He creado una rama pública para ocultar mi identidad secreta. Como plan, tiene alguna laguna.', 'I made a public branch to hide my secret identity. There may be a flaw in the plan.')
-        set('.fiction-card p', 'La rama batman es ficción. Vuelve a main para leer mi perfil real.', 'The batman branch is fiction. Return to main for my real profile.')
-        set('.run-preview .profile-eyebrow', 'Run and Debug', 'Run and Debug')
-        set('.run-preview h1', 'Persiguiendo bugs', 'Chasing bugs')
-        set('.run-preview > p:not(.profile-eyebrow)', 'Un pequeño recordatorio de que depurar también es correr detrás de cosas que se escapan.', 'A small reminder that debugging can feel like chasing things that keep escaping.')
         set('.empty-editor h1', 'Todo cerrado por ahora.', 'Everything is closed for now.')
-        set('.empty-editor p', 'Abre un archivo desde Explorer o búscalo por nombre.', 'Open a file in Explorer or search by name.')
-        set('.statusbar .status-item:first-child', 'Agent · desarrollo', 'Agent · development')
-        fileSearch.placeholder = es ? 'Nombre o ruta…' : 'Filename or path…'
-        document.querySelector('.activity-bar').setAttribute('aria-label', es ? 'Vistas del portfolio' : 'Portfolio views')
-        document.querySelector('.sidebar').setAttribute('aria-label', es ? 'Panel de actividad' : 'Activity panel')
+        set('.empty-editor p', 'Abre un archivo del árbol o vuelve a Welcome.', 'Open a file from the tree, or return to Welcome.')
+        set('.empty-welcome', 'Abrir Welcome.md', 'Open Welcome.md')
+        set('.statusbar .status-item:first-child', 'Juan · en desarrollo', 'Juan · in development')
+        set('.mobile-files-toggle span:last-child', 'Archivos', 'Files')
+        sidebar.setAttribute('aria-label', es ? 'Explorador de archivos' : 'File explorer')
+        sidebarClose.setAttribute('aria-label', es ? 'Cerrar explorador de archivos' : 'Close file explorer')
+        filesToggle.setAttribute('aria-label', es ? 'Abrir explorador de archivos' : 'Open file explorer')
         document.querySelector('.editor').setAttribute('aria-label', es ? 'Portfolio de Juan' : 'Juan’s portfolio')
         document.querySelector('.breadcrumbs').setAttribute('aria-label', es ? 'Ruta del archivo' : 'File path')
         document.querySelector('.titlebar').setAttribute('aria-label', es ? 'Barra de título' : 'Title bar')
         document.querySelector('.statusbar').setAttribute('aria-label', es ? 'Estado del workspace' : 'Workspace status')
-        languageSelect.setAttribute('aria-label', es ? 'Idioma' : 'Language')
+        brandButton.setAttribute('aria-label', es ? 'Abrir Welcome.md' : 'Open Welcome.md')
+        languageSwitch.setAttribute('aria-label', es ? 'Cambiar idioma a inglés' : 'Switch language to Spanish')
         themeSelect.setAttribute('aria-label', es ? 'Tema visual' : 'Visual theme')
-        fileSearch.setAttribute('aria-label', es ? 'Buscar archivos por nombre o ruta' : 'Search files by name or path')
         themeSelect.options[0].textContent = es ? 'VS Code oscuro' : 'VS Code Dark'
         themeSelect.options[1].textContent = es ? 'VS Code claro' : 'VS Code Light'
         themeSelect.options[4].textContent = es ? 'Tema: sistema' : 'Theme: system'
-        document.title = es ? 'Juan · Portfolio Agent (Alpha)' : 'Juan · Agent Portfolio (Alpha)'
+        document.title = 'Juan Larrondo · Portfolio (Alpha)'
       }
 
       function render() {
         renderChromeLocale()
-        languageSelect.value = locale
+        languageSwitch.dataset.currentLanguage = locale
         document.documentElement.lang = locale
         statusLocale.textContent = locale.toUpperCase()
-        statusBranch.textContent = branch
-        statusFile.textContent = view === 'run' ? 'Run and Debug' : branch === 'batman' ? (locale === 'es' ? 'Ficción' : 'Fiction') : activePath || (locale === 'es' ? 'Sin archivo' : 'No file')
+        statusFile.textContent = activePath || (locale === 'es' ? 'Sin archivo' : 'No file')
         titlebarLocation.textContent = `${activePath || 'Portfolio'} — Juan`
         document.querySelectorAll('.tree-file').forEach((button) => {
-          if (button.dataset.file === activePath && branch === 'main') button.setAttribute('aria-current', 'page')
+          if (button.dataset.file === activePath) button.setAttribute('aria-current', 'page')
           else button.removeAttribute('aria-current')
         })
-        branchButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.branch === branch)))
         renderTabs()
         renderBreadcrumb()
         renderContent()
-        renderSearch()
-        updateRun()
       }
 
       themeSelect.value = document.documentElement.dataset.themeChoice || 'system'
@@ -644,15 +600,24 @@ const baseUrl = import.meta.env.BASE_URL
       systemTheme.addEventListener('change', (event) => {
         if (document.documentElement.dataset.themeChoice === 'system') document.documentElement.dataset.theme = event.matches ? 'light' : 'dark'
       })
-      languageSelect.addEventListener('change', () => routeTo(activePath, languageSelect.value))
-      fileSearch.addEventListener('input', renderSearch)
-      activityButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-          const next = button.dataset.view
-          if (mobileViewport.matches && next === 'explorer' && view === 'explorer') { setMobileSidebarOpen(workbench.dataset.mobileSidebarOpen !== 'true'); return }
-          selectView(next)
-        })
+      brandButton.addEventListener('click', () => routeTo('Welcome.md'))
+      languageSwitch.addEventListener('click', () => routeTo(activePath, locale === 'es' ? 'en' : 'es'))
+      breadcrumbRoot.addEventListener('click', () => toggleBreadcrumbMenu(breadcrumbRoot, ''))
+      breadcrumbMenu.addEventListener('keydown', (event) => {
+        if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return
+        const rows = [...breadcrumbMenu.querySelectorAll('.breadcrumb-menu-row')].filter((row) => row.getClientRects().length)
+        const current = rows.indexOf(document.activeElement)
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? rows.length - 1 : event.key === 'ArrowDown' ? (current + 1) % rows.length : (current - 1 + rows.length) % rows.length
+        rows[next]?.focus()
+        event.preventDefault()
       })
+      document.addEventListener('pointerdown', (event) => {
+        if (!breadcrumbMenu.hidden && !breadcrumbMenu.contains(event.target) && !event.target.closest('.breadcrumb-folder')) closeBreadcrumbMenu()
+      })
+      window.addEventListener('resize', () => closeBreadcrumbMenu())
+      filesToggle.addEventListener('click', () => { setMobileSidebarOpen(true); sidebarClose.focus() })
+      sidebarClose.addEventListener('click', () => { setMobileSidebarOpen(false); filesToggle.focus() })
+      document.querySelector('.empty-welcome').addEventListener('click', () => routeTo('Welcome.md'))
       document.querySelectorAll('[data-folder]').forEach((button) => {
         button.addEventListener('click', () => {
           const list = document.getElementById(button.dataset.target)
@@ -662,31 +627,26 @@ const baseUrl = import.meta.env.BASE_URL
         })
       })
       document.querySelectorAll('.tree-file').forEach((button) => {
-        button.addEventListener('click', () => { routeTo(button.dataset.file); if (mobileViewport.matches) setMobileSidebarOpen(false) })
+        button.addEventListener('click', () => {
+          routeTo(button.dataset.file)
+          if (mobileViewport.matches) {
+            setMobileSidebarOpen(false)
+            const heading = document.querySelector('.welcome-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
+            if (heading) { heading.tabIndex = -1; heading.focus() }
+          }
+        })
       })
-      branchButtons.forEach((button) => button.addEventListener('click', () => { branch = button.dataset.branch; render() }))
-      function updateRun() {
-        if (reducedMotion.matches) running = false
-        runPreview.dataset.running = String(running)
-        runToggle.setAttribute('aria-pressed', String(running))
-        runToggle.disabled = reducedMotion.matches
-        runToggle.textContent = reducedMotion.matches
-          ? (locale === 'es' ? 'Animación detenida por preferencia de movimiento' : 'Animation stopped by motion preference')
-          : running ? (locale === 'es' ? 'Pausar animación' : 'Pause animation') : (locale === 'es' ? 'Iniciar animación' : 'Play animation')
-      }
-      runToggle.addEventListener('click', () => { running = !running; updateRun() })
-      reducedMotion.addEventListener('change', () => updateRun())
-      scrim.addEventListener('click', () => { setMobileSidebarOpen(false); document.querySelector(`[data-view="${view}"]`).focus() })
-      mobileViewport.addEventListener('change', (event) => setMobileSidebarOpen(!event.matches))
+      scrim.addEventListener('click', () => { setMobileSidebarOpen(false); filesToggle.focus() })
+      mobileViewport.addEventListener('change', () => setMobileSidebarOpen(false))
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && workbench.dataset.mobileSidebarOpen === 'true' && mobileViewport.matches) { setMobileSidebarOpen(false); document.querySelector(`[data-view="${view}"]`).focus() }
+        if (event.key === 'Escape' && !breadcrumbMenu.hidden) { closeBreadcrumbMenu(true); return }
+        if (event.key === 'Escape' && workbench.dataset.mobileSidebarOpen === 'true' && mobileViewport.matches) { setMobileSidebarOpen(false); filesToggle.focus() }
       })
       window.addEventListener('popstate', readRoute)
       window.addEventListener('hashchange', readRoute)
-      setMobileSidebarOpen(!mobileViewport.matches)
+      setMobileSidebarOpen(false)
       readRoute()
       render()
-      updateRun()
     </script>
   </body>
 </html>
