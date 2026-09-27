@@ -129,7 +129,7 @@ const baseUrl = import.meta.env.BASE_URL
 
         <main class="editor" aria-label="Portfolio de Juan">
           <div class="tabs-bar" aria-label="Archivos abiertos">
-            <button class="mobile-files-toggle" type="button" aria-controls="file-sidebar" aria-expanded="false"><span class="ui-icon icon-files" aria-hidden="true"></span><span>Files</span></button>
+            <button class="mobile-files-toggle" type="button" aria-controls="file-sidebar" aria-expanded="false"><span class="ui-icon icon-files" aria-hidden="true"></span><span>Explorer</span></button>
             <div class="tabs-list" id="tabs-list"></div>
           </div>
           <div class="breadcrumbs" id="breadcrumbs" aria-label="Ruta del archivo">
@@ -555,8 +555,11 @@ const baseUrl = import.meta.env.BASE_URL
         set('.empty-editor p', 'Abre un archivo del árbol o vuelve a Welcome.', 'Open a file from the tree, or return to Welcome.')
         set('.empty-welcome', 'Abrir Welcome.md', 'Open Welcome.md')
         set('.statusbar .status-item:first-child', 'Juan · en desarrollo', 'Juan · in development')
-        set('.mobile-files-toggle span:last-child', 'Archivos', 'Files')
+        set('#sidebar-title', 'Explorador', 'Explorer')
+        set('.mobile-files-toggle span:last-child', 'Explorador', 'Explorer')
         sidebar.setAttribute('aria-label', es ? 'Explorador de archivos' : 'File explorer')
+        document.querySelector('.view-content').setAttribute('aria-label', es ? 'Árbol de archivos' : 'File tree')
+        document.querySelector('.tabs-bar').setAttribute('aria-label', es ? 'Archivos abiertos' : 'Open files')
         sidebarClose.setAttribute('aria-label', es ? 'Cerrar explorador de archivos' : 'Close file explorer')
         filesToggle.setAttribute('aria-label', es ? 'Abrir explorador de archivos' : 'Open file explorer')
         document.querySelector('.editor').setAttribute('aria-label', es ? 'Portfolio de Juan' : 'Juan’s portfolio')
