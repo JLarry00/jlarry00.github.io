@@ -2,6 +2,8 @@
 
 Estado: [S15 — Marco y entradas](./sprints/S15-marco-y-entradas.md) aceptado por Juan el 27/09/2026 tras revisar el selector de carpetas y [publicado en Pages](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36320694535). Sus siete tareas están en `COMPLETADAS.md`. No hay sprint nuevo seleccionado. S13 y S14 también están aceptados y publicados.
 
+Tras S15 se publicó un ajuste puntual de terminología móvil en `AG-043`: botón y título del panel «Explorador/Explorer». La tarea completa sigue en el PB; este arreglo no abre ni cierra un sprint.
+
 S11 cerró y Juan aceptó `AG-026`. S12 no modificó la web ni publicó una variante nueva. Juan confirmó la función del `AGENTS.md` humano y que `SOUL.md` es su About personal completo, incluidos los hobbies; `MEMORY.md` queda aplazado. Las tareas de interfaz siguen en el PB y `AG-014` será la última.
 
 - [S12 — Criterios desde las reviews](./sprints/S12-video-reviews.md)
