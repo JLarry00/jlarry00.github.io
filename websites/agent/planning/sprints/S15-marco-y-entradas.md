@@ -1,6 +1,6 @@
 # Sprint S15 — Marco y entradas
 
-Estado: aceptado por Juan el 27/09/2026 tras revisar la corrección de carpetas; publicación autorizada y en curso. Producto: Agent. Tareas: `AG-041`, `AG-042`, `AG-044`–`AG-048`.
+Estado: aceptado por Juan y publicado el 27/09/2026 tras revisar la corrección de carpetas. Producto: Agent. Tareas: `AG-041`, `AG-042`, `AG-044`–`AG-048`.
 
 ## Objetivo
 
@@ -34,8 +34,10 @@ La primera ampliación quedó implementada localmente: cabecera con anchuras est
 
 ## Corrección de navegación de carpetas
 
-Juan precisó que las migas de carpeta deben abrir un selector flotante de archivos y subcarpetas, como en su captura de VS Code. Abrir directamente el README no cumple `AG-048`. Se sustituyó esa acción por un listado contextual con carpetas desplegables y archivos seleccionables, siguiendo los temas y colores de Agent; el README es una entrada del listado. Escape, clic fuera y el propio botón de carpeta cierran el selector. El build generó 32 páginas y el preview local responde en `http://127.0.0.1:8766/`. S15 continúa abierto hasta que Juan revise esta corrección local.
+Juan precisó que las migas de carpeta deben abrir un selector flotante de archivos y subcarpetas, como en su captura de VS Code. Abrir directamente el README no cumple `AG-048`. Se sustituyó esa acción por un listado contextual con carpetas desplegables y archivos seleccionables, siguiendo los temas y colores de Agent; el README es una entrada del listado. Escape, clic fuera y el propio botón de carpeta cierran el selector. El build generó 32 páginas y el preview local respondió en `http://127.0.0.1:8766/`. S15 quedó entonces abierto hasta la revisión de Juan.
 
 ## Cierre y aceptación
 
-Juan revisó el selector corregido y confirmó que le gusta el conjunto; autorizó publicar S15 el 27/09/2026. `AG-041`, `AG-042` y `AG-044`–`AG-048` pasan a `COMPLETADAS.md`. `AG-043` conserva la adaptación móvil completa para un sprint posterior y `AG-014` sigue siendo el QA final del producto. No se atribuye a esta aceptación una revisión técnica exhaustiva de todos los tamaños o modos. Resultado remoto pendiente de verificar tras el push.
+Juan revisó el selector corregido y confirmó que le gusta el conjunto; autorizó publicar S15 el 27/09/2026. `AG-041`, `AG-042` y `AG-044`–`AG-048` pasaron a `COMPLETADAS.md`. `AG-043` conserva la adaptación móvil completa para un sprint posterior y `AG-014` sigue siendo el QA final del producto. No se atribuye a esta aceptación una revisión técnica exhaustiva de todos los tamaños o modos.
+
+El commit `4260971` se publicó mediante [GitHub Pages #36320694535](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36320694535), completado correctamente. La página pública incluye el selector nuevo y `/`, `/for-agents/` y `/neon-mesh/` respondieron HTTP 200 al comprobarlas después del despliegue.

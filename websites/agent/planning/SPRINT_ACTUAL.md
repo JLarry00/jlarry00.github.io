@@ -1,6 +1,6 @@
 # Sprint actual — sin sprint activo
 
-Estado: [S15 — Marco y entradas](./sprints/S15-marco-y-entradas.md) aceptado por Juan el 27/09/2026 tras revisar el selector de carpetas. Sus siete tareas están en `COMPLETADAS.md`. Publicación autorizada y en curso; no hay sprint nuevo seleccionado. S13 y S14 están aceptados y publicados.
+Estado: [S15 — Marco y entradas](./sprints/S15-marco-y-entradas.md) aceptado por Juan el 27/09/2026 tras revisar el selector de carpetas y [publicado en Pages](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36320694535). Sus siete tareas están en `COMPLETADAS.md`. No hay sprint nuevo seleccionado. S13 y S14 también están aceptados y publicados.
 
 S11 cerró y Juan aceptó `AG-026`. S12 no modificó la web ni publicó una variante nueva. Juan confirmó la función del `AGENTS.md` humano y que `SOUL.md` es su About personal completo, incluidos los hobbies; `MEMORY.md` queda aplazado. Las tareas de interfaz siguen en el PB y `AG-014` será la última.
 
@@ -21,7 +21,7 @@ Juan seleccionó S15. Los siguientes sprints continúan como propuesta, sin prio
 
 | Sprint propuesto | Objetivo revisable | Tareas candidatas | Condición para empezarlo o cerrarlo |
 |---|---|---|---|
-| S15 · Marco y entradas | Aplicar la opción visual 4 y orientar desde ambas entradas | `AG-041`, `AG-042`, `AG-044`–`AG-048` | Aceptado por Juan; publicación autorizada el 27/09/2026. |
+| S15 · Marco y entradas | Aplicar la opción visual 4 y orientar desde ambas entradas | `AG-041`, `AG-042`, `AG-044`–`AG-048` | Aceptado por Juan y publicado el 27/09/2026. |
 | S16 · Voz de Juan | Sustituir el texto provisional por contenido verificable y propio | `AG-034` | Confirmar con Juan los hechos, ejemplos y datos personales que se publicarán; revisar español e inglés. |
 | S17 · Lectura de cada archivo | Diferenciar las secciones y presentar Experience como línea temporal | `AG-033`, `AG-032` | Trabajar sobre el marco de S15 y el contenido confirmado de S16; entregar diseños usables también en móvil. |
 | S18 · Experiencia móvil completa | Recorrer la web humana y la documental cómodamente desde el teléfono | `AG-043` | Revisar todas las secciones ya estabilizadas en S17, navegación táctil y tamaños estrechos. |

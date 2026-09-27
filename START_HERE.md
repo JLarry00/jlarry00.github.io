@@ -28,7 +28,7 @@ El índice [`PLANNING_INDEX.md`](./PLANNING_INDEX.md) enlaza a ambos Scrums. No 
 
 ## Estado de producto
 
-Agent es la web predeterminada de Pages: vive en `/` como versión en desarrollo y no indexable, con workbench inspirado en VS Code, árbol de archivos, pestañas, rutas navegables, temas y una colección Markdown enlazada. S15 retiró la barra de vistas, Search, Source Control, Run and Debug y la rama ficticia; su publicación está en curso. Neuron Mesh vive en `/neon-mesh/`. S13 y S14 fijaron el árbol y el mapa documental. La redacción personal y el QA final de Agent siguen pendientes. El vídeo de reviews tiene un análisis curado y aceptado en su Scrum; no se versionan el vídeo ni su transcripción íntegra.
+Agent es la web predeterminada de Pages: vive en `/` como versión en desarrollo y no indexable, con workbench inspirado en VS Code, árbol de archivos, pestañas, rutas navegables, temas y una colección Markdown enlazada. S15 retiró la barra de vistas, Search, Source Control, Run and Debug y la rama ficticia; se publicó el 27/09/2026 mediante [GitHub Pages #36320694535](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36320694535). Neuron Mesh vive en `/neon-mesh/`. S13 y S14 fijaron el árbol y el mapa documental. La redacción personal y el QA final de Agent siguen pendientes. El vídeo de reviews tiene un análisis curado y aceptado en su Scrum; no se versionan el vídeo ni su transcripción íntegra.
 
 Antes de usar copy de la web clásica en Agent, revisa `context/public-profile-snapshot.md`, contrasta fechas y estado actual con Juan y verifica las afirmaciones técnicas contra los repositorios. Las reviews editoriales de Juan deben informar el tono antes de escribir el perfil final.
 
