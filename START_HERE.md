@@ -22,6 +22,7 @@ No ejecutes npm install en la raíz. La raíz no tiene dependencias de aplicaci�
 - `scripts/site.mjs`: resuelve selección, instalación, desarrollo, comprobaciones, compilación y composición de las dos webs.
 - `context/`: síntesis curada de información ya publicada y decisiones editoriales seguras para versionar.
 - `contexto/`: posibles fuentes privadas locales. Está excluido de Git y nunca se copia a `context/` sin revisión.
+- `contexto/CONTENIDO_AGENT.md`: borrador local donde Juan puede escribir textos para páginas o tarjetas de Agent. En un clon nuevo, créalo desde [`PLANTILLA_CONTENIDO_AGENT.md`](./websites/agent/planning/PLANTILLA_CONTENIDO_AGENT.md).
 - `.github/workflows/deploy.yml`: construye ambas aplicaciones y publica un artefacto con Agent en `/` y Neuron Mesh en `/neon-mesh/`.
 
 El índice [`PLANNING_INDEX.md`](./PLANNING_INDEX.md) enlaza a ambos Scrums. No existe un backlog compartido.
@@ -38,6 +39,7 @@ Lee las instrucciones raíz y solo la planificación del producto afectado. Ejec
 
 - Neuron Mesh: `npm run dev:neuron-mesh`, `npm run check:neuron-mesh`, `npm run build:neuron-mesh`.
 - Agent: `npm run dev:agent`, `npm run check:agent`, `npm run build:agent`.
+- La vista local de Agent usa `http://127.0.0.1:8000/` con `npm run dev:agent` (o `dev:active` mientras Agent esté seleccionado).
 - Variante elegida: `npm run dev:active`, `npm run check:active`, `npm run build:active`.
 
 Cualquier nuevo clon necesita también que Juan configure su inicio de sesión de Codex y sus conexiones personales en ese ordenador; esos secretos no viajan con Git.

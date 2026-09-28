@@ -243,8 +243,6 @@ const baseUrl = import.meta.env.BASE_URL
       let routeResizeObserver = null
       let routeFrame = null
       let routeLayoutFrame = null
-      let activeExperienceDialog = null
-      let experienceDismissTimer = null
       let markerAnimationFrame = null
       let markerAnimationTime = null
       let markerInertiaFrame = null
@@ -483,7 +481,6 @@ const baseUrl = import.meta.env.BASE_URL
       function renderProfile() {
         cancelMarkerAnimation()
         stopAutoScroll()
-        closeExperienceDetail()
         if (routeFrame !== null) cancelAnimationFrame(routeFrame)
         routeFrame = null
         if (routeLayoutFrame !== null) cancelAnimationFrame(routeLayoutFrame)
@@ -639,98 +636,6 @@ const baseUrl = import.meta.env.BASE_URL
         return node
       }
 
-      function closeExperienceDetail(restoreFocus = false, fade = false) {
-        if (!activeExperienceDialog) return
-        const { panel, trigger } = activeExperienceDialog
-        const hadFocus = panel.contains(document.activeElement)
-        clearTimeout(experienceDismissTimer)
-        if (fade) {
-          panel.classList.add('is-dismissing')
-          experienceDismissTimer = setTimeout(() => { if (panel.classList.contains('is-dismissing')) panel.hidden = true }, 170)
-        } else {
-          panel.hidden = true
-          panel.classList.remove('is-dismissing')
-        }
-        trigger.setAttribute('aria-expanded', 'false')
-        delete trigger.closest('.route-stop').dataset.detailOpen
-        activeExperienceDialog = null
-        if (restoreFocus && trigger.isConnected) {
-          routeState.suppressFocusReveal = true
-          trigger.focus({ preventScroll: true })
-          routeState.suppressFocusReveal = false
-        } else if (hadFocus) editorScroll.focus({ preventScroll: true })
-      }
-
-      function experienceVisibleBounds() {
-        const editor = editorScroll.getBoundingClientRect()
-        const scene = routeState.viewport.getBoundingClientRect()
-        return {
-          top: Math.max(editor.top + editorScroll.clientTop, scene.top),
-          bottom: Math.min(editor.top + editorScroll.clientTop + editorScroll.clientHeight, scene.bottom),
-          left: Math.max(editor.left + editorScroll.clientLeft, scene.left),
-          right: Math.min(editor.left + editorScroll.clientLeft + editorScroll.clientWidth, scene.right),
-        }
-      }
-
-      function positionExperienceDetail(panel, trigger) {
-        const anchor = trigger.closest('.route-stop')
-        const anchorRect = anchor.getBoundingClientRect()
-        const triggerRect = trigger.getBoundingClientRect()
-        const view = experienceVisibleBounds()
-        view.width = view.right - view.left
-        const narrow = window.matchMedia('(max-width: 760px)').matches
-        const width = Math.min(narrow ? view.width - 24 : 405, view.width - 24)
-        panel.style.width = `${width}px`
-        panel.style.setProperty('--popover-view-height', `${Math.max(1, view.bottom - view.top - 16)}px`)
-        panel.style.right = 'auto'
-        panel.style.bottom = 'auto'
-        const panelRect = panel.getBoundingClientRect()
-        let left
-        let top
-        if (narrow) {
-          left = Math.max(view.left + 12, Math.min(triggerRect.left, view.right - width - 12))
-          top = triggerRect.bottom + 10
-          if (top + panelRect.height > view.bottom - 8 && triggerRect.top - panelRect.height - 10 >= view.top + 8) {
-            top = triggerRect.top - panelRect.height - 10
-          }
-        } else {
-          left = triggerRect.right + 14
-          if (left + width > view.right - 12) left = triggerRect.left - width - 14
-          left = Math.max(view.left + 12, Math.min(left, view.right - width - 12))
-          top = Math.max(view.top + 8, Math.min(triggerRect.top - 8, view.bottom - panelRect.height - 8))
-        }
-        top = Math.max(view.top + 8, Math.min(top, view.bottom - panelRect.height - 8))
-        panel.style.left = `${left - anchorRect.left}px`
-        panel.style.top = `${top - anchorRect.top}px`
-      }
-
-      function openExperienceDetail(stop, content, trigger) {
-        const panel = routeState?.panel
-        if (!panel) return
-        if (activeExperienceDialog?.trigger === trigger) { closeExperienceDetail(true); return }
-        if (activeExperienceDialog) closeExperienceDetail()
-        clearTimeout(experienceDismissTimer)
-        panel.classList.remove('is-dismissing')
-        const heading = make('div', 'experience-popover-head')
-        const close = make('button', 'experience-popover-close', '×')
-        close.type = 'button'
-        close.setAttribute('aria-label', locale === 'es' ? 'Cerrar detalle' : 'Close detail')
-        close.addEventListener('click', () => closeExperienceDetail(true))
-        heading.append(make('span', 'experience-popover-place', content.place || content.period || content.role), close)
-        const title = make('h2', '', content.title)
-        title.id = 'experience-popover-title'
-        const subline = make('p', 'experience-popover-role', [content.role, content.duration, content.period].filter(Boolean).join(' · '))
-        panel.replaceChildren(heading, title, subline, make('p', 'experience-popover-body', content.body))
-        trigger.closest('.route-stop').append(panel)
-        panel.dataset.kind = stop.kind
-        panel.hidden = false
-        activeExperienceDialog = { panel, trigger }
-        trigger.setAttribute('aria-expanded', 'true')
-        trigger.closest('.route-stop').dataset.detailOpen = 'true'
-        positionExperienceDetail(panel, trigger)
-        close.focus({ preventScroll: true })
-      }
-
       function updateRouteProgress() {
         if (!routeState?.length) return
         if (routeState.directPathInput) {
@@ -811,7 +716,6 @@ const baseUrl = import.meta.env.BASE_URL
         routeFrame = requestAnimationFrame(() => {
           routeFrame = null
           updateRouteProgress()
-          hideExperienceDetailOutsideView()
         })
       }
 
@@ -866,7 +770,6 @@ const baseUrl = import.meta.env.BASE_URL
           markerAnimationTime = null
         } else markerAnimationFrame = requestAnimationFrame(animateMarker)
         updateRouteProgress()
-        hideExperienceDetailOutsideView()
       }
 
       function advanceMarker(distance, smooth = false, timeConstant = 90) {
@@ -943,14 +846,6 @@ const baseUrl = import.meta.env.BASE_URL
           return eventDistances[index - 1] + (eventDistances[index] - eventDistances[index - 1]) * fraction
         }
         return length
-      }
-
-      function hideExperienceDetailOutsideView() {
-        if (!activeExperienceDialog) return
-        const triggerRect = activeExperienceDialog.trigger.closest('.route-stop').getBoundingClientRect()
-        const view = experienceVisibleBounds()
-        const visible = Math.max(0, Math.min(triggerRect.bottom, view.bottom) - Math.max(triggerRect.top, view.top))
-        if (visible <= triggerRect.height * 0.5) closeExperienceDetail(false, true)
       }
 
       function layoutExperienceRoute() {
@@ -1072,10 +967,6 @@ const baseUrl = import.meta.env.BASE_URL
           editorScroll.scrollTop = guided ? routeState.startScroll + distance : pinStart + camera
         }
         updateRouteProgress()
-        if (activeExperienceDialog) {
-          hideExperienceDetailOutsideView()
-          if (activeExperienceDialog) positionExperienceDetail(activeExperienceDialog.panel, activeExperienceDialog.trigger)
-        }
       }
 
       function renderExperience(entry) {
@@ -1102,30 +993,24 @@ const baseUrl = import.meta.env.BASE_URL
         const stops = []
         experienceStops.forEach((stop, index) => {
           const content = experienceStopContent(stop, entry)
-          const item = make('div', 'route-stop')
+          const item = make('article', 'route-stop')
           item.dataset.stop = stop.id
           item.dataset.kind = stop.kind
           item.dataset.side = index % 2 === 0 ? 'left' : 'right'
           item.style.setProperty('--event-y', `${yearPosition(stop.start)}px`)
           const pin = make('span', 'route-pin')
           pin.setAttribute('aria-hidden', 'true')
-          const button = make('button', 'route-stop-button')
-          button.type = 'button'
-          button.setAttribute('aria-haspopup', 'dialog')
-          button.setAttribute('aria-expanded', 'false')
-          button.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${content.title}`)
-          const roleLine = make('span', 'route-role')
-          roleLine.append(make('span', 'route-role-name', content.role))
-          if (content.duration) roleLine.append(make('span', 'route-duration', content.duration))
-          button.append(
-            make('span', 'route-place', [content.place, content.period].filter(Boolean).join(' · ') || content.role),
+          const card = make('div', 'route-stop-card')
+          const meta = make('div', 'route-meta')
+          meta.append(make('span', 'route-place', [content.place, content.period].filter(Boolean).join(' · ') || content.role))
+          if (content.duration) meta.append(make('span', 'route-duration', content.duration))
+          card.append(
+            meta,
             make('span', 'route-title', content.title),
-            roleLine,
+            make('span', 'route-role', content.role),
             ...(content.note ? [make('span', 'route-note', content.note)] : []),
-            make('span', 'route-open', locale === 'es' ? 'Ver detalle ↗' : 'View details ↗'),
           )
-          button.addEventListener('click', () => openExperienceDetail(stop, content, button))
-          item.append(pin, button)
+          item.append(pin, card)
           events.push({ date: stop.start, node: item, pin })
           stops.push(item)
         })
@@ -1179,62 +1064,7 @@ const baseUrl = import.meta.env.BASE_URL
         shell.append(viewport)
         scene.append(shell)
         profilePreview.append(scene)
-        const panel = make('div', 'experience-popover')
-        panel.setAttribute('role', 'dialog')
-        panel.setAttribute('aria-labelledby', 'experience-popover-title')
-        panel.hidden = true
-        panel.addEventListener('click', (event) => event.stopPropagation())
-        route.append(panel)
-        routeState = { route, shell, viewport, svg, line, progress, cursor, badge, pins, eventIds, eventDates: events.map((event) => event.date), stops, stopPointIndices, panel, points: [], eventDistances: [], motion: null, logoPeriods: [], currentStop: null, length: 0, startScroll: 0, guided: false, directPathInput: directPathInputEnabled && !reducedMotion.matches && !mobileViewport.matches, markerDistance: 0, targetDistance: 0, motionTimeConstant: 90 }
-        stops.forEach((item, index) => {
-          const button = item.querySelector('.route-stop-button')
-          let pointerFocus = false
-          button.addEventListener('pointerdown', () => {
-            pointerFocus = true
-            setTimeout(() => { pointerFocus = false }, 0)
-          })
-          button.addEventListener('focus', () => {
-            if (pointerFocus || routeState?.suppressFocusReveal) return
-            const focusedState = routeState
-            const focusDistance = routeState?.targetDistance
-            requestAnimationFrame(() => {
-              if (!routeState || routeState !== focusedState || document.activeElement !== button) return
-              if (routeState.directPathInput) {
-                if (!timelineCameraEnabled) return
-                if (routeState.targetDistance !== focusDistance) return
-                const rect = button.getBoundingClientRect()
-                const view = experienceVisibleBounds()
-                if (rect.top < view.top + 12 || rect.bottom > view.bottom - 12) {
-                  setMarkerDistance(routeState.eventDistances[routeState.stopPointIndices[index]])
-                  updateRouteProgress()
-                }
-                return
-              }
-              if (!routeState.guided) return
-              updateRouteProgress()
-              const view = experienceVisibleBounds()
-              const rect = button.getBoundingClientRect()
-              if (rect.top >= view.top + 12 && rect.bottom <= view.bottom - 12) return
-              editorScroll.scrollTop = routeState.startScroll + routeState.eventDistances[routeState.stopPointIndices[index]]
-              updateRouteProgress()
-              // A short viewport or a tall card can need a different camera
-              // position from its pin. Reveal its top without trapping Tab.
-              const focusedRect = button.getBoundingClientRect()
-              const focusedView = experienceVisibleBounds()
-              let camera = routeState.camera
-              if (focusedRect.top < focusedView.top + 12 || focusedRect.height > focusedView.bottom - focusedView.top - 24) {
-                camera += focusedRect.top - focusedView.top - 12
-              } else if (focusedRect.bottom > focusedView.bottom - 12) {
-                camera += focusedRect.bottom - focusedView.bottom + 12
-              } else return
-              const lastCamera = routeState.motion.cameraY.at(-1) - routeState.anchor
-              editorScroll.scrollTop = camera < routeState.leadIn ? routeState.pinStart + camera
-                : camera > lastCamera ? routeState.startScroll + routeState.length + camera - lastCamera
-                : routeState.startScroll + routeDistanceAtY(camera + routeState.anchor)
-              updateRouteProgress()
-            })
-          })
-        })
+        routeState = { route, shell, viewport, svg, line, progress, cursor, badge, pins, eventIds, eventDates: events.map((event) => event.date), stops, stopPointIndices, points: [], eventDistances: [], motion: null, logoPeriods: [], currentStop: null, length: 0, startScroll: 0, guided: false, directPathInput: directPathInputEnabled && !reducedMotion.matches && !mobileViewport.matches, markerDistance: 0, targetDistance: 0, motionTimeConstant: 90 }
         routeResizeObserver = new ResizeObserver(queueRouteLayout)
         routeResizeObserver.observe(route)
         routeResizeObserver.observe(editorScroll)
@@ -1314,7 +1144,6 @@ const baseUrl = import.meta.env.BASE_URL
           cancelMarkerAnimation()
           stopAutoScroll()
           delete editorScroll.dataset.directPathInput
-          closeExperienceDetail()
           if (routeFrame !== null) cancelAnimationFrame(routeFrame)
           routeFrame = null
           if (routeLayoutFrame !== null) cancelAnimationFrame(routeLayoutFrame)
@@ -1403,11 +1232,8 @@ const baseUrl = import.meta.env.BASE_URL
       document.addEventListener('pointerdown', (event) => {
         if (!breadcrumbMenu.hidden && !breadcrumbMenu.contains(event.target) && !event.target.closest('.breadcrumb-folder')) closeBreadcrumbMenu()
       })
-      document.addEventListener('click', (event) => {
-        if (activeExperienceDialog && !activeExperienceDialog.panel.contains(event.target) && !event.target.closest('.route-stop-button')) closeExperienceDetail()
-      })
       editorScroll.addEventListener('mousedown', (event) => {
-        if (!routeState?.directPathInput || event.button !== 1 || event.target.closest('a, .experience-popover')) return
+        if (!routeState?.directPathInput || event.button !== 1 || event.target.closest('a')) return
         event.preventDefault()
         event.stopPropagation()
         if (autoScrollAnchorY !== null) { stopAutoScroll(); return }
@@ -1417,7 +1243,7 @@ const baseUrl = import.meta.env.BASE_URL
         editorScroll.dataset.autoscroll = 'idle'
       })
       editorScroll.addEventListener('auxclick', (event) => {
-        if (routeState?.directPathInput && event.button === 1 && !event.target.closest('a, .experience-popover')) event.preventDefault()
+        if (routeState?.directPathInput && event.button === 1 && !event.target.closest('a')) event.preventDefault()
       })
       document.addEventListener('mousemove', (event) => {
         if (autoScrollAnchorY === null) return
@@ -1436,7 +1262,7 @@ const baseUrl = import.meta.env.BASE_URL
         queueRouteProgress()
       }, { passive: true })
       editorScroll.addEventListener('wheel', (event) => {
-        if (!routeState?.directPathInput || event.ctrlKey || event.metaKey || !event.deltaY || event.target.closest('.experience-popover')) return
+        if (!routeState?.directPathInput || event.ctrlKey || event.metaKey || !event.deltaY) return
         if (autoScrollAnchorY !== null) stopAutoScroll()
         if (event.cancelable) event.preventDefault()
         const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16
@@ -1448,7 +1274,7 @@ const baseUrl = import.meta.env.BASE_URL
       let markerTouchTime = 0
       let markerTouchVelocity = 0
       editorScroll.addEventListener('touchstart', (event) => {
-        if (!routeState?.directPathInput || event.target.closest('.experience-popover') || event.touches.length !== 1) {
+        if (!routeState?.directPathInput || event.touches.length !== 1) {
           markerTouchY = null
           return
         }
@@ -1496,7 +1322,7 @@ const baseUrl = import.meta.env.BASE_URL
       editorScroll.addEventListener('touchcancel', () => { markerTouchY = null; cancelMarkerAnimation() }, { passive: true })
       editorScroll.addEventListener('keydown', (event) => {
         if (!routeState?.directPathInput || event.defaultPrevented || event.altKey || event.metaKey || event.ctrlKey && !['Home', 'End'].includes(event.key)) return
-        if (event.target.closest('.experience-popover, input, select, textarea, [contenteditable="true"]')) return
+        if (event.target.closest('input, select, textarea, [contenteditable="true"]')) return
         if (event.code === 'Space' && event.target.closest('button, a')) return
         const page = editorScroll.clientHeight * 0.85
         const step = event.key === 'ArrowDown' ? 48 : event.key === 'ArrowUp' ? -48
@@ -1545,7 +1371,6 @@ const baseUrl = import.meta.env.BASE_URL
       document.addEventListener('keydown', (event) => {
         if (event.key === 'Escape' && autoScrollAnchorY !== null) { stopAutoScroll(); return }
         if (event.key === 'Escape' && !breadcrumbMenu.hidden) { closeBreadcrumbMenu(true); return }
-        if (event.key === 'Escape' && activeExperienceDialog) { closeExperienceDetail(true); return }
         if (event.key === 'Escape' && workbench.dataset.mobileSidebarOpen === 'true' && mobileViewport.matches) { setMobileSidebarOpen(false); filesToggle.focus() }
       })
       window.addEventListener('popstate', readRoute)

@@ -6,6 +6,10 @@ No hay otro sprint seleccionado. Juan decide qué trabajo del [Product Backlog p
 
 Tras la publicación de S17, Juan detectó que el favicon usaba el antiguo distintivo oscuro «JL». Pidió usar el distintivo azul «JL» de la cabecera local. Este ajuste puntual no selecciona el logo definitivo de `AG-049` ni abre un sprint nuevo.
 
+Revisión posterior de S17 solicitada por Juan el 28/09/2026, pendiente de su aceptación: Trayectoria conserva su ruta y tarjetas de color, pero estas ya no abren ventanas ni dicen «Ver detalle». Cada tarjeta muestra la descripción y duración; los comentarios breves solo aparecen donde Juan los escribió. Se incorporaron los siete bloques de `contexto/CONTENIDO_AGENT.md` después de que Juan guardase el borrador completo. La duración se movió a la esquina superior derecha de cada tarjeta, junto a lugar/año, para evitar que cambie de posición al variar el texto. El relato más extenso corresponde a SOUL.md y sigue pendiente de su texto para `AG-034`. Este ajuste local no reabre el sprint cerrado ni autoriza publicación. La preview de Agent queda en el puerto 8000; se cerraron los servidores anteriores del mismo proyecto en 8769, 8770 y 8771.
+
+Juan acortó después el comentario de la tarjeta de Tokio a «Primera vez trabajando y viviendo solo.»; se refleja también en inglés. La revisión local sigue pendiente de aceptación.
+
 La versión aprobada conserva inglés y tema oscuro como valores iniciales, el Welcome ya aceptado y la colección Markdown estática enlazada. El texto personal de SOUL sigue provisional hasta `AG-034`; `MEMORY.md` permanece aplazado.
 
 - [Sprints y decisiones de Agent](./sprints/)

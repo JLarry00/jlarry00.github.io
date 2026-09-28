@@ -1,9 +1,9 @@
 # Trajectory
 
-> Oxfam London shop volunteer, 2019; waiter at Blumare Shinjuku and Yoshinoya in Tokyo, 2020, with both jobs overlapping; Mechanical Manufacturing Production Planning diploma at IES Virgen de la Paloma, 2020–2022; 2EyesVision Production Technician, 2022–2024; Thinkia DevOps Engineer Internship, 2026. Computer Engineering degree at UAM since 2023, with graduation expected in 2027. Due to join Kontaktu AI in 2026; no duties described yet. No public metrics.
+> Oxfam London shop volunteer, 2019; waiter at Blumare Shinjuku and Yoshinoya in Tokyo, 2020, with both jobs overlapping; Mechanical Manufacturing Production Planning diploma at IES Virgen de la Paloma, 2020–2022; 2EyesVision Production Technician, 2022–2024; Thinkia DevOps Engineer Internship, 2026. Computer Engineering degree at UAM since 2023, with graduation expected in 2027. Planned AI Engineer Internship at Kontaktu AI from 2026; specific duties not yet described. No public metrics.
 
 Status: public portfolio in development.
-Source review: 2026-09-27.
+Source review: 2026-09-28.
 
 My path includes volunteering in London, work in Japan, a vocational diploma in mechanical manufacturing, technical production, a DevOps internship and Computer Engineering studies. I am due to join Kontaktu AI in 2026.
 
@@ -31,9 +31,9 @@ I began a Computer Engineering degree at Universidad Autónoma de Madrid in 2023
 
 I worked with Terraform and Proxmox on infrastructure deployment, and with Jenkins and GCP on automation. I also took part in applied AI work. Internal details and quantified results are not published here.
 
-## Kontaktu AI · Upcoming role · 2026 · at least 6 months expected
+## Kontaktu AI · Planned AI Engineer Internship · 2026 · at least 6 months expected
 
-I am due to join Kontaktu AI in 2026. I will add details about this role after it begins.
+I am due to join Kontaktu AI as an AI Engineer intern at a startup focused on agentic AI. Specific duties and outcomes are not yet described.
 
 ## Related files
 

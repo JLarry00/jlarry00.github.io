@@ -879,7 +879,6 @@ a:focus-visible {
 .experience-active-logo[data-brand='fp'] { width: 38px; height: 38px; padding: 3px; object-fit: cover; }
 .experience-active-logo[hidden] { display: none; }
 .route-stop { --stop-color: var(--page-accent); position: absolute; z-index: 1; top: var(--event-y); width: 42%; min-width: 0; transform: translateY(-46%); }
-.route-stop[data-detail-open='true'] { z-index: 6; }
 .route-stop[data-side='left'] { left: 0; }
 .route-stop[data-side='right'] { right: 0; }
 .route-stop[data-stop='oxfam'] { width: 39%; }
@@ -901,8 +900,8 @@ a:focus-visible {
 .route-stop[data-side='right'] .route-pin { left: -7%; }
 .route-stop[data-stop='oxfam'] .route-pin { top: auto; bottom: 0; }
 .route-stop[data-stop='virgen-de-la-paloma'] .route-pin { top: 0; }
-.route-stop-button { display: grid; width: 100%; gap: 8px; min-height: 152px; padding: 24px 27px; border: 1px solid color-mix(in srgb, var(--stop-color) 54%, var(--border)); border-radius: 25px 12px 26px 13px; background: linear-gradient(145deg, color-mix(in srgb, var(--stop-color) 19%, var(--panel)), color-mix(in srgb, var(--stop-color) 7%, var(--editor))); color: var(--foreground); font: inherit; text-align: left; cursor: pointer; box-shadow: 0 10px 30px rgb(0 0 0 / 11%); transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease; }
-.route-stop[data-side='right'] .route-stop-button { border-radius: 13px 27px 12px 25px; }
+.route-stop-card { display: grid; width: 100%; gap: 8px; min-height: 152px; padding: 24px 27px; border: 1px solid color-mix(in srgb, var(--stop-color) 54%, var(--border)); border-radius: 25px 12px 26px 13px; background: linear-gradient(145deg, color-mix(in srgb, var(--stop-color) 19%, var(--panel)), color-mix(in srgb, var(--stop-color) 7%, var(--editor))); color: var(--foreground); font: inherit; text-align: left; box-shadow: 0 10px 30px rgb(0 0 0 / 11%); transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease; }
+.route-stop[data-side='right'] .route-stop-card { border-radius: 13px 27px 12px 25px; }
 .route-stop[data-stop='oxfam'] { --stop-color: #99cfaf; }
 .route-stop[data-stop='japan-restaurants'] { --stop-color: #e2a19a; }
 .route-stop[data-stop='virgen-de-la-paloma'] { --stop-color: #9dbce9; }
@@ -910,30 +909,18 @@ a:focus-visible {
 .route-stop[data-stop='uam'] { --stop-color: #9dccad; }
 .route-stop[data-stop='thinkia'] { --stop-color: #91bce8; }
 .route-stop[data-stop='kontaktu'] { --stop-color: #e6ad75; }
-.route-stop[data-kind='upcoming'] .route-stop-button { border-style: dashed; }
-.route-stop[data-stop='japan-restaurants'] .route-stop-button { min-height: 185px; }
-.route-stop[data-stop='oxfam'] .route-stop-button { min-height: 165px; border-radius: 30px 13px 28px 28px; }
-.route-stop[data-stop='2eyes'] .route-stop-button { min-height: 187px; }
-.route-stop[data-stop='uam'] .route-stop-button { min-height: 172px; border-style: dashed; }
-.route-stop-button:hover, .route-stop-button:focus-visible, .route-stop[data-current='true'] .route-stop-button { border-color: var(--stop-color); box-shadow: 0 15px 32px rgb(0 0 0 / 19%); transform: translateY(-3px); }
-.route-stop-button:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.route-stop[data-kind='upcoming'] .route-stop-card { border-style: dashed; }
+.route-stop[data-stop='japan-restaurants'] .route-stop-card { min-height: 185px; }
+.route-stop[data-stop='oxfam'] .route-stop-card { min-height: 165px; border-radius: 30px 13px 28px 28px; }
+.route-stop[data-stop='2eyes'] .route-stop-card { min-height: 187px; }
+.route-stop[data-stop='uam'] .route-stop-card { min-height: 172px; border-style: dashed; }
+.route-stop[data-current='true'] .route-stop-card { border-color: var(--stop-color); box-shadow: 0 15px 32px rgb(0 0 0 / 19%); transform: translateY(-3px); }
+.route-meta { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start; }
 .route-place { color: var(--stop-color); font-size: 12px; font-weight: 700; letter-spacing: .02em; }
 .route-title { color: var(--chrome-strong); font-size: clamp(22px, 2.5vw, 34px); font-weight: 720; letter-spacing: -.04em; line-height: 1.12; }
-.route-role { display: flex; flex-wrap: wrap; align-items: baseline; gap: 5px 9px; color: var(--foreground); font-size: 13px; line-height: 1.45; }
-.route-role-name { min-width: 0; }
-.route-duration { flex: none; padding: 2px 8px; border: 1px solid color-mix(in srgb, var(--stop-color) 40%, var(--border)); border-radius: 999px; color: var(--stop-color); font-size: 11px; font-weight: 650; white-space: nowrap; }
+.route-role { color: var(--foreground); font-size: 13px; line-height: 1.45; }
+.route-duration { padding: 2px 8px; border: 1px solid color-mix(in srgb, var(--stop-color) 40%, var(--border)); border-radius: 999px; color: var(--stop-color); font-size: 11px; font-weight: 650; white-space: nowrap; }
 .route-note { color: var(--muted); font-size: 12px; font-style: italic; }
-.route-open { align-self: end; margin-top: 8px; color: var(--stop-color); font-size: 12px; font-weight: 650; }
-.experience-popover { overscroll-behavior: contain; position: absolute; z-index: 30; width: min(405px, calc(100vw - 32px)); max-height: min(65vh, 600px, var(--popover-view-height, 600px)); overflow: auto; padding: 24px 27px 28px; border: 1px solid var(--stop-color); border-radius: 18px; background: linear-gradient(145deg, color-mix(in srgb, var(--stop-color) 19%, var(--panel)), color-mix(in srgb, var(--stop-color) 7%, var(--editor))); color: var(--foreground); box-shadow: 0 24px 80px rgb(0 0 0 / 48%); }
-.experience-popover.is-dismissing { opacity: 0; filter: blur(2px); pointer-events: none; transition: opacity 160ms ease, filter 160ms ease; }
-.experience-popover[hidden] { display: none; }
-.experience-popover-head { display: flex; align-items: start; justify-content: space-between; gap: 18px; }
-.experience-popover-place { color: var(--stop-color); font-size: 12px; font-weight: 700; }
-.experience-popover-close { display: grid; width: 31px; height: 31px; flex: none; place-items: center; margin: -7px -9px 0 0; border: 1px solid var(--border); border-radius: 50%; background: var(--editor); color: var(--foreground); font: inherit; font-size: 24px; line-height: 1; cursor: pointer; }
-.experience-popover-close:hover, .experience-popover-close:focus-visible { border-color: var(--stop-color); }
-.experience-popover h2 { margin-top: 14px; font-size: clamp(25px, 3vw, 34px); }
-.experience-popover-role { margin: 8px 0 0; color: var(--stop-color); font-size: 13px; }
-.experience-popover-body { margin: 23px 0 0; font-size: 15px; line-height: 1.7; }
 
 .skill-area-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 35px; }
 .skill-area { display: grid; min-height: 220px; grid-template-rows: 30px auto 1fr auto; gap: 10px; padding: 23px; border: 1px solid var(--border); border-radius: 14px; background: color-mix(in srgb, var(--editor) 47%, var(--panel)); color: var(--foreground); text-decoration: none; }
@@ -1830,9 +1817,8 @@ a:focus-visible {
   .route-milestone .route-milestone-pin, .route-milestone[data-id='fp-end'] .route-milestone-pin { left: -28px; right: auto; }
   .experience-active-logo { width: 24px; height: 24px; }
   .experience-active-logo[data-brand='fp'] { width: 30px; height: 30px; }
-  .route-stop-button, .route-stop[data-stop] .route-stop-button { min-height: 125px; padding: 19px 21px; }
+  .route-stop-card, .route-stop[data-stop] .route-stop-card { min-height: 125px; padding: 19px 21px; }
   .route-title { font-size: 24px; }
-  .experience-popover { max-height: min(60vh, 520px, var(--popover-view-height, 520px)); padding: 19px 21px 24px; }
   .project-area { grid-template-columns: 42px minmax(0, 1fr); gap: 7px 14px; padding: 21px; }
   .project-area .file-glyph { width: 40px; height: 40px; }
   .project-area h2 { grid-column: 2; }
