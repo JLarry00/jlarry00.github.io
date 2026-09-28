@@ -153,3 +153,7 @@ Juan no dispone ahora de ratón y pidió una prueba del clic central. En Edge au
 ## Cierre · 28/09/2026
 
 Juan aprobó S17 completo y pidió subirlo. Se mueven `AG-032`, `AG-033`, `AG-051` y `AG-052` al backlog de tareas terminadas. La aceptación cubre la presentación e interacción actuales; el texto definitivo de `AG-034`, las fotografías de `AG-050`, el QA móvil de `AG-043` y la revisión global de rendimiento de `AG-053` siguen como trabajo separado. La prueba automatizada del clic central quedó documentada, con el límite de no contar con un ratón físico. Tras el incidente del preview obsoleto, las siguientes revisiones locales deben comprobar la página servida, además de la compilación.
+
+Publicación: el commit `5c76100` se subió a `main`; [GitHub Pages #36445703444](https://github.com/JLarry00/jlarry00.github.io/actions/runs/36445703444) finalizó con éxito. Se comprobaron HTTP 200 en `/`, `/for-agents/`, `for-agents/read/es/Trayectoria/`, `for-agents/read/en/Trajectory/` y `/neon-mesh/`. La ruta documental antigua de `Experience` conserva su página de redirección.
+
+Ajuste tras la publicación: Juan mostró el favicon oscuro «JL» anterior y pidió usar el distintivo azul «JL» que Agent ya tenía en su cabecera local. El favicon se rehizo con el mismo color, forma y letras; se le dio una ruta nueva para evitar que el navegador conserve el icono antiguo en caché. El logo turquesa de Neuron Mesh se descartó tras la aclaración de Juan. `AG-049` sigue pendiente para decidir un logo definitivo en el futuro.
