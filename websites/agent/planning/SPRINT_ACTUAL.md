@@ -12,6 +12,8 @@ Juan acortó después el comentario de la tarjeta de Tokio a «Primera vez traba
 
 La versión aprobada conserva inglés y tema oscuro como valores iniciales, el Welcome ya aceptado y la colección Markdown estática enlazada. El texto personal de SOUL sigue provisional hasta `AG-034`; `MEMORY.md` permanece aplazado.
 
+Ajuste puntual posterior a S17, solicitado el 29/09/2026 y autorizado para push: traducir en español los nombres públicos de Contact, archivos de áreas de skills y la carpeta y archivos de proyectos. `README.md`, `AGENTS.md`, `SOUL.md`, `skills/` y `ci-cd.md` conservan los nombres convencionales. Juan pidió después fusionar Welcome con README: `README.md` es ahora la entrada única, con el diseño de bienvenida, el contenido de orientación y el mapa; `Welcome.md` y `Bienvenida.md` desaparecen también de la colección documental, sin alias. Las demás rutas españolas antiguas se mantienen como enlaces de traslado. El sprint S17 sigue cerrado y no se selecciona otro sprint con este ajuste.
+
 - [Sprints y decisiones de Agent](./sprints/)
 - [Product Backlog terminado](./COMPLETADAS.md)
 - [Versiones](./VERSIONES.md)

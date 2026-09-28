@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content'
 import profile from '../../../data/profile.json'
+import localizedPaths from '../../../data/localized-paths.json'
 import '../../../styles/reader.css'
 
 export async function getStaticPaths() {
@@ -15,9 +16,10 @@ const { document } = Astro.props
 const { Content } = await render(document)
 const [locale, ...segments] = document.id.split('/')
 const documentPath = `${segments.join('/')}.md`
-const canonicalPath = documentPath === 'Experience.md' || documentPath === 'Trayectoria.md' ? 'Trajectory.md' : documentPath
+const canonicalPath = documentPath === 'Experience.md' ? 'Trajectory.md' : Object.entries(localizedPaths).find(([, localized]) => localized === documentPath)?.[0] ?? documentPath
 const title = profile.documents.find((item) => item.path === canonicalPath)?.[locale]?.title ?? documentPath
-const movedTo = documentPath === 'Experience.md' ? `${import.meta.env.BASE_URL}for-agents/read/${locale}/${locale === 'es' ? 'Trayectoria' : 'Trajectory'}/` : null
+const newPath = documentPath === 'Experience.md' ? (locale === 'es' ? localizedPaths['Trajectory.md'] : 'Trajectory.md') : locale === 'es' ? localizedPaths[documentPath] : null
+const movedTo = newPath ? `${import.meta.env.BASE_URL}for-agents/read/${locale}/${newPath.slice(0, -3)}/` : null
 ---
 <!doctype html>
 <html lang={locale}>

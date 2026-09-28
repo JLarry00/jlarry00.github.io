@@ -19,7 +19,7 @@ Esta parte personal, incluidos mis hobbies, sigue pendiente de elegir y redactar
 
 - [README.md](./README.md)
 - [Trayectoria.md](./Trayectoria.md)
-- [projects/README.md](./projects/README.md)
-- [Contact.md](./Contact.md)
+- [proyectos/README.md](./proyectos/README.md)
+- [Contacto.md](./Contacto.md)
 
 [Índice de agentes](../index.md)

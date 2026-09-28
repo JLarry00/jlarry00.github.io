@@ -24,7 +24,6 @@ This portfolio is in development. Each page states the limits of its claims; it 
 
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
-- [Welcome.md](./Welcome.md)
 - [Trajectory.md](./Trajectory.md)
 - [Contact.md](./Contact.md)
 - [skills/README.md](./skills/README.md)
@@ -38,7 +37,6 @@ This portfolio is in development. Each page states the limits of its claims; it 
 
 ## Related files
 
-- [Welcome.md](./Welcome.md)
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
 - [Trajectory.md](./Trajectory.md)

@@ -1,13 +1,14 @@
 ---
-import { welcome, welcomeEs } from '../data/welcome'
+import { readmeIntro, readmeIntroEs } from '../data/readme-intro'
 import profile from '../data/profile.json'
 import documentGraph from '../data/document-graph.json'
 import experienceStops from '../data/experience-stops.json'
+import localizedPaths from '../data/localized-paths.json'
 import '../styles/workbench.css'
 
 const pageTitle = 'Juan Larrondo · Portfolio (Alpha)'
 const documents = profile.documents
-const rootFileOrder = ['Welcome.md', 'README.md', 'AGENTS.md', 'SOUL.md', 'Trajectory.md', 'Contact.md']
+const rootFileOrder = ['README.md', 'AGENTS.md', 'SOUL.md', 'Trajectory.md', 'Contact.md']
 const rootFileRank = new Map(rootFileOrder.map((path, index) => [path, index]))
 const rootDocuments = documents
   .filter((document) => !document.path.includes('/'))
@@ -47,11 +48,11 @@ const baseUrl = import.meta.env.BASE_URL
   <body>
     <div class="app-shell">
       <header class="titlebar" aria-label="Title bar">
-        <button class="titlebar-brand" type="button" aria-label="Open Welcome.md">
+        <button class="titlebar-brand" type="button" aria-label="Open README.md">
           <span class="brand-mark" aria-hidden="true">JL</span>
           <span class="titlebar-name">Juan / portfolio</span>
         </button>
-        <div class="titlebar-location" id="titlebar-location">Welcome.md — Juan</div>
+        <div class="titlebar-location" id="titlebar-location">README.md — Juan</div>
         <div class="titlebar-actions">
           <button class="language-switch" type="button" data-current-language="en" aria-label="Switch language to Spanish">
             <span data-language-option="es" lang="es">ES</span>
@@ -94,7 +95,7 @@ const baseUrl = import.meta.env.BASE_URL
 
               <ul class="tree-group" id="workspace-files">
                 {rootDocuments.map((document) => (
-                  <li><button class="tree-file" type="button" data-file={document.path} aria-current={document.path === 'Welcome.md' ? 'page' : undefined}>
+                  <li><button class="tree-file" type="button" data-file={document.path} aria-current={document.path === 'README.md' ? 'page' : undefined}>
                     <span class="file-glyph ui-icon" aria-hidden="true"></span><span class="tree-file-label">{document.path}</span>
                   </button></li>
                 ))}
@@ -136,36 +137,36 @@ const baseUrl = import.meta.env.BASE_URL
           </div>
           <div class="breadcrumbs" id="breadcrumbs" aria-label="Ruta del archivo">
             <button class="breadcrumb-folder" id="breadcrumb-root" type="button" aria-controls="breadcrumb-menu" aria-expanded="false"><span class="breadcrumb-root-icon ui-icon" aria-hidden="true"></span><span>Juan</span></button><span id="breadcrumb-path"></span>
-            <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="breadcrumb-current-icon" id="breadcrumb-current-icon" data-file="Welcome.md"><span class="file-glyph ui-icon" aria-hidden="true"></span></span>
-            <span class="breadcrumb-file" id="breadcrumb-file">Welcome.md</span>
+            <span class="breadcrumb-separator" aria-hidden="true">›</span><span class="breadcrumb-current-icon" id="breadcrumb-current-icon" data-file="README.md"><span class="file-glyph ui-icon" aria-hidden="true"></span></span>
+            <span class="breadcrumb-file" id="breadcrumb-file">README.md</span>
             <div class="breadcrumb-menu" id="breadcrumb-menu" role="region" aria-label="Files in Juan" hidden>
               <div class="breadcrumb-menu-heading"><span id="breadcrumb-menu-title">Juan/</span><small id="breadcrumb-menu-hint">Choose a file</small></div>
               <div class="breadcrumb-menu-list" id="breadcrumb-menu-list"></div>
             </div>
           </div>
           <div class="editor-scroll" role="region" tabindex="0" aria-label="Scrollable portfolio content">
-            <article class="welcome-preview" id="welcome-preview" aria-label="Vista previa de Welcome.md">
-              <div class="welcome-eyebrow">
-                <span class="welcome-eyebrow-line" aria-hidden="true"></span>
-                <span>Welcome.md</span>
-                <span class="welcome-eyebrow-index">01 / portfolio</span>
+            <article class="readme-preview" id="readme-preview" aria-label="Vista previa de README.md">
+              <div class="readme-eyebrow">
+                <span class="readme-eyebrow-line" aria-hidden="true"></span>
+                <span>README.md</span>
+                <span class="readme-eyebrow-index">01 / portfolio</span>
               </div>
-              <div class="welcome-layout">
-                <div class="welcome-copy">
-                  <h1>{welcome.greeting}<br /><em>{welcome.invitation}</em></h1>
-                  <p class="welcome-lead">{welcome.lead}</p>
-                  <div class="welcome-guide">
+              <div class="readme-layout">
+                <div class="readme-copy">
+                  <h1>{readmeIntro.greeting}<br /><em>{readmeIntro.invitation}</em></h1>
+                  <p class="readme-lead">{readmeIntro.lead}</p>
+                  <div class="readme-guide">
                     <span class="guide-arrow" aria-hidden="true">↖</span>
-                    <p>{welcome.guide}</p>
+                    <p>{readmeIntro.guide}</p>
                   </div>
-                  <nav class="welcome-routes" aria-label="Start exploring">
-                    <a data-welcome-file="Trajectory.md" href="#/en/Trajectory.md">Trajectory</a>
-                    <a data-welcome-file="projects/README.md" href="#/en/projects%2FREADME.md">Projects</a>
-                    <a data-welcome-file="SOUL.md" href="#/en/SOUL.md">About me</a>
-                    <a data-welcome-file="Contact.md" href="#/en/Contact.md">Contact</a>
+                  <nav class="readme-routes" aria-label="Start exploring">
+                    <a data-readme-file="Trajectory.md" href="#/en/Trajectory.md">Trajectory</a>
+                    <a data-readme-file="projects/README.md" href="#/en/projects%2FREADME.md">Projects</a>
+                    <a data-readme-file="SOUL.md" href="#/en/SOUL.md">About me</a>
+                    <a data-readme-file="Contact.md" href="#/en/Contact.md">Contact</a>
                   </nav>
                 </div>
-                <div class="welcome-art" aria-hidden="true">
+                <div class="readme-art" aria-hidden="true">
                   <div class="art-file art-file-back">
                     <span>skills/</span>
                     <i></i><i></i><i></i>
@@ -182,14 +183,15 @@ const baseUrl = import.meta.env.BASE_URL
                   <span class="art-coordinate art-coordinate-bottom">// CURIOUS BY DESIGN</span>
                 </div>
               </div>
-              <div class="welcome-bottom">
-                <span class="welcome-bottom-label">Development note</span>
+              <div class="readme-bottom">
+                <span class="readme-bottom-label">Development note</span>
                 <p>This version is still in development. <a href={`${baseUrl}icons/codicons/ATTRIBUTION.txt`}>Icon credits</a></p>
-                <a class="welcome-agent-link" href={`${baseUrl}for-agents/`}>For agents ↗</a>
+                <a class="readme-agent-link" href={`${baseUrl}for-agents/`}>For agents ↗</a>
               </div>
             </article>
+            <section class="readme-explore" id="readme-explore" aria-label="Explore the README" hidden></section>
             <article class="profile-preview" id="profile-preview" aria-live="polite" hidden></article>
-            <article class="empty-editor" id="empty-editor" hidden><h1>Everything is closed for now.</h1><p>Open a file from the tree, or return to Welcome.</p><button class="empty-welcome" type="button">Open Welcome.md</button></article>
+            <article class="empty-editor" id="empty-editor" hidden><h1>Everything is closed for now.</h1><p>Open a file from the tree, or return to README.</p><button class="empty-readme" type="button">Open README.md</button></article>
           </div>
         </main>
 
@@ -201,13 +203,13 @@ const baseUrl = import.meta.env.BASE_URL
           <span class="status-item">Juan · in development</span>
         </div>
         <div class="status-group">
-          <span class="status-item is-secondary" id="status-file">Welcome.md</span>
+          <span class="status-item is-secondary" id="status-file">README.md</span>
           <span class="status-item is-secondary" id="status-locale">EN</span>
         </div>
       </footer>
     </div>
 
-    <script define:vars={{ profileDocuments: documents, rootFileOrder, graphNodes: documentGraph.nodes, experienceStops, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
+    <script define:vars={{ profileDocuments: documents, rootFileOrder, graphNodes: documentGraph.nodes, experienceStops, localizedPaths, baseUrl, readmeContent: readmeIntro, readmeSpanish: readmeIntroEs }}>
       const byPath = Object.fromEntries(profileDocuments.map((item) => [item.path, item]))
       const graphByPath = Object.fromEntries(graphNodes.map((item) => [item.path, item]))
       const workbench = document.querySelector('.workbench')
@@ -216,7 +218,8 @@ const baseUrl = import.meta.env.BASE_URL
       const sidebarClose = document.querySelector('.sidebar-close')
       const brandButton = document.querySelector('.titlebar-brand')
       const languageSwitch = document.querySelector('.language-switch')
-      const welcomePreview = document.querySelector('#welcome-preview')
+      const readmePreview = document.querySelector('#readme-preview')
+      const readmeExplore = document.querySelector('#readme-explore')
       const profilePreview = document.querySelector('#profile-preview')
       const emptyEditor = document.querySelector('#empty-editor')
       const tabsList = document.querySelector('#tabs-list')
@@ -236,8 +239,8 @@ const baseUrl = import.meta.env.BASE_URL
       const mobileViewport = window.matchMedia('(max-width: 760px)')
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
       const systemTheme = window.matchMedia('(prefers-color-scheme: light)')
-      const openTabs = ['Welcome.md']
-      let activePath = 'Welcome.md'
+      const openTabs = ['README.md']
+      let activePath = 'README.md'
       let openBreadcrumbTrigger = null
       let routeState = null
       let routeResizeObserver = null
@@ -257,11 +260,16 @@ const baseUrl = import.meta.env.BASE_URL
       let locale = (() => { try { return localStorage.getItem('agent-language') === 'es' ? 'es' : 'en' } catch { return 'en' } })()
 
       function canonicalPath(path) {
-        return path === 'Experience.md' || path === 'Trayectoria.md' ? 'Trajectory.md' : path
+        if (path === 'Experience.md') return 'Trajectory.md'
+        return Object.entries(localizedPaths).find(([, localized]) => localized === path)?.[0] ?? path
       }
 
       function displayPath(path, language = locale) {
-        return path === 'Trajectory.md' && language === 'es' ? 'Trayectoria.md' : path
+        return language === 'es' ? (localizedPaths[path] ?? path) : path
+      }
+
+      function displayFolder(path, language = locale) {
+        return language === 'es' && path === 'projects' ? 'proyectos' : path
       }
 
       function linkFor(path, language = locale) {
@@ -284,7 +292,13 @@ const baseUrl = import.meta.env.BASE_URL
         if (!match) return
         const requestedPath = decodeURIComponent(match[2])
         const path = canonicalPath(requestedPath)
-        if (path !== '_empty' && !byPath[path]) return
+        if (path !== '_empty' && !byPath[path]) {
+          history.replaceState(null, '', linkFor('README.md', match[1]))
+          locale = match[1]
+          activePath = 'README.md'
+          render()
+          return
+        }
         locale = match[1]
         const canonicalHash = path === '_empty' ? `#/${locale}/_empty` : linkFor(path, locale)
         if (location.hash !== canonicalHash) history.replaceState(null, '', canonicalHash)
@@ -358,7 +372,7 @@ const baseUrl = import.meta.env.BASE_URL
           fileButton.append(make('span', 'breadcrumb-menu-indent'), make('span', 'file-glyph ui-icon'), make('span', 'breadcrumb-menu-name', displayPath(path).split('/').at(-1)))
           fileButton.addEventListener('click', () => {
             routeTo(path)
-            const heading = document.querySelector('.welcome-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
+            const heading = document.querySelector('.readme-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
             if (heading) { heading.tabIndex = -1; heading.focus() }
           })
           container.append(fileButton)
@@ -369,8 +383,8 @@ const baseUrl = import.meta.env.BASE_URL
           folderButton.type = 'button'
           folderButton.dataset.folder = path.split('/').at(-1)
           folderButton.setAttribute('aria-expanded', 'false')
-          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar carpeta' : 'Show folder'} ${path}`)
-          folderButton.append(make('span', 'breadcrumb-menu-chevron', '›'), make('span', 'folder-glyph ui-icon'), make('span', 'breadcrumb-menu-name', path.split('/').at(-1)))
+          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar carpeta' : 'Show folder'} ${displayFolder(path)}`)
+          folderButton.append(make('span', 'breadcrumb-menu-chevron', '›'), make('span', 'folder-glyph ui-icon'), make('span', 'breadcrumb-menu-name', displayFolder(path.split('/').at(-1))))
           const children = make('div', 'breadcrumb-menu-children')
           children.hidden = true
           folderButton.addEventListener('click', () => {
@@ -389,7 +403,7 @@ const baseUrl = import.meta.env.BASE_URL
         closeBreadcrumbMenu()
         breadcrumbMenuList.replaceChildren()
         fillBreadcrumbMenu(breadcrumbMenuList, folderPath)
-        const folderName = folderPath ? folderPath.split('/').at(-1) : 'Juan'
+        const folderName = folderPath ? displayFolder(folderPath.split('/').at(-1)) : 'Juan'
         document.querySelector('#breadcrumb-menu-title').textContent = `${folderName}/`
         document.querySelector('#breadcrumb-menu-hint').textContent = locale === 'es' ? 'Elige un archivo' : 'Choose a file'
         breadcrumbMenu.setAttribute('aria-label', `${locale === 'es' ? 'Archivos en' : 'Files in'} ${folderName}`)
@@ -445,37 +459,57 @@ const baseUrl = import.meta.env.BASE_URL
         for (let index = 0; index < parts.length - 1; index++) {
           const folder = parts[index]
           const folderPath = parts.slice(0, index + 1).join('/')
-          const folderButton = make('button', 'breadcrumb-folder', folder)
+          const folderButton = make('button', 'breadcrumb-folder', displayFolder(folder))
           folderButton.type = 'button'
           folderButton.setAttribute('aria-controls', 'breadcrumb-menu')
           folderButton.setAttribute('aria-expanded', 'false')
-          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar archivos de' : 'Show files in'} ${folderPath}`)
+          folderButton.setAttribute('aria-label', `${locale === 'es' ? 'Mostrar archivos de' : 'Show files in'} ${displayFolder(folderPath)}`)
           folderButton.addEventListener('click', () => toggleBreadcrumbMenu(folderButton, folderPath))
           breadcrumbPath.append(make('span', 'breadcrumb-separator', '›'), folderButton)
         }
-        breadcrumbFile.textContent = displayPath(parts.at(-1)) || '—'
+        breadcrumbFile.textContent = activePath ? displayPath(activePath).split('/').at(-1) : '—'
         breadcrumbCurrentIcon.dataset.file = activePath || ''
       }
 
-      function renderWelcome() {
-        const intro = locale === 'es' ? welcomeSpanish : welcomeContent
-        const heading = welcomePreview.querySelector('.welcome-copy h1')
+      function renderReadme() {
+        const intro = locale === 'es' ? readmeSpanish : readmeContent
+        const heading = readmePreview.querySelector('.readme-copy h1')
         heading.firstChild.textContent = intro.greeting
         heading.querySelector('em').textContent = intro.invitation
-        welcomePreview.querySelector('.welcome-lead').textContent = intro.lead
-        welcomePreview.querySelector('.welcome-guide p').textContent = intro.guide
-        welcomePreview.querySelector('.welcome-bottom-label').textContent = locale === 'es' ? 'Nota de desarrollo' : 'Development note'
-        const note = welcomePreview.querySelector('.welcome-bottom p')
+        readmePreview.querySelector('.readme-lead').textContent = intro.lead
+        readmePreview.querySelector('.readme-guide p').textContent = intro.guide
+        readmePreview.querySelector('.readme-bottom-label').textContent = locale === 'es' ? 'Nota de desarrollo' : 'Development note'
+        const note = readmePreview.querySelector('.readme-bottom p')
         const creditLink = make('a', '', locale === 'es' ? 'Créditos de iconos' : 'Icon credits')
         creditLink.href = `${baseUrl}icons/codicons/ATTRIBUTION.txt`
         note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), creditLink)
-        welcomePreview.querySelector('.welcome-agent-link').textContent = locale === 'es' ? 'Para agentes ↗' : 'For agents ↗'
-        welcomePreview.querySelector('.welcome-routes').setAttribute('aria-label', locale === 'es' ? 'Empieza a explorar' : 'Start exploring')
+        readmePreview.querySelector('.readme-agent-link').textContent = locale === 'es' ? 'Para agentes ↗' : 'For agents ↗'
+        readmePreview.querySelector('.readme-routes').setAttribute('aria-label', locale === 'es' ? 'Empieza a explorar' : 'Start exploring')
         const routeNames = locale === 'es' ? ['Trayectoria', 'Proyectos', 'Sobre mí', 'Contacto'] : ['Trajectory', 'Projects', 'About me', 'Contact']
-        welcomePreview.querySelectorAll('[data-welcome-file]').forEach((link, index) => {
+        readmePreview.querySelectorAll('[data-readme-file]').forEach((link, index) => {
           link.textContent = routeNames[index]
-          link.href = linkFor(link.dataset.welcomeFile)
+          link.href = linkFor(link.dataset.readmeFile)
         })
+        const entry = byPath['README.md'][locale]
+        readmeExplore.replaceChildren(make('p', 'readme-facts', entry.lead))
+        const overview = make('div', 'readme-overview')
+        for (const section of entry.sections) {
+          const block = make('section', 'readme-section')
+          block.append(make('h2', '', section.title), make('p', '', section.body))
+          overview.append(block)
+        }
+        readmeExplore.append(overview)
+        renderBrain(readmeExplore)
+        const links = make('div', 'readme-links')
+        for (const link of entry.links) {
+          const anchor = make('a', 'profile-link', `${link.label} ↗`)
+          anchor.href = link.url
+          anchor.target = '_blank'
+          anchor.rel = 'noopener noreferrer'
+          links.append(anchor)
+        }
+        readmeExplore.append(links)
+        readmeExplore.setAttribute('aria-label', locale === 'es' ? 'Explorar README' : 'Explore the README')
       }
 
       function renderProfile() {
@@ -516,10 +550,6 @@ const baseUrl = import.meta.env.BASE_URL
         else if (layout === 'projects') renderLinkedAreas(entry, ['projects/jarvis.md', 'projects/payroll-extractor.md'], 'project-area')
         else renderEditorialSections(entry, layout)
 
-        if (activePath === 'README.md') {
-          renderBrain()
-          profilePreview.querySelector('.profile-sections')?.before(profilePreview.querySelector('.brain-section'))
-        }
         if (layout !== 'experience' && entry.links.length) {
           const links = make('div', 'profile-links')
           entry.links.forEach((link) => {
@@ -1072,7 +1102,7 @@ const baseUrl = import.meta.env.BASE_URL
         queueRouteLayout()
       }
 
-      function renderBrain() {
+      function renderBrain(container) {
         const section = make('section', 'brain-section')
         section.append(
           make('p', 'brain-kicker', locale === 'es' ? 'Markdown brain' : 'Markdown brain'),
@@ -1117,7 +1147,7 @@ const baseUrl = import.meta.env.BASE_URL
           label.setAttribute('x', node.x)
           label.setAttribute('y', node.y + 5)
           label.setAttribute('text-anchor', 'middle')
-          label.textContent = node.path.endsWith('/README.md') ? node.path.replace('README.md', '') : displayPath(node.path).split('/').at(-1)
+          label.textContent = node.path.endsWith('/README.md') ? `${displayFolder(node.path.split('/')[0])}/` : displayPath(node.path).split('/').at(-1)
           link.append(rect, label)
           svg.append(link)
         }
@@ -1136,7 +1166,7 @@ const baseUrl = import.meta.env.BASE_URL
           list.append(cluster)
         }
         section.append(list)
-        profilePreview.append(section)
+        container.append(section)
       }
 
       function renderContent() {
@@ -1152,11 +1182,12 @@ const baseUrl = import.meta.env.BASE_URL
           routeResizeObserver = null
           routeState = null
         }
-        welcomePreview.hidden = true
+        readmePreview.hidden = true
+        readmeExplore.hidden = true
         profilePreview.hidden = true
         emptyEditor.hidden = true
         if (!activePath) { editorScroll.dataset.page = 'empty'; emptyEditor.hidden = false }
-        else if (activePath === 'Welcome.md') { editorScroll.dataset.page = 'welcome'; welcomePreview.hidden = false; renderWelcome() }
+        else if (activePath === 'README.md') { editorScroll.dataset.page = 'readme'; readmePreview.hidden = false; readmeExplore.hidden = false; renderReadme() }
         else { profilePreview.hidden = false; renderProfile() }
       }
 
@@ -1165,8 +1196,9 @@ const baseUrl = import.meta.env.BASE_URL
         const set = (selector, spanish, english) => { document.querySelector(selector).textContent = es ? spanish : english }
         set('.alpha-label', 'Vista previa · Alpha', 'Preview · Alpha')
         set('.empty-editor h1', 'Todo cerrado por ahora.', 'Everything is closed for now.')
-        set('.empty-editor p', 'Abre un archivo del árbol o vuelve a Welcome.', 'Open a file from the tree, or return to Welcome.')
-        set('.empty-welcome', 'Abrir Welcome.md', 'Open Welcome.md')
+        set('.empty-editor p', 'Abre un archivo del árbol o vuelve a README.', 'Open a file from the tree, or return to README.')
+        set('.empty-readme', 'Abrir README.md', 'Open README.md')
+        set('.readme-eyebrow span:nth-child(2)', 'README.md', 'README.md')
         set('.statusbar .status-item:first-child', 'Juan · en desarrollo', 'Juan · in development')
         set('#sidebar-title', 'Explorador', 'Explorer')
         set('.mobile-files-toggle span:last-child', 'Explorador', 'Explorer')
@@ -1179,7 +1211,8 @@ const baseUrl = import.meta.env.BASE_URL
         document.querySelector('.breadcrumbs').setAttribute('aria-label', es ? 'Ruta del archivo' : 'File path')
         document.querySelector('.titlebar').setAttribute('aria-label', es ? 'Barra de título' : 'Title bar')
         document.querySelector('.statusbar').setAttribute('aria-label', es ? 'Estado del workspace' : 'Workspace status')
-        brandButton.setAttribute('aria-label', es ? 'Abrir Welcome.md' : 'Open Welcome.md')
+        brandButton.setAttribute('aria-label', es ? 'Abrir README.md' : 'Open README.md')
+        readmePreview.setAttribute('aria-label', es ? 'Vista previa de README.md' : 'Preview of README.md')
         languageSwitch.setAttribute('aria-label', es ? 'Cambiar idioma a inglés' : 'Switch language to Spanish')
         themeSelect.setAttribute('aria-label', es ? 'Tema visual' : 'Visual theme')
         themeSelect.options[0].textContent = es ? 'VS Code oscuro' : 'VS Code Dark'
@@ -1201,6 +1234,7 @@ const baseUrl = import.meta.env.BASE_URL
           if (button.dataset.file === activePath) button.setAttribute('aria-current', 'page')
           else button.removeAttribute('aria-current')
         })
+        document.querySelector('[data-folder="projects"] span:last-child').textContent = displayFolder('projects')
         renderTabs()
         renderBreadcrumb()
         renderContent()
@@ -1218,7 +1252,7 @@ const baseUrl = import.meta.env.BASE_URL
       systemTheme.addEventListener('change', (event) => {
         if (document.documentElement.dataset.themeChoice === 'system') document.documentElement.dataset.theme = event.matches ? 'light' : 'dark'
       })
-      brandButton.addEventListener('click', () => routeTo('Welcome.md'))
+      brandButton.addEventListener('click', () => routeTo('README.md'))
       languageSwitch.addEventListener('click', () => routeTo(activePath, locale === 'es' ? 'en' : 'es'))
       breadcrumbRoot.addEventListener('click', () => toggleBreadcrumbMenu(breadcrumbRoot, ''))
       breadcrumbMenu.addEventListener('keydown', (event) => {
@@ -1346,7 +1380,7 @@ const baseUrl = import.meta.env.BASE_URL
       })
       filesToggle.addEventListener('click', () => { setMobileSidebarOpen(true); sidebarClose.focus() })
       sidebarClose.addEventListener('click', () => { setMobileSidebarOpen(false); filesToggle.focus() })
-      document.querySelector('.empty-welcome').addEventListener('click', () => routeTo('Welcome.md'))
+      document.querySelector('.empty-readme').addEventListener('click', () => routeTo('README.md'))
       document.querySelectorAll('[data-folder]').forEach((button) => {
         button.addEventListener('click', () => {
           const list = document.getElementById(button.dataset.target)
@@ -1360,7 +1394,7 @@ const baseUrl = import.meta.env.BASE_URL
           routeTo(button.dataset.file)
           if (mobileViewport.matches) {
             setMobileSidebarOpen(false)
-            const heading = document.querySelector('.welcome-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
+            const heading = document.querySelector('.readme-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
             if (heading) { heading.tabIndex = -1; heading.focus() }
           }
         })

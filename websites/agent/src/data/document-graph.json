@@ -1,9 +1,8 @@
 {
   "nodes": [
-    { "path": "README.md", "group": "root", "x": 600, "y": 310, "related": ["Welcome.md", "AGENTS.md", "SOUL.md", "Trajectory.md", "skills/README.md", "projects/README.md", "Contact.md"] },
+    { "path": "README.md", "group": "root", "x": 600, "y": 215, "related": ["AGENTS.md", "SOUL.md", "Trajectory.md", "skills/README.md", "projects/README.md", "Contact.md"] },
     { "path": "AGENTS.md", "group": "root", "x": 330, "y": 135, "related": ["README.md", "SOUL.md", "Trajectory.md", "skills/README.md", "projects/README.md", "Contact.md"] },
     { "path": "SOUL.md", "group": "root", "x": 870, "y": 135, "related": ["README.md", "Trajectory.md", "projects/README.md", "Contact.md"] },
-    { "path": "Welcome.md", "group": "root", "x": 600, "y": 75, "related": ["README.md", "SOUL.md", "Trajectory.md", "projects/README.md"] },
     { "path": "Trajectory.md", "group": "root", "x": 285, "y": 345, "related": ["SOUL.md", "skills/README.md", "projects/README.md", "Contact.md"] },
     { "path": "Contact.md", "group": "root", "x": 915, "y": 345, "related": ["README.md", "Trajectory.md", "projects/README.md"] },
     { "path": "skills/README.md", "group": "skills", "x": 375, "y": 525, "related": ["skills/infrastructure.md", "skills/ci-cd.md", "skills/applied-ai.md", "skills/programming.md", "Trajectory.md", "projects/README.md"] },

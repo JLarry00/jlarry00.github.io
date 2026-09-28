@@ -28,6 +28,8 @@
 
 Las versiones Agent tienen su propia secuencia. El selector local apunta ahora a Agent.
 
+Ajuste de nombres y entrada posterior a S17 (29/09/2026): `README.md` absorbe Welcome y se convierte en la página inicial; `Welcome.md` y `Bienvenida.md` dejan de existir en la web humana y documental. `Contacto.md`, nombres de áreas de skills y `proyectos/` se muestran en la interfaz y tienen rutas documentales equivalentes. Los demás enlaces españoles anteriores conservan una página de traslado. Publicación remota pendiente del workflow tras el push autorizado por Juan.
+
 `AG-052` (S17, solo local): scroll nativo convertido en distancia constante sobre la ruta, con compensación del movimiento vertical en curvas y tramos horizontales. Compilación Astro de 32 páginas completada el 28/09/2026; preview local en el puerto 8768, pendiente de revisión de Juan. No publicado.
 
 Revisión local de `AG-052`: el indicador conserva la geometría real y la página sigue una referencia vertical suavizada, calculada al construir la ruta. Juan revisará si esto elimina los tirones; no se ha iniciado la evaluación de reingeniería `AG-053`.

@@ -39,7 +39,7 @@ Tengo previsto incorporarme a Kontaktu AI como Ingeniero de IA en prácticas, en
 
 - [SOUL.md](./SOUL.md)
 - [skills/README.md](./skills/README.md)
-- [projects/README.md](./projects/README.md)
-- [Contact.md](./Contact.md)
+- [proyectos/README.md](./proyectos/README.md)
+- [Contacto.md](./Contacto.md)
 
 [Índice de agentes](../index.md)

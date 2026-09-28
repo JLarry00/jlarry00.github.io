@@ -9,7 +9,7 @@ Estudio Ingeniería Informática en la Universidad Autónoma de Madrid. Mi exper
 
 ## Contenido del perfil
 
-Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión.
+Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. proyectos/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión.
 
 ## Alcance
 
@@ -24,26 +24,24 @@ Este portfolio está en desarrollo. Cada página indica los límites de lo que p
 
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
-- [Welcome.md](./Welcome.md)
 - [Trayectoria.md](./Trayectoria.md)
-- [Contact.md](./Contact.md)
+- [Contacto.md](./Contacto.md)
 - [skills/README.md](./skills/README.md)
-- [skills/infrastructure.md](./skills/infrastructure.md)
+- [skills/infraestructura.md](./skills/infraestructura.md)
 - [skills/ci-cd.md](./skills/ci-cd.md)
-- [skills/applied-ai.md](./skills/applied-ai.md)
-- [skills/programming.md](./skills/programming.md)
-- [projects/README.md](./projects/README.md)
-- [projects/jarvis.md](./projects/jarvis.md)
-- [projects/payroll-extractor.md](./projects/payroll-extractor.md)
+- [skills/ia-aplicada.md](./skills/ia-aplicada.md)
+- [skills/programacion.md](./skills/programacion.md)
+- [proyectos/README.md](./proyectos/README.md)
+- [proyectos/jarvis.md](./proyectos/jarvis.md)
+- [proyectos/extractor-de-nominas.md](./proyectos/extractor-de-nominas.md)
 
 ## Archivos relacionados
 
-- [Welcome.md](./Welcome.md)
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
 - [Trayectoria.md](./Trayectoria.md)
 - [skills/README.md](./skills/README.md)
-- [projects/README.md](./projects/README.md)
-- [Contact.md](./Contact.md)
+- [proyectos/README.md](./proyectos/README.md)
+- [Contacto.md](./Contacto.md)
 
 [Índice de agentes](../index.md)

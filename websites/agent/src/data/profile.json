@@ -33,7 +33,7 @@
         "agentSections": [
           {
             "title": "Contenido del perfil",
-            "body": "Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión."
+            "body": "Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. proyectos/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión."
           },
           {
             "title": "Alcance",
@@ -52,7 +52,7 @@
           },
           {
             "title": "How to explore",
-            "body": "Open a file from the tree, or start with Experience, Skills or Projects, depending on what you want to learn."
+            "body": "Open a file from the tree, or start with Trajectory, Skills or Projects, depending on what you want to learn."
           }
         ],
         "links": [
@@ -89,7 +89,7 @@
         "sections": [
           {
             "title": "Lo que hay aquí",
-            "body": "Welcome abre la puerta; SOUL cuenta algo más personal; Experience, skills y projects muestran lo que he hecho y lo que estoy aprendiendo."
+            "body": "README.md abre la puerta; SOUL.md cuenta algo más personal; Trayectoria.md, skills/ y proyectos/ muestran lo que he hecho y lo que estoy aprendiendo."
           },
           {
             "title": "Si prefieres los documentos",
@@ -106,7 +106,7 @@
         "agentSections": [
           {
             "title": "Cómo usar estos documentos",
-            "body": "Empieza por README.md para una visión general. Sigue Trayectoria.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y projects/README.md para proyectos. Contact.md reúne los canales públicos."
+            "body": "Empieza por README.md para una visión general. Sigue Trayectoria.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y proyectos/README.md para proyectos. Contacto.md reúne los canales públicos."
           },
           {
             "title": "Límites",
@@ -121,7 +121,7 @@
         "sections": [
           {
             "title": "What is here",
-            "body": "Welcome opens the door; SOUL shares more personal context; Experience, skills and projects show what I have done and what I am learning."
+            "body": "README.md opens the door; SOUL.md shares more personal context; Trajectory.md, skills/ and projects/ show what I have done and what I am learning."
           },
           {
             "title": "If you prefer documents",
@@ -183,36 +183,6 @@
         ],
         "links": [],
         "agentSummary": "Public personal context for Juan. Computer Engineering student with interests in automation, infrastructure and applied AI. Hobbies have not yet been confirmed for publication."
-      }
-    },
-    {
-      "path": "Welcome.md",
-      "icon": "home",
-      "es": {
-        "eyebrow": "Bienvenida",
-        "title": "Hola, soy Juan.",
-        "lead": "Pasa y curiosea. Estoy preparando este portfolio como un repositorio que puedas recorrer: cada archivo es una puerta a una parte de mi trabajo.",
-        "sections": [
-          {
-            "title": "Empieza por aquí",
-            "body": "Abre README.md para una visión general o sigue los enlaces entre archivos para explorar el perfil."
-          }
-        ],
-        "links": [],
-        "agentSummary": "Página de bienvenida. No contiene afirmaciones profesionales adicionales; consulta README, Experience, skills y projects para hechos."
-      },
-      "en": {
-        "eyebrow": "Welcome",
-        "title": "Hi, I’m Juan.",
-        "lead": "Come in and look around. I am building this portfolio as a repository you can browse: each file opens a different part of my work.",
-        "sections": [
-          {
-            "title": "Start here",
-            "body": "Open README.md for an overview or follow links between files to explore the profile."
-          }
-        ],
-        "links": [],
-        "agentSummary": "Welcome page. For professional facts, read README, Experience, skills and projects."
       }
     },
     {
@@ -499,7 +469,7 @@
       "icon": "project",
       "es": {
         "eyebrow": "Selección inicial",
-        "title": "Projects",
+        "title": "Proyectos",
         "lead": "Estos proyectos son espacios de aprendizaje y construcción. Presento sus objetivos y enlazo el código, sin convertir planes o demos en resultados de producción.",
         "sections": [
           {

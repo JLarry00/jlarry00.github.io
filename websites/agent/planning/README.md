@@ -24,16 +24,17 @@ README.md
 AGENTS.md
 SOUL.md
 MEMORY.md  (aplazado; no crear todavía)
-Welcome.md
 Trajectory.md / Trayectoria.md  (según idioma)
-Contact.md
+Contact.md / Contacto.md  (según idioma)
 skills/
   README.md
-  [area].md  (CI/CD, infraestructura, IA...)
-projects/
+  [area].md  (nombre traducido cuando procede; CI/CD se conserva)
+projects/ / proyectos/  (según idioma)
   README.md
-  [project].md
+  [project].md  (nombre propio conservado; descriptor traducido)
 ```
+
+Los identificadores internos siguen en inglés. `src/data/localized-paths.json` define los nombres públicos en español para la interfaz, las rutas y la colección documental. `README.md` reúne ahora la bienvenida y la orientación anterior, con el mapa de archivos y los enlaces. Los archivos `Welcome.md` y `Bienvenida.md` se retiraron por completo. Las otras rutas españolas antiguas conservan una página de traslado.
 
 S13 fijó este árbol sin `MEMORY.md`, que sigue aplazado sin función definida. `SOUL.md` es el About personal completo, incluidos los hobbies que Juan elija publicar; su texto actual es solo una base provisional. El `AGENTS.md` de la interfaz humana abre el `AGENTS.md` documental, cuya cabecera vuelve al archivo humano. [AG-005-opciones.md](./AG-005-opciones.md) registra el papel de cada archivo. S14 organiza skills por área y conserva la antigua ruta de Terraform como enlace al área de infraestructura. Los documentos se generan desde `src/data/profile.json`; `src/data/document-graph.json` define los enlaces entre ellos y el mapa humano. Las instrucciones reales del agente que desarrolla este workspace no se publican como perfil.
 

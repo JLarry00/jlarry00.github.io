@@ -4,8 +4,8 @@
     "kind": "volunteer",
     "start": "2019-10",
     "duration": { "es": "1 mes", "en": "1 month" },
-    "es": { "title": "Oxfam", "role": "Voluntariado en una tienda de Oxfam", "place": "Londres", "period": "2019", "note": "Primera experiencia viajando solo." },
-    "en": { "title": "Oxfam", "role": "Volunteering at an Oxfam shop", "place": "London", "period": "2019", "note": "My first time travelling alone." }
+    "es": { "title": "Oxfam", "role": "Voluntariado en una tienda de Oxfam", "place": "Londres", "period": "2019", "note": "Primera experiencia viajando solo.", "agentTitle": "Oxfam · Voluntariado en tienda · Londres · 2019", "agentBody": "Hice voluntariado en una tienda Oxfam en Londres." },
+    "en": { "title": "Oxfam", "role": "Volunteering at an Oxfam shop", "place": "London", "period": "2019", "note": "My first time travelling alone.", "agentTitle": "Oxfam · Shop volunteer · London · 2019", "agentBody": "I volunteered at an Oxfam shop in London." }
   },
   {
     "id": "japan-restaurants",
@@ -13,8 +13,8 @@
     "start": "2020-01",
     "end": "2020-06",
     "duration": { "es": "6 meses", "en": "6 months" },
-    "es": { "title": "Restaurantes Blumare y Yoshinoya", "role": "Camarero en Blumare Shinjuku y Yoshinoya, Nakano", "place": "Tokio", "period": "2020", "note": "Primera vez trabajando y viviendo solo." },
-    "en": { "title": "Blumare and Yoshinoya restaurants", "role": "Waiter at Blumare Shinjuku and Yoshinoya, Nakano", "place": "Tokyo", "period": "2020", "note": "My first time working and living on my own." }
+    "es": { "title": "Restaurantes Blumare y Yoshinoya", "role": "Camarero en Blumare Shinjuku y Yoshinoya, Nakano", "place": "Tokio", "period": "2020", "note": "Primera vez trabajando y viviendo solo.", "agentTitle": "Restaurantes Blumare y Yoshinoya · Camarero · Tokio · 2020", "agentBody": "Trabajé como camarero en Blumare Shinjuku y Yoshinoya durante mi estancia en Tokio. Ambos trabajos coincidieron en el tiempo." },
+    "en": { "title": "Blumare and Yoshinoya restaurants", "role": "Waiter at Blumare Shinjuku and Yoshinoya, Nakano", "place": "Tokyo", "period": "2020", "note": "My first time working and living on my own.", "agentTitle": "Blumare and Yoshinoya restaurants · Waiter · Tokyo · 2020", "agentBody": "I worked as a waiter at Blumare Shinjuku and Yoshinoya during my time in Tokyo. The two jobs overlapped." }
   },
   {
     "id": "virgen-de-la-paloma",
@@ -22,8 +22,8 @@
     "start": "2020-09",
     "end": "2022-06",
     "duration": { "es": "2 años", "en": "2 years" },
-    "es": { "title": "IES Virgen de la Paloma", "role": "Grado Superior en Programación de la Producción en Fabricación Mecánica", "place": "Madrid", "period": "2020–2022", "note": "Empieza la educación superior." },
-    "en": { "title": "IES Virgen de la Paloma", "role": "Higher Vocational Diploma in Mechanical Manufacturing Production Planning", "place": "Madrid", "period": "2020–2022", "note": "The start of my higher education." }
+    "es": { "title": "IES Virgen de la Paloma", "role": "Grado Superior en Programación de la Producción en Fabricación Mecánica", "place": "Madrid", "period": "2020–2022", "note": "Empieza la educación superior.", "agentBody": "Cursé el Grado Superior en Programación de la Producción en Fabricación Mecánica en el IES Virgen de la Paloma y terminé la FP en 2022." },
+    "en": { "title": "IES Virgen de la Paloma", "role": "Higher Vocational Diploma in Mechanical Manufacturing Production Planning", "place": "Madrid", "period": "2020–2022", "note": "The start of my higher education.", "agentBody": "I studied a Higher Vocational Diploma in Mechanical Manufacturing Production Planning at IES Virgen de la Paloma and completed it in 2022." }
   },
   { "id": "2eyes", "kind": "work", "start": "2022-09", "end": "2024-09", "duration": { "es": "2 años", "en": "2 years" }, "sectionIndex": 1,
     "es": { "role": "Técnico de Producción en una startup MedTech" },
@@ -48,7 +48,7 @@
     "kind": "upcoming",
     "start": "2026-10",
     "duration": { "es": "mín. 6 meses previstos", "en": "at least 6 months expected" },
-    "es": { "title": "Kontaktu AI", "role": "Prácticas previstas como Ingeniero de IA en una startup de IA agéntica", "period": "2026" },
-    "en": { "title": "Kontaktu AI", "role": "Planned AI Engineer Internship at an agentic AI startup", "period": "2026" }
+    "es": { "title": "Kontaktu AI", "role": "Prácticas previstas como Ingeniero de IA en una startup de IA agéntica", "period": "2026", "agentTitle": "Kontaktu AI · Prácticas previstas de Ingeniería de IA · 2026", "agentBody": "Tengo previsto incorporarme a Kontaktu AI como Ingeniero de IA en prácticas, en una startup centrada en IA agéntica. Aún no describo funciones concretas ni resultados de esta etapa." },
+    "en": { "title": "Kontaktu AI", "role": "Planned AI Engineer Internship at an agentic AI startup", "period": "2026", "agentTitle": "Kontaktu AI · Planned AI Engineer Internship · 2026", "agentBody": "I am due to join Kontaktu AI as an AI Engineer intern at a startup focused on agentic AI. Specific duties and outcomes are not yet described." }
   }
 ]

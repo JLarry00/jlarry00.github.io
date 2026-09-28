@@ -6,6 +6,7 @@ const root = fileURLToPath(new URL('../', import.meta.url))
 const profile = JSON.parse(readFileSync(path.join(root, 'src/data/profile.json'), 'utf8'))
 const experienceStops = JSON.parse(readFileSync(path.join(root, 'src/data/experience-stops.json'), 'utf8'))
 const graph = JSON.parse(readFileSync(path.join(root, 'src/data/document-graph.json'), 'utf8'))
+const localizedPaths = JSON.parse(readFileSync(path.join(root, 'src/data/localized-paths.json'), 'utf8'))
 const output = path.join(root, 'src/content/agent-docs')
 const locales = ['es', 'en']
 const documentsByPath = new Map(profile.documents.map((document) => [document.path, document]))
@@ -26,7 +27,7 @@ function relativeLink(from, to) {
 }
 
 function localizedPath(documentPath, locale) {
-  return documentPath === 'Trajectory.md' && locale === 'es' ? 'Trayectoria.md' : documentPath
+  return locale === 'es' ? (localizedPaths[documentPath] ?? documentPath) : documentPath
 }
 
 for (const locale of locales) {
@@ -50,8 +51,8 @@ for (const locale of locales) {
       for (const stop of experienceStops) {
         const section = stop.sectionIndex == null ? null : entry.sections[stop.sectionIndex]
         const content = stop[locale]
-        const heading = content ? [content.title, content.role, content.place, content.period].filter(Boolean).join(' · ') : section.title
-        lines.push(`## ${[heading, stop.duration?.[locale]].filter(Boolean).join(' · ')}`, '', content?.body ?? section?.body ?? '', '')
+        const heading = content?.agentTitle ?? (section && stop.id !== 'uam' ? section.title : [content?.title, content?.role, content?.place, content?.period].filter(Boolean).join(' · '))
+        lines.push(`## ${[heading, stop.duration?.[locale]].filter(Boolean).join(' · ')}`, '', content?.agentBody ?? section?.body ?? content?.note ?? '', '')
       }
     } else {
       for (const section of entry.agentSections ?? entry.sections) lines.push(`## ${section.title}`, '', section.body, '')
@@ -82,6 +83,18 @@ for (const locale of locales) {
     writeFileSync(file, lines.join('\n'))
   }
 
+  for (const [oldPath, newPath] of Object.entries(localizedPaths)) {
+    if (locale !== 'es') break
+    const oldFile = path.join(output, locale, oldPath)
+    mkdirSync(path.dirname(oldFile), { recursive: true })
+    writeFileSync(oldFile, [
+      '# Archivo trasladado',
+      '',
+      `[Abrir ${newPath}](${relativeLink(oldPath, newPath)})`,
+      '',
+    ].join('\n'))
+  }
+
   const movedPath = localizedPath('Trajectory.md', locale)
   writeFileSync(path.join(output, locale, 'Experience.md'), [
     `# ${locale === 'es' ? 'Archivo trasladado' : 'File moved'}`,
@@ -96,7 +109,7 @@ for (const locale of locales) {
     '',
     locale === 'es' ? 'Este enlace antiguo sigue disponible. Terraform está ahora dentro del área de infraestructura.' : 'This old URL remains available. Terraform now belongs to the infrastructure area.',
     '',
-    `[${locale === 'es' ? 'Abrir infraestructura' : 'Open infrastructure'}](./infrastructure.md)`,
+    `[${locale === 'es' ? 'Abrir infraestructura' : 'Open infrastructure'}](./${localizedPath('skills/infrastructure.md', locale).split('/').at(-1)})`,
     '',
   ].join('\n'))
 }
