@@ -15,7 +15,7 @@
           },
           {
             "title": "Cómo recorrerlo",
-            "body": "Abre un archivo desde el árbol o empieza por Experiencia, Skills o Proyectos según lo que quieras conocer."
+            "body": "Abre un archivo desde el árbol o empieza por Trayectoria, Skills o Proyectos según lo que quieras conocer."
           }
         ],
         "links": [
@@ -33,7 +33,7 @@
         "agentSections": [
           {
             "title": "Contenido del perfil",
-            "body": "Experience.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión."
+            "body": "Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión."
           },
           {
             "title": "Alcance",
@@ -70,7 +70,7 @@
         "agentSections": [
           {
             "title": "Profile contents",
-            "body": "Experience.md covers roles and education. skills/README.md distinguishes professional practice from studies. projects/README.md links two public personal repositories. SOUL.md adds personal context still under review."
+            "body": "Trajectory.md covers roles and education. skills/README.md distinguishes professional practice from studies. projects/README.md links two public personal repositories. SOUL.md adds personal context still under review."
           },
           {
             "title": "Scope",
@@ -106,7 +106,7 @@
         "agentSections": [
           {
             "title": "Cómo usar estos documentos",
-            "body": "Empieza por README.md para una visión general. Sigue Experience.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y projects/README.md para proyectos. Contact.md reúne los canales públicos."
+            "body": "Empieza por README.md para una visión general. Sigue Trayectoria.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y projects/README.md para proyectos. Contact.md reúne los canales públicos."
           },
           {
             "title": "Límites",
@@ -138,7 +138,7 @@
         "agentSections": [
           {
             "title": "How to use these documents",
-            "body": "Start with README.md for an overview. Follow Experience.md for work history, SOUL.md for personal context, skills/README.md for practice areas and projects/README.md for projects. Contact.md lists public contact channels."
+            "body": "Start with README.md for an overview. Follow Trajectory.md for work history, SOUL.md for personal context, skills/README.md for practice areas and projects/README.md for projects. Contact.md lists public contact channels."
           },
           {
             "title": "Limits",
@@ -216,49 +216,50 @@
       }
     },
     {
-      "path": "Experience.md",
+      "path": "Trajectory.md",
+      "reviewed": "2026-09-27",
       "icon": "briefcase",
       "es": {
         "eyebrow": "Trayectoria",
-        "title": "Experiencia",
-        "lead": "He pasado por producción técnica y por prácticas de DevOps. Ambas etapas me enseñaron a prestar atención a los procesos que hay detrás de un resultado.",
+        "title": "Trayectoria",
+        "lead": "Mi trayectoria incluye voluntariado en Londres, trabajo en Japón, una FP de fabricación mecánica, producción técnica, prácticas de DevOps y estudios de Ingeniería Informática. Mi incorporación a Kontaktu AI está prevista para 2026.",
         "sections": [
           {
-            "title": "Thinkia · prácticas DevOps · febrero–agosto de 2026",
+            "title": "Thinkia · Prácticas de Ingeniero DevOps · 2026",
             "body": "Trabajé con Terraform y Proxmox en despliegues de infraestructura, y con Jenkins y GCP en automatización. También participé en trabajo de IA aplicada. Los detalles internos y resultados cuantificados no se publican aquí."
           },
           {
-            "title": "2EyesVision · producción técnica · septiembre de 2022–septiembre de 2024",
+            "title": "2EyesVision · Técnico de Producción · 2022–2024",
             "body": "Participé en producción, pruebas y documentación en un entorno de tecnología oftalmológica. Colaboré en mejoras de procesos y en la claridad de las pruebas."
           },
           {
             "title": "Formación",
-            "body": "Curso el Grado en Ingeniería Informática en la Universidad Autónoma de Madrid. Esta página no presenta una fecha de graduación prevista como hecho cerrado."
+            "body": "Empecé el Grado en Ingeniería Informática en la Universidad Autónoma de Madrid en 2023. La graduación está prevista para 2027; todavía no es un título obtenido."
           }
         ],
         "links": [],
-        "agentSummary": "Experiencia cerrada: Thinkia, prácticas DevOps, febrero–agosto 2026; 2EyesVision, producción técnica, septiembre 2022–septiembre 2024. Grado en Ingeniería Informática en UAM en curso según perfil interno actualizado en septiembre 2026. Sin métricas publicadas."
+        "agentSummary": "Oxfam Londres, voluntariado en tienda, 2019; camarero en Blumare Shinjuku y Yoshinoya, Tokio, 2020, con ambos trabajos simultáneos; FP de Programación de la Producción en Fabricación Mecánica en IES Virgen de la Paloma, 2020–2022; 2EyesVision, Técnico de Producción, 2022–2024; Thinkia, Prácticas de Ingeniero DevOps, 2026. Grado en Ingeniería Informática en UAM desde 2023, con graduación prevista para 2027. Incorporación a Kontaktu AI prevista para 2026; aún sin funciones descritas. Sin métricas publicadas."
       },
       "en": {
         "eyebrow": "Background",
-        "title": "Experience",
-        "lead": "I have worked in technical production and in a DevOps internship. Both taught me to look closely at the processes behind a result.",
+        "title": "Trajectory",
+        "lead": "My path includes volunteering in London, work in Japan, a vocational diploma in mechanical manufacturing, technical production, a DevOps internship and Computer Engineering studies. I am due to join Kontaktu AI in 2026.",
         "sections": [
           {
-            "title": "Thinkia · DevOps internship · February–August 2026",
+            "title": "Thinkia · DevOps Engineer Internship · 2026",
             "body": "I worked with Terraform and Proxmox on infrastructure deployment, and with Jenkins and GCP on automation. I also took part in applied AI work. Internal details and quantified results are not published here."
           },
           {
-            "title": "2EyesVision · technical production · September 2022–September 2024",
+            "title": "2EyesVision · Production Technician · 2022–2024",
             "body": "I took part in production, testing and documentation in ophthalmic technology. I contributed to process improvements and clearer testing procedures."
           },
           {
             "title": "Education",
-            "body": "I am studying Computer Engineering at Universidad Autónoma de Madrid. This page does not state a projected graduation date as a settled fact."
+            "body": "I began a Computer Engineering degree at Universidad Autónoma de Madrid in 2023. Graduation is expected in 2027; the degree has not yet been awarded."
           }
         ],
         "links": [],
-        "agentSummary": "Completed roles: Thinkia DevOps internship, February–August 2026; 2EyesVision technical production, September 2022–September 2024. Computer Engineering degree at UAM ongoing per internal profile updated September 2026. No public metrics."
+        "agentSummary": "Oxfam London shop volunteer, 2019; waiter at Blumare Shinjuku and Yoshinoya in Tokyo, 2020, with both jobs overlapping; Mechanical Manufacturing Production Planning diploma at IES Virgen de la Paloma, 2020–2022; 2EyesVision Production Technician, 2022–2024; Thinkia DevOps Engineer Internship, 2026. Computer Engineering degree at UAM since 2023, with graduation expected in 2027. Due to join Kontaktu AI in 2026; no duties described yet. No public metrics."
       }
     },
     {
@@ -277,7 +278,8 @@
         "links": [
           {
             "label": "Correo",
-            "url": "mailto:juanlarrondofdez@gmail.com"
+            "action": "copy",
+            "value": "juanlarrondofdez@gmail.com"
           },
           {
             "label": "LinkedIn",
@@ -303,7 +305,8 @@
         "links": [
           {
             "label": "Email",
-            "url": "mailto:juanlarrondofdez@gmail.com"
+            "action": "copy",
+            "value": "juanlarrondofdez@gmail.com"
           },
           {
             "label": "LinkedIn",
@@ -385,7 +388,7 @@
           }
         ],
         "links": [],
-        "agentSummary": "Experiencia práctica con Terraform, Proxmox, GCP y Jenkins durante Thinkia (febrero–agosto 2026). Detalles internos omitidos; no hay métricas públicas verificadas."
+        "agentSummary": "Experiencia práctica con Terraform, Proxmox, GCP y Jenkins durante Thinkia (2026). Detalles internos omitidos; no hay métricas públicas verificadas."
       },
       "en": {
         "eyebrow": "Area · infrastructure",
@@ -398,7 +401,7 @@
           }
         ],
         "links": [],
-        "agentSummary": "Practical Terraform, Proxmox, GCP and Jenkins experience at Thinkia (February–August 2026). Internal details omitted; no verified public metrics."
+        "agentSummary": "Practical Terraform, Proxmox, GCP and Jenkins experience at Thinkia (2026). Internal details omitted; no verified public metrics."
       }
     },
     {

@@ -2,11 +2,12 @@
 import { welcome, welcomeEs } from '../data/welcome'
 import profile from '../data/profile.json'
 import documentGraph from '../data/document-graph.json'
+import experienceStops from '../data/experience-stops.json'
 import '../styles/workbench.css'
 
 const pageTitle = 'Juan Larrondo · Portfolio (Alpha)'
 const documents = profile.documents
-const rootFileOrder = ['Welcome.md', 'README.md', 'AGENTS.md', 'SOUL.md', 'Experience.md', 'Contact.md']
+const rootFileOrder = ['Welcome.md', 'README.md', 'AGENTS.md', 'SOUL.md', 'Trajectory.md', 'Contact.md']
 const rootFileRank = new Map(rootFileOrder.map((path, index) => [path, index]))
 const rootDocuments = documents
   .filter((document) => !document.path.includes('/'))
@@ -20,6 +21,7 @@ const baseUrl = import.meta.env.BASE_URL
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href={`${baseUrl}favicon.svg`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
@@ -141,7 +143,7 @@ const baseUrl = import.meta.env.BASE_URL
               <div class="breadcrumb-menu-list" id="breadcrumb-menu-list"></div>
             </div>
           </div>
-          <div class="editor-scroll">
+          <div class="editor-scroll" role="region" tabindex="0" aria-label="Scrollable portfolio content">
             <article class="welcome-preview" id="welcome-preview" aria-label="Vista previa de Welcome.md">
               <div class="welcome-eyebrow">
                 <span class="welcome-eyebrow-line" aria-hidden="true"></span>
@@ -157,7 +159,7 @@ const baseUrl = import.meta.env.BASE_URL
                     <p>{welcome.guide}</p>
                   </div>
                   <nav class="welcome-routes" aria-label="Start exploring">
-                    <a data-welcome-file="Experience.md" href="#/en/Experience.md">Experience</a>
+                    <a data-welcome-file="Trajectory.md" href="#/en/Trajectory.md">Trajectory</a>
                     <a data-welcome-file="projects/README.md" href="#/en/projects%2FREADME.md">Projects</a>
                     <a data-welcome-file="SOUL.md" href="#/en/SOUL.md">About me</a>
                     <a data-welcome-file="Contact.md" href="#/en/Contact.md">Contact</a>
@@ -205,7 +207,7 @@ const baseUrl = import.meta.env.BASE_URL
       </footer>
     </div>
 
-    <script define:vars={{ profileDocuments: documents, rootFileOrder, graphNodes: documentGraph.nodes, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
+    <script define:vars={{ profileDocuments: documents, rootFileOrder, graphNodes: documentGraph.nodes, experienceStops, baseUrl, welcomeContent: welcome, welcomeSpanish: welcomeEs }}>
       const byPath = Object.fromEntries(profileDocuments.map((item) => [item.path, item]))
       const graphByPath = Object.fromEntries(graphNodes.map((item) => [item.path, item]))
       const workbench = document.querySelector('.workbench')
@@ -224,6 +226,7 @@ const baseUrl = import.meta.env.BASE_URL
       const breadcrumbPath = document.querySelector('#breadcrumb-path')
       const breadcrumbRoot = document.querySelector('#breadcrumb-root')
       const breadcrumbs = document.querySelector('#breadcrumbs')
+      const editorScroll = document.querySelector('.editor-scroll')
       const breadcrumbMenu = document.querySelector('#breadcrumb-menu')
       const breadcrumbMenuList = document.querySelector('#breadcrumb-menu-list')
       const statusFile = document.querySelector('#status-file')
@@ -231,17 +234,44 @@ const baseUrl = import.meta.env.BASE_URL
       const themeSelect = document.querySelector('#theme-select')
       const scrim = document.querySelector('.mobile-scrim')
       const mobileViewport = window.matchMedia('(max-width: 760px)')
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
       const systemTheme = window.matchMedia('(prefers-color-scheme: light)')
       const openTabs = ['Welcome.md']
       let activePath = 'Welcome.md'
       let openBreadcrumbTrigger = null
+      let routeState = null
+      let routeResizeObserver = null
+      let routeFrame = null
+      let routeLayoutFrame = null
+      let activeExperienceDialog = null
+      let experienceDismissTimer = null
+      let markerAnimationFrame = null
+      let markerAnimationTime = null
+      let markerInertiaFrame = null
+      let markerInertiaTime = null
+      let autoScrollFrame = null
+      let autoScrollAnchorY = null
+      let autoScrollPointerY = null
+      let autoScrollTime = null
+      // AG-052: direct path-distance input; camera follows the same sampled point.
+      const directPathInputEnabled = true
+      const timelineCameraEnabled = true
       let locale = (() => { try { return localStorage.getItem('agent-language') === 'es' ? 'es' : 'en' } catch { return 'en' } })()
 
+      function canonicalPath(path) {
+        return path === 'Experience.md' || path === 'Trayectoria.md' ? 'Trajectory.md' : path
+      }
+
+      function displayPath(path, language = locale) {
+        return path === 'Trajectory.md' && language === 'es' ? 'Trayectoria.md' : path
+      }
+
       function linkFor(path, language = locale) {
-        return `#/${language}/${encodeURIComponent(path)}`
+        return `#/${language}/${encodeURIComponent(displayPath(canonicalPath(path), language))}`
       }
 
       function routeTo(path, language = locale) {
+        path = path ? canonicalPath(path) : null
         const target = path ? linkFor(path, language) : `#/${language}/_empty`
         if (location.hash !== target) history.pushState(null, '', target)
         locale = language
@@ -254,9 +284,12 @@ const baseUrl = import.meta.env.BASE_URL
       function readRoute() {
         const match = location.hash.match(/^#\/(es|en)\/(.+)$/)
         if (!match) return
-        const path = decodeURIComponent(match[2])
+        const requestedPath = decodeURIComponent(match[2])
+        const path = canonicalPath(requestedPath)
         if (path !== '_empty' && !byPath[path]) return
         locale = match[1]
+        const canonicalHash = path === '_empty' ? `#/${locale}/_empty` : linkFor(path, locale)
+        if (location.hash !== canonicalHash) history.replaceState(null, '', canonicalHash)
         activePath = path === '_empty' ? null : path
         if (activePath && !openTabs.includes(activePath)) openTabs.push(activePath)
         render()
@@ -275,6 +308,21 @@ const baseUrl = import.meta.env.BASE_URL
         if (className) node.className = className
         if (text != null) node.textContent = text
         return node
+      }
+
+      async function copyText(value) {
+        if (navigator.clipboard?.writeText) {
+          try { await navigator.clipboard.writeText(value); return } catch { /* Try the selection fallback. */ }
+        }
+        const field = make('textarea')
+        field.value = value
+        field.setAttribute('readonly', '')
+        field.style.position = 'fixed'
+        field.style.left = '-9999px'
+        document.body.append(field)
+        let copied = false
+        try { field.select(); copied = document.execCommand('copy') } finally { field.remove() }
+        if (!copied) throw new Error('Clipboard unavailable')
       }
 
       function closeBreadcrumbMenu(restoreFocus = false) {
@@ -309,7 +357,7 @@ const baseUrl = import.meta.env.BASE_URL
           fileButton.type = 'button'
           fileButton.dataset.file = path
           if (path === activePath) fileButton.setAttribute('aria-current', 'page')
-          fileButton.append(make('span', 'breadcrumb-menu-indent'), make('span', 'file-glyph ui-icon'), make('span', 'breadcrumb-menu-name', path.split('/').at(-1)))
+          fileButton.append(make('span', 'breadcrumb-menu-indent'), make('span', 'file-glyph ui-icon'), make('span', 'breadcrumb-menu-name', displayPath(path).split('/').at(-1)))
           fileButton.addEventListener('click', () => {
             routeTo(path)
             const heading = document.querySelector('.welcome-preview:not([hidden]) h1, .profile-preview:not([hidden]) h1')
@@ -357,6 +405,14 @@ const baseUrl = import.meta.env.BASE_URL
         breadcrumbMenuList.querySelector('button')?.focus()
       }
 
+      function closeTab(path) {
+        const index = openTabs.indexOf(path)
+        if (index < 0) return
+        openTabs.splice(index, 1)
+        if (path === activePath) routeTo(openTabs[Math.min(index, openTabs.length - 1)] || null)
+        else renderTabs()
+      }
+
       function renderTabs() {
         tabsList.replaceChildren()
         openTabs.forEach((path) => {
@@ -365,17 +421,18 @@ const baseUrl = import.meta.env.BASE_URL
           if (path === activePath) tab.dataset.active = 'true'
           const open = make('button', 'tab-open')
           open.type = 'button'
-          open.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${path}`)
-          open.append(make('span', 'file-glyph ui-icon'), make('span', 'editor-tab-name', path.split('/').at(-1)))
+          open.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${displayPath(path)}`)
+          open.append(make('span', 'file-glyph ui-icon'), make('span', 'editor-tab-name', displayPath(path).split('/').at(-1)))
           open.addEventListener('click', () => routeTo(path))
           const close = make('button', 'tab-close', '×')
           close.type = 'button'
-          close.setAttribute('aria-label', `${locale === 'es' ? 'Cerrar' : 'Close'} ${path}`)
-          close.addEventListener('click', () => {
-            const index = openTabs.indexOf(path)
-            openTabs.splice(index, 1)
-            if (path === activePath) routeTo(openTabs[Math.min(index, openTabs.length - 1)] || null)
-            else renderTabs()
+          close.setAttribute('aria-label', `${locale === 'es' ? 'Cerrar' : 'Close'} ${displayPath(path)}`)
+          close.addEventListener('click', () => closeTab(path))
+          tab.addEventListener('mousedown', (event) => { if (event.button === 1) event.preventDefault() })
+          tab.addEventListener('auxclick', (event) => {
+            if (event.button !== 1) return
+            event.preventDefault()
+            closeTab(path)
           })
           tab.append(open, close)
           tabsList.append(tab)
@@ -398,7 +455,7 @@ const baseUrl = import.meta.env.BASE_URL
           folderButton.addEventListener('click', () => toggleBreadcrumbMenu(folderButton, folderPath))
           breadcrumbPath.append(make('span', 'breadcrumb-separator', '›'), folderButton)
         }
-        breadcrumbFile.textContent = parts.at(-1) || '—'
+        breadcrumbFile.textContent = displayPath(parts.at(-1)) || '—'
         breadcrumbCurrentIcon.dataset.file = activePath || ''
       }
 
@@ -416,7 +473,7 @@ const baseUrl = import.meta.env.BASE_URL
         note.replaceChildren(document.createTextNode(locale === 'es' ? 'Esta versión sigue en desarrollo. ' : 'This version is still in development. '), creditLink)
         welcomePreview.querySelector('.welcome-agent-link').textContent = locale === 'es' ? 'Para agentes ↗' : 'For agents ↗'
         welcomePreview.querySelector('.welcome-routes').setAttribute('aria-label', locale === 'es' ? 'Empieza a explorar' : 'Start exploring')
-        const routeNames = locale === 'es' ? ['Experiencia', 'Proyectos', 'Sobre mí', 'Contacto'] : ['Experience', 'Projects', 'About me', 'Contact']
+        const routeNames = locale === 'es' ? ['Trayectoria', 'Proyectos', 'Sobre mí', 'Contacto'] : ['Trajectory', 'Projects', 'About me', 'Contact']
         welcomePreview.querySelectorAll('[data-welcome-file]').forEach((link, index) => {
           link.textContent = routeNames[index]
           link.href = linkFor(link.dataset.welcomeFile)
@@ -424,22 +481,77 @@ const baseUrl = import.meta.env.BASE_URL
       }
 
       function renderProfile() {
+        cancelMarkerAnimation()
+        stopAutoScroll()
+        closeExperienceDetail()
+        if (routeFrame !== null) cancelAnimationFrame(routeFrame)
+        routeFrame = null
+        if (routeLayoutFrame !== null) cancelAnimationFrame(routeLayoutFrame)
+        routeLayoutFrame = null
+        routeResizeObserver?.disconnect()
+        routeResizeObserver = null
+        routeState = null
         profilePreview.replaceChildren()
         if (!activePath) return
         const entry = byPath[activePath][locale]
-        profilePreview.append(make('p', 'profile-eyebrow', entry.eyebrow), make('h1', '', entry.title), make('p', 'profile-lead', entry.lead))
-        const grid = make('div', 'profile-grid')
-        entry.sections.forEach((section, index) => {
-          const card = make('section', 'profile-card')
-          card.append(make('span', 'profile-card-index', String(index + 1).padStart(2, '0')), make('h2', '', section.title), make('p', '', section.body))
-          grid.append(card)
-        })
-        profilePreview.append(grid)
-        if (activePath === 'README.md') renderBrain()
-        else renderRelatedFiles(activePath)
-        if (entry.links.length) {
+        const layout = activePath === 'README.md' ? 'overview'
+          : activePath === 'AGENTS.md' ? 'agents'
+          : activePath === 'SOUL.md' ? 'soul'
+          : activePath === 'Trajectory.md' ? 'experience'
+          : activePath === 'Contact.md' ? 'contact'
+          : activePath === 'skills/README.md' ? 'skills'
+          : activePath.startsWith('skills/') ? 'skill-detail'
+          : activePath === 'projects/README.md' ? 'projects'
+          : 'project-detail'
+        profilePreview.dataset.layout = layout
+        profilePreview.dataset.file = activePath
+        delete editorScroll.dataset.directPathInput
+        if (layout === 'experience' && directPathInputEnabled) editorScroll.scrollTop = 0
+        editorScroll.dataset.page = layout
+        if (layout === 'experience' && directPathInputEnabled && !reducedMotion.matches && !mobileViewport.matches) editorScroll.dataset.directPathInput = 'true'
+        const heading = make('header', 'profile-heading')
+        heading.append(make('p', 'profile-eyebrow', entry.eyebrow), make('h1', '', entry.title), make('p', 'profile-lead', entry.lead))
+        if (layout !== 'experience') profilePreview.append(heading)
+
+        if (layout === 'experience') renderExperience(entry)
+        else if (layout === 'soul') renderSoul(entry)
+        else if (layout === 'skills') renderLinkedAreas(entry, ['skills/infrastructure.md', 'skills/ci-cd.md', 'skills/applied-ai.md', 'skills/programming.md'], 'skill-area')
+        else if (layout === 'projects') renderLinkedAreas(entry, ['projects/jarvis.md', 'projects/payroll-extractor.md'], 'project-area')
+        else renderEditorialSections(entry, layout)
+
+        if (activePath === 'README.md') {
+          renderBrain()
+          profilePreview.querySelector('.profile-sections')?.before(profilePreview.querySelector('.brain-section'))
+        }
+        if (layout !== 'experience' && entry.links.length) {
           const links = make('div', 'profile-links')
           entry.links.forEach((link) => {
+            if (link.action === 'copy') {
+              const button = make('button', 'profile-link profile-email-copy', link.value)
+              button.type = 'button'
+              button.setAttribute('aria-label', `${locale === 'es' ? 'Copiar correo' : 'Copy email'}: ${link.value}`)
+              const status = make('span', 'visually-hidden')
+              status.setAttribute('role', 'status')
+              button.append(status)
+              let feedbackTimeout
+              button.addEventListener('click', async () => {
+                clearTimeout(feedbackTimeout)
+                try {
+                  await copyText(link.value)
+                  button.dataset.status = locale === 'es' ? 'Copiado' : 'Copied'
+                  status.textContent = locale === 'es' ? 'Correo copiado al portapapeles' : 'Email copied to clipboard'
+                } catch {
+                  button.dataset.status = locale === 'es' ? 'No se pudo copiar' : 'Could not copy'
+                  status.textContent = locale === 'es' ? 'No se pudo copiar el correo' : 'Could not copy the email'
+                }
+                feedbackTimeout = setTimeout(() => {
+                  delete button.dataset.status
+                  status.textContent = ''
+                }, 2400)
+              })
+              links.append(button)
+              return
+            }
             const anchor = make('a', 'profile-link', `${link.label} ↗`)
             anchor.href = link.url
             if (link.url.startsWith('https://')) { anchor.target = '_blank'; anchor.rel = 'noopener noreferrer' }
@@ -454,21 +566,680 @@ const baseUrl = import.meta.env.BASE_URL
         }
       }
 
-      function renderRelatedFiles(path) {
-        const related = graphByPath[path]?.related || []
-        if (!related.length) return
-        const nav = make('nav', 'related-files')
-        nav.setAttribute('aria-label', locale === 'es' ? 'Archivos relacionados' : 'Related files')
-        nav.append(make('h2', '', locale === 'es' ? 'Sigue por aquí' : 'Explore next'))
-        const list = make('div', 'related-file-list')
-        related.forEach((target) => {
-          const button = make('button', 'related-file', target)
-          button.type = 'button'
-          button.addEventListener('click', () => routeTo(target))
-          list.append(button)
+      function renderEditorialSections(entry, layout) {
+        const container = make('div', `profile-sections profile-sections-${layout}`)
+        entry.sections.forEach((section) => {
+          const block = make('section', 'profile-section')
+          block.append(make('h2', '', section.title), make('p', '', section.body))
+          container.append(block)
         })
-        nav.append(list)
-        profilePreview.append(nav)
+        profilePreview.append(container)
+      }
+
+      function renderSoul(entry) {
+        const container = make('div', 'soul-chapters')
+        let chapterIndex = 0
+        entry.sections.forEach((section) => {
+          section.body.split(/\n\s*\n/).filter(Boolean).forEach((paragraph, paragraphIndex) => {
+            const chapter = make('section', 'soul-chapter')
+            const text = make('div', 'soul-chapter-copy')
+            if (paragraphIndex === 0) text.append(make('h2', '', section.title))
+            text.append(make('p', '', paragraph))
+            const frame = make('figure', 'soul-photo')
+            const image = section.photos?.[paragraphIndex] || (paragraphIndex === 0 ? section.photo : null)
+            if (image?.src) {
+              const photo = make('img')
+              photo.src = `${baseUrl}${image.src.replace(/^\//, '')}`
+              photo.alt = image.alt?.[locale] || ''
+              photo.loading = 'lazy'
+              frame.append(photo)
+              if (image.caption?.[locale]) frame.append(make('figcaption', '', image.caption[locale]))
+            } else {
+              frame.classList.add('soul-photo-pending')
+              frame.append(make('span', 'soul-photo-symbol', '＋'), make('figcaption', '', locale === 'es' ? 'Foto personal pendiente' : 'Personal photo to come'))
+            }
+            chapter.dataset.side = chapterIndex++ % 2 === 0 ? 'right' : 'left'
+            chapter.append(text, frame)
+            container.append(chapter)
+          })
+        })
+        profilePreview.append(container)
+      }
+
+      function renderLinkedAreas(entry, paths, className) {
+        const list = make('div', `${className}-list`)
+        entry.sections.forEach((section, index) => {
+          const path = paths[index]
+          const link = make('a', className)
+          link.href = linkFor(path)
+          link.dataset.file = path
+          link.append(make('span', 'file-glyph ui-icon'), make('h2', '', section.title), make('p', '', section.body), make('span', `${className}-open`, locale === 'es' ? 'Abrir archivo ↗' : 'Open file ↗'))
+          list.append(link)
+        })
+        profilePreview.append(list)
+      }
+
+      function experienceStopContent(stop, entry) {
+        if (stop.sectionIndex == null) return { ...stop[locale], duration: stop.duration?.[locale] }
+        const section = entry.sections[stop.sectionIndex]
+        const parts = section.title.split(' · ')
+        return {
+          title: parts.shift() || section.title,
+          role: parts.shift() || '',
+          period: parts.join(' · '),
+          body: section.body,
+          ...stop[locale],
+          duration: stop.duration?.[locale],
+        }
+      }
+
+      function svgPart(tag, className) {
+        const node = document.createElementNS('http://www.w3.org/2000/svg', tag)
+        node.setAttribute('class', className)
+        return node
+      }
+
+      function closeExperienceDetail(restoreFocus = false, fade = false) {
+        if (!activeExperienceDialog) return
+        const { panel, trigger } = activeExperienceDialog
+        const hadFocus = panel.contains(document.activeElement)
+        clearTimeout(experienceDismissTimer)
+        if (fade) {
+          panel.classList.add('is-dismissing')
+          experienceDismissTimer = setTimeout(() => { if (panel.classList.contains('is-dismissing')) panel.hidden = true }, 170)
+        } else {
+          panel.hidden = true
+          panel.classList.remove('is-dismissing')
+        }
+        trigger.setAttribute('aria-expanded', 'false')
+        delete trigger.closest('.route-stop').dataset.detailOpen
+        activeExperienceDialog = null
+        if (restoreFocus && trigger.isConnected) {
+          routeState.suppressFocusReveal = true
+          trigger.focus({ preventScroll: true })
+          routeState.suppressFocusReveal = false
+        } else if (hadFocus) editorScroll.focus({ preventScroll: true })
+      }
+
+      function experienceVisibleBounds() {
+        const editor = editorScroll.getBoundingClientRect()
+        const scene = routeState.viewport.getBoundingClientRect()
+        return {
+          top: Math.max(editor.top + editorScroll.clientTop, scene.top),
+          bottom: Math.min(editor.top + editorScroll.clientTop + editorScroll.clientHeight, scene.bottom),
+          left: Math.max(editor.left + editorScroll.clientLeft, scene.left),
+          right: Math.min(editor.left + editorScroll.clientLeft + editorScroll.clientWidth, scene.right),
+        }
+      }
+
+      function positionExperienceDetail(panel, trigger) {
+        const anchor = trigger.closest('.route-stop')
+        const anchorRect = anchor.getBoundingClientRect()
+        const triggerRect = trigger.getBoundingClientRect()
+        const view = experienceVisibleBounds()
+        view.width = view.right - view.left
+        const narrow = window.matchMedia('(max-width: 760px)').matches
+        const width = Math.min(narrow ? view.width - 24 : 405, view.width - 24)
+        panel.style.width = `${width}px`
+        panel.style.setProperty('--popover-view-height', `${Math.max(1, view.bottom - view.top - 16)}px`)
+        panel.style.right = 'auto'
+        panel.style.bottom = 'auto'
+        const panelRect = panel.getBoundingClientRect()
+        let left
+        let top
+        if (narrow) {
+          left = Math.max(view.left + 12, Math.min(triggerRect.left, view.right - width - 12))
+          top = triggerRect.bottom + 10
+          if (top + panelRect.height > view.bottom - 8 && triggerRect.top - panelRect.height - 10 >= view.top + 8) {
+            top = triggerRect.top - panelRect.height - 10
+          }
+        } else {
+          left = triggerRect.right + 14
+          if (left + width > view.right - 12) left = triggerRect.left - width - 14
+          left = Math.max(view.left + 12, Math.min(left, view.right - width - 12))
+          top = Math.max(view.top + 8, Math.min(triggerRect.top - 8, view.bottom - panelRect.height - 8))
+        }
+        top = Math.max(view.top + 8, Math.min(top, view.bottom - panelRect.height - 8))
+        panel.style.left = `${left - anchorRect.left}px`
+        panel.style.top = `${top - anchorRect.top}px`
+      }
+
+      function openExperienceDetail(stop, content, trigger) {
+        const panel = routeState?.panel
+        if (!panel) return
+        if (activeExperienceDialog?.trigger === trigger) { closeExperienceDetail(true); return }
+        if (activeExperienceDialog) closeExperienceDetail()
+        clearTimeout(experienceDismissTimer)
+        panel.classList.remove('is-dismissing')
+        const heading = make('div', 'experience-popover-head')
+        const close = make('button', 'experience-popover-close', '×')
+        close.type = 'button'
+        close.setAttribute('aria-label', locale === 'es' ? 'Cerrar detalle' : 'Close detail')
+        close.addEventListener('click', () => closeExperienceDetail(true))
+        heading.append(make('span', 'experience-popover-place', content.place || content.period || content.role), close)
+        const title = make('h2', '', content.title)
+        title.id = 'experience-popover-title'
+        const subline = make('p', 'experience-popover-role', [content.role, content.duration, content.period].filter(Boolean).join(' · '))
+        panel.replaceChildren(heading, title, subline, make('p', 'experience-popover-body', content.body))
+        trigger.closest('.route-stop').append(panel)
+        panel.dataset.kind = stop.kind
+        panel.hidden = false
+        activeExperienceDialog = { panel, trigger }
+        trigger.setAttribute('aria-expanded', 'true')
+        trigger.closest('.route-stop').dataset.detailOpen = 'true'
+        positionExperienceDetail(panel, trigger)
+        close.focus({ preventScroll: true })
+      }
+
+      function updateRouteProgress() {
+        if (!routeState?.length) return
+        if (routeState.directPathInput) {
+          const distance = Math.max(0, Math.min(routeState.length, routeState.markerDistance))
+          const samplePosition = distance / routeState.length * (routeState.motion.points.length - 1)
+          const index = Math.floor(samplePosition)
+          const next = Math.min(routeState.motion.points.length - 1, index + 1)
+          const fraction = samplePosition - index
+          const first = routeState.motion.points[index]
+          const second = routeState.motion.points[next]
+          const point = {
+            x: first.x + (second.x - first.x) * fraction,
+            y: first.y + (second.y - first.y) * fraction,
+          }
+          // Input owns path distance. The content never drives the marker.
+          const camera = timelineCameraEnabled ? Math.max(0, point.y - routeState.motion.points[0].y) : 0
+          routeState.camera = camera
+          routeState.route.style.transform = `translate3d(0, ${-camera}px, 0)`
+          routeState.progress.style.strokeDashoffset = String(routeState.length - distance)
+          routeState.cursor.style.transform = `translate3d(${point.x}px, ${point.y}px, 0) translate(-50%, -50%)`
+          routeState.badge.style.transform = `translate3d(${point.x + 20}px, ${point.y}px, 0) translateY(-50%)`
+          routeState.logoPeriods.forEach((period) => {
+            const visible = distance >= period.start && distance <= period.end
+            if (period.visible === visible) return
+            period.logo.hidden = !visible
+            period.visible = visible
+          })
+          return
+        }
+        if (!routeState.guided || !reducedMotion.matches) routeState.lastScroll = editorScroll.scrollTop
+        const { route, progress, cursor, badge, stops, stopPointIndices, eventDistances, motion, length, startScroll } = routeState
+        if (!routeState.guided || reducedMotion.matches) {
+          route.style.transform = ''
+          if (routeState.currentStop !== null) stops[routeState.currentStop].dataset.current = 'false'
+          routeState.currentStop = null
+          return
+        }
+        const travelled = Math.max(0, Math.min(length, editorScroll.scrollTop - startScroll))
+        routeState.travelled = travelled
+        const samplePosition = travelled / length * (motion.points.length - 1)
+        const sampleIndex = Math.floor(samplePosition)
+        const nextIndex = Math.min(motion.points.length - 1, sampleIndex + 1)
+        const fraction = samplePosition - sampleIndex
+        const point = {
+          x: motion.points[sampleIndex].x + (motion.points[nextIndex].x - motion.points[sampleIndex].x) * fraction,
+          y: motion.points[sampleIndex].y + (motion.points[nextIndex].y - motion.points[sampleIndex].y) * fraction,
+        }
+        const pathCamera = motion.cameraY[sampleIndex] + (motion.cameraY[nextIndex] - motion.cameraY[sampleIndex]) * fraction - routeState.anchor
+        const beforePath = Math.min(0, editorScroll.scrollTop - startScroll)
+        const afterPath = Math.max(0, editorScroll.scrollTop - startScroll - length)
+        // Sticky owns the viewport. Every object uses this same sampled camera;
+        // there is no compensating transform for the browser's native scroll.
+        const camera = Math.max(0, pathCamera + beforePath + Math.min(routeState.tail, afterPath))
+        routeState.camera = camera
+        route.style.transform = `translate3d(0, ${-camera}px, 0)`
+        progress.style.strokeDashoffset = String(length - travelled)
+        cursor.style.transform = `translate3d(${point.x}px, ${point.y}px, 0) translate(-50%, -50%)`
+        badge.style.transform = `translate3d(${point.x + 20}px, ${point.y}px, 0) translateY(-50%)`
+        routeState.logoPeriods.forEach((period) => {
+          const visible = travelled >= period.start && travelled <= period.end
+          if (period.visible === visible) return
+          period.logo.hidden = !visible
+          period.visible = visible
+        })
+        let nearest = 0
+        for (let index = 1; index < stops.length; index++) {
+          if (Math.abs(eventDistances[stopPointIndices[index]] - travelled) < Math.abs(eventDistances[stopPointIndices[nearest]] - travelled)) nearest = index
+        }
+        if (nearest !== routeState.currentStop) {
+          if (routeState.currentStop !== null) stops[routeState.currentStop].dataset.current = 'false'
+          stops[nearest].dataset.current = 'true'
+          routeState.currentStop = nearest
+        }
+      }
+
+      function queueRouteProgress() {
+        if (routeFrame !== null || !routeState) return
+        routeFrame = requestAnimationFrame(() => {
+          routeFrame = null
+          updateRouteProgress()
+          hideExperienceDetailOutsideView()
+        })
+      }
+
+      function cancelMarkerAnimation() {
+        if (markerAnimationFrame !== null) cancelAnimationFrame(markerAnimationFrame)
+        if (markerInertiaFrame !== null) cancelAnimationFrame(markerInertiaFrame)
+        markerAnimationFrame = null
+        markerAnimationTime = null
+        markerInertiaFrame = null
+        markerInertiaTime = null
+      }
+
+      function stopAutoScroll() {
+        if (autoScrollFrame !== null) cancelAnimationFrame(autoScrollFrame)
+        autoScrollFrame = null
+        autoScrollAnchorY = null
+        autoScrollPointerY = null
+        autoScrollTime = null
+        delete editorScroll.dataset.autoscroll
+      }
+
+      function animateAutoScroll(timestamp) {
+        autoScrollFrame = null
+        if (autoScrollAnchorY === null || !routeState?.directPathInput || document.hidden) return
+        const offset = autoScrollPointerY - autoScrollAnchorY
+        const velocity = Math.sign(offset) * Math.min(1.8, Math.max(0, Math.abs(offset) - 12) * 0.012)
+        if (!velocity) { autoScrollTime = null; return }
+        const elapsed = Math.min(50, Math.max(0, timestamp - (autoScrollTime ?? timestamp - 16)))
+        autoScrollTime = timestamp
+        advanceMarker(velocity * elapsed)
+        autoScrollFrame = requestAnimationFrame(animateAutoScroll)
+      }
+
+      function setMarkerDistance(distance) {
+        if (!routeState?.directPathInput || !routeState.length) return
+        cancelMarkerAnimation()
+        routeState.markerDistance = Math.max(0, Math.min(routeState.length, distance))
+        routeState.targetDistance = routeState.markerDistance
+        queueRouteProgress()
+      }
+
+      function animateMarker(timestamp) {
+        markerAnimationFrame = null
+        if (!routeState?.directPathInput || document.hidden) return
+        const elapsed = Math.min(50, Math.max(0, timestamp - (markerAnimationTime ?? timestamp - 16)))
+        markerAnimationTime = timestamp
+        const remaining = routeState.targetDistance - routeState.markerDistance
+        const fraction = 1 - Math.exp(-elapsed / routeState.motionTimeConstant)
+        routeState.markerDistance += remaining * fraction
+        if (Math.abs(routeState.targetDistance - routeState.markerDistance) < 0.35) {
+          routeState.markerDistance = routeState.targetDistance
+          markerAnimationTime = null
+        } else markerAnimationFrame = requestAnimationFrame(animateMarker)
+        updateRouteProgress()
+        hideExperienceDetailOutsideView()
+      }
+
+      function advanceMarker(distance, smooth = false, timeConstant = 90) {
+        if (!routeState?.directPathInput || !routeState.length || !Number.isFinite(distance)) return
+        if (!smooth) {
+          setMarkerDistance(routeState.markerDistance + distance)
+          return
+        }
+        if (markerInertiaFrame !== null) {
+          cancelAnimationFrame(markerInertiaFrame)
+          markerInertiaFrame = null
+          markerInertiaTime = null
+        }
+        const pending = routeState.targetDistance - routeState.markerDistance
+        // A reversal starts at the visible point instead of finishing the old impulse.
+        if (pending && Math.sign(pending) !== Math.sign(distance)) routeState.targetDistance = routeState.markerDistance
+        routeState.targetDistance = Math.max(0, Math.min(routeState.length, routeState.targetDistance + distance))
+        routeState.motionTimeConstant = timeConstant
+        if (markerAnimationFrame === null) markerAnimationFrame = requestAnimationFrame(animateMarker)
+      }
+
+      function queueRouteLayout() {
+        if (routeLayoutFrame !== null || !routeState) return
+        routeLayoutFrame = requestAnimationFrame(() => {
+          routeLayoutFrame = null
+          layoutExperienceRoute()
+        })
+      }
+
+      function experienceMonth(date) {
+        const [year, month] = date.split('-').map(Number)
+        return year * 12 + month
+      }
+
+      // Geometry is sampled only on layout. Camera and marker share path distance,
+      // so horizontal portions hold the scene still, without temporal smoothing.
+      function sampleRouteMotion(line, length) {
+        const count = Math.max(2, Math.ceil(length / 12))
+        const points = Array.from({ length: count + 1 }, (_, index) => {
+          const point = line.getPointAtLength(length * index / count)
+          return { x: point.x, y: point.y }
+        })
+        const cameraY = []
+        points.forEach((point, index) => {
+          cameraY.push(Math.min(points.at(-1).y, Math.max(index ? cameraY[index - 1] : point.y, point.y)))
+        })
+        return { points, cameraY }
+      }
+
+      function routeDistanceAtY(y) {
+        const { motion, length } = routeState
+        const samples = motion.cameraY
+        let low = 0
+        let high = samples.length - 1
+        while (high - low > 1) {
+          const middle = Math.floor((low + high) / 2)
+          if (samples[middle] < y) low = middle
+          else high = middle
+        }
+        const gap = samples[high] - samples[low]
+        const fraction = gap > 0 ? Math.max(0, Math.min(1, (y - samples[low]) / gap)) : 0
+        return (low + fraction) / (samples.length - 1) * length
+      }
+
+      function dateToRouteDistance(date) {
+        const { eventDates, eventDistances, length } = routeState
+        const target = experienceMonth(date)
+        if (target <= experienceMonth(eventDates[0])) return 0
+        for (let index = 1; index < eventDates.length; index++) {
+          const end = experienceMonth(eventDates[index])
+          if (target > end) continue
+          const start = experienceMonth(eventDates[index - 1])
+          const fraction = end === start ? 1 : (target - start) / (end - start)
+          return eventDistances[index - 1] + (eventDistances[index] - eventDistances[index - 1]) * fraction
+        }
+        return length
+      }
+
+      function hideExperienceDetailOutsideView() {
+        if (!activeExperienceDialog) return
+        const triggerRect = activeExperienceDialog.trigger.closest('.route-stop').getBoundingClientRect()
+        const view = experienceVisibleBounds()
+        const visible = Math.max(0, Math.min(triggerRect.bottom, view.bottom) - Math.max(triggerRect.top, view.top))
+        if (visible <= triggerRect.height * 0.5) closeExperienceDetail(false, true)
+      }
+
+      function layoutExperienceRoute() {
+        if (!routeState) return
+        const { route, shell, svg, line, progress, pins, eventIds } = routeState
+        routeState.directPathInput = directPathInputEnabled && !reducedMotion.matches && !mobileViewport.matches
+        if (routeState.directPathInput) {
+          if (editorScroll.scrollTop) editorScroll.scrollTop = 0
+          editorScroll.dataset.directPathInput = 'true'
+        } else delete editorScroll.dataset.directPathInput
+        const previousLength = routeState.length
+        const previousMarkerFraction = routeState.directPathInput && previousLength ? routeState.markerDistance / previousLength : 0
+        const previousTargetFraction = routeState.directPathInput && previousLength ? routeState.targetDistance / previousLength : 0
+        const previousScroll = routeState.guided && reducedMotion.matches ? (routeState.lastScroll ?? editorScroll.scrollTop) : editorScroll.scrollTop
+        let previousPosition = null
+        if (!routeState.directPathInput && previousLength && previousScroll >= routeState.pinStart) {
+          let distance = Math.max(0, Math.min(previousLength, previousScroll - routeState.startScroll))
+          if (!routeState.guided) distance = routeDistanceAtY(previousScroll - routeState.pinStart + routeState.anchor)
+          if (routeState.guided && previousScroll < routeState.startScroll) {
+            previousPosition = { phase: 'entry', fraction: (previousScroll - routeState.pinStart) / (routeState.leadIn || 1) }
+          } else if (routeState.guided && previousScroll > routeState.startScroll + previousLength) {
+            previousPosition = { phase: 'exit', offset: previousScroll - routeState.startScroll - previousLength }
+          } else {
+            let index = 0
+            while (index < routeState.eventDistances.length - 2 && routeState.eventDistances[index + 1] < distance) index++
+            const start = routeState.eventDistances[index]
+            const end = routeState.eventDistances[index + 1]
+            previousPosition = { phase: 'path', index, fraction: (distance - start) / (end - start || 1) }
+          }
+        }
+        const bounds = route.getBoundingClientRect()
+        if (!bounds.width || !editorScroll.clientHeight) return
+        const points = pins.map((pin) => {
+          const rect = pin.getBoundingClientRect()
+          return { x: rect.left + rect.width / 2 - bounds.left, y: rect.top + rect.height / 2 - bounds.top }
+        })
+        if (points.length < 2) return
+        svg.setAttribute('viewBox', `0 0 ${bounds.width} ${bounds.height}`)
+        let d = `M ${points[0].x} ${points[0].y}`
+        const eventDistances = [0]
+        for (let index = 1; index < points.length; index++) {
+          const previous = points[index - 1]
+          const current = points[index]
+          const gap = current.y - previous.y
+          if (eventIds[index - 1] === 'thinkia-end' && eventIds[index] === 'kontaktu') {
+            const outside = Math.min(previous.x, current.x) - Math.min(14, bounds.width * 0.012)
+            d += ` C ${outside} ${previous.y + gap * .28}, ${outside} ${current.y - gap * .28}, ${current.x} ${current.y}`
+          } else {
+            const midway = previous.y + gap / 2
+            const bend = (previous.x + current.x) / 2 + (index % 2 ? 1 : -1) * Math.min(24, bounds.width * 0.025)
+            d += ` C ${previous.x} ${previous.y + gap * .27}, ${bend} ${midway - gap * .13}, ${bend} ${midway}`
+            d += ` C ${bend} ${midway + gap * .13}, ${current.x} ${current.y - gap * .27}, ${current.x} ${current.y}`
+          }
+          line.setAttribute('d', d)
+          eventDistances.push(line.getTotalLength())
+        }
+        progress.setAttribute('d', d)
+        routeState.points = points
+        routeState.eventDistances = eventDistances
+        routeState.length = eventDistances.at(-1)
+        routeState.motion = sampleRouteMotion(line, routeState.length)
+        progress.style.strokeDasharray = String(routeState.length)
+
+        if (routeState.directPathInput) {
+          shell.dataset.guided = 'false'
+          routeState.guided = false
+          routeState.logoPeriods = [...routeState.badge.querySelectorAll('[data-active-start]')].map((logo) => ({
+            logo,
+            start: dateToRouteDistance(logo.dataset.activeStart),
+            end: dateToRouteDistance(logo.dataset.activeEnd),
+            visible: null,
+          }))
+          routeState.markerDistance = previousMarkerFraction * routeState.length
+          routeState.targetDistance = previousTargetFraction * routeState.length
+          updateRouteProgress()
+          if (Math.abs(routeState.targetDistance - routeState.markerDistance) > 0.35 && markerAnimationFrame === null) {
+            markerAnimationFrame = requestAnimationFrame(animateMarker)
+          }
+          return
+        }
+
+        const viewHeight = editorScroll.clientHeight
+        const anchor = Math.max(0, Math.min(viewHeight * 0.43, points[0].y))
+        const leadIn = points[0].y - anchor
+        const contentBottom = Math.max(bounds.height, ...pins.map((pin) => pin.parentElement.getBoundingClientRect().bottom - bounds.top))
+        const tail = Math.max(0, contentBottom + 18 - (points.at(-1).y - anchor) - viewHeight)
+        const scrollRange = leadIn + routeState.length + tail
+        const guided = !reducedMotion.matches && !mobileViewport.matches
+        shell.dataset.guided = String(guided)
+        shell.style.setProperty('--route-viewport-height', `${viewHeight}px`)
+        shell.style.setProperty('--route-scene-height', `${viewHeight + scrollRange}px`)
+        const shellRect = shell.getBoundingClientRect()
+        const scrollRect = editorScroll.getBoundingClientRect()
+        const pinStart = editorScroll.scrollTop + shellRect.top - scrollRect.top - editorScroll.clientTop
+        Object.assign(routeState, { guided, viewHeight, anchor, leadIn, tail, scrollRange, pinStart, startScroll: pinStart + leadIn })
+        routeState.logoPeriods = [...routeState.badge.querySelectorAll('[data-active-start]')].map((logo) => ({
+          logo,
+          start: dateToRouteDistance(logo.dataset.activeStart),
+          end: dateToRouteDistance(logo.dataset.activeEnd),
+          visible: null,
+        }))
+        if (previousPosition) {
+          let distance = 0
+          let camera = 0
+          if (previousPosition.phase === 'path') {
+            const { index, fraction } = previousPosition
+            distance = eventDistances[index] + (eventDistances[index + 1] - eventDistances[index]) * fraction
+            const position = distance / routeState.length * (routeState.motion.points.length - 1)
+            const sample = Math.floor(position)
+            const next = Math.min(sample + 1, routeState.motion.points.length - 1)
+            camera = routeState.motion.points[sample].y + (routeState.motion.points[next].y - routeState.motion.points[sample].y) * (position - sample) - anchor
+          } else if (previousPosition.phase === 'entry') {
+            camera = leadIn * previousPosition.fraction
+            distance = camera - leadIn
+          } else {
+            distance = routeState.length + previousPosition.offset
+            camera = points.at(-1).y - anchor + previousPosition.offset
+          }
+          editorScroll.scrollTop = guided ? routeState.startScroll + distance : pinStart + camera
+        }
+        updateRouteProgress()
+        if (activeExperienceDialog) {
+          hideExperienceDetailOutsideView()
+          if (activeExperienceDialog) positionExperienceDetail(activeExperienceDialog.panel, activeExperienceDialog.trigger)
+        }
+      }
+
+      function renderExperience(entry) {
+        const monthIndex = (date) => experienceMonth(date) - experienceMonth('2019-01')
+        const yearPosition = (date) => 120 + monthIndex(date) * 12
+        const scene = make('section', 'experience-scene')
+        scene.tabIndex = 0
+        scene.setAttribute('aria-label', locale === 'es' ? 'Trayectoria' : 'Journey')
+        const route = make('div', 'experience-route')
+        const svg = svgPart('svg', 'experience-route-line')
+        svg.setAttribute('aria-hidden', 'true')
+        const line = svgPart('path', 'experience-route-path')
+        const progress = svgPart('path', 'experience-route-progress')
+        svg.append(line, progress)
+        route.append(svg)
+        route.style.setProperty('--route-height', `${yearPosition('2027-06') + 115}px`)
+        for (let year = 2019; year <= 2027; year++) {
+          const label = make('span', 'experience-year', String(year))
+          label.style.setProperty('--event-y', `${yearPosition(`${year}-01`)}px`)
+          label.setAttribute('aria-hidden', 'true')
+          route.append(label)
+        }
+        const events = []
+        const stops = []
+        experienceStops.forEach((stop, index) => {
+          const content = experienceStopContent(stop, entry)
+          const item = make('div', 'route-stop')
+          item.dataset.stop = stop.id
+          item.dataset.kind = stop.kind
+          item.dataset.side = index % 2 === 0 ? 'left' : 'right'
+          item.style.setProperty('--event-y', `${yearPosition(stop.start)}px`)
+          const pin = make('span', 'route-pin')
+          pin.setAttribute('aria-hidden', 'true')
+          const button = make('button', 'route-stop-button')
+          button.type = 'button'
+          button.setAttribute('aria-haspopup', 'dialog')
+          button.setAttribute('aria-expanded', 'false')
+          button.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${content.title}`)
+          const roleLine = make('span', 'route-role')
+          roleLine.append(make('span', 'route-role-name', content.role))
+          if (content.duration) roleLine.append(make('span', 'route-duration', content.duration))
+          button.append(
+            make('span', 'route-place', [content.place, content.period].filter(Boolean).join(' · ') || content.role),
+            make('span', 'route-title', content.title),
+            roleLine,
+            ...(content.note ? [make('span', 'route-note', content.note)] : []),
+            make('span', 'route-open', locale === 'es' ? 'Ver detalle ↗' : 'View details ↗'),
+          )
+          button.addEventListener('click', () => openExperienceDetail(stop, content, button))
+          item.append(pin, button)
+          events.push({ date: stop.start, node: item, pin })
+          stops.push(item)
+        })
+        const milestones = [
+          { id: 'fp-end', date: '2022-06', es: 'Fin del Grado Superior', en: 'Higher Vocational Diploma completed' },
+          { id: '2eyes-end', date: '2024-09', es: 'Fin de la etapa 2EyesVision', en: '2EyesVision chapter ends' },
+          { id: 'thinkia-end', date: '2026-08', es: 'Fin de las prácticas en Thinkia', en: 'Thinkia internship ends' },
+          { id: 'uam-graduation', date: '2027-06', es: 'Graduación prevista', en: 'Expected graduation' },
+        ]
+        milestones.forEach((event) => {
+          const item = make('div', 'route-milestone')
+          item.dataset.id = event.id
+          item.style.setProperty('--event-y', `${yearPosition(event.date)}px`)
+          const pin = make('span', 'route-milestone-pin')
+          pin.setAttribute('aria-hidden', 'true')
+          item.append(pin, make('span', 'route-milestone-text', event[locale]))
+          events.push({ date: event.date, node: item, pin })
+        })
+        events.sort((first, second) => monthIndex(first.date) - monthIndex(second.date))
+        events.forEach((event) => route.append(event.node))
+        const pins = events.map((event) => event.pin)
+        const eventIds = events.map((event) => event.node.dataset.stop ?? event.node.dataset.id)
+        const stopPointIndices = stops.map((stop) => events.findIndex((event) => event.node === stop))
+        const cursor = make('span', 'experience-route-cursor')
+        cursor.setAttribute('aria-hidden', 'true')
+        route.append(cursor)
+        const badge = make('span', 'experience-active-logos')
+        badge.setAttribute('aria-hidden', 'true')
+        for (const item of [
+          { src: 'japan-flag.webp', label: locale === 'es' ? 'Estancia en Japón' : 'Time in Japan', start: '2020-01', end: '2020-06' },
+          { src: 'virgen-de-la-paloma-logo.jpg', label: 'IES Virgen de la Paloma', brand: 'fp', start: '2020-09', end: '2022-06' },
+          { src: '2eyesvision-mark.webp', label: '2EyesVision', start: '2022-09', end: '2024-09' },
+          { src: 'uam-crest.svg', label: 'UAM', start: '2023-09', end: '2027-06' },
+          { src: 'thinkia.jpg', label: 'Thinkia', start: '2026-02', end: '2026-08' },
+          { src: 'kontaktu.jpg', label: 'Kontaktu AI', start: '2026-10', end: '2027-06' },
+        ]) {
+          const logo = make('img', 'experience-active-logo')
+          logo.src = `${baseUrl}images/${item.src}`
+          logo.alt = ''
+          logo.title = item.label
+          if (item.brand) logo.dataset.brand = item.brand
+          logo.dataset.activeStart = item.start
+          logo.dataset.activeEnd = item.end
+          logo.hidden = true
+          badge.append(logo)
+        }
+        route.append(badge)
+        const shell = make('div', 'experience-route-shell')
+        const viewport = make('div', 'experience-route-viewport')
+        viewport.append(route)
+        shell.append(viewport)
+        scene.append(shell)
+        profilePreview.append(scene)
+        const panel = make('div', 'experience-popover')
+        panel.setAttribute('role', 'dialog')
+        panel.setAttribute('aria-labelledby', 'experience-popover-title')
+        panel.hidden = true
+        panel.addEventListener('click', (event) => event.stopPropagation())
+        route.append(panel)
+        routeState = { route, shell, viewport, svg, line, progress, cursor, badge, pins, eventIds, eventDates: events.map((event) => event.date), stops, stopPointIndices, panel, points: [], eventDistances: [], motion: null, logoPeriods: [], currentStop: null, length: 0, startScroll: 0, guided: false, directPathInput: directPathInputEnabled && !reducedMotion.matches && !mobileViewport.matches, markerDistance: 0, targetDistance: 0, motionTimeConstant: 90 }
+        stops.forEach((item, index) => {
+          const button = item.querySelector('.route-stop-button')
+          let pointerFocus = false
+          button.addEventListener('pointerdown', () => {
+            pointerFocus = true
+            setTimeout(() => { pointerFocus = false }, 0)
+          })
+          button.addEventListener('focus', () => {
+            if (pointerFocus || routeState?.suppressFocusReveal) return
+            const focusedState = routeState
+            const focusDistance = routeState?.targetDistance
+            requestAnimationFrame(() => {
+              if (!routeState || routeState !== focusedState || document.activeElement !== button) return
+              if (routeState.directPathInput) {
+                if (!timelineCameraEnabled) return
+                if (routeState.targetDistance !== focusDistance) return
+                const rect = button.getBoundingClientRect()
+                const view = experienceVisibleBounds()
+                if (rect.top < view.top + 12 || rect.bottom > view.bottom - 12) {
+                  setMarkerDistance(routeState.eventDistances[routeState.stopPointIndices[index]])
+                  updateRouteProgress()
+                }
+                return
+              }
+              if (!routeState.guided) return
+              updateRouteProgress()
+              const view = experienceVisibleBounds()
+              const rect = button.getBoundingClientRect()
+              if (rect.top >= view.top + 12 && rect.bottom <= view.bottom - 12) return
+              editorScroll.scrollTop = routeState.startScroll + routeState.eventDistances[routeState.stopPointIndices[index]]
+              updateRouteProgress()
+              // A short viewport or a tall card can need a different camera
+              // position from its pin. Reveal its top without trapping Tab.
+              const focusedRect = button.getBoundingClientRect()
+              const focusedView = experienceVisibleBounds()
+              let camera = routeState.camera
+              if (focusedRect.top < focusedView.top + 12 || focusedRect.height > focusedView.bottom - focusedView.top - 24) {
+                camera += focusedRect.top - focusedView.top - 12
+              } else if (focusedRect.bottom > focusedView.bottom - 12) {
+                camera += focusedRect.bottom - focusedView.bottom + 12
+              } else return
+              const lastCamera = routeState.motion.cameraY.at(-1) - routeState.anchor
+              editorScroll.scrollTop = camera < routeState.leadIn ? routeState.pinStart + camera
+                : camera > lastCamera ? routeState.startScroll + routeState.length + camera - lastCamera
+                : routeState.startScroll + routeDistanceAtY(camera + routeState.anchor)
+              updateRouteProgress()
+            })
+          })
+        })
+        routeResizeObserver = new ResizeObserver(queueRouteLayout)
+        routeResizeObserver.observe(route)
+        routeResizeObserver.observe(editorScroll)
+        events.forEach((event) => routeResizeObserver.observe(event.node))
+        queueRouteLayout()
       }
 
       function renderBrain() {
@@ -505,7 +1276,7 @@ const baseUrl = import.meta.env.BASE_URL
           const link = document.createElementNS(ns, 'a')
           link.setAttribute('class', `brain-node brain-node-${node.group}`)
           link.setAttribute('href', linkFor(node.path))
-          link.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${node.path}`)
+          link.setAttribute('aria-label', `${locale === 'es' ? 'Abrir' : 'Open'} ${displayPath(node.path)}`)
           const rect = document.createElementNS(ns, 'rect')
           rect.setAttribute('x', node.x - 82)
           rect.setAttribute('y', node.y - 23)
@@ -516,7 +1287,7 @@ const baseUrl = import.meta.env.BASE_URL
           label.setAttribute('x', node.x)
           label.setAttribute('y', node.y + 5)
           label.setAttribute('text-anchor', 'middle')
-          label.textContent = node.path.endsWith('/README.md') ? node.path.replace('README.md', '') : node.path.split('/').at(-1)
+          label.textContent = node.path.endsWith('/README.md') ? node.path.replace('README.md', '') : displayPath(node.path).split('/').at(-1)
           link.append(rect, label)
           svg.append(link)
         }
@@ -527,7 +1298,7 @@ const baseUrl = import.meta.env.BASE_URL
           const cluster = make('section', 'brain-mobile-cluster')
           cluster.append(make('h3', '', locale === 'es' ? titleEs : titleEn))
           for (const node of graphNodes.filter((item) => item.group === group)) {
-            const button = make('button', 'related-file', node.path)
+            const button = make('button', 'related-file', displayPath(node.path))
             button.type = 'button'
             button.addEventListener('click', () => routeTo(node.path))
             cluster.append(button)
@@ -539,11 +1310,24 @@ const baseUrl = import.meta.env.BASE_URL
       }
 
       function renderContent() {
+        if (activePath !== 'Trajectory.md') {
+          cancelMarkerAnimation()
+          stopAutoScroll()
+          delete editorScroll.dataset.directPathInput
+          closeExperienceDetail()
+          if (routeFrame !== null) cancelAnimationFrame(routeFrame)
+          routeFrame = null
+          if (routeLayoutFrame !== null) cancelAnimationFrame(routeLayoutFrame)
+          routeLayoutFrame = null
+          routeResizeObserver?.disconnect()
+          routeResizeObserver = null
+          routeState = null
+        }
         welcomePreview.hidden = true
         profilePreview.hidden = true
         emptyEditor.hidden = true
-        if (!activePath) emptyEditor.hidden = false
-        else if (activePath === 'Welcome.md') { welcomePreview.hidden = false; renderWelcome() }
+        if (!activePath) { editorScroll.dataset.page = 'empty'; emptyEditor.hidden = false }
+        else if (activePath === 'Welcome.md') { editorScroll.dataset.page = 'welcome'; welcomePreview.hidden = false; renderWelcome() }
         else { profilePreview.hidden = false; renderProfile() }
       }
 
@@ -579,10 +1363,12 @@ const baseUrl = import.meta.env.BASE_URL
         renderChromeLocale()
         languageSwitch.dataset.currentLanguage = locale
         document.documentElement.lang = locale
+        editorScroll.setAttribute('aria-label', locale === 'es' ? 'Contenido desplazable del portfolio' : 'Scrollable portfolio content')
         statusLocale.textContent = locale.toUpperCase()
-        statusFile.textContent = activePath || (locale === 'es' ? 'Sin archivo' : 'No file')
-        titlebarLocation.textContent = `${activePath || 'Portfolio'} — Juan`
+        statusFile.textContent = activePath ? displayPath(activePath) : (locale === 'es' ? 'Sin archivo' : 'No file')
+        titlebarLocation.textContent = `${activePath ? displayPath(activePath) : 'Portfolio'} — Juan`
         document.querySelectorAll('.tree-file').forEach((button) => {
+          button.querySelector('.tree-file-label').textContent = displayPath(button.dataset.file).split('/').at(-1)
           if (button.dataset.file === activePath) button.setAttribute('aria-current', 'page')
           else button.removeAttribute('aria-current')
         })
@@ -617,7 +1403,121 @@ const baseUrl = import.meta.env.BASE_URL
       document.addEventListener('pointerdown', (event) => {
         if (!breadcrumbMenu.hidden && !breadcrumbMenu.contains(event.target) && !event.target.closest('.breadcrumb-folder')) closeBreadcrumbMenu()
       })
-      window.addEventListener('resize', () => closeBreadcrumbMenu())
+      document.addEventListener('click', (event) => {
+        if (activeExperienceDialog && !activeExperienceDialog.panel.contains(event.target) && !event.target.closest('.route-stop-button')) closeExperienceDetail()
+      })
+      editorScroll.addEventListener('mousedown', (event) => {
+        if (!routeState?.directPathInput || event.button !== 1 || event.target.closest('a, .experience-popover')) return
+        event.preventDefault()
+        event.stopPropagation()
+        if (autoScrollAnchorY !== null) { stopAutoScroll(); return }
+        cancelMarkerAnimation()
+        autoScrollAnchorY = event.clientY
+        autoScrollPointerY = event.clientY
+        editorScroll.dataset.autoscroll = 'idle'
+      })
+      editorScroll.addEventListener('auxclick', (event) => {
+        if (routeState?.directPathInput && event.button === 1 && !event.target.closest('a, .experience-popover')) event.preventDefault()
+      })
+      document.addEventListener('mousemove', (event) => {
+        if (autoScrollAnchorY === null) return
+        autoScrollPointerY = event.clientY
+        const offset = autoScrollPointerY - autoScrollAnchorY
+        editorScroll.dataset.autoscroll = offset > 12 ? 'down' : offset < -12 ? 'up' : 'idle'
+        if (Math.abs(offset) <= 12) {
+          if (autoScrollFrame !== null) cancelAnimationFrame(autoScrollFrame)
+          autoScrollFrame = null
+          autoScrollTime = null
+        } else if (autoScrollFrame === null) autoScrollFrame = requestAnimationFrame(animateAutoScroll)
+      })
+      document.addEventListener('mousedown', () => { if (autoScrollAnchorY !== null) stopAutoScroll() })
+      window.addEventListener('blur', stopAutoScroll)
+      editorScroll.addEventListener('scroll', () => {
+        queueRouteProgress()
+      }, { passive: true })
+      editorScroll.addEventListener('wheel', (event) => {
+        if (!routeState?.directPathInput || event.ctrlKey || event.metaKey || !event.deltaY || event.target.closest('.experience-popover')) return
+        if (autoScrollAnchorY !== null) stopAutoScroll()
+        if (event.cancelable) event.preventDefault()
+        const unit = event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 16
+          : event.deltaMode === WheelEvent.DOM_DELTA_PAGE ? editorScroll.clientHeight : 1
+        const delta = event.deltaY * unit
+        advanceMarker(delta, true, event.deltaMode === WheelEvent.DOM_DELTA_PIXEL && Math.abs(delta) < 24 ? 42 : 90)
+      }, { passive: false })
+      let markerTouchY = null
+      let markerTouchTime = 0
+      let markerTouchVelocity = 0
+      editorScroll.addEventListener('touchstart', (event) => {
+        if (!routeState?.directPathInput || event.target.closest('.experience-popover') || event.touches.length !== 1) {
+          markerTouchY = null
+          return
+        }
+        if (autoScrollAnchorY !== null) stopAutoScroll()
+        cancelMarkerAnimation()
+        markerTouchY = event.touches[0].clientY
+        markerTouchTime = event.timeStamp
+        markerTouchVelocity = 0
+      }, { passive: true })
+      editorScroll.addEventListener('touchmove', (event) => {
+        if (!routeState?.directPathInput || markerTouchY === null) return
+        if (event.touches.length !== 1) { markerTouchY = null; return }
+        const nextY = event.touches[0].clientY
+        if (event.cancelable) event.preventDefault()
+        const delta = markerTouchY - nextY
+        const elapsed = event.timeStamp - markerTouchTime
+        if (elapsed > 0) markerTouchVelocity = markerTouchVelocity * 0.35 + Math.max(-3, Math.min(3, delta / elapsed)) * 0.65
+        advanceMarker(delta)
+        markerTouchY = nextY
+        markerTouchTime = event.timeStamp
+      }, { passive: false })
+      function animateTouchInertia(timestamp) {
+        markerInertiaFrame = null
+        if (!routeState?.directPathInput || document.hidden) return
+        const elapsed = Math.min(50, Math.max(0, timestamp - (markerInertiaTime ?? timestamp - 16)))
+        markerInertiaTime = timestamp
+        const decay = Math.exp(-elapsed / 170)
+        const delta = markerTouchVelocity * 170 * (1 - decay)
+        const before = routeState.markerDistance
+        routeState.markerDistance = Math.max(0, Math.min(routeState.length, before + delta))
+        routeState.targetDistance = routeState.markerDistance
+        markerTouchVelocity *= decay
+        queueRouteProgress()
+        if (Math.abs(markerTouchVelocity) > 0.03 && routeState.markerDistance !== before + delta) markerTouchVelocity = 0
+        if (Math.abs(markerTouchVelocity) > 0.03) markerInertiaFrame = requestAnimationFrame(animateTouchInertia)
+        else markerInertiaTime = null
+      }
+      editorScroll.addEventListener('touchend', (event) => {
+        if (markerTouchY !== null && !event.touches.length && event.timeStamp - markerTouchTime < 80 && Math.abs(markerTouchVelocity) > 0.1) {
+          markerInertiaTime = null
+          markerInertiaFrame = requestAnimationFrame(animateTouchInertia)
+        }
+        markerTouchY = null
+      }, { passive: true })
+      editorScroll.addEventListener('touchcancel', () => { markerTouchY = null; cancelMarkerAnimation() }, { passive: true })
+      editorScroll.addEventListener('keydown', (event) => {
+        if (!routeState?.directPathInput || event.defaultPrevented || event.altKey || event.metaKey || event.ctrlKey && !['Home', 'End'].includes(event.key)) return
+        if (event.target.closest('.experience-popover, input, select, textarea, [contenteditable="true"]')) return
+        if (event.code === 'Space' && event.target.closest('button, a')) return
+        const page = editorScroll.clientHeight * 0.85
+        const step = event.key === 'ArrowDown' ? 48 : event.key === 'ArrowUp' ? -48
+          : event.key === 'PageDown' || (event.code === 'Space' && !event.shiftKey) ? page
+            : event.key === 'PageUp' || (event.code === 'Space' && event.shiftKey) ? -page
+              : event.key === 'Home' ? -Infinity : event.key === 'End' ? Infinity : null
+        if (step === null) return
+        event.preventDefault()
+        if (Number.isFinite(step)) advanceMarker(step, true, 75)
+        else setMarkerDistance(step > 0 ? routeState.length : 0)
+      })
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden || !routeState?.directPathInput) return
+        stopAutoScroll()
+        if (markerAnimationFrame !== null) setMarkerDistance(routeState.targetDistance)
+        else cancelMarkerAnimation()
+      })
+      window.addEventListener('resize', () => {
+        closeBreadcrumbMenu()
+        queueRouteLayout()
+      })
       filesToggle.addEventListener('click', () => { setMobileSidebarOpen(true); sidebarClose.focus() })
       sidebarClose.addEventListener('click', () => { setMobileSidebarOpen(false); filesToggle.focus() })
       document.querySelector('.empty-welcome').addEventListener('click', () => routeTo('Welcome.md'))
@@ -640,9 +1540,12 @@ const baseUrl = import.meta.env.BASE_URL
         })
       })
       scrim.addEventListener('click', () => { setMobileSidebarOpen(false); filesToggle.focus() })
-      mobileViewport.addEventListener('change', () => setMobileSidebarOpen(false))
+      mobileViewport.addEventListener('change', () => { setMobileSidebarOpen(false); queueRouteLayout() })
+      reducedMotion.addEventListener('change', queueRouteLayout)
       document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && autoScrollAnchorY !== null) { stopAutoScroll(); return }
         if (event.key === 'Escape' && !breadcrumbMenu.hidden) { closeBreadcrumbMenu(true); return }
+        if (event.key === 'Escape' && activeExperienceDialog) { closeExperienceDetail(true); return }
         if (event.key === 'Escape' && workbench.dataset.mobileSidebarOpen === 'true' && mobileViewport.matches) { setMobileSidebarOpen(false); filesToggle.focus() }
       })
       window.addEventListener('popstate', readRoute)

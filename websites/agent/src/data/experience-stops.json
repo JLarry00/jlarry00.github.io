@@ -1,0 +1,48 @@
+[
+  {
+    "id": "oxfam",
+    "kind": "volunteer",
+    "start": "2019-10",
+    "duration": { "es": "1 mes", "en": "1 month" },
+    "es": { "title": "Oxfam", "role": "Voluntariado en tienda", "place": "Londres", "period": "2019", "body": "Hice voluntariado en una tienda Oxfam en Londres." },
+    "en": { "title": "Oxfam", "role": "Shop volunteer", "place": "London", "period": "2019", "body": "I volunteered at an Oxfam shop in London." }
+  },
+  {
+    "id": "japan-restaurants",
+    "kind": "japan",
+    "start": "2020-01",
+    "end": "2020-06",
+    "duration": { "es": "6 meses", "en": "6 months" },
+    "es": { "title": "Restaurantes Blumare y Yoshinoya", "role": "Camarero", "place": "Tokio", "period": "2020", "body": "Trabajé como camarero en Blumare Shinjuku y Yoshinoya durante mi estancia en Tokio. Ambos trabajos coincidieron en el tiempo." },
+    "en": { "title": "Blumare and Yoshinoya restaurants", "role": "Waiter", "place": "Tokyo", "period": "2020", "body": "I worked as a waiter at Blumare Shinjuku and Yoshinoya during my time in Tokyo. The two jobs overlapped." }
+  },
+  {
+    "id": "virgen-de-la-paloma",
+    "kind": "education",
+    "start": "2020-09",
+    "end": "2022-06",
+    "duration": { "es": "2 años", "en": "2 years" },
+    "es": { "title": "IES Virgen de la Paloma", "role": "Grado Superior en Programación de la Producción en Fabricación Mecánica", "place": "Madrid", "period": "2020–2022", "body": "Cursé el Grado Superior en Programación de la Producción en Fabricación Mecánica en el IES Virgen de la Paloma y terminé la FP en 2022." },
+    "en": { "title": "IES Virgen de la Paloma", "role": "Higher Vocational Diploma in Mechanical Manufacturing Production Planning", "place": "Madrid", "period": "2020–2022", "body": "I studied a Higher Vocational Diploma in Mechanical Manufacturing Production Planning at IES Virgen de la Paloma and completed it in 2022." }
+  },
+  { "id": "2eyes", "kind": "work", "start": "2022-09", "end": "2024-09", "duration": { "es": "2 años", "en": "2 years" }, "sectionIndex": 1 },
+  {
+    "id": "uam",
+    "kind": "education",
+    "start": "2023-09",
+    "end": "2027-06",
+    "duration": { "es": "4 años previstos", "en": "4 years expected" },
+    "sectionIndex": 2,
+    "es": { "title": "Universidad Autónoma de Madrid", "role": "Grado en Ingeniería Informática", "place": "Madrid", "period": "2023–actualidad", "note": "En paralelo con el trabajo" },
+    "en": { "title": "Universidad Autónoma de Madrid", "role": "Computer Engineering degree", "place": "Madrid", "period": "2023–present", "note": "Alongside work" }
+  },
+  { "id": "thinkia", "kind": "work", "start": "2026-02", "end": "2026-08", "duration": { "es": "7 meses", "en": "7 months" }, "sectionIndex": 0 },
+  {
+    "id": "kontaktu",
+    "kind": "upcoming",
+    "start": "2026-10",
+    "duration": { "es": "mín. 6 meses previstos", "en": "at least 6 months expected" },
+    "es": { "title": "Kontaktu AI", "role": "Próxima etapa", "period": "2026", "body": "Mi incorporación a Kontaktu AI está prevista para 2026. Añadiré los detalles de esta etapa cuando haya comenzado." },
+    "en": { "title": "Kontaktu AI", "role": "Upcoming role", "period": "2026", "body": "I am due to join Kontaktu AI in 2026. I will add details about this role after it begins." }
+  }
+]

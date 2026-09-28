@@ -15,14 +15,18 @@ const { document } = Astro.props
 const { Content } = await render(document)
 const [locale, ...segments] = document.id.split('/')
 const documentPath = `${segments.join('/')}.md`
-const title = profile.documents.find((item) => item.path === documentPath)?.[locale]?.title ?? documentPath
+const canonicalPath = documentPath === 'Experience.md' || documentPath === 'Trayectoria.md' ? 'Trajectory.md' : documentPath
+const title = profile.documents.find((item) => item.path === canonicalPath)?.[locale]?.title ?? documentPath
+const movedTo = documentPath === 'Experience.md' ? `${import.meta.env.BASE_URL}for-agents/read/${locale}/${locale === 'es' ? 'Trayectoria' : 'Trajectory'}/` : null
 ---
 <!doctype html>
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
+    {movedTo && <meta http-equiv="refresh" content={`0;url=${movedTo}`} />}
     <title>{title} · {locale === 'es' ? 'Markdown con formato' : 'Formatted Markdown'} · Juan Larrondo</title>
     <script is:inline>
       try {

@@ -29,7 +29,7 @@ Python and Git appear in my work and projects. Java, C and SQL belong to my stud
 - [skills/ci-cd.md](./ci-cd.md)
 - [skills/applied-ai.md](./applied-ai.md)
 - [skills/programming.md](./programming.md)
-- [Experience.md](../Experience.md)
+- [Trajectory.md](../Trajectory.md)
 - [projects/README.md](../projects/README.md)
 
 [Agent index](../../index.md)

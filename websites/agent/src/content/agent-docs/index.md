@@ -2,7 +2,7 @@
 
 These documents are written as Markdown in the project and published as linked, formatted HTML pages. People and automated readers use the same pages without JavaScript.
 
-Source review: 2026-09-24. The website is in development.
+Latest source review: 2026-09-27. The website is in development.
 
 ## English
 
@@ -10,7 +10,7 @@ Source review: 2026-09-24. The website is in development.
 - [AGENTS.md](en/AGENTS.md)
 - [SOUL.md](en/SOUL.md)
 - [Welcome.md](en/Welcome.md)
-- [Experience.md](en/Experience.md)
+- [Trajectory.md](en/Trajectory.md)
 - [Contact.md](en/Contact.md)
 - [skills/README.md](en/skills/README.md)
 - [skills/infrastructure.md](en/skills/infrastructure.md)
@@ -27,7 +27,7 @@ Source review: 2026-09-24. The website is in development.
 - [AGENTS.md](es/AGENTS.md)
 - [SOUL.md](es/SOUL.md)
 - [Welcome.md](es/Welcome.md)
-- [Experience.md](es/Experience.md)
+- [Trayectoria.md](es/Trayectoria.md)
 - [Contact.md](es/Contact.md)
 - [skills/README.md](es/skills/README.md)
 - [skills/infrastructure.md](es/skills/infrastructure.md)

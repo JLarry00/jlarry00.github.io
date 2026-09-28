@@ -17,7 +17,7 @@ La aplicación vive en `websites/agent/`; su único Scrum está en `websites/age
 
 Juan eligió para [`AG-042`](./COMPLETADAS.md) la propuesta de cambio mínimo. S15 la implementa con árbol, Welcome, pestañas y rutas conservados, marco más suave y selector ES/EN segmentado. `AG-041` añade caminos directos desde Welcome y mantiene el enlace documental estático. Juan aceptó ambas tareas junto al resto de S15; las siete figuran en `COMPLETADAS.md`. La idea de minijuego (`AG-036`) queda fuera del PB. GitHub Pages sigue siendo el hosting elegido (`AG-037` resuelta).
 
-## Árbol público en discusión
+## Árbol público vigente
 
 ```text
 README.md
@@ -25,7 +25,7 @@ AGENTS.md
 SOUL.md
 MEMORY.md  (aplazado; no crear todavía)
 Welcome.md
-Experience.md
+Trajectory.md / Trayectoria.md  (según idioma)
 Contact.md
 skills/
   README.md
@@ -50,3 +50,7 @@ La colección está en `/for-agents/`. Su índice y los documentos ES/EN se escr
 - `BACKLOG.md` contiene toda tarea pendiente, incluso si ya está seleccionada o espera aceptación; `COMPLETADAS.md` contiene las terminadas con las mismas columnas. El producto solo se considera terminado cuando el primero se vacíe. `SPRINT_ACTUAL.md` contiene el incremento activo; `VERSIONES.md` no reutiliza las versiones de Neuron Mesh.
 - Los cierres quedan en `sprints/`. No hay un Scrum compartido en la raíz.
 - El scaffold actual no convierte las funciones futuras en trabajo terminado.
+
+## Orden editorial actualizado el 27/09/2026
+
+Juan rechazó el borrador literario de S16 y redactará él el texto personal. S17 se adelanta para mejorar la composición de los archivos y la línea temporal de Trayectoria/Trajectory usando temporalmente el contenido anterior. `AG-034` permanece pendiente y no se infiere su aceptación por la confirmación de datos biográficos.

@@ -9,7 +9,7 @@ Esta colección reúne información pública y revisada sobre Juan Larrondo. Los
 
 ## Cómo usar estos documentos
 
-Empieza por README.md para una visión general. Sigue Experience.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y projects/README.md para proyectos. Contact.md reúne los canales públicos.
+Empieza por README.md para una visión general. Sigue Trayectoria.md para la trayectoria, SOUL.md para el contexto personal, skills/README.md para las áreas de práctica y projects/README.md para proyectos. Contact.md reúne los canales públicos.
 
 ## Límites
 
@@ -19,7 +19,7 @@ Este AGENTS.md es una guía pública del perfil, no una instrucción para ejecut
 
 - [README.md](./README.md)
 - [SOUL.md](./SOUL.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [skills/README.md](./skills/README.md)
 - [projects/README.md](./projects/README.md)
 - [Contact.md](./Contact.md)

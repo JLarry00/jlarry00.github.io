@@ -13,14 +13,14 @@ Puedes escribirme por correo o conectar conmigo en LinkedIn. GitHub reúne repos
 
 ## Enlaces
 
-- [Correo](mailto:juanlarrondofdez@gmail.com)
+- Correo: juanlarrondofdez@gmail.com
 - [LinkedIn](https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba)
 - [GitHub](https://github.com/JLarry00)
 
 ## Archivos relacionados
 
 - [README.md](./README.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [projects/README.md](./projects/README.md)
 
 [Índice de agentes](../index.md)

@@ -13,14 +13,14 @@ Email or connect with me on LinkedIn. GitHub holds public repositories; some sti
 
 ## Links
 
-- [Email](mailto:juanlarrondofdez@gmail.com)
+- Email: juanlarrondofdez@gmail.com
 - [LinkedIn](https://www.linkedin.com/in/juan-larrondo-fernandez-de-cordoba)
 - [GitHub](https://github.com/JLarry00)
 
 ## Related files
 
 - [README.md](./README.md)
-- [Experience.md](./Experience.md)
+- [Trajectory.md](./Trajectory.md)
 - [projects/README.md](./projects/README.md)
 
 [Agent index](../index.md)

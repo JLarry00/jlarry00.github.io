@@ -9,7 +9,7 @@ I study Computer Engineering at Universidad Autónoma de Madrid. My public exper
 
 ## Profile contents
 
-Experience.md covers roles and education. skills/README.md distinguishes professional practice from studies. projects/README.md links two public personal repositories. SOUL.md adds personal context still under review.
+Trajectory.md covers roles and education. skills/README.md distinguishes professional practice from studies. projects/README.md links two public personal repositories. SOUL.md adds personal context still under review.
 
 ## Scope
 
@@ -25,7 +25,7 @@ This portfolio is in development. Each page states the limits of its claims; it 
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
 - [Welcome.md](./Welcome.md)
-- [Experience.md](./Experience.md)
+- [Trajectory.md](./Trajectory.md)
 - [Contact.md](./Contact.md)
 - [skills/README.md](./skills/README.md)
 - [skills/infrastructure.md](./skills/infrastructure.md)
@@ -41,7 +41,7 @@ This portfolio is in development. Each page states the limits of its claims; it 
 - [Welcome.md](./Welcome.md)
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
-- [Experience.md](./Experience.md)
+- [Trajectory.md](./Trajectory.md)
 - [skills/README.md](./skills/README.md)
 - [projects/README.md](./projects/README.md)
 - [Contact.md](./Contact.md)

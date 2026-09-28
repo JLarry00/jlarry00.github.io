@@ -18,7 +18,7 @@ Esta parte personal, incluidos mis hobbies, sigue pendiente de elegir y redactar
 ## Archivos relacionados
 
 - [README.md](./README.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [projects/README.md](./projects/README.md)
 - [Contact.md](./Contact.md)
 

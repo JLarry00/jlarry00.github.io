@@ -1,6 +1,6 @@
 # Infrastructure
 
-> Practical Terraform, Proxmox, GCP and Jenkins experience at Thinkia (February–August 2026). Internal details omitted; no verified public metrics.
+> Practical Terraform, Proxmox, GCP and Jenkins experience at Thinkia (2026). Internal details omitted; no verified public metrics.
 
 Status: public portfolio in development.
 Source review: 2026-09-24.
@@ -15,6 +15,6 @@ My work covered declarative deployments, resource separation and automation of o
 
 - [skills/README.md](./README.md)
 - [skills/ci-cd.md](./ci-cd.md)
-- [Experience.md](../Experience.md)
+- [Trajectory.md](../Trajectory.md)
 
 [Agent index](../../index.md)

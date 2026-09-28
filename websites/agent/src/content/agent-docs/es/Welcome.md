@@ -15,7 +15,7 @@ Abre README.md para una visión general o sigue los enlaces entre archivos para 
 
 - [README.md](./README.md)
 - [SOUL.md](./SOUL.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [projects/README.md](./projects/README.md)
 
 [Índice de agentes](../index.md)

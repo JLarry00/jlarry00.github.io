@@ -15,7 +15,7 @@ Open README.md for an overview or follow links between files to explore the prof
 
 - [README.md](./README.md)
 - [SOUL.md](./SOUL.md)
-- [Experience.md](./Experience.md)
+- [Trajectory.md](./Trajectory.md)
 - [projects/README.md](./projects/README.md)
 
 [Agent index](../index.md)

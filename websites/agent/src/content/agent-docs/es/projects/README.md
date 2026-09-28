@@ -25,6 +25,6 @@ Explora la extracción de datos de documentos y la comprobación de importes. El
 - [projects/jarvis.md](./jarvis.md)
 - [projects/payroll-extractor.md](./payroll-extractor.md)
 - [skills/README.md](../skills/README.md)
-- [Experience.md](../Experience.md)
+- [Trayectoria.md](../Trayectoria.md)
 
 [Índice de agentes](../../index.md)

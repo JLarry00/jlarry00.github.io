@@ -15,6 +15,6 @@ El trabajo combinaba automatización y despliegue de recursos. No publico el pip
 
 - [skills/README.md](./README.md)
 - [skills/infrastructure.md](./infrastructure.md)
-- [Experience.md](../Experience.md)
+- [Trayectoria.md](../Trayectoria.md)
 
 [Índice de agentes](../../index.md)

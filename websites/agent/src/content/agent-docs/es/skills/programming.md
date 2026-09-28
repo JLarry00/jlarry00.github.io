@@ -15,6 +15,6 @@ No convierto una lista de lenguajes en una escala de dominio. Cada experiencia y
 
 - [skills/README.md](./README.md)
 - [projects/README.md](../projects/README.md)
-- [Experience.md](../Experience.md)
+- [Trayectoria.md](../Trayectoria.md)
 
 [Índice de agentes](../../index.md)

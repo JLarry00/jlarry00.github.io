@@ -15,6 +15,6 @@ I do not turn a language list into a proficiency scale. Each linked experience o
 
 - [skills/README.md](./README.md)
 - [projects/README.md](../projects/README.md)
-- [Experience.md](../Experience.md)
+- [Trajectory.md](../Trajectory.md)
 
 [Agent index](../../index.md)

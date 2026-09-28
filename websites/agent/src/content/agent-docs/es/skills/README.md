@@ -29,7 +29,7 @@ Python y Git aparecen en mi trabajo y proyectos. Java, C y SQL pertenecen a mi f
 - [skills/ci-cd.md](./ci-cd.md)
 - [skills/applied-ai.md](./applied-ai.md)
 - [skills/programming.md](./programming.md)
-- [Experience.md](../Experience.md)
+- [Trayectoria.md](../Trayectoria.md)
 - [projects/README.md](../projects/README.md)
 
 [Índice de agentes](../../index.md)

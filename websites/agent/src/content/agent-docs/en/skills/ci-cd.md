@@ -15,6 +15,6 @@ The work combined automation and resource deployment. I do not publish the inter
 
 - [skills/README.md](./README.md)
 - [skills/infrastructure.md](./infrastructure.md)
-- [Experience.md](../Experience.md)
+- [Trajectory.md](../Trajectory.md)
 
 [Agent index](../../index.md)

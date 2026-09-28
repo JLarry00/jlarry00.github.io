@@ -9,7 +9,7 @@ Estudio Ingeniería Informática en la Universidad Autónoma de Madrid. Mi exper
 
 ## Contenido del perfil
 
-Experience.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión.
+Trayectoria.md reúne roles y formación. skills/README.md distingue práctica profesional y estudios. projects/README.md enlaza dos repositorios personales públicos. SOUL.md añade contexto personal todavía en revisión.
 
 ## Alcance
 
@@ -25,7 +25,7 @@ Este portfolio está en desarrollo. Cada página indica los límites de lo que p
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
 - [Welcome.md](./Welcome.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [Contact.md](./Contact.md)
 - [skills/README.md](./skills/README.md)
 - [skills/infrastructure.md](./skills/infrastructure.md)
@@ -41,7 +41,7 @@ Este portfolio está en desarrollo. Cada página indica los límites de lo que p
 - [Welcome.md](./Welcome.md)
 - [AGENTS.md](./AGENTS.md)
 - [SOUL.md](./SOUL.md)
-- [Experience.md](./Experience.md)
+- [Trayectoria.md](./Trayectoria.md)
 - [skills/README.md](./skills/README.md)
 - [projects/README.md](./projects/README.md)
 - [Contact.md](./Contact.md)

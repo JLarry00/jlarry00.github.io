@@ -18,7 +18,7 @@ I still need to choose and write the personal stories and hobbies I want to shar
 ## Related files
 
 - [README.md](./README.md)
-- [Experience.md](./Experience.md)
+- [Trajectory.md](./Trajectory.md)
 - [projects/README.md](./projects/README.md)
 - [Contact.md](./Contact.md)
 

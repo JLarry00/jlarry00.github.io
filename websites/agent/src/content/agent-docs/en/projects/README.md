@@ -25,6 +25,6 @@ Explores document data extraction and numerical checks. The repository is the re
 - [projects/jarvis.md](./jarvis.md)
 - [projects/payroll-extractor.md](./payroll-extractor.md)
 - [skills/README.md](../skills/README.md)
-- [Experience.md](../Experience.md)
+- [Trajectory.md](../Trajectory.md)
 
 [Agent index](../../index.md)
